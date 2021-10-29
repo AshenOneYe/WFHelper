@@ -24,14 +24,14 @@ while flag:
     hash = getImageHash(image=tmp)
     if hash == Config.lingdangHash:
         print("有铃铛")
-        touchScreen(Config.lingdangPos)
+        touchScreen(Config.lingdangArea)
         continue
 
     tmp = screen.crop(Config.canjiaArea)
     hash = getImageHash(image=tmp)
     if hash == Config.canjiaHash:
         print("参加")
-        touchScreen(Config.canjiaPos)
+        touchScreen(Config.canjiaArea)
         continue
 
 
@@ -39,7 +39,7 @@ while flag:
     hash = getImageHash(image=tmp)
     if hash == Config.zhunbeiHash:
         print("准备")
-        touchScreen(Config.zhunbeiPos)
+        touchScreen(Config.zhunbeiArea)
         continue
 
 
@@ -47,7 +47,7 @@ while flag:
     hash = getImageHash(tmp)
     if hash == Config.yijingkaishiOKHash:
         print("已经开始")
-        touchScreen(Config.yijingkaishiOKPos)
+        touchScreen(Config.yijingkaishiOKArea)
         continue
 
 
@@ -55,7 +55,7 @@ while flag:
     hash = getImageHash(tmp)
     if hash == Config.manyuanOKHash:
         print("满员了")
-        touchScreen(Config.manyuanOKPos)
+        touchScreen(Config.manyuanOKArea)
         continue
 
 
@@ -63,7 +63,7 @@ while flag:
     hash = getImageHash(tmp)
     if hash == Config.jixuHash:
         print("继续")
-        touchScreen(Config.jixuPos)
+        touchScreen(Config.jixuArea)
         continue
 
 
@@ -71,7 +71,7 @@ while flag:
     hash = getImageHash(tmp)
     if hash == Config.likaiHash:
         print("离开房间")
-        touchScreen(Config.likaiPos)
+        touchScreen(Config.likaiArea)
         continue
 
 
@@ -79,7 +79,7 @@ while flag:
     hash = getImageHash(tmp)
     if hash == Config.jixuguankaHash:
         print("继续关卡")
-        touchScreen(Config.jixuguankaPos)
+        touchScreen(Config.jixuguankaArea)
         continue
 
 
@@ -87,5 +87,5 @@ while flag:
     hash = getImageHash(tmp)
     if hash == Config.shengjiHash:
         print("升级了")
-        touchScreen(Config.shengjiPos)
+        touchScreen(Config.shengjiArea)
         continue
