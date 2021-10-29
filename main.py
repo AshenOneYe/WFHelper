@@ -1,15 +1,16 @@
 from Config import Config
 from ADBUtil import *
 from ImageUtil import getImageHash, readImageFromBytes
-# from PIL import Image
+
 
 
 flag = True
 # flag = False
 
-# getScreen("images\\tmp5.png")
-# pic = Image.open("images\manyuan.png")
-# pic.crop((316,1422,760,1528)).save("images\manyuanOK.png")
+# getScreen("images\\tmp6.png")
+# from PIL import Image
+# pic = Image.open("images\\tmp6.png")
+# pic.crop((322,1089,794,1250)).save("images\shengji.png")
 
 
 while flag:
@@ -54,3 +55,8 @@ while flag:
     hash = getImageHash(tmp)
     if hash == Config.jixuguankaHash:
         touchScreen(Config.jixuguankaPos)
+
+    tmp = screen.crop(Config.shengjiArea)
+    hash = getImageHash(tmp)
+    if hash == Config.shengjiHash:
+        touchScreen(Config.shengjiPos)

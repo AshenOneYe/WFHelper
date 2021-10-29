@@ -42,7 +42,10 @@ class Config():
     jixuguankaPos = ((jixuguankaArea[0]+jixuguankaArea[2])/2,((jixuguankaArea[1]+jixuguankaArea[3])/2))
     jixuguankaHash = getImageHash(path=jixuguankaPath)
     
-
+    shengjiPath = "images\shengji.png"
+    shengjiArea = (322,1089,794,1250)
+    shengjiPos = ((shengjiArea[0]+shengjiArea[2])/2,((shengjiArea[1]+shengjiArea[3])/2))
+    shengjiHash = getImageHash(path=shengjiPath)
     
 
     
