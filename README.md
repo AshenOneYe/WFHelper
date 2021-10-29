@@ -28,4 +28,4 @@
 完成环境配置后，确保手机开启全面屏即可省略截图环节
 
 ## 效果如图
-![Demo](\pics/demo.jpg)
+![Demo](pics/demo.jpg)
