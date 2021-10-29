@@ -1,11 +1,10 @@
 from io import BytesIO
 from PIL import Image
-from utils.ADBUtil import getScreen
 import imagehash
 
 
-def readImageFromBytes(bytes):
-    bytes_stream = BytesIO(getScreen(None))
+def readImageFromBytes(bytes):  
+    bytes_stream = BytesIO(bytes)
     return Image.open(bytes_stream)
 
 def getImageHash(image=None,path=None):
@@ -14,4 +13,8 @@ def getImageHash(image=None,path=None):
         image = Image.open(path)
     
     return imagehash.phash(image)
+
+def getImageCrop(path,box):
+    image = Image.open(path)
+    return image.crop(box)
 
