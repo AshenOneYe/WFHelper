@@ -1,5 +1,4 @@
-from os import path
-from ImageUtil import getImageHash
+from utils.ImageUtil import getImageHash
 
 class Config():
     lingdangPath = "images\lingdang.png"

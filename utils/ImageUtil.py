@@ -1,6 +1,6 @@
 from io import BytesIO
 from PIL import Image
-from ADBUtil import getScreen
+from utils.ADBUtil import getScreen
 import imagehash
 
 
