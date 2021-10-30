@@ -3,6 +3,7 @@ from utils.ADBUtil import *
 from utils.ImageUtil import getImageHash, readImageFromBytes
 import sys
 import getopt
+import time
 
 
 def checkAndClick(target,screen,adb):
@@ -15,21 +16,25 @@ def checkAndClick(target,screen,adb):
         return False
 
 
- 
-
-
 def main(adb,configPath=None):
 
     flag = True
+    lastClick = int(time.time())
 
     config = Config(configPath)
 
     while flag:
         screen = readImageFromBytes(adb.getScreen())
+        t = int(time.time())
 
         for target in config.targets:
             if checkAndClick(target,screen,adb):
+                lastClick = t
                 break
+
+        #300秒未操作则随机点击一次
+        if t - lastClick > 300:
+            adb.touchScreen([0,0,config.picSize[0],config.picSize[1]])
 
 if __name__ == '__main__':
 
