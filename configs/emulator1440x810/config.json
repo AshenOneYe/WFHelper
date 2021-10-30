@@ -1,0 +1,62 @@
+[
+    {
+        "path" : "jixu.png",
+        "area" : [279,1319,530,1388],
+        "text" : "点击继续"
+    },
+    {
+        "path" : "canjia.png",
+        "area" : [431,1173,740,1240],
+        "text" : "点击参加按钮"
+    },
+    {
+        "path" : "canjia2.png",
+        "area" : [374,1309,643,1376],
+        "text" : "点击参加按钮"
+    },
+    {
+        "path" : "lingdang.png",
+        "area" : [30,17,75,59],
+        "text" : "发现铃铛，点击"
+    },
+    {
+        "path" : "lingdang2.png",
+        "area" : [3,32,85,132],
+        "text" : "发现铃铛，点击"
+    },
+    {
+        "path" : "OK.png",
+        "area" : [246,894,563,962],
+        "text" : "蹭车失败，点击OK"
+    },
+    {
+        "path" : "jiantou.png",
+        "area" : [700,45,746,104],
+        "text" : "点击箭头，返回游戏"
+    },
+    {
+        "path" : "zhunbei.png",
+        "area" : [240,1000,565,1094],
+        "text" : "点击准备按钮"
+    },
+    {
+        "path" : "likai.png",
+        "area" : [116,1322,366,1383],
+        "text" : "离开房间"
+    },
+    {
+        "path" : "jixuguanka.png",
+        "area" : [430,895,742,960],
+        "text" : "继续关卡"
+    },
+    {
+        "path" : "shengji.png",
+        "area" : [234,632,576,677],
+        "text" : "升级了！！！"
+    },
+    {
+        "path" : "shengji2.png",
+        "area" : [223,632,577,677],
+        "text" : "升级了！！！"
+    }
+]

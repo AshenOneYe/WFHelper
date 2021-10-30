@@ -18,11 +18,11 @@ def checkAndClick(target,screen,adb):
  
 
 
-def main(adb):
+def main(adb,configPath=None):
 
     flag = True
 
-    config = Config()
+    config = Config(configPath)
 
     while flag:
         screen = readImageFromBytes(adb.getScreen())
@@ -31,14 +31,13 @@ def main(adb):
             if checkAndClick(target,screen,adb):
                 break
 
-
-
 if __name__ == '__main__':
 
     adb = ADBUtil()
+    configPath = None
 
     try:
-        opts,args = getopt.getopt(sys.argv[1:], "d:s:")
+        opts,args = getopt.getopt(sys.argv[1:], "d:s:c:")
         
         for o,a in opts:
             if o == "-d":
@@ -46,11 +45,13 @@ if __name__ == '__main__':
             elif o == "-s":
                 adb.getScreen(savePath=a)
                 sys.exit()
+            elif o == "-c":
+                configPath = a
 
     except getopt.GetoptError:
         print("参数错误")
 
-    main(adb)
+    main(adb,configPath)
         
 
     
