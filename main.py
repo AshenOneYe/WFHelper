@@ -83,6 +83,7 @@ class Main():
 
                 #300秒未操作则随机点击一次
                 if t - self.lastActionTime > 300:
+                    print("长时间未操作，随机点击一次")
                     self.adb.touchScreen((0,0,self.config.picSize[0],2))
                     self.lastActionTime = t
         except KeyboardInterrupt:

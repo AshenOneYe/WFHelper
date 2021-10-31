@@ -3,7 +3,7 @@
         "name" : "继续",
         "path" : "jixu.png",
         "area" : [279,1319,530,1388],
-        "action" : ["-c",null],
+        "action" : ["-w","离开"],
         "text" : "点击继续"
     },
     {
@@ -66,7 +66,7 @@
         "name" : "继续关卡",
         "path" : "jixuguanka.png",
         "area" : [430,895,742,960],
-        "action" : ["-w","离开"],
+        "action" : ["-c",null],
         "text" : "继续关卡"
     },
     {
