@@ -16,6 +16,8 @@ class Main():
     lastLog = ""
     isRunning = False
     serverThread = None
+    device = None
+    configPath = None
 
     def log(self,log):
         print(log)
@@ -43,7 +45,7 @@ class Main():
         self.log("等待{}".format(waitTargetName))
         target = self.getTargetFromName(waitTargetName)
 
-        while True:
+        while self.isRunning:
             screen = readImageFromBytes(self.adb.getScreen())
             self.adb.touchScreen((0,0,self.config.picSize[0],2))
             if self.check(selfTarget,screen):
@@ -73,39 +75,47 @@ class Main():
             sys.exit()
 
 
-    def start(self):
+    def mainLoop(self):
+        while self.isRunning:
+            screen = readImageFromBytes(self.adb.getScreen())
+            t = int(time.time())
 
-        self.isRunning = True
-        self.lastActionTime = int(time.time())
-
-        try:
-            while self.isRunning:
-                screen = readImageFromBytes(self.adb.getScreen())
-                t = int(time.time())
-
-                for target in self.config.targets:
-                    if self.check(target,screen):
-                        self.doAction(target)
-                        self.lastActionTime = t
-                        break
-
-                #300秒未操作则随机点击一次
-                if t - self.lastActionTime > 300:
-                    self.log("长时间未操作，随机点击一次")
-                    self.adb.touchScreen((0,0,self.config.picSize[0],2))
+            for target in self.config.targets:
+                if self.check(target,screen):
+                    self.doAction(target)
                     self.lastActionTime = t
+                    break
+
+            #300秒未操作则随机点击一次
+            if t - self.lastActionTime > 300:
+                self.log("长时间未操作，随机点击一次")
+                self.adb.touchScreen((0,0,self.config.picSize[0],2))
+                self.lastActionTime = t
+
+
+    def start(self):
+        self.init()
+        self.isRunning = True
+        try:
+            while True:
+                self.mainLoop()
         except KeyboardInterrupt:
-            print("退出")
-            sys.exit()
+            print("退出!!!")
+        
 
+    def stop(self):
+        self.isRunning = False
+        self.log("停止自动脚本")
 
-    def startServer(self):
-        self.server.startServer()
+    def init(self):
+        self.adb = ADBUtil()
+        self.adb.setDevice(self.device)
+        self.config = Config(self.configPath)
+        self.lastActionTime = int(time.time())
+        self.log("自动脚本初始化完成")
+
 
     def __init__(self,argv) -> None:
-
-        self.adb = ADBUtil()
-        configPath = None
 
         try:
             opts,args = getopt.getopt(argv, "d:s:c:")
@@ -113,29 +123,26 @@ class Main():
             for o,a in opts:
                 if o == "-d":
                     self.log("设备名 : {}".format(a))
-                    self.adb.setDevice(a)
+                    self.device = a
                 elif o == "-s":
                     self.log("截图保存至 : {}".format(a))
-                    self.adb.getScreen(savePath=a)
+                    ADBUtil().getScreen(savePath=a)
                     sys.exit()
                 elif o == "-c":
-                    configPath = a
+                    self.configPath = a
 
                 # TODO -v 参数打印log信息
-
         except getopt.GetoptError:
             print("参数错误")
 
-        self.config = Config(configPath)
-        self.server = Server(self)
-
-        self.serverThread = threading.Thread(target=self.server.startServer)
-        # 设置主线程退出时同时关闭Server
-        self.serverThread.setDaemon(True)
-        self.serverThread.start()
-
-
+        
 
 if __name__ == '__main__':
     main = Main(sys.argv)
+    server = Server(main)
+
+    serverThread = threading.Thread(target=server.startServer)
+    serverThread.setDaemon(True)
+    serverThread.start()
+
     main.start()

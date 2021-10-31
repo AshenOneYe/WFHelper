@@ -21,6 +21,9 @@ class Server():
     def getScreenShot(self):
         return self.main.adb.getScreen()
 
+    def touchScreen(self,x,y):
+        self.main.adb.touchScreen([x,y,x+1,y+1])
+
 
     def startServer(self):
         server = make_server('', 8080,self.app)

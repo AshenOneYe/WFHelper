@@ -13,7 +13,7 @@
 ### 运行环境配置
 
 > 1. 安装配置python3环境
-> 2. 安装依赖库 `pip install imagehash`
+> 2. 安装依赖库 `pip install imagehash`和``pip install flask``
 > 3. 安装adb并配置adb到环境变量
 
 ### 配置文件
@@ -51,7 +51,7 @@
 
 ## 已知问题
 
-使用过程中有任何问题或者有更好的想法欢迎提issue或者加群反馈！！！
+使用过程中有任何问题或者有更好的想法欢迎提issue或者加群反馈！！！更欢迎来开车和踢罐，马上出超本了，护好您的肝！！！
 ![QQ群](pics/qqgroup.jpg)
 
 
