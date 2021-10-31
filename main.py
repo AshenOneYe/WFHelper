@@ -138,7 +138,7 @@ class Main():
         
 
 if __name__ == '__main__':
-    main = Main(sys.argv)
+    main = Main(sys.argv[1:])
     server = Server(main)
 
     serverThread = threading.Thread(target=server.startServer)
