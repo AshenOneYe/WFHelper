@@ -11,10 +11,11 @@ def getImageHash(image=None,path=None):
 
     if path != None:
         image = Image.open(path)
-    
+
     return imagehash.phash(image)
 
 def getImageCrop(path,box):
     image = Image.open(path)
     return image.crop(box)
+
 
