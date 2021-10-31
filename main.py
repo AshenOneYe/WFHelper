@@ -1,9 +1,11 @@
 from Config import *
+from server.Server import Server
 from utils.ADBUtil import *
 from utils.ImageUtil import getImageHash, readImageFromBytes
 import sys
 import getopt
 import time
+import threading
 
 
 class Main():
@@ -11,13 +13,19 @@ class Main():
     adb = None
     config = None
     lastActionTime = int(time.time())
+    lastLog = ""
     isRunning = False
+    serverThread = None
+
+    def log(self,log):
+        print(log)
+        self.lastLog = log
 
     def check(self,target,screen):
         tmp = screen.crop(target["area"])
         hash = getImageHash(image=tmp)
         if hash == target["hash"]:
-            print(target["text"])
+            self.log(target["text"])
             return True
         return False
 
@@ -32,7 +40,7 @@ class Main():
       
 
     def waitFor(self,selfTarget,waitTargetName):
-        print("等待{}".format(waitTargetName))
+        self.log("等待{}".format(waitTargetName))
         target = self.getTargetFromName(waitTargetName)
 
         while True:
@@ -83,14 +91,19 @@ class Main():
 
                 #300秒未操作则随机点击一次
                 if t - self.lastActionTime > 300:
-                    print("长时间未操作，随机点击一次")
+                    self.log("长时间未操作，随机点击一次")
                     self.adb.touchScreen((0,0,self.config.picSize[0],2))
                     self.lastActionTime = t
         except KeyboardInterrupt:
             print("退出")
+            sys.exit()
 
+
+    def startServer(self):
+        self.server.startServer()
 
     def __init__(self,argv) -> None:
+
         self.adb = ADBUtil()
         configPath = None
 
@@ -99,17 +112,28 @@ class Main():
             
             for o,a in opts:
                 if o == "-d":
+                    self.log("设备名 : {}".format(a))
                     self.adb.setDevice(a)
                 elif o == "-s":
+                    self.log("截图保存至 : {}".format(a))
                     self.adb.getScreen(savePath=a)
                     sys.exit()
                 elif o == "-c":
                     configPath = a
 
+                # TODO -v 参数打印log信息
+
         except getopt.GetoptError:
             print("参数错误")
 
         self.config = Config(configPath)
+        self.server = Server(self)
+
+        self.serverThread = threading.Thread(target=self.server.startServer)
+        # 设置主线程退出时同时关闭Server
+        self.serverThread.setDaemon(True)
+        self.serverThread.start()
+
 
 
 if __name__ == '__main__':
