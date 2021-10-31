@@ -1,38 +1,52 @@
 [
 
     {
+        "name" : "准备",
         "path" : "zhunbei.png",
         "area" : [311,1567,770,1710],
+        "action" : ["-c",null],
         "text" : "点击准备按钮"
     },
     {
+        "name" : "OK",
         "path" : "OK.png",
         "area" : [316,1422,760,1528],
+        "action" : ["-c",null],
         "text" : "蹭车失败，点击OK"
     },
     {
+        "name" : "OK2",
         "path" : "OK2.png",
         "area" : [372,2000,705,2089],
+        "action" : ["-c",null],
         "text" : "任务结束，点击OK"
     },
     {
+        "name" : "继续",
         "path" : "jixu.png",
         "area" : [368,1995,711,2090],
+        "action" : ["-w","返回"],
         "text" : "点击继续"
     },
     {
+        "name" : "返回",
         "path" : "fanhui.png",
         "area" : [587,1996,922,2090],
+        "action" : ["-c",null],
         "text" : "返回房间"
     },
     {
+        "name" : "升级",
         "path" : "shengji.png",
         "area" : [322,1089,794,1250],
+        "action" : ["-c",null],
         "text" : "升级了！"
     },
     {
+        "name" : "升级2",
         "path" : "shengji2.png",
         "area" : [309,1082,770,1145],
+        "action" : ["-c",null],
         "text" : "升级了！"
     }
 ]
