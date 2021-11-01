@@ -7,24 +7,30 @@ from utils.LogUtil import Log
 class Config():
 
     targets = None
-    configPath = "configs\emulator1440x810\config.json"
+    configPath = None
     configDir = None
     picSize = None
 
-    def __init__(self,configPath=None):
 
-        if configPath != None:
-            self.configPath = configPath
+    def setConfigPath(self,configPath):
+        self.configPath = configPath
+
+    def updateConfig(self):
+
         configDir = self.configPath[0:self.configPath.rfind("\\")+1]
-        
+        self.configDir = configDir
 
         Log.info("配置文件路径 : {}".format(self.configPath))
-        with open(self.configPath, "r",encoding="utf-8") as f:  # 打开文件
-            data = f.read()  # 读取文件
-            self.targets = json.loads(data)
+        try:
+            with open(self.configPath, "r",encoding="utf-8") as f:  # 打开文件
+                data = f.read()  # 读取文件
+                self.targets = json.loads(data)
+        except FileNotFoundError:
+            Log.error("配置文件读取失败，请检查以下文件是否存在:{}".format(self.configPath))
+            sys.exit()
 
         if self.targets == None:
-            Log.error("读取配置文件出错")
+            Log.error("配置文件读取失败，内容为空")
             sys.exit()
 
         self.picSize = Image.open(configDir + self.targets[0]["path"]).size
@@ -35,3 +41,9 @@ class Config():
             img = getImageCrop(configDir + target["path"],target["area"])
             target["hash"] = getImageHash(image=img)
 
+    def __init__(self,configPath="configs\emulator1440x810\config.json",autoUpdate=True):
+        self.setConfigPath(configPath)
+        if autoUpdate:
+            self.updateConfig()
+
+config = Config(autoUpdate=False)

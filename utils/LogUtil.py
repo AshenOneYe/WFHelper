@@ -1,27 +1,36 @@
 import logging
+import time
 
 class LogUtil():
-    LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
-    DATE_FORMAT = "%Y/%m/%d %H:%M:%S"
+     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
+     DATE_FORMAT = "%Y/%m/%d %H:%M:%S"
 
-    logging.basicConfig(level=logging.DEBUG,format=LOG_FORMAT,datefmt=DATE_FORMAT)
+     logging.basicConfig(level=logging.INFO,format=LOG_FORMAT,datefmt=DATE_FORMAT)
 
-    def debug(self,msg):
-         logging.debug(msg)
-    
-    def info(self,msg):
-         logging.info(msg)
+     lastLog = None
 
-    def warning(self,msg):
-         logging.warning(msg)
+     def setLastLog(self,log):
+          log = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))+" " + log
+          self.lastLog = log
 
-    def error(self,msg):
-         logging.error(msg)
+     def debug(self,msg):
+          self.setLastLog(msg)
+          logging.debug(msg)
 
-    def critical(self,msg):
-         logging.critical(msg)
+     def info(self,msg):
+          self.setLastLog(msg)
+          logging.info(msg)
 
-    def __init__(self) -> None:
-        pass
+     def warning(self,msg):
+          self.setLastLog(msg)
+          logging.warning(msg)
+
+     def error(self,msg):
+          self.setLastLog(msg)
+          logging.error(msg)
+
+     def critical(self,msg):
+          self.setLastLog(msg)
+          logging.critical(msg)
 
 Log = LogUtil()

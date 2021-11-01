@@ -9,6 +9,7 @@ class ADBUtil():
     device = None
     rplc = b'\r\n'
     test = False
+    lastScreenBytes = None
 
     def getScreen(self,savePath=None):
 
@@ -34,6 +35,8 @@ class ADBUtil():
         if savePath != None and len(binary_screenshot) != 0:
             with open(savePath,'wb') as f:
                 f.write(binary_screenshot)
+
+        self.lastScreenBytes = binary_screenshot
         return binary_screenshot
 
 

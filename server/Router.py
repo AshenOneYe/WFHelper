@@ -1,6 +1,5 @@
 from flask import url_for,render_template,redirect,make_response,request
-import threading
-
+from utils.LogUtil import Log
 
 def setRouter(server):
 
@@ -23,14 +22,12 @@ def setRouter(server):
 
     @app.route("/stop")
     def stop():
-        server.main.stop()
+        server.stopWFHelper()
         return "Stop"
 
     @app.route("/start")
     def start():
-        server.main.init()
-        server.main.isRunning = True
-        
+        server.startWFHelper()
         return "Start"
 
     @app.route("/touchScreen")
@@ -48,4 +45,4 @@ def setRouter(server):
     def page_not_found(error):
         return redirect(url_for('index'))
 
-    server.main.log("服务器初始化完成")
+    Log.info("服务器初始化完成")
