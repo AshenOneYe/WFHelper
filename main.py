@@ -6,6 +6,7 @@ import sys
 import getopt
 import time
 import threading
+from utils.LogUtil import Log
 
 
 class Main():
@@ -19,8 +20,8 @@ class Main():
     configPath = None
 
     def log(self,log):
+        Log.info(log)
         log = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))+" " + log
-        print(log)
         self.lastLog = log
 
     def check(self,target,screen):
@@ -77,7 +78,7 @@ class Main():
                     self.waitFor(target,a)
 
         except getopt.GetoptError:
-            print("配置文件中{}的action参数错误".format(target["name"]))
+            Log.error("配置文件中{}的action参数错误".format(target["name"]))
             sys.exit()
 
 
@@ -106,7 +107,7 @@ class Main():
             while True:
                 self.mainLoop()
         except KeyboardInterrupt:
-            print("退出!!!")
+            Log.critical("退出!!!")
         
 
     def stop(self):
@@ -138,7 +139,7 @@ class Main():
 
                 # TODO -v 参数打印log信息
         except getopt.GetoptError:
-            print("参数错误")
+            Log.critical("参数错误")
 
         
 
