@@ -49,3 +49,5 @@ class ADBUtil():
 
     def setDevice(self,device):
         self.device = device
+
+adbUtil = ADBUtil()

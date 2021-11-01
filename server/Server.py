@@ -1,6 +1,7 @@
 from flask import Flask
 from wsgiref.simple_server import make_server
 from server.Router import setRouter
+from utils.ADBUtil import adbUtil
 
 
 class Server():
@@ -19,10 +20,10 @@ class Server():
         return self.main.lastLog
 
     def getScreenShot(self):
-        return self.main.adb.getScreen()
+        return adbUtil.getScreen()
 
     def touchScreen(self,x,y):
-        self.main.adb.touchScreen([x,y,x+1,y+1])
+        adbUtil.touchScreen([x,y,x+1,y+1])
 
 
     def startServer(self):

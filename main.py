@@ -1,6 +1,6 @@
 from Config import *
 from server.Server import Server
-from utils.ADBUtil import *
+from utils.ADBUtil import adbUtil
 from utils.ImageUtil import getImageHash, readImageFromBytes
 import sys
 import getopt
@@ -10,7 +10,6 @@ import threading
 
 class Main():
 
-    adb = None
     config = None
     lastActionTime = int(time.time())
     lastLog = ""
@@ -33,7 +32,7 @@ class Main():
         return False
 
     def click(self,area):
-        self.adb.touchScreen(area)
+        adbUtil.touchScreen(area)
 
 
     def getTargetFromName(self,targetName):
@@ -49,10 +48,10 @@ class Main():
         startTime = int(time.time())
 
         while self.isRunning:
-            screen = readImageFromBytes(self.adb.getScreen())
-            self.adb.touchScreen((0,0,self.config.picSize[0],2))
+            screen = readImageFromBytes(adbUtil.getScreen())
+            adbUtil.touchScreen((0,0,self.config.picSize[0],2))
             if self.check(selfTarget,screen):
-                self.adb.touchScreen(selfTarget["area"])
+                adbUtil.touchScreen(selfTarget["area"])
                 
             if self.check(target,screen):
                 self.doAction(target)
@@ -84,7 +83,7 @@ class Main():
 
     def mainLoop(self):
         while self.isRunning:
-            screen = readImageFromBytes(self.adb.getScreen())
+            screen = readImageFromBytes(adbUtil.getScreen())
             t = int(time.time())
 
             for target in self.config.targets:
@@ -96,7 +95,7 @@ class Main():
             #300秒未操作则随机点击一次
             if t - self.lastActionTime > 300:
                 self.log("长时间未操作，随机点击一次")
-                self.adb.touchScreen((0,0,self.config.picSize[0],2))
+                adbUtil.touchScreen((0,0,self.config.picSize[0],2))
                 self.lastActionTime = t
 
 
@@ -115,8 +114,7 @@ class Main():
         self.log("停止自动脚本")
 
     def init(self):
-        self.adb = ADBUtil()
-        self.adb.setDevice(self.device)
+        adbUtil.setDevice(self.device)
         self.config = Config(self.configPath)
         self.lastActionTime = int(time.time())
         self.log("自动脚本初始化完成")
@@ -133,7 +131,7 @@ class Main():
                     self.device = a
                 elif o == "-s":
                     self.log("截图保存至 : {}".format(a))
-                    ADBUtil().getScreen(savePath=a)
+                    adbUtil.getScreen(savePath=a)
                     sys.exit()
                 elif o == "-c":
                     self.configPath = a
