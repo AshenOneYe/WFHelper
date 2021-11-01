@@ -12,7 +12,7 @@ class Server():
     def __init__(self,wfhelper):
 
         # TODO 提供参数指定host和port
-        self.main = wfhelper
+        self.wfhelper = wfhelper
         setRouter(self)
 
 
