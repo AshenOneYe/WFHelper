@@ -29,7 +29,6 @@ class Server():
         self.wfhelper.stop()
 
     def startWFHelper(self):
-        self.wfhelper.init()
         self.wfhelper.isRunning = True
 
 

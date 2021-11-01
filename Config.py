@@ -41,6 +41,8 @@ class Config():
             img = getImageCrop(configDir + target["path"],target["area"])
             target["hash"] = getImageHash(image=img)
 
+        Log.info("配置文件初始化完成")
+
     def __init__(self,configPath="configs\emulator1440x810\config.json",autoUpdate=True):
         self.setConfigPath(configPath)
         if autoUpdate:

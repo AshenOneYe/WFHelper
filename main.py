@@ -25,12 +25,15 @@ if __name__ == '__main__':
 
             # TODO -v 参数打印log信息
     except getopt.GetoptError:
-        Log.critical("参数错误")
+        Log.error("参数错误")
+
+    config.updateConfig()
 
     server = Server(wfhelper)
     serverThread = threading.Thread(target=server.startServer)
     serverThread.setDaemon(True)
     serverThread.start()
 
+    # 不用子线程启动的原因是，子线程莫名的速度慢很多
     wfhelper.start()
     

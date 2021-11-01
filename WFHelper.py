@@ -87,10 +87,14 @@ class WFHelper():
                 adbUtil.touchScreen((0,0,config.picSize[0],2))
                 self.lastActionTime = t
 
+        ## 当脚本被远程停止时，持续更新lastActionTime
+        self.lastActionTime = int(time.time())
+
 
     def start(self):
-        self.init()
+        self.lastActionTime = int(time.time())
         self.isRunning = True
+
         try:
             while True:
                 self.mainLoop()
@@ -101,11 +105,5 @@ class WFHelper():
     def stop(self):
         self.isRunning = False
         Log.info("停止自动脚本")
-
-    def init(self):
-        config.updateConfig()
-        self.lastActionTime = int(time.time())
-        Log.info("自动脚本初始化完成")
-
 
 wfhelper = WFHelper()
