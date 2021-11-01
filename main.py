@@ -20,6 +20,7 @@ class Main():
     configPath = None
 
     def log(self,log):
+        log = str(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))+" " + log
         print(log)
         self.lastLog = log
 
@@ -45,6 +46,8 @@ class Main():
         self.log("等待{}".format(waitTargetName))
         target = self.getTargetFromName(waitTargetName)
 
+        startTime = int(time.time())
+
         while self.isRunning:
             screen = readImageFromBytes(self.adb.getScreen())
             self.adb.touchScreen((0,0,self.config.picSize[0],2))
@@ -53,6 +56,10 @@ class Main():
                 
             if self.check(target,screen):
                 self.doAction(target)
+                break
+
+            # 设置timeout防止卡死
+            if int(time.time()) - startTime > 20:
                 break
 
 
@@ -146,3 +153,4 @@ if __name__ == '__main__':
     serverThread.start()
 
     main.start()
+    
