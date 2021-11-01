@@ -38,7 +38,7 @@ class WFHelper():
         while self.isRunning:
             screen = readImageFromBytes(adbUtil.getScreen())
             self.screen = screen
-            adbUtil.touchScreen((0,0,config.picSize[0],2))
+            adbUtil.touchScreen((0, 0, config.picSize[0]/2, 2))
             if self.check(selfTarget,screen):
                 adbUtil.touchScreen(selfTarget["area"])
                 
@@ -84,7 +84,7 @@ class WFHelper():
             #300秒未操作则随机点击一次
             if t - self.lastActionTime > 300:
                 Log.info("长时间未操作，随机点击一次")
-                adbUtil.touchScreen((0,0,config.picSize[0],2))
+                adbUtil.touchScreen((0, 0, config.picSize[0]/2, 2))
                 self.lastActionTime = t
 
         ## 当脚本被远程停止时，持续更新lastActionTime
