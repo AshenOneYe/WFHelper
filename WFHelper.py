@@ -1,11 +1,10 @@
 from Config import config
 from utils.ADBUtil import adbUtil
-from utils.ImageUtil import getImageHash, readImageFromBytes
+from utils.ImageUtil import *
 import sys
 import getopt
 import time
 from utils.LogUtil import Log
-import distance
 
 class WFHelper():
 
@@ -15,8 +14,8 @@ class WFHelper():
     def check(self,target,screen):
         tmp = screen.crop(target["area"])
         hash = getImageHash(image=tmp)
-        # 写死5
-        if distance.hamming(str(hash),str(target["hash"])) <= 5:
+        # 写死，相似度大于0.9即可
+        if similarity(hash,target["hash"]) <= 0.9:
             Log.info(target["text"])
             return True
         return False
