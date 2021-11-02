@@ -50,20 +50,22 @@ class WFHelper():
             if int(time.time()) - startTime > 20:
                 break
 
-
     def doAction(self,target):
         try:
-            opts,args = getopt.getopt(target["action"], "c:w:")
+            opts,args = getopt.getopt(target["action"], "c:w:s:")
             
             for o,a in opts:
                 if o == "-c":
-                    if a==None:
+                    if a==None or a=="" or a==" ":
                         self.click(target["area"])
                     else:
                         self.click(a)
 
                 if o == "-w":
                     self.waitFor(target,a)
+
+                if o == "-s":
+                    time.sleep(int(a))
 
         except getopt.GetoptError:
             Log.error("配置文件中{}的action参数错误".format(target["name"]))
