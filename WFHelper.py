@@ -16,7 +16,7 @@ class WFHelper():
         tmp = screen.crop(target["area"])
         hash = getImageHash(image=tmp)
         # 写死5
-        if distance.hamming(hash,target["hash"]) <= 5:
+        if distance.hamming(str(hash),str(target["hash"])) <= 5:
             Log.info(target["text"])
             return True
         return False
