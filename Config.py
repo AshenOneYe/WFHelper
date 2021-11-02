@@ -27,6 +27,7 @@ class Config():
                 self.configPath = configPath
             except FileNotFoundError:
                 Log.error("配置文件读取失败，请检查以下文件是否存在:{}".format(configPath))
+                input("按下回车键退出")
                 sys.exit()
 
 
@@ -42,6 +43,7 @@ class Config():
 
         if self.targets == None:
             Log.error("配置文件读取失败，内容为空")
+            input("按下回车键退出")
             sys.exit()
 
         self.picSize = Image.open(configDir + self.targets[0]["path"]).size

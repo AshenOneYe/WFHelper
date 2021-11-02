@@ -11,17 +11,21 @@ if __name__ == '__main__':
 
     try:
         opts,args = getopt.getopt(sys.argv[1:], "d:s:c:")
-        
-        for o,a in opts:
-            if o == "-d":
-                Log.info("设备名 : {}".format(a))
-                adbUtil.setDevice(a)
-            elif o == "-s":
-                Log.info("截图保存至 : {}".format(a))
-                adbUtil.getScreen(savePath=a)
-                sys.exit()
-            elif o == "-c":
-                config.setConfigPath(a)
+        opts = dict(opts)
+
+        if "-d" in opts:
+            device = opts["-d"]
+            adbUtil.setDevice(device)
+        else:
+            adbUtil.setDevice(None)
+            
+        if "-s" in opts:
+            savePath = opts["-s"]
+            Log.info("截图保存至 : {}".format(savePath))
+            adbUtil.getScreen(savePath=savePath)
+            sys.exit()
+        if "-c" in opts:
+            config.setConfigPath(opts["-c"])        
 
             # TODO -v 参数打印log信息
     except getopt.GetoptError:

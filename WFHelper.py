@@ -53,10 +53,10 @@ class WFHelper():
     def doAction(self,target):
         try:
             opts,args = getopt.getopt(target["action"], "c:w:s:")
-            
+
             for o,a in opts:
                 if o == "-c":
-                    if a==None or a=="" or a==" ":
+                    if a in (None,""," "):
                         self.click(target["area"])
                     else:
                         self.click(a)
