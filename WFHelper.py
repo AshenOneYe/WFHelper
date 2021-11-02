@@ -5,6 +5,7 @@ import sys
 import getopt
 import time
 from utils.LogUtil import Log
+import distance
 
 class WFHelper():
 
@@ -14,8 +15,8 @@ class WFHelper():
     def check(self,target,screen):
         tmp = screen.crop(target["area"])
         hash = getImageHash(image=tmp)
-        # 写死，相似度大于0.9即可
-        if similarity(hash,target["hash"]) <= 0.9:
+        # 写死5
+        if distance.hamming(str(hash),str(target["hash"])) <= 5:
             Log.info(target["text"])
             return True
         return False
