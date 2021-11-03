@@ -35,7 +35,7 @@ def setRouter(server):
     def touchScreen():
         x = int(request.args.get("x"))
         y = int(request.args.get("y"))
-        server.touchScreen(x, y)           
+        server.touchScreen(x, y)
         return "点击成功"
 
     @app.errorhandler(404)
