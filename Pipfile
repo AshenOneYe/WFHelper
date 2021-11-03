@@ -7,8 +7,15 @@ name = "pypi"
 ImageHash = "*"
 Flask = "*"
 Distance = "*"
+pyinstaller = "*"
 
 [dev-packages]
+mypy = "*"
+flake8 = "*"
+black = "*"
 
 [requires]
 python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
