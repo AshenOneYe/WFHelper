@@ -11,10 +11,17 @@ DefaultConfigPath = r"configs\emulator1440x810\config.json"
 
 class Config:
 
+    name = None
+    author = None
+    description = None
+    globalSimilarity = None
+    globalRandomClickDelay = None
+    globalRandomClickArea = None
     targets = None
     configPath = None
     configDir = None
     picSize = None
+    screenSize = None
 
     def setConfigPath(self, configPath):
 
