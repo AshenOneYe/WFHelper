@@ -69,7 +69,7 @@ class ADBUtil:
             cmd += "-s {} ".format(self.device)
 
         cmd += "shell input tap {} {}".format(
-            random.randrange(area[0], area[2]), 
+            random.randrange(area[0], area[2]),
             random.randrange(area[1], area[3])
         )
 
