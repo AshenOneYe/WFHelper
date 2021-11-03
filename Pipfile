@@ -1,0 +1,21 @@
+[[source]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+ImageHash = "*"
+Flask = "*"
+Distance = "*"
+pyinstaller = "*"
+
+[dev-packages]
+mypy = "*"
+flake8 = "*"
+black = "*"
+
+[requires]
+python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
