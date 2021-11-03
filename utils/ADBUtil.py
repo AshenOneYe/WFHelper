@@ -27,8 +27,8 @@ class ADBUtil:
         process = os.popen(cmd)
         devices = process.readlines()
         try:
-            devices = devices[1 : len(devices) - 1]
-        except:
+            devices = devices[1: len(devices) - 1]
+        except IndexError:
             Log.error("获取设备列表失败")
         return devices
 
@@ -69,7 +69,8 @@ class ADBUtil:
             cmd += "-s {} ".format(self.device)
 
         cmd += "shell input tap {} {}".format(
-            random.randrange(area[0], area[2]), random.randrange(area[1], area[3])
+            random.randrange(area[0], area[2]), 
+            random.randrange(area[1], area[3])
         )
 
         os.system(cmd)
@@ -88,7 +89,7 @@ class ADBUtil:
                     print("{} : {}".format(i, devices[i]))
                 try:
                     device = devices[int(input())]
-                except:
+                except ValueError:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
         if device is None:
