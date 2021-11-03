@@ -10,6 +10,6 @@ PyInstaller.__main__.run(
         "--add-data",
         "utils/adb;adb",
         "--name",
-        "WFHelper-emulator1440x810",
+        "WFHelper",
     ]
 )
