@@ -1,5 +1,6 @@
-from flask import url_for,render_template,redirect,make_response,request
+from flask import url_for, render_template, redirect, make_response, request
 from utils.LogUtil import Log
+
 
 def setRouter(server):
 
@@ -32,14 +33,10 @@ def setRouter(server):
 
     @app.route("/touchScreen")
     def touchScreen():
-        try:
-            x = int(request.args.get("x"))
-            y = int(request.args.get("y"))
-            server.touchScreen(x,y)
-        except:
-            return "点击失败"
+        x = int(request.args.get("x"))
+        y = int(request.args.get("y"))
+        server.touchScreen(x, y)           
         return "点击成功"
-
 
     @app.errorhandler(404)
     def page_not_found(error):
