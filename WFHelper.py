@@ -35,7 +35,6 @@ class WFHelper():
 
     # 该功能不稳定
     def waitFor(self, selfTarget, args):
-        Log.info("等待{}".format(args[0]))
         target = self.getTargetFromName(args[0])
 
         startTime = int(time.time())
@@ -43,7 +42,7 @@ class WFHelper():
         while self.isRunning:
             screen = readImageFromBytes(adbUtil.getScreen())
             self.screen = screen
-            adbUtil.touchScreen((0, 0, config.picSize[0]/2, 2))
+            adbUtil.touchScreen((0, 0, config.screenSize[0]/2, 2))
             if self.check(selfTarget, screen):
                 adbUtil.touchScreen(selfTarget["area"])
 
