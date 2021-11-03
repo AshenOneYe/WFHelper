@@ -29,7 +29,7 @@ class WFHelper():
         for target in config.targets:
             if target["name"] == targetName:
                 return target
-      
+
     def waitFor(self, selfTarget, waitTargetName):
         Log.info("等待{}".format(waitTargetName))
         target = self.getTargetFromName(waitTargetName)
@@ -42,7 +42,7 @@ class WFHelper():
             adbUtil.touchScreen((0, 0, config.picSize[0]/2, 2))
             if self.check(selfTarget, screen):
                 adbUtil.touchScreen(selfTarget["area"])
-                
+
             if self.check(target, screen):
                 self.doAction(target)
                 break
@@ -103,7 +103,7 @@ class WFHelper():
                 self.mainLoop()
         except KeyboardInterrupt:
             Log.critical("退出!!!")
-        
+
     def stop(self):
         self.isRunning = False
         Log.info("停止自动脚本")
