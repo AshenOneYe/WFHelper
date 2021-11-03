@@ -6,7 +6,7 @@ from PIL import Image
 from utils.ImageUtil import getImageCrop, getImageHash
 from utils.LogUtil import Log
 
-DefaultConfigPath = "configs\emulator1440x810\config.json"
+DefaultConfigPath = r"configs\emulator1440x810\config.json"
 
 
 class Config:
