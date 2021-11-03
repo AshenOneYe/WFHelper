@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 ImageHash = "*"
 Flask = "*"
-Distance = "*"
 pyinstaller = "*"
 
 [dev-packages]
