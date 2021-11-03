@@ -7,34 +7,42 @@ from utils.ImageUtil import readImageFromBytes
 from utils.LogUtil import Log
 
 
+# 解决打包前打包后路径不一致问题https://cloud.tencent.com/developer/article/1739886
+def base_path(path):
+    if getattr(sys, "frozen", None):
+        basedir = sys._MEIPASS
+    else:
+        basedir = os.path.dirname(__file__)
+    return os.path.join(basedir, path)
+
+
 class ADBUtil:
 
     device = None
     rplc = b"\r\n"
     test = False
     lastScreenBytes = None
-
-    # 解决打包前打包后路径不一致问题https://cloud.tencent.com/developer/article/1739886
-    def base_path(self, path):
-        if getattr(sys, "frozen", None):
-            basedir = sys._MEIPASS
-        else:
-            basedir = os.path.dirname(__file__)
-        return os.path.join(basedir, path)
+    adbPath = base_path("") + r"adb\adb.exe"
 
     def getDeviceList(self):
-        cmd = self.base_path("") + r"adb\adb.exe devices"
+        cmd = self.adbPath + " devices"
         process = os.popen(cmd)
         devices = process.readlines()
         try:
-            devices = devices[1: len(devices) - 1]
+            devices = devices[1:-1]
+            if len(devices) == 0:
+                Log.info("尝试获取默认设备")
+                os.popen(
+                    self.adbPath + " connect 127.0.0.1:7555"
+                )
+                devices = os.popen(cmd).readlines()[1:-1]
         except IndexError:
             Log.error("获取设备列表失败")
         return devices
 
     def getScreen(self, savePath=None):
 
-        cmd = self.base_path("") + r"adb\adb.exe "
+        cmd = self.adbPath + " "
 
         if self.device is not None:
             cmd += "-s {} ".format(self.device)
@@ -63,7 +71,7 @@ class ADBUtil:
         return binary_screenshot
 
     def touchScreen(self, area):
-        cmd = self.base_path("") + r"adb\adb.exe "
+        cmd = self.adbPath + " "
 
         if self.device is not None:
             cmd += "-s {} ".format(self.device)
@@ -76,11 +84,13 @@ class ADBUtil:
         os.system(cmd)
 
     def setDevice(self, device):
+        # 用户没有指定设备
         if device is None:
             devices = self.getDeviceList()
             if len(devices) == 0:
                 Log.error("未检测到设备连接")
-            if len(devices) == 1:
+                sys.exit()
+            elif len(devices) == 1:
                 device = devices[0].split("\t")[0]
                 Log.info("只检测到一台设备，默认与其建立连接")
             else:
@@ -92,8 +102,6 @@ class ADBUtil:
                 except ValueError:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
-        if device is None:
-            sys.exit()
         self.device = device
         Log.info("设备名 : {}".format(self.device))
 
