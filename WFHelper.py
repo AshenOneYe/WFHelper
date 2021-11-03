@@ -1,8 +1,6 @@
 from Config import config
 from utils.ADBUtil import adbUtil
 from utils.ImageUtil import getImageHash, similarity, readImageFromBytes
-import sys
-import getopt
 import time
 from utils.LogUtil import Log
 
@@ -15,9 +13,11 @@ class WFHelper():
     def check(self, target, screen):
         tmp = screen.crop(target["area"])
         hash = getImageHash(image=tmp)
-        # 写死0.9
         s = similarity(hash1=hash, hash2=target["hash"])
-        if s >= 0.9:
+        similarityThreshold = config.similarityThreshold
+        if "similarityThreshold" in target:
+            similarityThreshold = target["similarityThreshold"]
+        if s >= similarityThreshold:
             Log.info("{},识别相似度:{}".format(target["text"], s))
             return True
         return False
@@ -25,14 +25,18 @@ class WFHelper():
     def click(self, area):
         adbUtil.touchScreen(area)
 
+    def sleep(self, args):
+        time.sleep(args[0])
+
     def getTargetFromName(self, targetName):
         for target in config.targets:
             if target["name"] == targetName:
                 return target
 
-    def waitFor(self, selfTarget, waitTargetName):
-        Log.info("等待{}".format(waitTargetName))
-        target = self.getTargetFromName(waitTargetName)
+    # 该功能不稳定
+    def waitFor(self, selfTarget, args):
+        Log.info("等待{}".format(args[0]))
+        target = self.getTargetFromName(args[0])
 
         startTime = int(time.time())
 
@@ -44,35 +48,40 @@ class WFHelper():
                 adbUtil.touchScreen(selfTarget["area"])
 
             if self.check(target, screen):
-                self.doAction(target)
                 break
 
             # 设置timeout防止卡死
-            if int(time.time()) - startTime > 20:
+            timeout = 20
+            try:
+                timeout = args[1]
+            except IndexError:
+                pass
+            if int(time.time()) - startTime > timeout:
                 break
 
     def doAction(self, target):
-        try:
-            opts, args = getopt.getopt(target["action"], "c:w:s:")
-
-            for o, a in opts:
-                if o == "-c":
-                    if a in (None, "", " "):
-                        self.click(target["area"])
-                    else:
-                        self.click(a)
-
-                if o == "-w":
-                    self.waitFor(target, a)
-
-                if o == "-s":
-                    Log.info("等待{}秒......".format(a))
-                    time.sleep(int(a))
-                    Log.info("等待结束")
-
-        except getopt.GetoptError:
-            Log.error("配置文件中{}的action参数错误".format(target["name"]))
-            sys.exit()
+        actions = target["actions"]
+        for action in actions:
+            if "info" in action:
+                Log.info(action["info"])
+            if action["name"] == "click":
+                if "args" not in action or \
+                        len(action["args"]) == 0 or action["args"][0] is None:
+                    self.click(target["area"])
+                else:
+                    self.click(action["args"][0])
+            elif action["name"] == "sleep":
+                self.sleep(action["args"])
+            elif action["name"] == "waitFor":
+                self.waitFor(target, action["args"])
+            elif action["name"] == "pass":
+                pass
+            else:
+                Log.error(
+                    "action'{}'不存在！请检查'{}'的配置文件".format(
+                        action["name"], target["name"]
+                    )
+                )
 
     def mainLoop(self):
         while self.isRunning:
@@ -86,9 +95,9 @@ class WFHelper():
                     break
 
             # 300秒未操作则随机点击一次
-            if t - self.lastActionTime > 300:
+            if t - self.lastActionTime > config.randomClickDelay:
                 Log.info("长时间未操作，随机点击一次")
-                adbUtil.touchScreen((0, 0, config.picSize[0]/2, 2))
+                adbUtil.touchScreen(config.randomClickArea)
                 self.lastActionTime = t
 
         # 当脚本被远程停止时，持续更新lastActionTime

@@ -1,86 +1,107 @@
-[
-    {
-        "name" : "继续",
-        "path" : "jixu.png",
-        "area" : [279,1319,530,1388],
-        "action" : ["-w","离开"],
-        "text" : "点击继续"
-    },
-    {
-        "name" : "参加",
-        "path" : "canjia.png",
-        "area" : [431,1173,740,1240],
-        "action" : ["-c",null],
-        "text" : "点击参加按钮"
-    },
-    {
-        "name" : "参加2",
-        "path" : "canjia2.png",
-        "area" : [374,1309,643,1376],
-        "action" : ["-c",null],
-        "text" : "点击参加按钮"
-    },
-    {
-        "name" : "铃铛",
-        "path" : "lingdang.png",
-        "area" : [30,17,75,59],
-        "action" : ["-c",null],
-        "text" : "发现铃铛，点击"
-    },
-    {
-        "name" : "铃铛2",
-        "path" : "lingdang2.png",
-        "area" : [3,32,85,132],
-        "action" : ["-c",null],
-        "text" : "发现铃铛，点击"
-    },
-    {
-        "name" : "OK",
-        "path" : "OK.png",
-        "area" : [246,894,563,962],
-        "action" : ["-c",null],
-        "text" : "蹭车失败，点击OK"
-    },
-    {
-        "name" : "箭头",
-        "path" : "jiantou.png",
-        "area" : [700,45,746,104],
-        "action" : ["-c",null],
-        "text" : "点击箭头，返回游戏"
-    },
-    {
-        "name" : "准备",
-        "path" : "zhunbei.png",
-        "area" : [240,1000,565,1094],
-        "action" : ["-c",null],
-        "text" : "点击准备按钮"
-    },
-    {
-        "name" : "离开",
-        "path" : "likai.png",
-        "area" : [116,1322,366,1383],
-        "action" : ["-c",null],
-        "text" : "离开房间"
-    },
-    {
-        "name" : "继续关卡",
-        "path" : "jixuguanka.png",
-        "area" : [430,895,742,960],
-        "action" : ["-c",null],
-        "text" : "继续关卡"
-    },
-    {
-        "name" : "升级",
-        "path" : "shengji.png",
-        "area" : [234,632,576,677],
-        "action" : ["-c",null],
-        "text" : "升级了！！！"
-    },
-    {
-        "name" : "升级2",
-        "path" : "shengji2.png",
-        "area" : [223,632,577,677],
-        "action" : ["-c",null],
-        "text" : "升级了！！！"
-    }
-]
+{
+    "name":"WF1440x810模拟器混铃铛",
+    "author":"大A",
+    "description":"这个配置用于世界弹射物语国服混铃铛，可以在1440x810分辨率的模拟器上运行",
+    "similarityThreshold":1,
+    "randomClickDelay":300,
+    "randomClickArea":[0,0,1,1],
+    "screenSize":[1440,810],
+    "targets":[
+        {
+            "name" : "继续",
+            "path" : "jixu.png",
+            "area" : [279,1319,530,1388],
+            "similarityThreshold":0.9,
+            "text" : "发现继续按钮",
+            "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
+            "actions":[
+                {
+                    "name":"waitFor",
+                    "args":["继续",20],
+                    "info":"等待离开房间按钮出现"
+                },
+                {
+                    "name":"pass",
+                    "info":"结束等待"
+                }
+            ]
+        },
+        {
+            "name" : "参加",
+            "path" : "canjia.png",
+            "area" : [431,1173,740,1240],
+            "text" : "点击参加按钮",
+            "actions" : [{"name":"click"}]
+        },
+        {
+            "name" : "参加2",
+            "path" : "canjia2.png",
+            "area" : [374,1309,643,1376],
+            "actions" : [{"name":"click"}],
+            "text" : "点击参加按钮"
+        },
+        {
+            "name" : "铃铛",
+            "path" : "lingdang.png",
+            "area" : [30,17,75,59],
+            "actions" : [{"name":"click"}],
+            "text" : "发现铃铛，点击"
+        },
+        {
+            "name" : "铃铛2",
+            "path" : "lingdang2.png",
+            "area" : [3,32,85,132],
+            "actions" : [{"name":"click"}],
+            "text" : "发现铃铛，点击"
+        },
+        {
+            "name" : "OK",
+            "path" : "OK.png",
+            "area" : [246,894,563,962],
+            "actions" : [{"name":"click"}],
+            "text" : "蹭车失败，点击OK"
+        },
+        {
+            "name" : "箭头",
+            "path" : "jiantou.png",
+            "area" : [700,45,746,104],
+            "actions" : [{"name":"click"}],
+            "text" : "点击箭头，返回游戏"
+        },
+        {
+            "name" : "准备",
+            "path" : "zhunbei.png",
+            "area" : [240,1000,565,1094],
+            "actions" : [{"name":"click"}],
+            "text" : "点击准备按钮"
+        },
+        {
+            "name" : "离开",
+            "path" : "likai.png",
+            "area" : [116,1322,366,1383],
+            "actions" : [{"name":"click"}],
+            "text" : "离开房间"
+        },
+        {
+            "name" : "继续关卡",
+            "path" : "jixuguanka.png",
+            "area" : [430,895,742,960],
+            "actions" : [{"name":"click"}],
+            "text" : "继续关卡"
+        },
+        {
+            "name" : "升级",
+            "path" : "shengji.png",
+            "area" : [234,632,576,677],
+            "actions" : [{"name":"click"}],
+            "text" : "升级了！！！"
+        },
+        {
+            "name" : "升级2",
+            "path" : "shengji2.png",
+            "area" : [223,632,577,677],
+            "actions" : [{"name":"click"}],
+            "text" : "升级了！！！"
+        }
+    ]
+}
