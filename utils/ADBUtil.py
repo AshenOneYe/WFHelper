@@ -7,23 +7,25 @@ from utils.ImageUtil import readImageFromBytes
 from utils.LogUtil import Log
 
 
+# 解决打包前打包后路径不一致问题https://cloud.tencent.com/developer/article/1739886
+def base_path(path):
+    if getattr(sys, "frozen", None):
+        basedir = sys._MEIPASS
+    else:
+        basedir = os.path.dirname(__file__)
+    return os.path.join(basedir, path)
+
+
 class ADBUtil:
 
     device = None
     rplc = b"\r\n"
     test = False
     lastScreenBytes = None
-
-    # 解决打包前打包后路径不一致问题https://cloud.tencent.com/developer/article/1739886
-    def base_path(self, path):
-        if getattr(sys, "frozen", None):
-            basedir = sys._MEIPASS
-        else:
-            basedir = os.path.dirname(__file__)
-        return os.path.join(basedir, path)
+    adbPath = base_path("") + r"adb\adb.exe"
 
     def getDeviceList(self):
-        cmd = self.base_path("") + r"adb\adb.exe devices"
+        cmd = self.adbPath + " devices"
         process = os.popen(cmd)
         devices = process.readlines()
         try:
@@ -31,7 +33,7 @@ class ADBUtil:
             if len(devices) == 0:
                 Log.info("尝试获取默认设备")
                 os.popen(
-                    self.base_path("") + r"adb\adb.exe connect 127.0.0.1:7555"
+                    self.adbPath + " connect 127.0.0.1:7555"
                 )
                 devices = os.popen(cmd).readlines()[1:-1]
         except IndexError:
@@ -40,7 +42,7 @@ class ADBUtil:
 
     def getScreen(self, savePath=None):
 
-        cmd = self.base_path("") + r"adb\adb.exe "
+        cmd = self.adbPath + " "
 
         if self.device is not None:
             cmd += "-s {} ".format(self.device)
@@ -69,7 +71,7 @@ class ADBUtil:
         return binary_screenshot
 
     def touchScreen(self, area):
-        cmd = self.base_path("") + r"adb\adb.exe "
+        cmd = self.adbPath + " "
 
         if self.device is not None:
             cmd += "-s {} ".format(self.device)
