@@ -32,7 +32,7 @@ class ADBUtil:
                 Log.info("尝试获取默认设备")
                 os.popen(self.base_path("") + r"adb\adb.exe connect 127.0.0.1:7555")
                 devices = os.popen(cmd).readlines()[1:-1]
-        except:
+        except IndexError:
             Log.error("获取设备列表失败")
         return devices
 
@@ -94,7 +94,7 @@ class ADBUtil:
                     print("{} : {}".format(i, devices[i]))
                 try:
                     device = devices[int(input())]
-                except:
+                except ValueError:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
         self.device = device
