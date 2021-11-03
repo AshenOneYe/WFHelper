@@ -67,7 +67,10 @@ class WFHelper():
                     self.waitFor(target,a)
 
                 if o == "-s":
+                    Log.info("等待{}秒......".format(a))
                     time.sleep(int(a))
+                    Log.info("等待结束")
+
 
         except getopt.GetoptError:
             Log.error("配置文件中{}的action参数错误".format(target["name"]))
