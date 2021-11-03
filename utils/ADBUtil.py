@@ -30,7 +30,9 @@ class ADBUtil:
             devices = devices[1:-1]
             if len(devices) == 0:
                 Log.info("尝试获取默认设备")
-                os.popen(self.base_path("") + r"adb\adb.exe connect 127.0.0.1:7555")
+                os.popen(
+                    self.base_path("") + r"adb\adb.exe connect 127.0.0.1:7555"
+                )
                 devices = os.popen(cmd).readlines()[1:-1]
         except IndexError:
             Log.error("获取设备列表失败")
