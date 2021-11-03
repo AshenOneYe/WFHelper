@@ -2,6 +2,9 @@ from io import BytesIO
 from PIL import Image
 import imagehash
 
+def similarity(hash1,hash2):
+    sim = 1 - (hash1 - hash2)/len(hash1.hash)**2
+    return sim
 
 def readImageFromBytes(bytes):  
     bytes_stream = BytesIO(bytes)
@@ -28,6 +31,3 @@ def similarity(h1,h2):
             total += 1
 
     return count/total
-
-
-
