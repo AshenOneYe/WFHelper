@@ -27,7 +27,11 @@ class ADBUtil:
         process = os.popen(cmd)
         devices = process.readlines()
         try:
-            devices = devices[1 : len(devices) - 1]
+            devices = devices[1:-1]
+            if len(devices) == 0:
+                Log.info("尝试获取默认设备")
+                os.popen(self.base_path("") + r"adb\adb.exe connect 127.0.0.1:7555")
+                devices = os.popen(cmd).readlines()[1:-1]
         except:
             Log.error("获取设备列表失败")
         return devices
@@ -75,11 +79,13 @@ class ADBUtil:
         os.system(cmd)
 
     def setDevice(self, device):
+        # 用户没有指定设备
         if device is None:
             devices = self.getDeviceList()
             if len(devices) == 0:
                 Log.error("未检测到设备连接")
-            if len(devices) == 1:
+                sys.exit()
+            elif len(devices) == 1:
                 device = devices[0].split("\t")[0]
                 Log.info("只检测到一台设备，默认与其建立连接")
             else:
@@ -91,8 +97,6 @@ class ADBUtil:
                 except:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
-        if device is None:
-            sys.exit()
         self.device = device
         Log.info("设备名 : {}".format(self.device))
 
