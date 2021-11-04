@@ -1,11 +1,12 @@
+import time
+
 from Config import config
 from utils.ADBUtil import adbUtil
-from utils.ImageUtil import getImageHash, similarity, readImageFromBytes
-import time
+from utils.ImageUtil import getImageHash, readImageFromBytes, similarity
 from utils.LogUtil import Log
 
 
-class WFHelper():
+class WFHelper:
 
     lastActionTime = int(time.time())
     isRunning = False
@@ -49,7 +50,7 @@ class WFHelper():
         while self.isRunning:
             screen = readImageFromBytes(adbUtil.getScreen())
             self.screen = screen
-            adbUtil.touchScreen((0, 0, config.screenSize[0]/2, 2))
+            adbUtil.touchScreen((0, 0, config.screenSize[0] / 2, 2))
             if self.check(selfTarget, screen):
                 adbUtil.touchScreen(selfTarget["area"])
 
@@ -71,8 +72,11 @@ class WFHelper():
             if "info" in action:
                 Log.info(action["info"])
             if action["name"] == "click":
-                if "args" not in action or \
-                        len(action["args"]) == 0 or action["args"][0] is None:
+                if (
+                    "args" not in action
+                    or len(action["args"]) == 0
+                    or action["args"][0] is None
+                ):
                     self.click(target["area"])
                 else:
                     self.click(action["args"][0])
@@ -86,9 +90,7 @@ class WFHelper():
                 pass
             else:
                 Log.error(
-                    "action:'{}'不存在！请检查'{}'的配置文件".format(
-                        action["name"], target["name"]
-                    )
+                    "action:'{}'不存在！请检查'{}'的配置文件".format(action["name"], target["name"])
                 )
 
     def mainLoop(self):

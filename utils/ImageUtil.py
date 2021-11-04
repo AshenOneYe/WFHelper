@@ -14,10 +14,8 @@ def readImageFromBytes(bytes):
 
 
 def getImageHash(image=None, path=None):
-
     if path is not None:
         image = Image.open(path)
-
     return imagehash.phash(image)
 
 
