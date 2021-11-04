@@ -28,6 +28,13 @@ class WFHelper():
     def sleep(self, args):
         time.sleep(args[0])
 
+    def count(self, target):
+        if "count" not in target:
+            target["count"] = 0
+        target["count"] = target["count"] + 1
+        Log.info("已完成`{}`{}次".format(target["name"], target["count"]))
+        # Log.info(args[0].format(args[1:]))
+
     def getTargetFromName(self, targetName):
         for target in config.targets:
             if target["name"] == targetName:
@@ -73,11 +80,13 @@ class WFHelper():
                 self.sleep(action["args"])
             elif action["name"] == "waitFor":
                 self.waitFor(target, action["args"])
+            elif action["name"] == "count":
+                self.count(target)
             elif action["name"] == "pass":
                 pass
             else:
                 Log.error(
-                    "action'{}'不存在！请检查'{}'的配置文件".format(
+                    "action:'{}'不存在！请检查'{}'的配置文件".format(
                         action["name"], target["name"]
                     )
                 )
@@ -93,7 +102,7 @@ class WFHelper():
                     self.lastActionTime = t
                     break
 
-            # 300秒未操作则随机点击一次
+            # 长时间未操作则随机点击一次
             if t - self.lastActionTime > config.randomClickDelay:
                 Log.info("长时间未操作，随机点击一次")
                 adbUtil.touchScreen(config.randomClickArea)

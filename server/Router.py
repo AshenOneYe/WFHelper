@@ -8,7 +8,7 @@ def setRouter(server):
 
     @app.route("/")
     def index():
-        return render_template('index.html')
+        return render_template('index.html', log=server.getLastLog())
 
     @app.route("/getLastLog")
     def getLastLog():

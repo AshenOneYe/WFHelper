@@ -79,7 +79,10 @@
             "name" : "离开",
             "path" : "likai.png",
             "area" : [116,1322,366,1383],
-            "actions" : [{"name":"click"}],
+            "actions" : [
+                {"name":"click"},
+                {"name":"count"}
+            ],
             "text" : "离开房间"
         },
         {
