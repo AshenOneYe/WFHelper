@@ -10,7 +10,7 @@
         {
             "name" : "开始1",
             "path" : "kaishi.png",
-            "area" : [2037,940,2346,1013],
+            "area" : [2157,959,2346,1013],
             "text" : "发现关卡界面开始行动按钮",
             "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
             "actions" : [
@@ -39,6 +39,10 @@
             "text" : "行动结束",
             "similarityThreshold":0.8,
             "actions" : [
+                {
+                    "name":"sleep",
+                    "args":[3]
+                },
                 {"name":"click"},
                 {
                     "name":"sleep",
