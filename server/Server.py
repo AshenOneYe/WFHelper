@@ -18,6 +18,13 @@ class Server():
     def getLastLog(self):
         return Log.lastLog
 
+    def getLogArray(self):
+        return Log.logArray
+
+    def setLogLimit(self, value):
+        Log.logArray = []
+        Log.logLimit = value
+
     def getScreenShot(self):
         return adbUtil.getScreen()
 

@@ -1,0 +1,130 @@
+{
+  "name": "蓝叠1280*720模拟器混铃铛",
+  "author": "snyssss",
+  "description": "适用于蓝叠中国64位，1280*720，DPI240。",
+  "similarityThreshold": 0.95,
+  "randomClickDelay": 300,
+  "randomClickArea": [0, 0, 1, 1],
+  "screenSize": [1280, 720],
+  "targets": [
+    {
+      "name": "准备",
+      "path": "zhunbei.png",
+      "area": [240, 900, 480, 920],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "点击准备"
+    },
+    {
+      "name": "参加",
+      "path": "canjia.png",
+      "area": [440, 1040, 640, 1100],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "点击参加"
+    },
+    {
+      "name": "参加2",
+      "path": "canjia2.png",
+      "area": [400, 1160, 560, 1220],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "点击参加"
+    },
+    {
+      "name": "铃铛",
+      "path": "lingdang.png",
+      "area": [30, 18, 62, 50],
+      "actions": [{ "name": "click" }],
+      "text": "准备上车"
+    },
+    {
+      "name": "铃铛2",
+      "path": "lingdang2.png",
+      "area": [25, 50, 65, 90],
+      "actions": [{ "name": "click" }],
+      "text": "准备上车"
+    },
+    {
+      "name": "暂停",
+      "path": "zanting.png",
+      "area": [630, 48, 660, 80],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "蹭车失败，解除暂停"
+    },
+    {
+      "name": "离开",
+      "path": "likai.png",
+      "area": [120, 1180, 320, 1220],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "蹭车结束，离开房间"
+    },
+    {
+      "name": "继续关卡",
+      "path": "jixuguanqia.png",
+      "area": [480, 800, 640, 840],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "继续关卡"
+    },
+    {
+      "name": "OK",
+      "path": "ok.png",
+      "area": [300, 800, 460, 840],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "点击OK"
+    },
+    {
+      "name": "OK2",
+      "path": "ok2.png",
+      "area": [120, 1180, 320, 1220],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "当前关卡完成，点击OK"
+    },
+    {
+      "name": "继续",
+      "path": "jixu.png",
+      "area": [300, 1180, 460, 1220],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "点击继续"
+    },
+    {
+      "name": "摇人",
+      "path": "yaoren.png",
+      "area": [310, 770, 410, 850],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "开始摇人"
+    },
+    {
+      "name": "摇人2",
+      "path": "yaoren2.png",
+      "area": [480, 900, 640, 940],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "等待乘客"
+    },
+    {
+      "name": "发车",
+      "path": "fache.png",
+      "area": [280, 850, 460, 940],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "开始发车"
+    },
+    {
+      "name": "发车失败",
+      "path": "facheshibai.png",
+      "area": [300, 800, 460, 840],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "发车失败"
+    },
+    {
+      "name": "解散",
+      "path": "jiesan.png",
+      "area": [120, 1180, 320, 1220],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "发车完成，离开房间"
+    },
+    {
+      "name": "升级",
+      "path": "shengji.png",
+      "area": [300, 560, 460, 600],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "已升级"
+    }
+  ]
+}

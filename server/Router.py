@@ -1,3 +1,6 @@
+
+import json
+
 from flask import url_for, render_template, redirect, make_response, request
 from utils.LogUtil import Log
 
@@ -13,6 +16,16 @@ def setRouter(server):
     @app.route("/getLastLog")
     def getLastLog():
         return server.getLastLog()
+
+    @app.route("/getLogArray")
+    def getLogArray():
+        return json.dumps(server.getLogArray()).encode('utf8')
+
+    @app.route("/setLogLimit")
+    def setLogLimit():
+        v = int(request.args.get("value"))
+        server.setLogLimit(v)
+        return '设置成功'
 
     @app.route("/getScreenShot")
     def getScreenShot():
