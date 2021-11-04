@@ -108,6 +108,8 @@ class WFHelper():
                 adbUtil.touchScreen(config.randomClickArea)
                 self.lastActionTime = t
 
+            time.sleep(config.loopDelay)
+
         # 当脚本被远程停止时，持续更新lastActionTime
         self.lastActionTime = int(time.time())
 

@@ -18,6 +18,7 @@ class Config:
     randomClickDelay = 300  # 长时间未操作随机点击的触发时间，单位秒
     randomClickArea = [0, 0, 1, 1]  # 长时间未操作随机点击的点击区域
     screenSize = None  # 屏幕尺寸
+    loopDelay = 0  # 每轮循环的延迟时间
     configData = None
     targets = None
     configPath = None
@@ -48,17 +49,28 @@ class Config:
         try:
             data = open(self.configPath, "r", encoding="utf-8").read()
             self.configData = json.loads(data)
-            self.name = self.configData["name"]
-            self.author = self.configData["author"]
-            self.description = self.configData["description"]
-            self.similarityThreshold = self.configData["similarityThreshold"]
-            self.randomClickDelay = self.configData["randomClickDelay"]
-            self.randomClickArea = self.configData["randomClickArea"]
-            self.screenSize = self.configData["screenSize"]
-            self.targets = self.configData["targets"]
         except json.decoder.JSONDecodeError:
             Log.error("解析配置文件出错，请选择正确的配置文件！")
             sys.exit()
+
+        if "name" in self.configData:
+            self.name = self.configData["name"]
+        if "author" in self.configData:
+            self.author = self.configData["author"]
+        if "description" in self.configData:
+            self.description = self.configData["description"]
+        if "similarityThreshold" in self.configData:
+            self.similarityThreshold = self.configData["similarityThreshold"]
+        if "randomClickDelay" in self.configData:
+            self.randomClickDelay = self.configData["randomClickDelay"]
+        if "randomClickArea" in self.configData:
+            self.randomClickArea = self.configData["randomClickArea"]
+        if "screenSize" in self.configData:
+            self.screenSize = self.configData["screenSize"]
+        if "loopDelay" in self.configData:
+            self.loopDelay = self.configData["loopDelay"]
+        if "targets" in self.configData:
+            self.targets = self.configData["targets"]
 
         if self.targets is None:
             Log.error("配置文件读取失败，内容为空")
@@ -75,6 +87,9 @@ class Config:
             target["hash"] = getImageHash(image=img)
 
         Log.info("配置文件初始化完成")
+        Log.info("配置文件名称 : {}".format(self.name))
+        Log.info("配置文件作者 : {}".format(self.author))
+        Log.info("配置文件描述 : {}".format(self.description))
 
     def __init__(self, configPath=DefaultConfigPath, autoUpdate=True):
         self.setConfigPath(configPath)

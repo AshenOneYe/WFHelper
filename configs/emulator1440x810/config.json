@@ -3,6 +3,7 @@
     "author":"大A",
     "description":"这个配置用于世界弹射物语国服混铃铛，可以在1440x810分辨率的模拟器上运行",
     "similarityThreshold":1,
+    "loopDelay" : 0,
     "randomClickDelay":300,
     "randomClickArea":[0,0,1,1],
     "screenSize":[1440,810],
