@@ -132,6 +132,7 @@
             document.querySelector('[name="Log"]').innerHTML = `
             <ul class="log-list">${res
               .map((item) => `<li>${item}</li>`)
+              .reverse()
               .join("")}
             </ul>
             `;
