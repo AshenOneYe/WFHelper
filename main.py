@@ -40,4 +40,4 @@ if __name__ == "__main__":
     serverThread.start()
 
     # 不用子线程启动的原因是，子线程莫名的速度慢很多
-    wfhelper.start()
+    wfhelper.init()

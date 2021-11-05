@@ -43,17 +43,17 @@
         border-top: none;
       }
 
-      .log-list {
+      .list {
         margin: 0;
         padding: 0;
       }
 
-      .log-list li {
+      .list li {
         padding: 12px;
         list-style: none;
       }
 
-      .log-list li:nth-of-type(odd) {
+      .list li:nth-of-type(odd) {
         background: #ddd;
       }
 
@@ -71,6 +71,9 @@
 
   <body>
     <div class="tab">
+      <button class="tablinks" onclick="switchTab(event, 'Summary')">
+        统计
+      </button>
       <button class="tablinks" onclick="switchTab(event, 'Log')">日志</button>
       <button class="tablinks" onclick="switchTab(event, 'ScreenCap')">
         截图
@@ -79,6 +82,8 @@
         操作
       </button>
     </div>
+
+    <div name="Summary" class="tabcontent"></div>
 
     <div name="Log" class="tabcontent"></div>
 
@@ -89,7 +94,10 @@
     <div name="Actions" class="tabcontent">
       <button class="button" onclick="start()">开始</button>
       <button class="button" onclick="stop()">停止</button>
-      <button class="button" onclick="autoFetch(event)">
+      <button class="button" onclick="autoFetchSummary(event)">
+        启用统计自动刷新
+      </button>
+      <button class="button" onclick="autoFetchLog(event)">
         启用日志自动刷新
       </button>
       <button class="button" onclick="setLogLimit()">设置日志长度</button>
@@ -116,6 +124,10 @@
           }
         });
 
+        if (name === "Summary") {
+          loadSummary();
+        }
+
         if (name === "Log") {
           loadLogArray();
         }
@@ -125,16 +137,49 @@
         }
       };
 
+      const loadSummary = () => {
+        const format = (key, value) => {
+          if (key === "startTime") {
+            return `开始时间：${value ? new Date(value * 1000).toLocaleString() : ""}`;
+          }
+
+          if (key === "lastActionTime") {
+            return `活跃时间：${value ? new Date(value * 1000).toLocaleString() : ""}`;
+          }
+
+          if (key === "completeCount") {
+            return `完成次数：${value}`;
+          }
+
+          if (key === "levelupCount") {
+            return `升级次数：${value}`;
+          }
+
+          return `${key}:${value}`;
+        };
+
+        fetch(`/getSummary`)
+          .then((res) => res.json())
+          .then((res) => {
+            document.querySelector('[name="Summary"]').innerHTML = `
+              <ul class="list">${Object.entries(res)
+                .map(([key, value]) => `<li>${format(key, value)}</li>`)
+                .join("")}
+              </ul>
+            `;
+          });
+      };
+
       const loadLogArray = () => {
         fetch(`/getLogArray`)
           .then((res) => res.json())
           .then((res) => {
             document.querySelector('[name="Log"]').innerHTML = `
-            <ul class="log-list">${res
-              .map((item) => `<li>${item}</li>`)
-              .reverse()
-              .join("")}
-            </ul>
+              <ul class="list">${res
+                .map((item) => `<li>${item}</li>`)
+                .reverse()
+                .join("")}
+              </ul>
             `;
           });
       };
@@ -165,7 +210,29 @@
         fetch(`/stop`);
       };
 
-      const autoFetch = (() => {
+      const autoFetchSummary = (() => {
+        let interval;
+
+        return (event) => {
+          if (interval) {
+            clearInterval(interval);
+
+            interval = 0;
+
+            event.currentTarget.innerHTML = "启用统计自动刷新";
+          } else {
+            const delay = Number(prompt("自动刷新间隔（秒）：", 60));
+
+            if (delay > 0) {
+              interval = setInterval(loadSummary, delay * 1000);
+
+              event.currentTarget.innerHTML = "停止统计自动刷新";
+            }
+          }
+        };
+      })();
+
+      const autoFetchLog = (() => {
         let interval;
 
         return (event) => {

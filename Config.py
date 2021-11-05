@@ -1,5 +1,6 @@
 import json
 import sys
+from typing import Dict
 
 from PIL import Image
 
@@ -20,9 +21,10 @@ class Config:
     screenSize = None  # 屏幕尺寸
     loopDelay = 0  # 每轮循环的延迟时间
     configData = None
-    targets = None
     configPath = None
     configDir = None
+    targets = None
+    summary = {}  # type: Dict[str, str]
 
     def setConfigPath(self, configPath):
 
@@ -71,6 +73,8 @@ class Config:
             self.loopDelay = self.configData["loopDelay"]
         if "targets" in self.configData:
             self.targets = self.configData["targets"]
+        if "summary" in self.configData:
+            self.summary = self.configData["summary"]
 
         if self.targets is None:
             Log.error("配置文件读取失败，内容为空")
