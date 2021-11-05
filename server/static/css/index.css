@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 12px;
+  }
+
+  button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  .tab button {
+    background-color: inherit;
+    float: left;
+  }
+
+  .tab button:hover {
+    background-color: #ddd;
+  }
+
+  .tab button.active {
+    background-color: #ccc;
+  }
+
+  .tabcontent {
+    display: none;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  .list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .list li {
+    padding: 12px;
+    list-style: none;
+  }
+
+  .list li:nth-of-type(odd) {
+    background: #ddd;
+  }
+
+  .button {
+    margin: 12px;
+    color: #fff;
+    background-color: #1976d2;
+  }
+
+  .button:hover {
+    background-color: #42a5f5;
+  }
