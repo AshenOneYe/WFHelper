@@ -1,0 +1,66 @@
+{
+    "name":"一加9R明日方舟循环刷图",
+    "author":"大A",
+    "description":"这个配置文件用于明日方舟循环刷某一张固定图",
+    "similarityThreshold":1,
+    "randomClickDelay":300,
+    "randomClickArea":[0,0,1,1],
+    "screenSize":[2400,1080],
+    "targets":[
+        {
+            "name" : "开始1",
+            "path" : "kaishi.png",
+            "area" : [2157,959,2346,1013],
+            "text" : "发现关卡界面开始行动按钮",
+            "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
+            "actions" : [
+                {
+                    "name":"click",
+                    "info":"点击开始行动"
+                }
+            ]
+        },
+        {
+            "name" : "开始2",
+            "path" : "kaishixingdong.png",
+            "area" : [1794,550,1995,967],
+            "text" : "发现编队界面开始行动按钮",
+            "actions" : [
+                {
+                    "name":"click",
+                    "info":"点击开始行动"
+                }
+            ]
+        },
+        {
+            "name" : "行动结束",
+            "path" : "xingdongjieshu.png",
+            "area" : [65,880,587,1004],
+            "text" : "行动结束",
+            "similarityThreshold":0.8,
+            "actions" : [
+                {
+                    "name":"sleep",
+                    "args":[3]
+                },
+                {"name":"click"},
+                {
+                    "name":"sleep",
+                    "args":[3]
+                },
+                {"name":"count"}
+            ]
+        },
+        {
+            "name" : "理智不足",
+            "path" : "lizhibuzu.png",
+            "area" : [1387,743,1779,781],
+            "text" : "理智不足，退出脚本",
+            "similarityThreshold":0.8,
+            "actions" : [
+                {"name":"exit"}
+            ]
+        }
+
+    ]
+}

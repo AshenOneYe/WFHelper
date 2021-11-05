@@ -88,6 +88,9 @@ class WFHelper:
                 self.count(target)
             elif action["name"] == "pass":
                 pass
+            elif action["name"] == "exit":
+                import sys
+                sys.exit()
             else:
                 Log.error(
                     "action:'{}'不存在！请检查'{}'的配置文件".format(action["name"], target["name"])
