@@ -1,4 +1,7 @@
 # WFHelper
+
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)![GitHub release (latest by date)](https://img.shields.io/github/v/release/AshenOneYe/WFHelper)![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/AshenOneYe/WFHelper?include_prereleases)![GitHub Pipenv locked Python version](https://img.shields.io/github/pipenv/locked/python-version/AshenOneYe/WFHelper)![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/AshenOneYe/WFHelper/dev/flake8)![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/AshenOneYe/WFHelper/dev/mypy)
+
 世界弹射物语护肝宝，24小时自动混铃铛共斗
 
 ## 由于作者时间有限，不保证以下Readme随时保持最新，欢迎加群咨询！！！

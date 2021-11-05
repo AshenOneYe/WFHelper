@@ -27,6 +27,10 @@ def setRouter(server):
         server.setLogLimit(v)
         return '设置成功'
 
+    @app.route("/getSummary")
+    def getSummary():
+        return json.dumps(server.getSummary()).encode('utf8')
+
     @app.route("/getScreenShot")
     def getScreenShot():
         img = server.getScreenShot()

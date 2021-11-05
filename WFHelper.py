@@ -11,6 +11,8 @@ class WFHelper:
     lastActionTime = int(time.time())
     isRunning = False
 
+    summary = None
+
     def check(self, target, screen):
         tmp = screen.crop(target["area"])
         hash = getImageHash(image=tmp)
@@ -19,7 +21,7 @@ class WFHelper:
         if "similarityThreshold" in target:
             similarityThreshold = target["similarityThreshold"]
         if s >= similarityThreshold:
-            Log.info("{},识别相似度:{}".format(target["text"], s))
+            Log.info("{} - 识别相似度：{}".format(target["text"], s))
             return True
         return False
 
@@ -28,6 +30,21 @@ class WFHelper:
 
     def sleep(self, args):
         time.sleep(args[0])
+
+    def updateSummary(self, args):
+        name, action, value = args
+
+        if isinstance(value, str) and value.startswith('$'):
+            value = getattr(self, value[1:])
+
+        if name not in self.summary:
+            self.summary[name] = ""
+
+        if action == 'replace':
+            self.summary[name] = value
+
+        if action == 'increase':
+            self.summary[name] = int(self.summary[name]) + int(value)
 
     def count(self, target):
         if "count" not in target:
@@ -49,7 +66,6 @@ class WFHelper:
 
         while self.isRunning:
             screen = readImageFromBytes(adbUtil.getScreen())
-            self.screen = screen
             adbUtil.touchScreen((0, 0, config.screenSize[0] / 2, 2))
             if self.check(selfTarget, screen):
                 adbUtil.touchScreen(selfTarget["area"])
@@ -82,6 +98,8 @@ class WFHelper:
                     self.click(action["args"][0])
             elif action["name"] == "sleep":
                 self.sleep(action["args"])
+            elif action["name"] == "summary":
+                self.updateSummary(action["args"])
             elif action["name"] == "waitFor":
                 self.waitFor(target, action["args"])
             elif action["name"] == "count":
@@ -93,34 +111,39 @@ class WFHelper:
                 sys.exit()
             else:
                 Log.error(
-                    "action:'{}'不存在！请检查'{}'的配置文件".format(action["name"], target["name"])
+                    "action:'{}'不存在！请检查'{}'的配置文件".format(
+                        action["name"], target["name"])
                 )
 
     def mainLoop(self):
         while self.isRunning:
-            screen = readImageFromBytes(adbUtil.getScreen())
             t = int(time.time())
+
+            screen = readImageFromBytes(adbUtil.getScreen())
 
             for target in config.targets:
                 if self.check(target, screen):
                     self.doAction(target)
-                    self.lastActionTime = t
+                    self.updateActionTime(t)
                     break
 
             # 长时间未操作则随机点击一次
             if t - self.lastActionTime > config.randomClickDelay:
                 Log.info("长时间未操作，随机点击一次")
                 adbUtil.touchScreen(config.randomClickArea)
-                self.lastActionTime = t
+                self.updateActionTime(t)
 
             time.sleep(config.loopDelay)
 
         # 当脚本被远程停止时，持续更新lastActionTime
-        self.lastActionTime = int(time.time())
+        self.updateActionTime(int(time.time()))
 
-    def start(self):
-        self.lastActionTime = int(time.time())
-        self.isRunning = True
+    def updateActionTime(self, time):
+        self.lastActionTime = time
+        self.updateSummary(["lastActionTime", "replace", time])
+
+    def init(self):
+        self.start()
 
         try:
             while True:
@@ -128,8 +151,15 @@ class WFHelper:
         except KeyboardInterrupt:
             Log.critical("退出!!!")
 
+    def start(self):
+        self.isRunning = True
+        self.summary = config.summary
+        self.updateSummary(["startTime", "replace", int(time.time())])
+        Log.info("开始自动脚本")
+
     def stop(self):
         self.isRunning = False
+        self.updateSummary(["startTime", "replace", ""])
         Log.info("停止自动脚本")
 
 
