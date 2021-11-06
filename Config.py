@@ -21,48 +21,21 @@ class Config:
     screenSize = None  # 屏幕尺寸
     loopDelay = 0  # 每轮循环的延迟时间
     configData = None
-    configPath = None
-    configDir = None
     targets = None
     summary = {}  # type: Dict[str, str]
 
-    def setConfigPath(self, configPath):
+    def __init__(self, configPath=None):
 
-        # 在此检查文件是否存在
-        try:
-            open(configPath, "r", encoding="utf-8")  # 打开文件
-            self.configPath = configPath
-        except FileNotFoundError:
-            try:
-                configPath = __file__[0: __file__.rfind("\\") + 1] \
-                    + configPath
-                open(configPath, "r", encoding="utf-8")  # 打开文件
-                self.configPath = configPath
-            except FileNotFoundError:
-                Log.error("配置文件读取失败，请检查以下文件是否存在:{}".format(configPath))
-                sys.exit()
+        if configPath is None:
+            Log.error("配置文件路径为空")
 
-    def selectConfig(self):
-        Log.error("退出")
-        sys.exit()
+        self.configPath = configPath
+        self.configDir = configPath[0: self.configPath.rfind("\\") + 1]
 
-    
+        data = open(self.configPath, "r", encoding="utf-8").read()
+        self.configData = json.loads(data)
 
-    def updateConfig(self):
-        if self.configPath is None:
-            self.selectConfig()
-
-        configDir = self.configPath[0: self.configPath.rfind("\\") + 1]
-        self.configDir = configDir
-
-        Log.info("配置文件路径 : {}".format(self.configPath))
-        try:
-            data = open(self.configPath, "r", encoding="utf-8").read()
-            self.configData = json.loads(data)
-        except json.decoder.JSONDecodeError:
-            Log.error("解析配置文件出错，请选择正确的配置文件！")
-            sys.exit()
-
+    def init(self):
         if "name" in self.configData:
             self.name = self.configData["name"]
         if "author" in self.configData:
@@ -91,17 +64,14 @@ class Config:
         # 如果不在配置文件中指定屏幕尺寸，则根据配置文件下的截图计算
         if self.screenSize is None:
             self.screenSize = \
-                Image.open(configDir + self.targets[0]["path"]).size
+                Image.open(self.configDir + self.targets[0]["path"]).size
         Log.info("屏幕尺寸 : {}x{}".format(self.screenSize[0], self.screenSize[1]))
 
         for target in self.targets:
-            img = getImageCrop(configDir + target["path"], target["area"])
+            img = getImageCrop(self.configDir + target["path"], target["area"])
             target["hash"] = getImageHash(image=img)
 
         Log.info("配置文件初始化完成")
         Log.info("配置文件名称 : {}".format(self.name))
         Log.info("配置文件作者 : {}".format(self.author))
         Log.info("配置文件描述 : {}".format(self.description))
-
-
-config = Config()

@@ -2,14 +2,15 @@ import getopt
 import sys
 import threading
 
-from Config import config
+from ConfigManager import configManager
 from server.Server import Server
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
-from WFHelper import wfhelper
+from WFHelper import WFHelper
 
 if __name__ == "__main__":
 
+    config = None
     try:
         opts, args = getopt.getopt(sys.argv[1:], "d:s:c:")
         opts = dict(opts)
@@ -26,13 +27,17 @@ if __name__ == "__main__":
             adbUtil.getScreen(savePath=savePath)
             sys.exit()
         if "-c" in opts:
-            config.setConfigPath(opts["-c"])
+            config = configManager.getConfig(opts["-c"])
 
             # TODO -v 参数打印log信息
     except getopt.GetoptError:
         Log.error("参数错误")
 
-    config.updateConfig()
+    if config is None:
+        Log.info("未指定配置文件\n")
+        config = configManager.selectConfig()
+    config.init()
+    wfhelper = WFHelper(config)
 
     server = Server(wfhelper)
     serverThread = threading.Thread(target=server.startServer)

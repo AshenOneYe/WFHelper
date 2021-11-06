@@ -1,4 +1,3 @@
-import os
 import random
 import sys
 import adbutils
@@ -68,7 +67,7 @@ class ADBUtil:
             else:
                 Log.info("发现多台设备，请输入序号指定要连接的设备:")
                 for i in range(0, len(devices)):
-                    print("{} - {}".format(i, devices[i]._serial))
+                    print("[{}] - {}".format(i, devices[i]._serial))
                 try:
                     serial = devices[int(input())]._serial
                 except ValueError:

@@ -1,6 +1,5 @@
 import time
 
-from Config import config
 from utils.ADBUtil import adbUtil
 from utils.ImageUtil import getImageHash, readImageFromBytes, similarity
 from utils.LogUtil import Log
@@ -10,19 +9,22 @@ class WFHelper:
 
     lastActionTime = int(time.time())
     isRunning = False
-
+    config = None
     summary = None
 
     def check(self, target, screen):
-        tmp = screen.crop(target["area"])
-        hash = getImageHash(image=tmp)
-        s = similarity(hash1=hash, hash2=target["hash"])
-        similarityThreshold = config.similarityThreshold
-        if "similarityThreshold" in target:
-            similarityThreshold = target["similarityThreshold"]
-        if s >= similarityThreshold:
-            Log.info("{} - 识别相似度：{}".format(target["text"], s))
-            return True
+        try:
+            tmp = screen.crop(target["area"])
+            hash = getImageHash(image=tmp)
+            s = similarity(hash1=hash, hash2=target["hash"])
+            similarityThreshold = self.config.similarityThreshold
+            if "similarityThreshold" in target:
+                similarityThreshold = target["similarityThreshold"]
+            if s >= similarityThreshold:
+                Log.info("{} - 识别相似度：{}".format(target["text"], s))
+                return True
+        except SyntaxError:
+            pass
         return False
 
     def click(self, area):
@@ -54,7 +56,7 @@ class WFHelper:
         # Log.info(args[0].format(args[1:]))
 
     def getTargetFromName(self, targetName):
-        for target in config.targets:
+        for target in self.config.targets:
             if target["name"] == targetName:
                 return target
 
@@ -66,7 +68,7 @@ class WFHelper:
 
         while self.isRunning:
             screen = readImageFromBytes(adbUtil.getScreen())
-            adbUtil.touchScreen((0, 0, config.screenSize[0] / 2, 2))
+            adbUtil.touchScreen((0, 0, self.config.screenSize[0] / 2, 2))
             if self.check(selfTarget, screen):
                 adbUtil.touchScreen(selfTarget["area"])
 
@@ -121,19 +123,19 @@ class WFHelper:
 
             screen = readImageFromBytes(adbUtil.getScreen())
 
-            for target in config.targets:
+            for target in self.config.targets:
                 if self.check(target, screen):
                     self.doAction(target)
                     self.updateActionTime(t)
                     break
 
             # 长时间未操作则随机点击一次
-            if t - self.lastActionTime > config.randomClickDelay:
+            if t - self.lastActionTime > self.config.randomClickDelay:
                 Log.info("长时间未操作，随机点击一次")
-                adbUtil.touchScreen(config.randomClickArea)
+                adbUtil.touchScreen(self.config.randomClickArea)
                 self.updateActionTime(t)
 
-            time.sleep(config.loopDelay)
+            time.sleep(self.config.loopDelay)
 
         # 当脚本被远程停止时，持续更新lastActionTime
         self.updateActionTime(int(time.time()))
@@ -153,7 +155,7 @@ class WFHelper:
 
     def start(self):
         self.isRunning = True
-        self.summary = config.summary
+        self.summary = self.config.summary
         self.updateSummary(["startTime", "replace", int(time.time())])
         Log.info("开始自动脚本")
 
@@ -162,5 +164,5 @@ class WFHelper:
         self.updateSummary(["startTime", "replace", ""])
         Log.info("停止自动脚本")
 
-
-wfhelper = WFHelper()
+    def __init__(self, config):
+        self.config = config
