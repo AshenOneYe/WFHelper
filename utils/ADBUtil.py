@@ -17,8 +17,6 @@ class ADBUtil:
     test = False
     lastScreenBytes = None
 
-    adbPath = None
-
     def getScreen(self, savePath=None):
 
         cmd = self.adbPath + " "
@@ -91,7 +89,8 @@ class ADBUtil:
             basedir = sys._MEIPASS
         else:
             basedir = os.path.dirname(__file__)
-        self.adbPath = os.path.join(basedir, "") + r"adb\adb.exe"
+        adbPath = os.path.join(basedir, "") + r"adb;"
+        os.environ['PATH'] = adbPath + os.environ['PATH']
 
 
 adbUtil = ADBUtil()
