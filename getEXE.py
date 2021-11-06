@@ -5,6 +5,8 @@ PyInstaller.__main__.run(
         "main.py",
         "--onefile",
         "--noconfirm",
+        "-i",
+        "server/static/favicon.ico",
         "--add-data",
         "server/templates;server/templates",
         "--add-data",

@@ -55,6 +55,10 @@ def setRouter(server):
         server.touchScreen(x, y)
         return "点击成功"
 
+    @app.route('/favicon.ico')
+    def favicon():
+        return app.send_static_file('favicon.ico')
+
     @app.errorhandler(404)
     def page_not_found(error):
         return redirect(url_for('index'))
