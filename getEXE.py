@@ -8,8 +8,6 @@ PyInstaller.__main__.run(
         "--add-data",
         "configs;configs",
         "--add-data",
-        "utils/adb;adb",
-        "--add-data",
         "server/templates;server/templates",
         "--name",
         "WFHelper",

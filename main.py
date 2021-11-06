@@ -15,8 +15,8 @@ if __name__ == "__main__":
         opts = dict(opts)
 
         if "-d" in opts:
-            device = opts["-d"]
-            adbUtil.setDevice(device)
+            serial = opts["-d"]
+            adbUtil.setDevice(serial)
         else:
             adbUtil.setDevice(None)
 
