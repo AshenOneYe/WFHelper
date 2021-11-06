@@ -15,17 +15,7 @@
             "similarityThreshold":0.9,
             "text" : "发现继续按钮",
             "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
-            "actions":[
-                {
-                    "name":"waitFor",
-                    "args":["离开",20],
-                    "info":"等待离开房间按钮出现"
-                },
-                {
-                    "name":"pass",
-                    "info":"结束等待"
-                }
-            ]
+            "actions":[{"name":"click"}]
         },
         {
             "name" : "参加",
