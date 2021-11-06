@@ -1,10 +1,21 @@
 import os
 from Config import Config
 import json
+import sys
+
+
 
 
 class ConfigManager:
     rootPath = "configs"
+
+    # 解决打包前打包后路径不一致问题https://cloud.tencent.com/developer/article/1739886
+    def base_path(path):
+        if getattr(sys, "frozen", None):
+            basedir = sys._MEIPASS
+        else:
+            basedir = os.path.dirname(__file__)
+        return os.path.join(basedir, path)
 
     def getConfigFileList(self):
         configFileList = []
