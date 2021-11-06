@@ -19,7 +19,7 @@ class ADBUtil:
 
     def getScreen(self, savePath=None):
 
-        cmd = self.adbPath + " "
+        cmd = "adb "
 
         if self.device is not None:
             cmd += "-s {} ".format(self.device._serial)
