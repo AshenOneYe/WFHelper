@@ -13,18 +13,15 @@ class WFHelper:
     summary = None
 
     def check(self, target, screen):
-        try:
-            tmp = screen.crop(target["area"])
-            hash = getImageHash(image=tmp)
-            s = similarity(hash1=hash, hash2=target["hash"])
-            similarityThreshold = self.config.similarityThreshold
-            if "similarityThreshold" in target:
-                similarityThreshold = target["similarityThreshold"]
-            if s >= similarityThreshold:
-                Log.info("{} - 识别相似度：{}".format(target["text"], s))
-                return True
-        except SyntaxError:
-            pass
+        tmp = screen.crop(target["area"])
+        hash = getImageHash(image=tmp)
+        s = similarity(hash1=hash, hash2=target["hash"])
+        similarityThreshold = self.config.similarityThreshold
+        if "similarityThreshold" in target:
+            similarityThreshold = target["similarityThreshold"]
+        if s >= similarityThreshold:
+            Log.info("{} - 识别相似度：{}".format(target["text"], s))
+            return True
         return False
 
     def click(self, area):

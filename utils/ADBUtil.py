@@ -1,6 +1,8 @@
 import random
 import sys
 import adbutils
+import subprocess
+import os
 
 from utils.ImageUtil import readImageFromBytes
 from utils.LogUtil import Log
@@ -15,18 +17,21 @@ class ADBUtil:
     test = False
     lastScreenBytes = None
 
+    adbPath = None
+
     def getScreen(self, savePath=None):
 
-        cmd = "screencap -p"
+        cmd = self.adbPath + " "
 
-        stream = self.device.shell(cmd, stream=True)
+        if self.device is not None:
+            cmd += "-s {} ".format(self.device._serial)
 
-        binary_screenshot = b""
-        while True:
-            chunk = stream.read(4096)
-            if not chunk:
-                break
-            binary_screenshot += chunk
+        cmd += "shell screencap -p"
+
+        process = subprocess.Popen(
+            cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE
+        )
+        binary_screenshot = process.stdout.read()
 
         if not self.test:
             try:
@@ -82,5 +87,11 @@ class ADBUtil:
             Log.error("获取设备信息失败")
             sys.exit()
 
+    def __init__(self):
+        if getattr(sys, "frozen", None):
+            basedir = sys._MEIPASS
+        else:
+            basedir = os.path.dirname(__file__)
+        self.adbPath = os.path.join(basedir, "") + r"adb\adb.exe"
 
 adbUtil = ADBUtil()

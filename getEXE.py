@@ -6,8 +6,6 @@ PyInstaller.__main__.run(
         "--onefile",
         "--noconfirm",
         "--add-data",
-        "configs;configs",
-        "--add-data",
         "server/templates;server/templates",
         "--add-data",
         "server/static;server/static",
