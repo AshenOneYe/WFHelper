@@ -9,6 +9,8 @@ PyInstaller.__main__.run(
         "configs;configs",
         "--add-data",
         "server/templates;server/templates",
+        "--add-data",
+        "server/static;server/static",
         "--name",
         "WFHelper",
     ]
