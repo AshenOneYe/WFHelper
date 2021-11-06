@@ -42,7 +42,15 @@ class Config:
                 Log.error("配置文件读取失败，请检查以下文件是否存在:{}".format(configPath))
                 sys.exit()
 
+    def selectConfig(self):
+        Log.error("退出")
+        sys.exit()
+
+    
+
     def updateConfig(self):
+        if self.configPath is None:
+            self.selectConfig()
 
         configDir = self.configPath[0: self.configPath.rfind("\\") + 1]
         self.configDir = configDir
@@ -95,10 +103,5 @@ class Config:
         Log.info("配置文件作者 : {}".format(self.author))
         Log.info("配置文件描述 : {}".format(self.description))
 
-    def __init__(self, configPath=DefaultConfigPath, autoUpdate=True):
-        self.setConfigPath(configPath)
-        if autoUpdate:
-            self.updateConfig()
 
-
-config = Config(autoUpdate=False)
+config = Config()
