@@ -79,7 +79,6 @@ class ADBUtil:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
         self.device = adbutils.AdbDevice(adb, serial=serial)
-        adb.connect(self.device._serial, 3)
         Log.info("设备serial : {}".format(self.device._serial))
         try:
             Log.info("设备信息 : {}".format(self.device.prop))
@@ -93,5 +92,6 @@ class ADBUtil:
         else:
             basedir = os.path.dirname(__file__)
         self.adbPath = os.path.join(basedir, "") + r"adb\adb.exe"
+
 
 adbUtil = ADBUtil()
