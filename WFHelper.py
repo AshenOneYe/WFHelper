@@ -47,26 +47,18 @@ class WFHelper:
         self.state.setState("lastActionTime", time)
 
     def run(self):
+        self.config.init()
         self.start()
-
-        try:
-            while True:
-                while self.state.getState("isRunning"):
-                    targets = self.config.targetList[self.state.getState("currentTargets")]
-                    self.mainLoop(targets)
-                # 当脚本被远程停止时，持续更新lastActionTime
-                    time.sleep(self.config.loopDelay)
-                self.updateActionTime(int(time.time()))
-
-        except KeyboardInterrupt:
-            print(self.state.content)
-            Log.critical("退出!!!")
 
     def start(self):
         self.state.setState("isRunning", True)
         self.state.merge(self.config.summary)
         self.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
+        while self.state.getState("isRunning"):
+            targets = self.config.targetList[self.state.getState("currentTargets")]
+            self.mainLoop(targets)
+            time.sleep(self.config.loopDelay)
 
     def stop(self):
         self.state.setState("isRunning", False)

@@ -2,11 +2,12 @@
     "name":"一加9R明日方舟循环刷图",
     "author":"大A",
     "description":"这个配置文件用于明日方舟循环刷某一张固定图",
-    "similarityThreshold":1,
+    "similarityThreshold":0.9,
     "randomClickDelay":300,
     "randomClickArea":[0,0,1,1],
     "screenSize":[2400,1080],
-    "targets":[
+    "targetList":["mainTargets"],
+    "mainTargets":[
         {
             "name" : "开始1",
             "path" : "kaishi.png",
