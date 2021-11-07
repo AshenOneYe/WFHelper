@@ -21,13 +21,13 @@ class Config:
     screenSize = None  # 屏幕尺寸
     loopDelay = 0  # 每轮循环的延迟时间
     configData = None
-    targets = None
+    targetList = {}  # type: Dict[str, list]
     summary = {}  # type: Dict[str, str]
 
     def __init__(self, configPath=None):
 
         if configPath is None:
-            Log.error("配置文件路径为空")
+            return
 
         self.configPath = configPath
         self.configDir = configPath[0: self.configPath.rfind("\\") + 1]
@@ -52,14 +52,8 @@ class Config:
             self.screenSize = self.configData["screenSize"]
         if "loopDelay" in self.configData:
             self.loopDelay = self.configData["loopDelay"]
-        if "targets" in self.configData:
-            self.targets = self.configData["targets"]
         if "summary" in self.configData:
             self.summary = self.configData["summary"]
-
-        if self.targets is None:
-            Log.error("配置文件读取失败，内容为空")
-            sys.exit()
 
         # 如果不在配置文件中指定屏幕尺寸，则根据配置文件下的截图计算
         if self.screenSize is None:
@@ -67,9 +61,12 @@ class Config:
                 Image.open(self.configDir + self.targets[0]["path"]).size
         Log.info("屏幕尺寸 : {}x{}".format(self.screenSize[0], self.screenSize[1]))
 
-        for target in self.targets:
-            img = getImageCrop(self.configDir + target["path"], target["area"])
-            target["hash"] = getImageHash(image=img)
+        for targetsName in self.configData["targetList"]:
+            targets = self.configData[targetsName]
+            for target in targets:
+                img = getImageCrop(self.configDir + target["path"], target["area"])
+                target["hash"] = getImageHash(image=img)
+            self.targetList[targetsName] = targets
 
         Log.info("配置文件初始化完成")
         Log.info("配置文件名称 : {}".format(self.name))

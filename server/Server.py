@@ -26,7 +26,7 @@ class Server():
         Log.logLimit = value
 
     def getSummary(self):
-        return self.wfhelper.summary
+        return self.wfhelper.state.content
 
     def getScreenShot(self):
         return adbUtil.getScreen()
@@ -43,4 +43,3 @@ class Server():
     def startServer(self):
         server = make_server('', 8080, self.app)
         server.serve_forever()
-        # self.app.run("0.0.0.0",8080,debug=False)

@@ -49,10 +49,19 @@ class ADBUtil:
         return binary_screenshot
 
     def touchScreen(self, area):
-        self.device.click(
+        cmd = "adb "
+        if self.device is not None:
+            cmd += "-s {} ".format(self.device._serial)
+        cmd += "shell input tap {} {}"
+        cmd = cmd.format(
             random.randrange(area[0], area[2]),
             random.randrange(area[1], area[3])
         )
+        os.system(cmd)
+        # cmd = cmd.format(
+        #     random.randrange(area[0], area[2]),
+        #     random.randrange(area[1], area[3])
+        # )
 
     def setDevice(self, serial):
         # 用户没有指定设备
