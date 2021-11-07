@@ -7,8 +7,8 @@
   "randomClickDelay": 300,
   "randomClickArea": [0, 0, 1, 1],
   "screenSize": [1280, 720],
-  "summary": { "completeCount": "0", "levelupCount": "0" },
-  "targets": [
+  "targetList":["mainTargets"],
+  "mainTargets": [
     {
       "name": "参加",
       "path": "canjia.png",
@@ -50,8 +50,8 @@
       "area": [120, 1180, 320, 1220],
       "actions": [
         {
-          "name": "summary",
-          "args": ["completeCount", "increase", "1"]
+          "name": "state",
+          "args": ["increase", "completeCount", 1]
         },
         { "name": "click" },
         { "name": "sleep", "args": [2] }
@@ -134,8 +134,8 @@
       "area": [300, 560, 460, 600],
       "actions": [
         {
-          "name": "summary",
-          "args": ["levelupCount", "increase", "1"]
+          "name": "state",
+          "args": ["increase", "levelupCount", "1"]
         },
         { "name": "click" },
         { "name": "sleep", "args": [1] }

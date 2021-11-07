@@ -59,6 +59,7 @@ class WFHelper:
                 self.updateActionTime(int(time.time()))
 
         except KeyboardInterrupt:
+            print(self.state.content)
             Log.critical("退出!!!")
 
     def start(self):

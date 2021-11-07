@@ -48,7 +48,10 @@
                     "name":"sleep",
                     "args":[3]
                 },
-                {"name":"count"}
+                {
+                    "name":"state",
+                    "args":["increase","complete",1]
+                }
             ]
         },
         {
