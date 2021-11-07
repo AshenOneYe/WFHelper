@@ -90,6 +90,9 @@ class ActionManager:
                 self.subTarget(action["args"])
             elif action["name"] == "info":
                 self.info(action["args"])
+            elif action["name"] == "next":
+                # TODO 用于强制指定下一个target
+                pass
             elif action["name"] == "exit":
                 import sys
                 sys.exit()

@@ -49,7 +49,13 @@
             "name" : "OK",
             "path" : "OK.png",
             "area" : [246,894,563,962],
-            "actions" : [{"name":"click"}],
+            "actions" : [
+                {"name":"click"},
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","无"]
+                }
+            ],
             "text" : "蹭车失败，点击OK"
         },
         {
@@ -85,6 +91,10 @@
                 {
                     "name":"state",
                     "args":["increase","$正在挑战的boss",1]
+                },
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","无"]
                 },
                 {
                     "name":"info",
