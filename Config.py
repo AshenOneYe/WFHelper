@@ -1,5 +1,4 @@
 import json
-import sys
 from typing import Dict
 
 from PIL import Image

@@ -7,13 +7,12 @@
     "randomClickDelay":300,
     "randomClickArea":[0,0,1,1],
     "screenSize":[1440,810],
-    "targetList":["mainTargets"],
+    "targetList":["mainTargets","bosses"],
     "mainTargets":[
         {
             "name" : "继续",
             "path" : "jixu.png",
             "area" : [279,1319,530,1388],
-            "similarityThreshold":0.9,
             "text" : "发现继续按钮",
             "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
             "actions":[{"name":"click"}]
@@ -64,7 +63,17 @@
             "name" : "准备",
             "path" : "zhunbei.png",
             "area" : [240,1000,565,1094],
-            "actions" : [{"name":"click"}],
+            "actions" : [
+                {
+                    "name":"subTargets",
+                    "args":["bosses"]
+                },
+                {"name":"click"},
+                {
+                    "name":"info",
+                    "args":["点击准备按钮"]
+                }
+            ],
             "text" : "点击准备按钮"
         },
         {
@@ -75,7 +84,11 @@
                 {"name":"click"},
                 {
                     "name":"state",
-                    "args":["increase","complete",1]
+                    "args":["increase","$正在挑战的boss",1]
+                },
+                {
+                    "name":"info",
+                    "args":["完成挑战{} : {}次","$正在挑战的boss","$$正在挑战的boss"]
                 }
             ],
             "text" : "离开房间"
@@ -100,6 +113,104 @@
             "area" : [223,632,577,677],
             "actions" : [{"name":"click"}],
             "text" : "升级了！！！"
+        }
+    ],
+    "bosses":[
+        {
+            "name" : "管理者",
+            "path" : "guanlizhe.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","管理者"]
+                }
+            ],
+            "text" : "正在挑战管理者"
+        },
+        {
+            "name" : "大蛇",
+            "path" : "dashe.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","大蛇"]
+                }
+            ],
+            "text" : "正在挑战大蛇"
+        },
+        {
+            "name" : "白虎",
+            "path" : "baihu.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","白虎"]
+                }
+            ],
+            "text" : "正在挑战白虎"
+        },
+        {
+            "name" : "恶魔",
+            "path" : "emo.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","恶魔"]
+                }
+            ],
+            "text" : "正在挑战恶魔"
+        },
+        {
+            "name" : "石头人",
+            "path" : "shitouren.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","石头人"]
+                }
+            ],
+            "text" : "正在挑战石头人"
+        },
+        {
+            "name" : "螃蟹",
+            "path" : "pangxie.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","螃蟹"]
+                }
+            ],
+            "text" : "正在挑战螃蟹"
+        },
+        {
+            "name" : "骷髅王",
+            "path" : "kulouwang.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","骷髅王"]
+                }
+            ],
+            "text" : "正在挑战骷髅王"
+        },
+        {
+            "name" : "猫头鹰",
+            "path" : "maotouying.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","猫头鹰"]
+                }
+            ],
+            "text" : "正在挑战猫头鹰"
         }
     ]
 }

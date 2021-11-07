@@ -6,8 +6,8 @@
     "randomClickDelay":300,
     "randomClickArea":[0,0,1,1],
     "screenSize":[1440,810],
-
-    "targets":[
+    "targetList":["mainTargets"],
+    "mainTargets":[
         {
             "name" : "继续",
             "path" : "jixu.png",
