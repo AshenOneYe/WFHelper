@@ -50,8 +50,8 @@ def setRouter(server):
 
     @app.route("/touchScreen")
     def touchScreen():
-        x = int(request.args.get("x"))
-        y = int(request.args.get("y"))
+        x = int(eval(request.args.get("x")))
+        y = int(eval(request.args.get("y")))
         server.touchScreen(x, y)
         return "点击成功"
 
