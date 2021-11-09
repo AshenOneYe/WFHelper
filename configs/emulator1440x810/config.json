@@ -93,12 +93,12 @@
                     "args":["increase","$正在挑战的boss",1]
                 },
                 {
-                    "name":"state",
-                    "args":["set","正在挑战的boss","无"]
-                },
-                {
                     "name":"info",
                     "args":["完成挑战{} : {}次","$正在挑战的boss","$$正在挑战的boss"]
+                },
+                {
+                    "name": "state",
+                    "args": ["set", "正在挑战的boss", "无"]
                 }
             ],
             "text" : "离开房间"
