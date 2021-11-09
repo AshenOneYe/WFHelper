@@ -47,7 +47,6 @@ class WFHelper:
         self.state.setState("lastActionTime", time)
 
     def run(self):
-        self.config.init()
         self.start()
 
     def start(self):

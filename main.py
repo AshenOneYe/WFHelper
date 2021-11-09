@@ -6,7 +6,7 @@ from server.Server import Server
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
 from WFHelper import WFHelper
-from multiprocessing import Process
+import threading
 
 if __name__ == "__main__":
 
@@ -36,13 +36,13 @@ if __name__ == "__main__":
     if config is None:
         Log.info("未指定配置文件\n")
         config = configManager.selectConfig()
+    config.init()
     wfhelper = WFHelper(config)
-    # 不用子线程启动的原因是，子线程莫名的速度慢很多
-    p = Process(target=wfhelper.run, daemon=True)
-    p.start()
 
     server = Server(wfhelper)
-    try:
-        server.startServer()
-    except KeyboardInterrupt:
-        Log.critical("退出!!!")
+    serverThread = threading.Thread(target=server.startServer)
+    serverThread.daemon = True
+    serverThread.start()
+
+    # 不用子线程启动的原因是，子线程莫名的速度慢很多
+    wfhelper.start()
