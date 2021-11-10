@@ -4,6 +4,7 @@
     "description":"这个配置文件用于明日方舟循环刷某一张固定图",
     "similarityThreshold":0.9,
     "randomClickDelay":300,
+    "loopDelay":1,
     "randomClickArea":[0,0,1,1],
     "screenSize":[2400,1080],
     "targetList":["mainTargets"],
@@ -12,6 +13,7 @@
             "name" : "开始1",
             "path" : "kaishi.png",
             "area" : [2157,959,2346,1013],
+            "colorRatio":0.2,
             "text" : "发现关卡界面开始行动按钮",
             "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
             "actions" : [
@@ -24,6 +26,7 @@
         {
             "name" : "开始2",
             "path" : "kaishixingdong.png",
+            "colorRatio":0.2,
             "area" : [1794,550,1995,967],
             "text" : "发现编队界面开始行动按钮",
             "actions" : [
@@ -35,6 +38,7 @@
         },
         {
             "name" : "行动结束",
+            "colorRatio":0.2,
             "path" : "xingdongjieshu.png",
             "area" : [65,880,587,1004],
             "text" : "行动结束",
@@ -58,6 +62,7 @@
         {
             "name" : "理智不足",
             "path" : "lizhibuzu.png",
+            "colorRatio":0.2,
             "area" : [1387,743,1779,781],
             "text" : "理智不足，退出脚本",
             "similarityThreshold":0.8,

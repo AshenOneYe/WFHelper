@@ -2,7 +2,7 @@ import time
 from State import State
 from Config import Config
 from utils.ADBUtil import adbUtil
-from utils.ImageUtil import getImageHash, readImageFromBytes, similarity
+from utils.ImageUtil import readImageFromBytes, similarity
 from utils.LogUtil import Log
 from Action import ActionManager
 
@@ -15,8 +15,7 @@ class WFHelper:
 
     def check(self, target, screen):
         tmp = screen.crop(target["area"])
-        hash = getImageHash(image=tmp)
-        s = similarity(hash1=hash, hash2=target["hash"])
+        s = similarity(tmp, target)
         similarityThreshold = self.config.similarityThreshold
         if "similarityThreshold" in target:
             similarityThreshold = target["similarityThreshold"]
