@@ -48,14 +48,12 @@ class ActionManager:
             value = int(value) + int(self.state.getState(name))
             self.state.setState(name, value)
 
-    def subTarget(self, args):
+    def changeTargets(self, args):
         targets = self.wfhelper.config.targetList[args[0]]
-        self.wfhelper.mainLoop(targets)
-
-    def getTargetFromName(self, targetName):
-        for target in self.config.targets:
-            if target["name"] == targetName:
-                return target
+        if args[1] == "loop":
+            self.state.setState("currentTargets", targets)
+        elif args[1] == "once":
+            self.wfhelper.mainLoop(targets)
 
     def info(self, args):
         if len(args) == 0:
@@ -86,12 +84,12 @@ class ActionManager:
                 self.sleep(action["args"])
             elif action["name"] == "state":
                 self.accessState(action["args"])
-            elif action["name"] == "subTargets":
-                self.subTarget(action["args"])
+            elif action["name"] == "changeTargets":
+                self.changeTargets(action["args"])
             elif action["name"] == "info":
                 self.info(action["args"])
             elif action["name"] == "next":
-                # TODO 用于强制指定下一个target
+                # TODO 用于强制指定下一个targets
                 pass
             elif action["name"] == "exit":
                 import sys

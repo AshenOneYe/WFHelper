@@ -71,8 +71,8 @@
             "area" : [240,1000,565,1094],
             "actions" : [
                 {
-                    "name":"subTargets",
-                    "args":["bosses"]
+                    "name":"changeTargets",
+                    "args":["bosses","once"]
                 },
                 {"name":"click"},
                 {

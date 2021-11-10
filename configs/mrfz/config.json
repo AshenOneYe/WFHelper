@@ -38,11 +38,10 @@
         },
         {
             "name" : "行动结束",
-            "colorRatio":0.2,
             "path" : "xingdongjieshu.png",
-            "area" : [65,880,587,1004],
+            "similarityThreshold":0.85,
+            "area" : [495,767,564,805],
             "text" : "行动结束",
-            "similarityThreshold":0.8,
             "actions" : [
                 {
                     "name":"sleep",
@@ -62,10 +61,9 @@
         {
             "name" : "理智不足",
             "path" : "lizhibuzu.png",
-            "colorRatio":0.2,
+            "colorRatio":0.9,
             "area" : [1387,743,1779,781],
             "text" : "理智不足，退出脚本",
-            "similarityThreshold":0.8,
             "actions" : [
                 {"name":"exit"}
             ]

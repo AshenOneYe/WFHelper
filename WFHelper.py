@@ -34,13 +34,14 @@ class WFHelper:
             if self.check(target, screen):
                 self.actionManager.doAction(target)
                 self.updateActionTime(t)
-                break
+                return True
 
         # 长时间未操作则随机点击一次
         if t - self.state.getState("lastActionTime") > self.config.randomClickDelay:
             Log.info("长时间未操作，随机点击一次")
             adbUtil.touchScreen(self.config.randomClickArea)
             self.updateActionTime(t)
+        return False
 
     def updateActionTime(self, time):
         self.state.setState("lastActionTime", time)

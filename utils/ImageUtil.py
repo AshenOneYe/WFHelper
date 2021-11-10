@@ -38,8 +38,6 @@ def getImageCrop(path, box):
     return image.crop(box)
 
 
-
-
 # img1 = getImageCrop("test.png", [318, 1574, 759, 1701])
 # img2 = getImageCrop("test2.png", [318, 1574, 759, 1701])
 
