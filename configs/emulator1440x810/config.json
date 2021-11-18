@@ -83,6 +83,23 @@
             "text" : "点击准备按钮"
         },
         {
+            "name" : "准备2",
+            "path" : "zhunbei2.png",
+            "area" : [240,1000,565,1094],
+            "actions" : [
+                {
+                    "name":"subTargets",
+                    "args":["bosses"]
+                },
+                {"name":"click"},
+                {
+                    "name":"info",
+                    "args":["点击准备按钮"]
+                }
+            ],
+            "text" : "点击准备按钮"
+        },
+        {
             "name" : "离开",
             "path" : "likai.png",
             "area" : [116,1322,366,1383],
