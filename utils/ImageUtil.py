@@ -6,6 +6,7 @@ import operator
 from functools import reduce
 
 
+# 这个函数可能要继续优化
 def similarity(img, target):
     hash1 = getImageHash(image=img)
     hash2 = target["hash"]
@@ -36,13 +37,3 @@ def getImageHash(image=None, path=None):
 def getImageCrop(path, box):
     image = Image.open(path)
     return image.crop(box)
-
-
-# img1 = getImageCrop("test.png", [318, 1574, 759, 1701])
-# img2 = getImageCrop("test2.png", [318, 1574, 759, 1701])
-
-# s1 = similarity(getImageHash(image=img1), getImageHash(image=img2))
-# s2 = image_contrast(img1, img2)
-
-# print("s1 : {} , s2 {}".format(s1, s2))
-# print("avg : {}".format((9*s1+s2)/10))

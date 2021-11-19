@@ -52,7 +52,9 @@ class ActionManager:
 
     def changeTargets(self, args):
         targets = self.wfhelper.config.targetList[args[0]]
-        if args[1] == "loop":
+        if len(args) == 1:
+            self.wfhelper.mainLoop(targets)
+        elif args[1] == "loop":
             self.state.setState("currentTargets", targets)
         elif args[1] == "once":
             self.wfhelper.mainLoop(targets)

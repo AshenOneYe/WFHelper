@@ -51,6 +51,8 @@ class ConfigManager:
             index += 1
 
         i = int(input())
+        if i is None:
+            i = 0
         config = configs[i]
         return config
 
