@@ -43,6 +43,8 @@ class ActionManager:
             self.state.setState(name, value)
 
         if action == 'increase':
+            if name == "无" or name is None:
+                return
             if not self.state.has(name):
                 self.state.setState(name, 0)
             value = int(value) + int(self.state.getState(name))
@@ -88,9 +90,6 @@ class ActionManager:
                 self.changeTargets(action["args"])
             elif action["name"] == "info":
                 self.info(action["args"])
-            elif action["name"] == "next":
-                # TODO 用于强制指定下一个targets
-                pass
             elif action["name"] == "exit":
                 import sys
                 sys.exit()
