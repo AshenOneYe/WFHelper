@@ -50,11 +50,16 @@ class ConfigManager:
             print("\t描述 : - {}".format(config.configData["description"]))
             index += 1
 
-        i = int(input())
-        if i is None:
+        i = input()
+        if i is None or i == "":
             i = 0
-        config = configs[i]
-        return config
+        try:
+            i = int(i)
+            config = configs[i]
+            return config
+        except ValueError:
+            print("输入的序号有误！")
+            sys.exit()
 
 
 configManager = ConfigManager()

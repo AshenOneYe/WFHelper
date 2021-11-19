@@ -58,10 +58,6 @@ class ADBUtil:
             random.randrange(area[1], area[3])
         )
         os.system(cmd)
-        # cmd = cmd.format(
-        #     random.randrange(area[0], area[2]),
-        #     random.randrange(area[1], area[3])
-        # )
 
     def setDevice(self, serial):
         # 用户没有指定设备
@@ -73,15 +69,20 @@ class ADBUtil:
                 serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
                 out = adb.connect(serial, timeout=3)
                 Log.info(out)
-            elif len(devices) == 1:
-                serial = devices[0]._serial
-                Log.info("只检测到一台设备，默认与其建立连接")
             else:
-                Log.info("发现多台设备，请输入序号指定要连接的设备:")
+                Log.info("检测到已连接的设备，请输入序号指定要连接的设备:")
                 for i in range(0, len(devices)):
                     print("[{}] - {}".format(i, devices[i]._serial))
                 try:
-                    serial = devices[int(input())]._serial
+                    print("[-1] - 手动输入设备ip和端口进行连接")
+                    index = int(input())
+                    if index == -1:
+                        serial = "127.0.0.1:5555"
+                        serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
+                        out = adb.connect(serial, timeout=3)
+                        Log.info(out)
+                    else:
+                        serial = devices[index]._serial
                 except ValueError:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
