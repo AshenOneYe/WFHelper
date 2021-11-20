@@ -1,5 +1,6 @@
 import json
 from typing import Dict
+from os import path
 
 from PIL import Image
 
@@ -29,7 +30,7 @@ class Config:
             return
 
         self.configPath = configPath
-        self.configDir = configPath[0: self.configPath.rfind("\\") + 1]
+        self.configDir = path.dirname(configPath)
 
         data = open(self.configPath, "r", encoding="utf-8").read()
         self.configData = json.loads(data)
@@ -57,13 +58,13 @@ class Config:
         # 如果不在配置文件中指定屏幕尺寸，则根据配置文件下的截图计算
         if self.screenSize is None:
             self.screenSize = \
-                Image.open(self.configDir + self.targets[0]["path"]).size
+                Image.open(path.join(self.configDir, self.targets[0]["path"])).size
         Log.info("屏幕尺寸 : {}x{}".format(self.screenSize[0], self.screenSize[1]))
 
         for targetsName in self.configData["targetList"]:
             targets = self.configData[targetsName]
             for target in targets:
-                img = getImageCrop(self.configDir + target["path"], target["area"])
+                img = getImageCrop(path.join(self.configDir, target["path"]), target["area"])
                 target["hash"] = getImageHash(image=img)
                 if "colorRatio" in target:
                     target["histogram"] = img.histogram()

@@ -87,6 +87,13 @@
       "text": "点击准备"
     },
     {
+      "name": "准备",
+      "path": "zhunbei2.png",
+      "area": [240, 900, 480, 920],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
+      "text": "点击准备"
+    },
+    {
       "name": "继续",
       "path": "jixu.png",
       "area": [300, 1180, 460, 1220],
