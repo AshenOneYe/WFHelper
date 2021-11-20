@@ -66,6 +66,13 @@
       "text": "继续关卡"
     },
     {
+      "name": "放弃",
+      "path": "fangqi.png",
+      "area": [480, 800, 640, 840],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
+      "text": "关卡失败，点击放弃"
+    },
+    {
       "name": "OK",
       "path": "ok.png",
       "area": [300, 800, 460, 840],
@@ -80,8 +87,22 @@
       "text": "当前关卡完成，点击OK"
     },
     {
+      "name": "失败",
+      "path": "shibai.png",
+      "area": [120, 1040, 320, 1080],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
+      "text": "当前关卡失败"
+    },
+    {
       "name": "准备",
       "path": "zhunbei.png",
+      "area": [240, 900, 480, 920],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
+      "text": "点击准备"
+    },
+    {
+      "name": "准备",
+      "path": "zhunbei2.png",
       "area": [240, 900, 480, 920],
       "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
       "text": "点击准备"
@@ -90,7 +111,7 @@
       "name": "继续",
       "path": "jixu.png",
       "area": [300, 1180, 460, 1220],
-      "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
       "text": "点击继续"
     },
     {
