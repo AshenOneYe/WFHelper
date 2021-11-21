@@ -55,6 +55,15 @@ def setRouter(server):
         server.touchScreen(x, y)
         return "点击成功"
 
+    @app.route("/swipeScreen")
+    def swipeScreen():
+        x1 = int(eval(request.args.get("x1")))
+        y1 = int(eval(request.args.get("y1")))
+        x2 = int(eval(request.args.get("x2")))
+        y2 = int(eval(request.args.get("y2")))
+        server.swipeScreen(x1, y1, x2, y2)
+        return "滑动成功"
+
     @app.route('/favicon.ico')
     def favicon():
         return app.send_static_file('favicon.ico')

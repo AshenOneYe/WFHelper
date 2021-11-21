@@ -34,6 +34,9 @@ class Server():
     def touchScreen(self, x, y):
         adbUtil.touchScreen([x, y, x+1, y+1])
 
+    def swipeScreen(self, x1, y1, x2, y2):
+        adbUtil.swipeScreen(x1, y1, x2, y2)
+
     def stopWFHelper(self):
         self.wfhelper.stop()
 

@@ -53,6 +53,10 @@ class ADBUtil:
                 random.randrange(area[1], area[3])
             )
 
+    def swipeScreen(self, x1, y1, x2, y2):
+        if self.device is not None:
+            self.device.swipe(x1, y1, x2, y2, random.uniform(0.5, 1.0))
+
     def setDevice(self, serial):
         # 用户没有指定设备
         if serial is None:

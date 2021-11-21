@@ -215,14 +215,10 @@ const setLogLimit = () => {
 };
 
 const touchScreen = (() => {
-  const delay = 5000;
+  const delay = 1000;
 
-  return (e) => {
+  return (x, y) => {
     if (canvas.style.cursor !== "not-allowed") {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
       fetch(`/touchScreen?x=${x}&y=${y}`)
         .then(() => {
           canvas.style.cursor = "not-allowed";
@@ -243,6 +239,67 @@ const touchScreen = (() => {
   };
 })();
 
-canvas.addEventListener("mousedown", touchScreen);
+const swipeScreen = (() => {
+  const delay = 1000;
+
+  return (x1, y1, x2, y2) => {
+    if (canvas.style.cursor !== "not-allowed") {
+      fetch(`/swipeScreen?x1=${x1}&y1=${y1}&x2=${x2}&y2=${y2}`)
+        .then(() => {
+          canvas.style.cursor = "not-allowed";
+
+          ctx.globalCompositeOperation = "destination-out";
+          ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+          ctx.beginPath();
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fill();
+          ctx.globalCompositeOperation = "source-over";
+        })
+        .then(() => new Promise((resolve) => setTimeout(resolve, delay)))
+        .then(() => {
+          canvas.style.cursor = "auto";
+        })
+        .then(loadScreenCap);
+    }
+  };
+})();
+
+const Mouse = {
+  x: 0,
+  y: 0,
+  mousedown: (e) => {
+    Mouse.x = e.clientX;
+    Mouse.y = e.clientY;
+  },
+  mouseup: (e) => {
+    if (Mouse.x & Mouse.y) {
+      if (
+        Math.abs(e.clientX - Mouse.x) > 10 ||
+        Math.abs(e.clientY - Mouse.y) > 10
+      ) {
+        const rect = canvas.getBoundingClientRect();
+        const x1 = Mouse.x - rect.left;
+        const y1 = Mouse.y - rect.top;
+        const x2 = e.clientX - rect.left;
+        const y2 = e.clientY - rect.top;
+
+        swipeScreen(x1, y1, x2, y2);
+      } else {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        touchScreen(x, y);
+      }
+    }
+
+    Mouse.x = 0;
+    Mouse.y = 0;
+  },
+};
+
+canvas.addEventListener("mousedown", Mouse.mousedown);
+canvas.addEventListener("mouseup", Mouse.mouseup);
+canvas.addEventListener("mouseleave", Mouse.mouseup);
 
 document.querySelector(".tablinks").click();
