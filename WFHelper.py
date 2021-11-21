@@ -1,4 +1,4 @@
-import time
+import time, random
 from State import State
 from Config import Config
 from utils.ADBUtil import adbUtil
@@ -47,6 +47,18 @@ class WFHelper:
             adbUtil.touchScreen(self.config.randomClickArea)
             self.updateActionTime(t)
         return False
+    
+    def loopDelay(self):
+        a, b = self.config.loopDelay
+        delay = random.uniform(a, b)        
+        time.sleep(delay)
+
+    def isIdle(self):
+        if self.state.getState("isRunning"):
+            return False
+        if self.state.getState("lastActionTime") + 10 > int(time.time()):
+            return False
+        return True
 
     def updateActionTime(self, time):
         self.state.setState("lastActionTime", time)
@@ -54,15 +66,17 @@ class WFHelper:
     def run(self):
         self.start()
 
+        while True:
+            if not self.isIdle():
+                targets = self.config.targetList[self.state.getState("currentTargets")]
+                self.mainLoop(targets)
+            self.loopDelay()
+
     def start(self):
         self.state.setState("isRunning", True)
         self.state.merge(self.config.summary)
         self.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
-        while self.state.getState("isRunning"):
-            targets = self.config.targetList[self.state.getState("currentTargets")]
-            self.mainLoop(targets)
-            time.sleep(self.config.loopDelay)
 
     def stop(self):
         self.state.setState("isRunning", False)

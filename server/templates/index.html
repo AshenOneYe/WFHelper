@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>WFHelper</title>
-    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="static/css/index.css" />
   </head>
 
   <body>
@@ -29,15 +29,22 @@
     </div>
 
     <div name="Actions" class="tabcontent">
-      <button class="button" onclick="start()">开始</button>
-      <button class="button" onclick="stop()">停止</button>
-      <button class="button" onclick="autoFetchSummary(event)">
-        启用统计自动刷新
-      </button>
-      <button class="button" onclick="autoFetchLog(event)">
-        启用日志自动刷新
-      </button>
-      <button class="button" onclick="setLogLimit()">设置日志长度</button>
+      <div>
+        <button class="button" onclick="start()">开始</button>
+        <button class="button" onclick="stop()">停止</button>
+        <button class="button" onclick="autoFetchSummary(event)">
+          启用统计自动刷新
+        </button>
+        <button class="button" onclick="autoFetchLog(event)">
+          启用日志自动刷新
+        </button>
+        <button class="button" onclick="setLogLimit()">设置日志长度</button>
+      </div>
+      <div>
+        <button class="button" onclick="setTaskCycle(event)">
+          设置任务周期
+        </button>
+      </div>
     </div>
   </body>
   <script type="text/javascript" src="static/js/index.js"></script>
