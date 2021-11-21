@@ -70,7 +70,7 @@ class WFHelper:
             if not self.isIdle():
                 targets = self.config.targetList[self.state.getState("currentTargets")]
                 self.mainLoop(targets)
-            self.loopDelay()
+                self.loopDelay()
 
     def start(self):
         self.state.setState("isRunning", True)

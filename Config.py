@@ -51,7 +51,7 @@ class Config:
         if "screenSize" in self.configData:
             self.screenSize = self.configData["screenSize"]
         if "loopDelay" in self.configData:
-            if isinstance(self.configData["loopDelay"], int):
+            if isinstance(self.configData["loopDelay"], float):
                 self.loopDelay = [self.configData["loopDelay"], self.configData["loopDelay"]]
             else:
                 self.loopDelay = self.configData["loopDelay"]
