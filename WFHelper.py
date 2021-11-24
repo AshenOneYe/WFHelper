@@ -31,22 +31,27 @@ class WFHelper:
             return result
 
     def checkRequirement(self, requirement):
-        if len(requirement) == 1:
-            if self.state.getState(requirement[0]) == 0:
+        if len(requirement) < 3:
+            key = self.actionManager.formatArg(requirement[0])
+            if self.state.getState(key) == 0:
                 return False
             else:
                 return True
-        elif len(requirement) >= 3:
-            key = requirement[0]
+        else:
+            key = self.actionManager.formatArg(requirement[0])
             ope = requirement[1]
             lim = requirement[2]
             if ope == "==":
                 return True if self.state.getState(key) == lim else False
             else:
-                val = self.state.getState(key)
+                val = 0
+                if not self.state.has(key):
+                    self.state.setState(key, 0)
+                else:
+                    val = self.state.getState(key)
                 try:
                     val = float(val)
-                    lim = float(val)
+                    lim = float(lim)
                     if ope == "<":
                         return True if val < lim else False
                     elif ope == "<=":
@@ -57,7 +62,7 @@ class WFHelper:
                         return True if val >= lim else False
                     else:
                         return False
-                except ValueError as arg:
+                except TypeError as arg:
                     Log.error("错误的边界值 : {}".format(arg))
                     return False
 
@@ -68,6 +73,8 @@ class WFHelper:
         for target in targets:
             if "requirement" not in target or self.checkRequirement(target["requirement"]):
                 if "hash" not in target or self.check(target, self.screen):
+                    if "hash" not in target:
+                        Log.info("{} - 直接操作".format(target["text"]))
                     self.actionManager.doAction(target)
                     self.updateActionTime(t)
                     return True

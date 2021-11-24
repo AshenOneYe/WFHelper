@@ -8,7 +8,6 @@ class State:
         "lastActionTime": int(time.time()),
         "isRunning": False,
         "currentTargets": "mainTargets",
-        "matchResult": 0
     }
 
     def setState(self, key, value):

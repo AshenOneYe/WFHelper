@@ -87,7 +87,10 @@ class ActionManager:
                     or len(action["args"]) == 0
                     or action["args"][0] is None
                 ):
-                    self.click(target["area"])
+                    if "area" in target:
+                        self.click(target["area"])
+                    else:
+                        self.click(self.wfhelper.config.screenSize)
                 else:
                     self.click(action["args"][0])
             elif action["name"] == "sleep":
