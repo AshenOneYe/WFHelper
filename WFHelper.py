@@ -47,6 +47,7 @@ class WFHelper:
 
             while True:
                 try:
+                    # FIXME eval 不安全，请使用 aeval 模块代替
                     return eval(statement, self.state.content)
 
                 except NameError as e:
@@ -110,13 +111,15 @@ class WFHelper:
         t = int(time.time())
 
         for target in targets:
-            if "require" not in target or self.checkRequire(target["require"]):
-                if "hash" not in target or self.check(target, self.screen):
-                    if "hash" not in target:
-                        Log.info("{} - 直接操作".format(target["text"]))
-                    self.actionManager.doAction(target)
-                    self.updateActionTime(t)
-                    return True
+            if "require" in target and not self.checkRequire(target["require"]):
+                continue
+
+            if "hash" not in target or self.check(target, self.screen):
+                if "hash" not in target:
+                    Log.info("{} - 直接操作".format(target["text"]))
+                self.actionManager.doAction(target)
+                self.updateActionTime(t)
+                return True
 
         # 长时间未操作则随机点击一次
         if t - self.state.getState("lastActionTime") > self.config.randomClickDelay:
@@ -147,6 +150,7 @@ class WFHelper:
         while True:
             if not self.isIdle():
                 targets = self.config.targetList[self.state.getState("currentTargets")]
+                self.screen = readImageFromBytes(adbUtil.getScreen())
                 self.mainLoop(targets)
                 self.loopDelay()
 
@@ -155,12 +159,6 @@ class WFHelper:
         self.state.merge(self.config.state)
         self.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
-        while self.state.getState("isRunning"):
-            targets = self.config.targetList[self.state.getState("currentTargets")]
-            self.screen = readImageFromBytes(adbUtil.getScreen())
-            self.mainLoop(targets)
-            time.sleep(self.config.loopDelay)
-
             
     def stop(self):
         self.state.setState("isRunning", False)
