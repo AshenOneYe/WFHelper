@@ -67,10 +67,11 @@ class Config:
         for targetsName in self.configData["targetList"]:
             targets = self.configData[targetsName]
             for target in targets:
-                img = getImageCrop(path.join(self.configDir, target["path"]), target["area"])
-                target["hash"] = getImageHash(image=img)
-                if "colorRatio" in target:
-                    target["histogram"] = img.histogram()
+                if "path" in target:
+                    img = getImageCrop(path.join(self.configDir, target["path"]), target["area"])
+                    target["hash"] = getImageHash(image=img)
+                    if "colorRatio" in target:
+                        target["histogram"] = img.histogram()
             self.targetList[targetsName] = targets
 
         Log.info("配置文件初始化完成")

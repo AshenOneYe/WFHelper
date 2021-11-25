@@ -7,7 +7,7 @@ class State:
     content = {
         "lastActionTime": int(time.time()),
         "isRunning": False,
-        "currentTargets": "mainTargets"
+        "currentTargets": "mainTargets",
     }
 
     def setState(self, key, value):

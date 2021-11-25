@@ -53,11 +53,12 @@ class ActionManager:
     def changeTargets(self, args):
         targets = self.wfhelper.config.targetList[args[0]]
         if len(args) == 1:
-            self.wfhelper.mainLoop(targets)
+            return self.wfhelper.mainLoop(targets)
         elif args[1] == "loop":
-            self.state.setState("currentTargets", targets)
+            return self.state.setState("currentTargets", targets)
         elif args[1] == "once":
-            self.wfhelper.mainLoop(targets)
+            return self.wfhelper.mainLoop(targets)
+        return False
 
     def info(self, args):
         if len(args) == 0:
@@ -72,6 +73,11 @@ class ActionManager:
         else:
             Log.info(tmp[0].format(*tmp[1:]))
 
+    def match(self, args):
+        if len(args) > 0:
+            if not self.changeTargets([args[0]]) and len(args) > 1:
+                self.doAction({"actions": args[1]})
+
     def doAction(self, target):
         actions = target["actions"]
         for action in actions:
@@ -81,7 +87,10 @@ class ActionManager:
                     or len(action["args"]) == 0
                     or action["args"][0] is None
                 ):
-                    self.click(target["area"])
+                    if "area" in target:
+                        self.click(target["area"])
+                    else:
+                        self.click(self.wfhelper.config.screenSize)
                 else:
                     self.click(action["args"][0])
             elif action["name"] == "sleep":
@@ -92,6 +101,8 @@ class ActionManager:
                 self.changeTargets(action["args"])
             elif action["name"] == "info":
                 self.info(action["args"])
+            elif action["name"] == "match":
+                self.match(action["args"])
             elif action["name"] == "exit":
                 import sys
                 sys.exit()

@@ -20,7 +20,7 @@ class LogUtil:
     def setLastLog(self, log):
         log = str(
             time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        ) + " " + log
+        ) + " {}".format(log)
 
         self.lastLog = log
         self.logArray.append(log)
