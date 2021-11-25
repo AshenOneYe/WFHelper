@@ -3,11 +3,11 @@
   "author": "snyssss",
   "description": "适用于蓝叠64位，1280*720，DPI240。",
   "similarityThreshold": 0.95,
-  "loopDelay": 0.2,
+  "loopDelay": [0.1, 1.0],
   "randomClickDelay": 300,
   "randomClickArea": [0, 0, 1, 1],
   "screenSize": [1280, 720],
-  "targetList":["mainTargets"],
+  "targetList": ["mainTargets"],
   "mainTargets": [
     {
       "name": "参加",
@@ -41,7 +41,7 @@
       "name": "暂停",
       "path": "zanting.png",
       "area": [630, 48, 660, 80],
-      "actions": [{ "name": "click" }],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
       "text": "蹭车失败，解除暂停"
     },
     {
@@ -54,7 +54,7 @@
           "args": ["increase", "completeCount", 1]
         },
         { "name": "click" },
-        { "name": "sleep", "args": [2] }
+        { "name": "sleep", "args": [1] }
       ],
       "text": "蹭车结束，离开房间"
     },

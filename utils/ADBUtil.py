@@ -15,21 +15,20 @@ class ADBUtil:
     device = None
     rplc = b"\r\n"
     test = False
-    lastScreenBytes = None
 
     def getScreen(self, savePath=None):
-
-        cmd = "adb "
+        binary_screenshot = b""
 
         if self.device is not None:
-            cmd += "-s {} ".format(self.device._serial)
+            stream = self.device.shell(["screencap", "-p"], stream=True)
+            
+            while True:
+                chunk = stream.read(4096)
+                if not chunk:
+                    break
+                binary_screenshot += chunk
 
-        cmd += "shell screencap -p"
-
-        process = subprocess.Popen(
-            cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE
-        )
-        binary_screenshot = process.stdout.read()
+            stream.close()
 
         if not self.test:
             try:
@@ -45,19 +44,18 @@ class ADBUtil:
             with open(savePath, "wb") as f:
                 f.write(binary_screenshot)
 
-        self.lastScreenBytes = binary_screenshot
         return binary_screenshot
 
     def touchScreen(self, area):
-        cmd = "adb "
         if self.device is not None:
-            cmd += "-s {} ".format(self.device._serial)
-        cmd += "shell input tap {} {}"
-        cmd = cmd.format(
-            random.randrange(area[0], area[2]),
-            random.randrange(area[1], area[3])
-        )
-        os.system(cmd)
+            self.device.click(
+                random.randrange(area[0], area[2]),
+                random.randrange(area[1], area[3])
+            )
+
+    def swipeScreen(self, x1, y1, x2, y2):
+        if self.device is not None:
+            self.device.swipe(x1, y1, x2, y2, random.uniform(0.5, 1.0))
 
     def setDevice(self, serial):
         # 用户没有指定设备
