@@ -155,8 +155,8 @@ class WFHelper:
                 self.loopDelay()
 
     def start(self):
-        self.state.setState("isRunning", True)
         self.state.merge(self.config.state)
+        self.state.setState("isRunning", True)
         self.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
             

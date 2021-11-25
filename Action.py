@@ -79,7 +79,7 @@ class ActionManager:
 
     def getScreen(self, savePath):
         adbUtil.getScreen(savePath)
-        
+
     def match(self, args):
         if len(args) > 0:
             if not self.changeTargets([args[0]]) and len(args) > 1:
@@ -94,7 +94,7 @@ class ActionManager:
                     match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_]+")
                     items = re.findall(match, func)
                     for item in items:
-                        func = func.replace(item, self.formatArg(item))
+                        func = func.replace(item, str(self.formatArg(item)))
                     isValidate = aeval(func)
                     if not isValidate:
                         continue
