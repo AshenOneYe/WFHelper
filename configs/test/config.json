@@ -1,0 +1,52 @@
+{
+    "name": "新字段测试",
+    "author": "aaaaa",
+    "description": "测试新字段requirement和无图像识别的直接操作",
+    "similarityThreshold": 0.95,
+    "randomClickDelay": 300,
+    "randomClickArea": [
+        0,
+        0,
+        1,
+        1
+    ],
+    "screenSize": [
+        1920,
+        1080
+    ],
+    "targetList": [
+        "mainTargets"
+    ],
+    "mainTargets": [
+        {
+            "requirement":["test","<",10],
+            "name": "自增",
+            "actions": [
+                {
+                    "name": "state",
+                    "args": [
+                        "increase",
+                        "test",
+                        1
+                    ]
+                },
+                {
+                    "name":"info",
+                    "args":["$test"]
+                }
+            ],
+            "text": "测试自增"
+        },
+        {
+            "requirement":["test",">=",10],
+            "name": "自增结束",
+            "actions": [
+                {
+                    "name":"info",
+                    "args":["$test"]
+                }
+            ],
+            "text": "测试自增结束"
+        }
+    ]
+}

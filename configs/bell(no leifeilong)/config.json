@@ -1,0 +1,276 @@
+{
+    "name":"小米6混铃铛",
+    "author":"aaaaa",
+    "description":"这个配置文件用于1920x1080设备混铃铛，不会打雷废龙",
+    "similarityThreshold":0.95,
+    "randomClickDelay":300,
+    "randomClickArea":[0,0,1,1],
+    "screenSize":[1920,1080],
+    "targetList":["mainTargets","bosses","nigerudayo"],
+    "mainTargets":[
+        {
+            "name" : "铃铛",
+            "path" : "lingdang.png",
+            "area" : [45,25,95,80],
+            "actions" : [{"name":"click"}],
+            "text" : "发现铃铛，点击"
+        },
+        {
+            "name" : "铃铛界面",
+            "path" : "canjia.png",
+            "area" : [80,1545,1000,1665],
+            "actions" : [
+                {
+                    "name":"match",
+                    "args":["nigerudayo",
+                            [
+                                {
+                                    "name":"click",
+                                    "args":[[580,1570,980,1650]]
+                                },
+                                {
+                                    "name":"info",
+                                    "args":["点击参加"]
+                                }
+                            ]
+                    ]
+                }
+            ],
+            "text" : "看看是啥"
+        },
+        {
+            "name" : "准备",
+            "path" : "zhunbei.png",
+            "area" : [330,1345,750,1450],
+            "actions" : [
+                {
+                    "name":"changeTargets",
+                    "args":["bosses"]
+                },
+                {"name":"click"},
+                {
+                    "name":"info",
+                    "args":["点击准备按钮"]
+                }
+            ],
+            "text" : "发现准备按钮"
+        },
+        {
+            "name" : "准备2",
+            "path" : "zhunbei2.png",
+            "area" : [330,1345,750,1450],
+            "actions" : [
+                {
+                    "name":"changeTargets",
+                    "args":["bosses"]
+                },
+                {"name":"click"},
+                {
+                    "name":"info",
+                    "args":["点击准备按钮"]
+                }
+            ],
+            "text" : "发现准备按钮"
+        },
+        {
+            "name" : "OK",
+            "path" : "OK.png",
+            "area" : [335,1200,745,1275],
+            "actions" : [{"name":"click"}],
+            "text" : "蹭车失败，点击OK"
+        },
+        {
+            "name" : "OK2",
+            "path" : "OK2.png",
+            "area" : [335,1200,745,1275],
+            "actions" : [{"name":"click"}],
+            "text" : "房间解散，点击OK"
+        },
+        {
+            "name" : "继续",
+            "path" : "jixu.png",
+            "area" : [375,1760,700,1845],
+            "actions" : [
+                {"name":"click"}
+            ],
+            "text" : "点击继续"
+        },
+        {
+            "name" : "离开",
+            "path" : "likai.png",
+            "area" : [160,1755,480,1840],
+            "actions" : [
+                {"name":"click"},
+                {
+                    "name":"state",
+                    "args":["increase","$正在挑战的boss",1]
+                },
+                {
+                    "name":"info",
+                    "args":["完成挑战{} : {}次","$正在挑战的boss","$$正在挑战的boss"]
+                }
+            ],
+            "text" : "离开房间"
+        }
+    ],
+    "bosses":[
+        {
+            "name" : "管理者",
+            "path" : "glz.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","管理者"]
+                }
+            ],
+            "text" : "正在挑战管理者"
+        },
+        {
+            "name" : "大蛇",
+            "path" : "dashe.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","大蛇"]
+                }
+            ],
+            "text" : "正在挑战大蛇"
+        },
+        {
+            "name" : "白虎",
+            "path" : "baihu.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","白虎"]
+                }
+            ],
+            "text" : "正在挑战白虎"
+        },
+        {
+            "name" : "恶魔",
+            "path" : "emo.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","恶魔"]
+                }
+            ],
+            "text" : "正在挑战恶魔"
+        },
+        {
+            "name" : "石头人",
+            "path" : "shitouren.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","石头人"]
+                }
+            ],
+            "text" : "正在挑战石头人"
+        },
+        {
+            "name" : "螃蟹",
+            "path" : "pangxie.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","螃蟹"]
+                }
+            ],
+            "text" : "正在挑战螃蟹"
+        },
+        {
+            "name" : "骷髅王",
+            "path" : "kulouwang.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","骷髅王"]
+                }
+            ],
+            "text" : "正在挑战骷髅王"
+        },
+        {
+            "name" : "猫头鹰",
+            "path" : "maotouying.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","猫头鹰"]
+                }
+            ],
+            "text" : "正在挑战猫头鹰"
+        },
+        {
+            "name" : "雷废龙 高+",
+            "path" : "leifeilong+.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","雷废龙 高+"]
+                }
+            ],
+            "text" : "正在挑战雷废龙 高+"
+        },
+        {
+            "name" : "雷废龙 高",
+            "path" : "leifeilong.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","雷废龙 高"]
+                }
+            ],
+            "text" : "正在挑战雷废龙 高"
+        },
+        {
+            "name" : "雷废龙 中",
+            "path" : "leifeilong-.png",
+            "area" : [50,1545,260,1700],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","雷废龙 中"]
+                }
+            ],
+            "text" : "正在挑战雷废龙 中"
+        }
+    ],
+    "nigerudayo":[
+        {
+            "name" : "雷废龙 高+",
+            "path" : "lingdangleifeilong+.png",
+            "area" : [95,465,285,590],
+            "actions" : [
+                {
+                    "name":"click",
+                    "args":[[100,1575,500,1645]]
+                }
+            ],
+            "text" : "是雷废龙，跑了跑了"
+        },
+        {
+            "name" : "雷废龙 高",
+            "path" : "lingdangleifeilong.png",
+            "area" : [95,465,285,590],
+            "actions" : [
+                {
+                    "name":"click",
+                    "args":[[100,1575,500,1645]]
+                }
+            ],
+            "text" : "是雷废龙，跑了跑了"
+        }
+    ]
+}
