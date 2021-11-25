@@ -18,8 +18,8 @@ const switchTab = (event, name) => {
     }
   });
 
-  if (name === "Summary") {
-    loadSummary();
+  if (name === "State") {
+    loadState();
   }
 
   if (name === "Log") {
@@ -31,8 +31,12 @@ const switchTab = (event, name) => {
   }
 };
 
-const loadSummary = () => {
+const loadState = () => {
   const format = (key, value) => {
+    if (key === "isDebug") {
+      return `调试模式：${eval(value) ? "是" : "否"}`;
+    }
+
     if (key === "startTime") {
       return `开始时间：${
         value ? new Date(value * 1000).toLocaleString() : ""
@@ -61,13 +65,13 @@ const loadSummary = () => {
       return `升级次数：${value}`;
     }
 
-    return `${key}:${value}`;
+    return `${key}：${value}`;
   };
 
-  fetch(`/getSummary`)
+  fetch(`/getState`)
     .then((res) => res.json())
     .then((res) => {
-      document.querySelector('[name="Summary"]').innerHTML = `
+      document.querySelector('[name="State"]').innerHTML = `
               <ul class="list">${Object.entries(res)
                 .map(([key, value]) => `<li>${format(key, value)}</li>`)
                 .join("")}
@@ -116,7 +120,7 @@ const stop = () => {
   fetch(`/stop`);
 };
 
-const autoFetchSummary = (() => {
+const autoFetchState = (() => {
   let interval;
 
   return (event) => {
@@ -130,7 +134,7 @@ const autoFetchSummary = (() => {
       const delay = Number(prompt("自动刷新间隔（秒）：", 60));
 
       if (delay > 0) {
-        interval = setInterval(loadSummary, delay * 1000);
+        interval = setInterval(loadState, delay * 1000);
 
         event.currentTarget.innerHTML = "停止统计自动刷新";
       }
@@ -159,6 +163,14 @@ const autoFetchLog = (() => {
     }
   };
 })();
+
+const setLogLimit = () => {
+  const value = Number(prompt("日志长度", 20));
+
+  if (value > 0) {
+    fetch(`/setLogLimit?value=${value}`);
+  }
+};
 
 const setTaskCycle = (() => {
   let timeout;
@@ -206,12 +218,25 @@ const setTaskCycle = (() => {
   };
 })();
 
-const setLogLimit = () => {
-  const value = Number(prompt("日志长度", 20));
+const setState = (key, value) => {
+  fetch(
+    `/setState?key=${encodeURIComponent(key)}&value=${encodeURIComponent(
+      value
+    )}`
+  );
+};
 
-  if (value > 0) {
-    fetch(`/setLogLimit?value=${value}`);
-  }
+const toggleState = (event, key) => {
+  event.currentTarget.innerHTML = event.currentTarget.innerHTML.replace(
+    /[启禁]用/,
+    (matched) => {
+      const value = matched === "启用" ? "禁用" : "启用";
+
+      setState(key, value);
+
+      return value;
+    }
+  );
 };
 
 const touchScreen = (() => {

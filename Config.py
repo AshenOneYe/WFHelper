@@ -22,7 +22,7 @@ class Config:
     loopDelay = [0, 0]  # 每轮循环的延迟时间
     configData = None
     targetList = {}  # type: Dict[str, list]
-    summary = {}  # type: Dict[str, str]
+    state = {}  # type: Dict[str, str]
 
     def __init__(self, configPath=None):
 
@@ -55,8 +55,8 @@ class Config:
                 self.loopDelay = [self.configData["loopDelay"], self.configData["loopDelay"]]
             else:
                 self.loopDelay = self.configData["loopDelay"]
-        if "summary" in self.configData:
-            self.summary = self.configData["summary"]
+        if "state" in self.configData:
+            self.state = self.configData["state"]
 
         # 如果不在配置文件中指定屏幕尺寸，则根据配置文件下的截图计算
         if self.screenSize is None:

@@ -25,7 +25,10 @@ class Server():
         Log.logArray = []
         Log.logLimit = value
 
-    def getSummary(self):
+    def setState(self, key, value):
+        self.wfhelper.state.setState(key, value)
+
+    def getState(self):
         return self.wfhelper.state.content
 
     def getScreenShot(self):

@@ -24,7 +24,8 @@ class WFHelper:
             if "similarityThreshold" in target:
                 similarityThreshold = target["similarityThreshold"]
             if s >= similarityThreshold:
-                Log.info("{} - 识别相似度：{}".format(target["text"], s))
+                if "text" in target:
+                    Log.info("{} - 识别相似度：{}".format(target["text"], s))
                 result = True
         finally:
             return result
@@ -63,7 +64,8 @@ class WFHelper:
     def updateActionTime(self, time):
         self.state.setState("lastActionTime", time)
 
-    def run(self):
+    def run(self, isDebug = False):
+        self.state.setState("isDebug", isDebug)
         self.start()
 
         while True:
@@ -74,7 +76,7 @@ class WFHelper:
 
     def start(self):
         self.state.setState("isRunning", True)
-        self.state.merge(self.config.summary)
+        self.state.merge(self.config.state)
         self.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
 
