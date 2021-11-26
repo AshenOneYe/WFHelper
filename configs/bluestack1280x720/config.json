@@ -3,12 +3,19 @@
   "author": "snyssss",
   "description": "适用于蓝叠64位，1280*720，DPI240。",
   "similarityThreshold": 0.95,
-  "loopDelay": [0.1, 1.0],
+  "loopDelay": [0.2, 1.0],
   "randomClickDelay": 300,
   "randomClickArea": [0, 0, 1, 1],
   "screenSize": [1280, 720],
   "state": { "伊尔考普斯": "启用" },
-  "targetList": ["mainTargets", "join", "skip", "lingdang", "lingdang2"],
+  "targetList": [
+    "mainTargets",
+    "join",
+    "skip",
+    "lingdang",
+    "lingdang2",
+    "full-energy"
+  ],
   "mainTargets": [
     {
       "name": "参加",
@@ -193,6 +200,18 @@
         { "name": "sleep", "args": [1] }
       ],
       "text": "已升级"
+    },
+    {
+      "name": "体力满了",
+      "path": "full-energy.png",
+      "area": [390, 30, 400, 40],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["full-energy"],
+          "validate": "False"
+        }
+      ]
     }
   ],
   "join": [
@@ -413,6 +432,29 @@
       "text": "铃铛内容：白虎 - 高级"
     },
     {
+      "name": "白虎 - 中级",
+      "path": "boss/1-lei-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "白虎 - 中级"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["join"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["skip"],
+          "validate": "False"
+        }
+      ],
+      "text": "铃铛内容：白虎 - 中级"
+    },
+    {
       "name": "寄居蟹船长 - 高级",
       "path": "boss/1-shui-2.png",
       "area": [100, 330, 160, 380],
@@ -436,6 +478,29 @@
       "text": "铃铛内容：寄居蟹船长 - 高级"
     },
     {
+      "name": "寄居蟹船长 - 中级",
+      "path": "boss/1-shui-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "寄居蟹船长 - 中级"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["join"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["skip"],
+          "validate": "False"
+        }
+      ],
+      "text": "铃铛内容：寄居蟹船长 - 中级"
+    },
+    {
       "name": "废墟魔像 - 高级",
       "path": "boss/1-huo-2.png",
       "area": [100, 330, 160, 380],
@@ -457,6 +522,52 @@
         }
       ],
       "text": "铃铛内容：废墟魔像 - 高级"
+    },
+    {
+      "name": "废墟魔像 - 中级",
+      "path": "boss/1-huo-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "废墟魔像 - 中级"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["join"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["skip"],
+          "validate": "False"
+        }
+      ],
+      "text": "铃铛内容：废墟魔像 - 中级"
+    },
+    {
+      "name": "维·索拉斯 - 初级",
+      "path": "boss/1-niao-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "维·索拉斯 - 初级"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["join"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["skip"],
+          "validate": "False"
+        }
+      ],
+      "text": "铃铛内容：维·索拉斯 - 初级"
     },
     {
       "name": "参加",
@@ -589,6 +700,29 @@
       "text": "铃铛内容：白虎 - 高级"
     },
     {
+      "name": "寄居蟹船长 - 高级",
+      "path": "boss/2-shui-2.png",
+      "area": [70, 300, 130, 350],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "寄居蟹船长 - 高级"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["join"],
+          "validate": "True"
+        },
+        {
+          "name": "changeTargets",
+          "args": ["skip"],
+          "validate": "False"
+        }
+      ],
+      "text": "铃铛内容：寄居蟹船长 - 高级"
+    },
+    {
       "name": "废墟魔像 - 高级",
       "path": "boss/2-huo-2.png",
       "area": [70, 300, 130, 350],
@@ -622,6 +756,14 @@
           "args": ["join"]
         }
       ]
+    }
+  ],
+  "full-energy": [
+    {
+      "name": "体力满了",
+      "path": "full-energy.png",
+      "area": [250, 30, 450, 40],
+      "actions": [{ "name": "info", "args": ["体力满了"] }]
     }
   ]
 }

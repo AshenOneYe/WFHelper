@@ -144,6 +144,9 @@ class WFHelper:
         self.state.setState("lastActionTime", time)
 
     def run(self, isDebug = False):
+        if isDebug:
+            Log.setDebugLevel()
+
         self.state.setState("isDebug", isDebug)
         self.start()
 

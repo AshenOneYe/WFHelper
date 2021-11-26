@@ -28,6 +28,7 @@ if __name__ == "__main__":
             Log.info("截图保存至 : {}".format(savePath))
             adbUtil.getScreen(savePath=savePath)
             sys.exit()
+            
         if "-c" in opts:
             config = configManager.getConfig(opts["-c"])
 

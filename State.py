@@ -5,6 +5,7 @@ import time
 class State:
 
     content = {
+        "startTime": "",
         "lastActionTime": int(time.time()),
         "isRunning": False,
         "currentTargets": "mainTargets",
