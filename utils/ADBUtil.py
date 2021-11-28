@@ -41,6 +41,11 @@ class ADBUtil:
         binary_screenshot = binary_screenshot.replace(self.rplc, b"\n")
 
         if savePath is not None and len(binary_screenshot) != 0:
+            dirs = os.path.dirname(savePath)
+
+            if not os.path.exists(dirs):
+                os.makedirs(dirs)
+
             with open(savePath, "wb") as f:
                 f.write(binary_screenshot)
 

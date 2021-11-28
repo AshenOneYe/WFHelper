@@ -10,9 +10,11 @@ import threading
 
 if __name__ == "__main__":
 
+    isDebug = False
     config = None
+
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "d:s:c:")
+        opts, args = getopt.getopt(sys.argv[1:], "d:s:c:t")
         opts = dict(opts)
 
         if "-d" in opts:
@@ -26,8 +28,12 @@ if __name__ == "__main__":
             Log.info("截图保存至 : {}".format(savePath))
             adbUtil.getScreen(savePath=savePath)
             sys.exit()
+            
         if "-c" in opts:
             config = configManager.getConfig(opts["-c"])
+
+        if "-t" in opts:
+            isDebug = True
 
             # TODO -v 参数打印log信息
     except getopt.GetoptError:
@@ -45,4 +51,4 @@ if __name__ == "__main__":
     serverThread.start()
 
     # 不用子线程启动的原因是，子线程莫名的速度慢很多
-    wfhelper.run()
+    wfhelper.run(isDebug)

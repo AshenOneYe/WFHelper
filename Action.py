@@ -1,9 +1,13 @@
 
+from sys import path
 from utils.ADBUtil import adbUtil
-import time
+import time, re
 from utils.LogUtil import Log
 from State import State
+from os import path
+from asteval import Interpreter
 
+aeval = Interpreter()
 
 class ActionManager:
     wfhelper = None
@@ -73,6 +77,9 @@ class ActionManager:
         else:
             Log.info(tmp[0].format(*tmp[1:]))
 
+    def getScreen(self, savePath):
+        adbUtil.getScreen(savePath)
+
     def match(self, args):
         if len(args) > 0:
             if not self.changeTargets([args[0]]) and len(args) > 1:
@@ -81,6 +88,19 @@ class ActionManager:
     def doAction(self, target):
         actions = target["actions"]
         for action in actions:
+            if "validate" in action:
+                try:
+                    func = action["validate"]
+                    match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_]+")
+                    items = re.findall(match, func)
+                    for item in items:
+                        func = func.replace(item, str(self.formatArg(item)))
+                    isValidate = aeval(func)
+                    if not isValidate:
+                        continue
+                except:
+                    continue
+
             if action["name"] == "click":
                 if (
                     "args" not in action
@@ -106,6 +126,12 @@ class ActionManager:
             elif action["name"] == "exit":
                 import sys
                 sys.exit()
+            elif action["name"] == "getScreen":
+                if "args" not in action:
+                    savePath = path.join(self.wfhelper.config.configDir, "temp/{}.png".format(int(time.time())))
+                    self.getScreen(savePath)
+                else:
+                    self.getScreen(action["args"])
             else:
                 Log.error(
                     "action:'{}'不存在！请检查'{}'的配置文件".format(

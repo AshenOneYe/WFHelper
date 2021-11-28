@@ -17,6 +17,9 @@ class LogUtil:
     logArray = []  # type: List[str]
     logLimit = 20
 
+    def setDebugLevel(self):
+        logging.getLogger().setLevel(logging.DEBUG)
+
     def setLastLog(self, log):
         log = str(
             time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
