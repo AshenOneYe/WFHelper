@@ -9,6 +9,7 @@ Flask = "*"
 pyinstaller = "*"
 adbutils = "*"
 asteval = "*"
+<<<<<<< HEAD
 asyncio = "*"
 websockets = "*"
 

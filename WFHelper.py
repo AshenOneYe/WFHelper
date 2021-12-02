@@ -1,10 +1,12 @@
-import time, random
-from State import State
+import random
+import time
+
+from Action import ActionManager
 from Config import Config
+from State import State
 from utils.ADBUtil import adbUtil
 from utils.ImageUtil import readImageFromBytes, similarity
 from utils.LogUtil import Log
-from Action import ActionManager
 
 
 class WFHelper:
@@ -127,10 +129,10 @@ class WFHelper:
             adbUtil.touchScreen(self.config.randomClickArea)
             self.updateActionTime(t)
         return False
-    
+
     def loopDelay(self):
         a, b = self.config.loopDelay
-        delay = random.uniform(a, b)        
+        delay = random.uniform(a, b)
         time.sleep(delay)
 
     def isIdle(self):
@@ -143,7 +145,7 @@ class WFHelper:
     def updateActionTime(self, time):
         self.state.setState("lastActionTime", time)
 
-    def run(self, isDebug = False):
+    def run(self, isDebug=False):
         if isDebug:
             Log.setDebugLevel()
 
@@ -162,7 +164,7 @@ class WFHelper:
         self.state.setState("isRunning", True)
         self.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
-            
+
     def stop(self):
         self.state.setState("isRunning", False)
         self.state.setState("startTime", "")
