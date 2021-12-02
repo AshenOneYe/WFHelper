@@ -7,11 +7,10 @@ name = "pypi"
 ImageHash = "*"
 Flask = "*"
 pyinstaller = "*"
-adbutils = "*"
 asteval = "*"
-<<<<<<< HEAD
 asyncio = "*"
 websockets = "*"
+pure-python-adb = "*"
 
 [dev-packages]
 mypy = "*"
