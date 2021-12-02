@@ -20,7 +20,6 @@ class WFHelper:
         result = False
 
         try:
-            # FIXME 有几率报错 broken PNG file
             tmp = screen.crop(target["area"])
             s = similarity(tmp, target)
             similarityThreshold = self.config.similarityThreshold

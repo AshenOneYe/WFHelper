@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 ImageHash = "*"
 Flask = "*"
+flask_sockets = "*"
 pyinstaller = "*"
 asteval = "*"
 pure-python-adb = "*"

@@ -361,3 +361,9 @@ document.querySelector(".tablinks").click();
     });
   });
 })();
+
+var ws = new WebSocket("ws://"+window.location.host+"/echo");
+
+ws.onmessage = function (event) {
+  console.log(event)
+};

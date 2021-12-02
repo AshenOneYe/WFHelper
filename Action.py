@@ -1,13 +1,16 @@
 
-from sys import path
-from utils.ADBUtil import adbUtil
-import time, re
-from utils.LogUtil import Log
-from State import State
+import re
+import time
 from os import path
+
 from asteval import Interpreter
 
+from State import State
+from utils.ADBUtil import adbUtil
+from utils.LogUtil import Log
+
 aeval = Interpreter()
+
 
 class ActionManager:
     wfhelper = None
