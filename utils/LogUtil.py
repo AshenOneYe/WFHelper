@@ -3,6 +3,8 @@ import time
 
 from typing import List
 
+from utils.WSUtil import WS
+
 
 class LogUtil:
     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
@@ -24,6 +26,8 @@ class LogUtil:
         log = str(
             time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         ) + " {}".format(log)
+
+        WS.broadcast(log)
 
         self.lastLog = log
         self.logArray.append(log)

@@ -9,6 +9,8 @@ Flask = "*"
 pyinstaller = "*"
 adbutils = "*"
 asteval = "*"
+asyncio = "*"
+websockets = "*"
 
 [dev-packages]
 mypy = "*"

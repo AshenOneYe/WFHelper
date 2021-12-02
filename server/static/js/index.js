@@ -129,38 +129,47 @@ const autoFetchState = (() => {
 
       interval = 0;
 
-      event.currentTarget.innerHTML = "启用统计自动刷新";
+      event.currentTarget.innerHTML = "启用状态自动刷新";
     } else {
       const delay = Number(prompt("自动刷新间隔（秒）：", 60));
 
       if (delay > 0) {
         interval = setInterval(loadState, delay * 1000);
 
-        event.currentTarget.innerHTML = "停止统计自动刷新";
+        event.currentTarget.innerHTML = "停止状态自动刷新";
       }
     }
   };
 })();
 
 const autoFetchLog = (() => {
-  let interval;
+  let ws;
 
   return (event) => {
-    if (interval) {
-      clearInterval(interval);
+    event.currentTarget.innerHTML = event.currentTarget.innerHTML.replace(
+      /启用|停止/,
+      (matched) => {
+        const value = matched === "启用" ? "停止" : "启用";
 
-      interval = 0;
+        if (matched === "启用") {
+          ws = new WebSocket("ws://127.0.0.1:8765/");
 
-      event.currentTarget.innerHTML = "启用日志自动刷新";
-    } else {
-      const delay = Number(prompt("自动刷新间隔（秒）：", 60));
+          ws.onmessage = (e) => {
+            document
+              .querySelector('[name="Log"] .list')
+              .insertAdjacentHTML(`afterbegin`, `<li>${e.data}</li>`);
+          };
 
-      if (delay > 0) {
-        interval = setInterval(loadLogArray, delay * 1000);
+          ws.onclose = () => {
+            ws = null;
+          };
+        } else if (ws) {
+          ws.close();
+        }
 
-        event.currentTarget.innerHTML = "停止日志自动刷新";
+        return value;
       }
-    }
+    );
   };
 })();
 
