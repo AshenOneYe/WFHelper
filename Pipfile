@@ -7,8 +7,8 @@ name = "pypi"
 ImageHash = "*"
 Flask = "*"
 pyinstaller = "*"
-adbutils = "*"
 asteval = "*"
+pure-python-adb = "*"
 
 [dev-packages]
 mypy = "*"
