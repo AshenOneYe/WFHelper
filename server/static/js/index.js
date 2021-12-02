@@ -328,3 +328,36 @@ canvas.addEventListener("mouseup", Mouse.mouseup);
 canvas.addEventListener("mouseleave", Mouse.mouseup);
 
 document.querySelector(".tablinks").click();
+
+(() => {
+  [...document.querySelectorAll(".checkbox-group")].forEach((group) => {
+    const name = group.getAttribute("name");
+    const items = group.getAttribute("items").split("|");
+
+    group.innerHTML = `
+      <div class="title">${name}</div>
+      ${items
+        .map((item) => {
+          return `
+          <label>
+          <span>${item}</span>
+          <input type="checkbox" checked/>
+          </label>
+        `;
+        })
+        .join("")}
+    `;
+
+    const inputs = [...group.querySelectorAll("input")];
+
+    inputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        const value = inputs.reduce((accumulator, currentValue) => {
+          return accumulator + (currentValue.checked ? "1" : "0");
+        }, "0b");
+
+        setState(name, value);
+      });
+    });
+  });
+})();

@@ -8,9 +8,7 @@
 
   <body>
     <div class="tab">
-      <button class="tablinks" onclick="switchTab(event, 'State')">
-        状态
-      </button>
+      <button class="tablinks" onclick="switchTab(event, 'State')">状态</button>
       <button class="tablinks" onclick="switchTab(event, 'Log')">日志</button>
       <button class="tablinks" onclick="switchTab(event, 'ScreenCap')">
         截图
@@ -45,11 +43,12 @@
           设置任务周期
         </button>
       </div>
-      <div>
-        <button class="button" onclick="toggleState(event, '伊尔考普斯')">
-          伊尔考普斯：启用
-        </button>
-      </div>
+      <div
+        class="checkbox-group"
+        name="废墟魔像"
+        items="超级|高级+|高级|中级"
+      ></div>
+      <div class="checkbox-group" name="伊尔考普斯" items="高级+|高级"></div>
     </div>
   </body>
   <script type="text/javascript" src="static/js/index.js"></script>
