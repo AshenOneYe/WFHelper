@@ -1,13 +1,16 @@
 
-from sys import path
-from utils.ADBUtil import adbUtil
-import time, re
-from utils.LogUtil import Log
-from State import State
+import re
+import time
 from os import path
+
 from asteval import Interpreter
 
+from State import State
+from utils.ADBUtil import adbUtil
+from utils.LogUtil import Log
+
 aeval = Interpreter()
+
 
 class ActionManager:
     wfhelper = None
@@ -80,63 +83,66 @@ class ActionManager:
     def getScreen(self, savePath):
         adbUtil.getScreen(savePath)
 
-    def match(self, args):
-        if len(args) > 0:
-            if not self.changeTargets([args[0]]) and len(args) > 1:
-                self.doAction({"actions": args[1]})
+    def IF(self, target, args):
+        exp, callbacks = args
+        match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+\[\]]+")
+        items = re.findall(match, exp)
+        for item in items:
+            func = exp.replace(item, str(self.formatArg(item)))
+        result = aeval(func)
+        Log.info("判断“{}”结果为: {}".format(exp, result))
+        actions = None
+        if result and "true" in callbacks:
+            actions = callbacks["true"]
+        elif not result and "false" in callbacks:
+            actions = callbacks["false"]
+        self.doActions(target, actions)
 
-    def doAction(self, target):
-        actions = target["actions"]
-        for action in actions:
-            if "validate" in action:
-                try:
-                    func = action["validate"]
-                    match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+\[\]]+")
-                    items = re.findall(match, func)
-                    for item in items:
-                        func = func.replace(item, str(self.formatArg(item)))
-                    isValidate = aeval(func)
-                    if not isValidate:
-                        continue
-                except:
-                    continue
-
-            if action["name"] == "click":
-                if (
-                    "args" not in action
-                    or len(action["args"]) == 0
-                    or action["args"][0] is None
-                ):
-                    if "area" in target:
-                        self.click(target["area"])
-                    else:
-                        self.click(self.wfhelper.config.screenSize)
+    def doAction(self, target, action):
+        if action["name"] == "click":
+            if (
+                "args" not in action
+                or len(action["args"]) == 0
+                or action["args"][0] is None
+            ):
+                if "area" in target:
+                    self.click(target["area"])
                 else:
-                    self.click(action["args"][0])
-            elif action["name"] == "sleep":
-                self.sleep(action["args"])
-            elif action["name"] == "state":
-                self.accessState(action["args"])
-            elif action["name"] == "changeTargets":
-                self.changeTargets(action["args"])
-            elif action["name"] == "info":
-                self.info(action["args"])
-            elif action["name"] == "match":
-                self.match(action["args"])
-            elif action["name"] == "exit":
-                import sys
-                sys.exit()
-            elif action["name"] == "getScreen":
-                if "args" not in action:
-                    savePath = path.join(self.wfhelper.config.configDir, "temp/{}.png".format(int(time.time())))
-                    self.getScreen(savePath)
-                else:
-                    self.getScreen(action["args"])
+                    self.click(self.wfhelper.config.screenSize)
             else:
-                Log.error(
-                    "action:'{}'不存在！请检查'{}'的配置文件".format(
-                        action["name"], target["name"])
-                )
+                self.click(action["args"][0])
+        elif action["name"] == "sleep":
+            self.sleep(action["args"])
+        elif action["name"] == "state":
+            self.accessState(action["args"])
+        elif action["name"] == "changeTargets":
+            self.changeTargets(action["args"])
+        elif action["name"] == "info":
+            self.info(action["args"])
+        elif action["name"] == "match":
+            self.match(action["args"])
+        elif action["name"] == "exit":
+            import sys
+            sys.exit()
+        elif action["name"] == "getScreen":
+            if "args" not in action:
+                savePath = path.join(self.wfhelper.config.configDir, "temp/{}.png".format(int(time.time())))
+                self.getScreen(savePath)
+            else:
+                self.getScreen(action["args"])
+        elif action["name"] == "if":
+            self.IF(target, action["args"])
+        else:
+            Log.error(
+                "action:'{}'不存在！请检查'{}'的配置文件".format(
+                    action["name"], target["name"])
+            )
+
+    def doActions(self, target, actions=None):
+        if actions is None:
+            actions = target["actions"]
+        for action in actions:
+            self.doAction(target, action)
 
     def __init__(self, wfhelper):
         self.wfhelper = wfhelper

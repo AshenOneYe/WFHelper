@@ -7,7 +7,7 @@
     "loopDelay":[1,1],
     "randomClickArea":[0,0,1,1],
     "screenSize":[2400,1080],
-    "targetList":["mainTargets"],
+    "targetList":["mainTargets","lizhi"],
     "mainTargets":[
         {
             "name" : "开始1",
@@ -62,12 +62,59 @@
             "name" : "理智不足",
             "path" : "lizhibuzu.png",
             "colorRatio":0.9,
-            "area" : [1387,743,1779,781],
-            "text" : "理智不足，退出脚本",
+            "area" : [1159,728,2151,919],
+            "text" : "理智不足",
             "actions" : [
-                {"name":"exit"}
+                {
+                    "name":"state",
+                    "args":["set","有无理智药",true]
+                },
+                {
+                    "name":"changeTargets",
+                    "args":["lizhi"]
+                },
+                {
+                    "name":"if",
+                    "args":[
+                        "$有无理智药",
+                        {
+                            "true":[
+                                {
+                                    "name":"info",
+                                    "args":["大朗恰药"]
+                                },
+                                {
+                                    "name":"click",
+                                    "args":[[1850,845,1897,888]]
+                                }
+                            ],
+                            "false":[
+                                {
+                                    "name":"info",
+                                    "args":["没理智药了，退出"]
+                                },
+                                {"name":"exit"}
+                            ]
+                        }
+                    ]
+                }
             ]
         }
 
+    ],
+    "lizhi":[
+        {
+            "name" : "是否使用源石",
+            "path" : "yuanshi.png",
+            "similarity":0.9,
+            "area" : [1363,416,1528,572],
+            "text" : "没有理智药了",
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","有无理智药",false]
+                }
+            ]
+        }
     ]
 }

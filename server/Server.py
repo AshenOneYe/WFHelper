@@ -5,6 +5,7 @@ from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
 
 
+
 class Server():
     app = Flask(__name__)
     wfhelper = None
