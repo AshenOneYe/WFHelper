@@ -362,8 +362,11 @@ document.querySelector(".tablinks").click();
   });
 })();
 
-var ws = new WebSocket("ws://"+window.location.host+"/echo");
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+socket.on('connect', function() {
+  socket.emit('my event', {data: 'I\'m connected!'});
+});
 
-ws.onmessage = function (event) {
-  console.log(event)
-};
+socket.on('test',function(data){
+  console.log(data)
+})

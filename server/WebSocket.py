@@ -1,10 +1,14 @@
-from flask_sockets import Sockets
+from utils.LogUtil import Log
 
 
 def setWebSocket(server):
-    app = server.app
-    sockets = Sockets(app)
+    socketio = server.socketio
 
-    @sockets.route('/echo')
-    def echo_socket(ws):
-        ws.send("test")
+    @socketio.on('connect')
+    def onConnect(auth):
+        Log.info("websocket Client connected!")
+
+    @socketio.on('disconnect')
+    def onDisonnect():
+        Log.info("websocket Client disconnected!")
+        # stopThread

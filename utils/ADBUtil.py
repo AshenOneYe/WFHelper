@@ -12,21 +12,21 @@ class ADBUtil:
     adb = None
 
     def getScreen(self, savePath=None):
-        binary_screenshot = None
+        currentframe = None
 
         if self.device is not None:
-            binary_screenshot = self.device.screencap()
+            currentframe = self.device.screencap()
 
-        if savePath is not None and len(binary_screenshot) != 0 and binary_screenshot is not None:
+        if savePath is not None and len(currentframe) != 0 and currentframe is not None:
             dirs = os.path.dirname(savePath)
 
             if not os.path.exists(dirs):
                 os.makedirs(dirs)
 
             with open(savePath, "wb") as f:
-                f.write(binary_screenshot)
+                f.write(currentframe)
 
-        return binary_screenshot
+        return currentframe
 
     def touchScreen(self, area):
         if self.device is not None:
@@ -70,11 +70,12 @@ class ADBUtil:
         Log.info("设备serial : {}".format(self.device.serial))
         try:
             props = self.device.get_properties()
-            Log.info("设备名称 : {}".format(props["ro.product.bootimage.device"]))
-            Log.info("制造商 : {}".format(props["ro.product.bootimage.manufacturer"]))
-            Log.info("model : {}".format(props["ro.product.bootimage.model"]))
+            Log.info("设备名称 : {}".format(props["ro.product.device"]))
+            Log.info("制造商 : {}".format(props["ro.product.manufacturer"]))
+            Log.info("model : {}".format(props["ro.product.model"]))
             Log.info("CPU : {}".format(props["ro.product.cpu.abi"]))
-            Log.info("系统版本 : {}".format(props["ro.product.build.version.release"]))
+            Log.info("系统版本 : {}".format(props["ro.build.version.release"]))
+            # print(props)
         except ValueError:
             Log.error("获取设备信息失败")
             sys.exit()

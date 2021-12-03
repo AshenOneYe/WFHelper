@@ -3,11 +3,13 @@ from server.Router import setRouter
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
 from server.WebSocket import setWebSocket
+from flask_socketio import SocketIO
 
 
 class Server():
     app = Flask(__name__)
     wfhelper = None
+    socketio = SocketIO(app)
 
     def __init__(self, wfhelper):
 
@@ -48,7 +50,8 @@ class Server():
         self.wfhelper.start()
 
     def startServer(self):
-        from gevent import pywsgi
-        from geventwebsocket.handler import WebSocketHandler
-        server = pywsgi.WSGIServer(('', 8080), self.app, handler_class=WebSocketHandler)
-        server.serve_forever()
+        self.socketio.run(self.app, "0.0.0.0", 8080)
+        # from gevent import pywsgi
+        # from geventwebsocket.handler import WebSocketHandler
+        # server = pywsgi.WSGIServer(('', 8080), self.app, handler_class=WebSocketHandler)
+        # server.serve_forever()
