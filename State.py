@@ -1,6 +1,7 @@
-from utils.LogUtil import Log
-import time
+import time,json
 
+from utils.LogUtil import Log
+from utils.WSUtil import WS
 
 class State:
 
@@ -13,6 +14,7 @@ class State:
 
     def setState(self, key, value):
         self.content[key] = value
+        self.broadcast()
 
     def getState(self, key):
         if key in self.content:
@@ -28,3 +30,10 @@ class State:
         if key in self.content:
             return True
         return False
+
+    def broadcast(self):
+        WS.broadcast(json.dumps({
+            "type": 'update-state',
+            "time": int(time.time()),
+            "data": self.content
+        }).encode('utf8'))

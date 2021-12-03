@@ -9,7 +9,6 @@ class WSUtil:
 
         try:
             async for message in websocket:
-                print(message)
                 await websocket.send(message)
         finally:
             self.clients.remove(websocket)
