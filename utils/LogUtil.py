@@ -1,7 +1,9 @@
 import logging
-import time
+import time,json
 
 from typing import List
+
+from utils.WSUtil import WS
 
 
 class LogUtil:
@@ -21,6 +23,12 @@ class LogUtil:
         logging.getLogger().setLevel(logging.DEBUG)
 
     def setLastLog(self, log):
+        WS.broadcast(json.dumps({
+            "type": 'push-log-message',
+            "time": int(time.time()),
+            "data": log
+        }).encode('utf8'))
+
         log = str(
             time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         ) + " {}".format(log)

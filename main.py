@@ -5,6 +5,7 @@ from ConfigManager import configManager
 from server.Server import Server
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
+from utils.WSUtil import WS
 from WFHelper import WFHelper
 import threading
 
@@ -28,7 +29,7 @@ if __name__ == "__main__":
             Log.info("截图保存至 : {}".format(savePath))
             adbUtil.getScreen(savePath=savePath)
             sys.exit()
-            
+
         if "-c" in opts:
             config = configManager.getConfig(opts["-c"])
 
@@ -42,6 +43,7 @@ if __name__ == "__main__":
     if config is None:
         Log.info("未指定配置文件\n")
         config = configManager.selectConfig()
+
     config.init()
     wfhelper = WFHelper(config)
 
@@ -49,6 +51,10 @@ if __name__ == "__main__":
     serverThread = threading.Thread(target=server.startServer)
     serverThread.daemon = True
     serverThread.start()
+
+    wsThread = threading.Thread(target=WS.run)
+    wsThread.daemon = True
+    wsThread.start()
 
     # 不用子线程启动的原因是，子线程莫名的速度慢很多
     wfhelper.run(isDebug)

@@ -8,7 +8,14 @@
   "randomClickArea": [0, 0, 1, 1],
   "screenSize": [1280, 720],
   "state": {
+    "八岐大蛇": "0b1",
+    "管理者": "0b11",
+    "诅咒弧魔艾基尔": "0b11",
+    "不死王瑞西塔尔": "0b11",
+    "白虎": "0b11",
+    "寄居蟹船长": "0b11",
     "废墟魔像": "0b1111",
+    "维·索拉斯": "0b1",
     "伊尔考普斯": "0b11"
   },
   "targetList": [
@@ -64,6 +71,20 @@
       "text": "蹭车失败，解除暂停"
     },
     {
+      "name": "OK",
+      "path": "ok.png",
+      "area": [300, 800, 460, 840],
+      "actions": [
+        { "name": "click" },
+        { "name": "sleep", "args": [1] },
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "无"]
+        }
+      ],
+      "text": "点击OK"
+    },
+    {
       "name": "离开",
       "path": "likai.png",
       "area": [120, 1180, 320, 1220],
@@ -100,25 +121,11 @@
       "text": "关卡失败，点击放弃"
     },
     {
-      "name": "OK",
-      "path": "ok.png",
-      "area": [300, 800, 460, 840],
-      "actions": [
-        { "name": "click" },
-        { "name": "sleep", "args": [1] },
-        {
-          "name": "state",
-          "args": ["set", "正在挑战的boss", "无"]
-        }
-      ],
-      "text": "点击OK"
-    },
-    {
-      "name": "OK2",
-      "path": "ok2.png",
+      "name": "关卡完成",
+      "path": "wanchengguanqia.png",
       "area": [120, 1180, 320, 1220],
       "actions": [{ "name": "click" }, { "name": "sleep", "args": [1] }],
-      "text": "当前关卡完成，点击OK"
+      "text": "当前关卡完成"
     },
     {
       "name": "失败",
@@ -304,17 +311,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "八岐大蛇 - 高级"],
-          "validate": "True"
+          "validate": "$八岐大蛇 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$八岐大蛇 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$八岐大蛇 & (1 << (1 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：八岐大蛇 - 高级"
@@ -327,17 +334,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "管理者 - 高级"],
-          "validate": "True"
+          "validate": "$管理者 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$管理者 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$管理者 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：管理者 - 高级"
@@ -350,17 +357,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "管理者 - 中级"],
-          "validate": "True"
+          "validate": "$管理者 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$管理者 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$管理者 & (1 << (1 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：管理者 - 中级"
@@ -373,17 +380,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "诅咒弧魔艾基尔 - 高级"],
-          "validate": "True"
+          "validate": "$诅咒弧魔艾基尔 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$诅咒弧魔艾基尔 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$诅咒弧魔艾基尔 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：诅咒弧魔艾基尔 - 高级"
@@ -396,17 +403,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "不死王瑞西塔尔 - 高级"],
-          "validate": "True"
+          "validate": "$不死王瑞西塔尔 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$不死王瑞西塔尔 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$不死王瑞西塔尔 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：不死王瑞西塔尔 - 高级"
@@ -419,17 +426,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "不死王瑞西塔尔 - 中级"],
-          "validate": "True"
+          "validate": "$不死王瑞西塔尔 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$不死王瑞西塔尔 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$不死王瑞西塔尔 & (1 << (1 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：不死王瑞西塔尔 - 中级"
@@ -442,17 +449,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "白虎 - 高级"],
-          "validate": "True"
+          "validate": "$白虎 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$白虎 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$白虎 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：白虎 - 高级"
@@ -465,17 +472,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "白虎 - 中级"],
-          "validate": "True"
+          "validate": "$白虎 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$白虎 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$白虎 & (1 << (1 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：白虎 - 中级"
@@ -488,17 +495,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "寄居蟹船长 - 高级"],
-          "validate": "True"
+          "validate": "$寄居蟹船长 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$寄居蟹船长 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$寄居蟹船长 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：寄居蟹船长 - 高级"
@@ -511,17 +518,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "寄居蟹船长 - 中级"],
-          "validate": "True"
+          "validate": "$寄居蟹船长 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$寄居蟹船长 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$寄居蟹船长 & (1 << (1 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：寄居蟹船长 - 中级"
@@ -626,17 +633,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "维·索拉斯 - 初级"],
-          "validate": "True"
+          "validate": "$维·索拉斯 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$维·索拉斯 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$维·索拉斯 & (1 << (1 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：维·索拉斯 - 初级"
@@ -710,17 +717,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "八岐大蛇 - 高级"],
-          "validate": "True"
+          "validate": "$八岐大蛇 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$八岐大蛇 & (1 << (1 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$八岐大蛇 & (1 << (1 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：八岐大蛇 - 高级"
@@ -733,17 +740,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "管理者 - 高级"],
-          "validate": "True"
+          "validate": "$管理者 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$管理者 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$管理者 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：管理者 - 高级"
@@ -756,17 +763,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "不死王瑞西塔尔 - 高级"],
-          "validate": "True"
+          "validate": "$不死王瑞西塔尔 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$不死王瑞西塔尔 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$不死王瑞西塔尔 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：不死王瑞西塔尔 - 高级"
@@ -779,17 +786,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "白虎 - 高级"],
-          "validate": "True"
+          "validate": "$白虎 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$白虎 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$白虎 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：白虎 - 高级"
@@ -802,17 +809,17 @@
         {
           "name": "state",
           "args": ["set", "正在挑战的boss", "寄居蟹船长 - 高级"],
-          "validate": "True"
+          "validate": "$寄居蟹船长 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["join"],
-          "validate": "True"
+          "validate": "$寄居蟹船长 & (1 << (2 - 1)) > 0"
         },
         {
           "name": "changeTargets",
           "args": ["skip"],
-          "validate": "False"
+          "validate": "$寄居蟹船长 & (1 << (2 - 1)) < 1"
         }
       ],
       "text": "铃铛内容：寄居蟹船长 - 高级"
