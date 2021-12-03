@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 ImageHash = "*"
 Flask = "*"
-Flask-SocketIO = "*"
 pyinstaller = "*"
 asteval = "*"
 asyncio = "*"
