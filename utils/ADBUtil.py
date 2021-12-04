@@ -39,7 +39,10 @@ class ADBUtil:
         if self.device is not None:
             self.device.input_swipe(x1, y1, x2, y2, int(random.uniform(0.5, 1.0) * 1000))
 
-    def setDevice(self, serial):
+    def setDevice(self, serial, force=False):
+        if force:
+            self.device = self.adb.device(serial)
+            return serial
         # 用户没有指定设备
         if serial is None:
             devices = self.adb.devices()
@@ -79,6 +82,7 @@ class ADBUtil:
         except ValueError:
             Log.error("获取设备信息失败")
             sys.exit()
+        return serial
 
     def __init__(self):
         if getattr(sys, "frozen", None):

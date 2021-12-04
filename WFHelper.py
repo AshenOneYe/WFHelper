@@ -7,14 +7,17 @@ from State import State
 from utils.ADBUtil import adbUtil
 from utils.ImageUtil import readImageFromBytes, similarity
 from utils.LogUtil import Log
+from multiprocessing import Process
 
 
-class WFHelper:
+class WFHelper(Process):
 
     actionManager = None
     config = Config()
     state = State()
     screen = None
+    serial = None
+    isDebug = False
 
     def check(self, target, screen):
         result = False
@@ -67,11 +70,12 @@ class WFHelper:
         self.state.setState("lastActionTime", time)
 
     def run(self, isDebug=False):
+        self.init()
         if isDebug:
             Log.setDebugLevel()
 
         self.state.setState("isDebug", isDebug)
-        self.start()
+        self.Start()
 
         while True:
             if not self.isIdle():
@@ -80,7 +84,7 @@ class WFHelper:
                 self.mainLoop(targets)
                 self.loopDelay()
 
-    def start(self):
+    def Start(self):
         self.state.merge(self.config.state)
         self.state.setState("isRunning", True)
         self.state.setState("startTime", int(time.time()))
@@ -91,6 +95,14 @@ class WFHelper:
         self.state.setState("startTime", "")
         Log.info("停止自动脚本")
 
-    def __init__(self, config):
+    def init(self):
+        self.config.init()
+        adbUtil.setDevice(self.serial, True)
+
+    def __init__(self, config, serial, isDebug):
+        super().__init__()
+        self.daemon = True
         self.config = config
+        self.serial = serial
+        self.isDebug = isDebug
         self.actionManager = ActionManager(self)

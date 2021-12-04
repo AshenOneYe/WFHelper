@@ -45,7 +45,7 @@ class Server():
         self.wfhelper.stop()
 
     def startWFHelper(self):
-        self.wfhelper.start()
+        self.wfhelper.Start()
 
     def startServer(self):
         server = make_server('', 8080, self.app)
