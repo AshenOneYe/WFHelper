@@ -39,7 +39,7 @@
         {
             "name" : "行动结束",
             "path" : "xingdongjieshu.png",
-            "similarityThreshold":0.85,
+            "similarityThreshold":0.75,
             "area" : [495,767,564,805],
             "text" : "行动结束",
             "actions" : [

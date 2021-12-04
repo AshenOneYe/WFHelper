@@ -8,6 +8,8 @@ from utils.LogUtil import Log
 from utils.WSUtil import WS
 from WFHelper import WFHelper
 import threading
+from Pipe import PipeImpl
+
 
 if __name__ == "__main__":
 
@@ -45,16 +47,17 @@ if __name__ == "__main__":
         Log.info("未指定配置文件\n")
         config = configManager.selectConfig()
 
-    wfhelper = WFHelper(config, serial, isDebug)
-    wfhelper.start()
+    c1, c2 = PipeImpl()
 
-    wsThread = threading.Thread(target=WS.run)
-    wsThread.daemon = True
-    wsThread.start()
+    wfhelper = WFHelper(config, serial, c1, isDebug)
+    # wfhelper.start()
+
+    # wsThread = threading.Thread(target=WS.run)
+    # wsThread.daemon = True
+    # wsThread.start()
 
     server = Server(wfhelper)
     server.startServer()
-
 
 
     # # 不用子线程启动的原因是，子线程莫名的速度慢很多

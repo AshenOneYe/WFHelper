@@ -5,13 +5,11 @@ from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
 
 
-
 class Server():
     app = Flask(__name__)
     wfhelper = None
 
     def __init__(self, wfhelper):
-
         # TODO 提供参数指定host和port
         self.wfhelper = wfhelper
         setRouter(self)

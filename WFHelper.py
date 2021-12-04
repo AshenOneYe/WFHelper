@@ -18,6 +18,13 @@ class WFHelper(Process):
     screen = None
     serial = None
     isDebug = False
+    conn = None
+
+    def updateCallback(self, state):
+        data = {
+            "onUpdate": state
+        }
+        self.conn.send(data)
 
     def check(self, target, screen):
         result = False
@@ -98,11 +105,14 @@ class WFHelper(Process):
     def init(self):
         self.config.init()
         adbUtil.setDevice(self.serial, True)
+        self.state.setCallback(self.updateCallback)
+        Log.setCallback(self.updateCallback)
 
-    def __init__(self, config, serial, isDebug):
+    def __init__(self, config, serial, conn, isDebug):
         super().__init__()
         self.daemon = True
         self.config = config
         self.serial = serial
         self.isDebug = isDebug
+        self.conn = conn
         self.actionManager = ActionManager(self)

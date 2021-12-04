@@ -1,9 +1,9 @@
+import json
 import logging
-import time,json
-
+import time
 from typing import List
 
-from utils.WSUtil import WS
+# from utils.WSUtil import WS
 
 
 class LogUtil:
@@ -18,16 +18,18 @@ class LogUtil:
 
     logArray = []  # type: List[str]
     logLimit = 20
+    callback = None
 
     def setDebugLevel(self):
         logging.getLogger().setLevel(logging.DEBUG)
 
     def setLastLog(self, log):
-        WS.broadcast(json.dumps({
-            "type": 'push-log-message',
-            "time": int(time.time()),
-            "data": log
-        }).encode('utf8'))
+        if self.callback is not None:
+            self.callback(json.dumps({
+                "type": 'push-log-message',
+                "time": int(time.time()),
+                "data": log
+            }).encode('utf8'))
 
         log = str(
             time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -59,5 +61,7 @@ class LogUtil:
         self.setLastLog(msg)
         logging.critical(msg)
 
+    def setCallback(self, callback):
+        self.callback = callback
 
 Log = LogUtil()
