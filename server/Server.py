@@ -1,3 +1,4 @@
+import sys
 from flask import Flask
 from wsgiref.simple_server import make_server
 from server.Router import setRouter
@@ -7,11 +8,19 @@ from utils.LogUtil import Log
 
 class Server():
     app = Flask(__name__)
-    wfhelper = None
+    conn = None
+    callback = None
+    state = None
+    server = None
 
-    def __init__(self, wfhelper):
+    def onMessage(self, data):
+        self.state = data
+
+    def __init__(self, conn):
         # TODO 提供参数指定host和port
-        self.wfhelper = wfhelper
+        self.conn = conn
+        self.conn.setCallback(self.onMessage)
+        self.conn.startReceive()
         setRouter(self)
 
     def getLastLog(self):
@@ -25,10 +34,11 @@ class Server():
         Log.logLimit = value
 
     def setState(self, key, value):
-        self.wfhelper.state.setState(key, value)
+        pass
+        # self.wfhelper.state.setState(key, value)
 
     def getState(self):
-        return self.wfhelper.state.content
+        return self.state
 
     def getScreenShot(self):
         return adbUtil.getScreen()
@@ -47,4 +57,5 @@ class Server():
 
     def startServer(self):
         server = make_server('', 8080, self.app)
+        self.server = server
         server.serve_forever()

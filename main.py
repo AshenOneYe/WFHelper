@@ -5,7 +5,7 @@ from ConfigManager import configManager
 from server.Server import Server
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
-from utils.WSUtil import WS
+from server.WS import WS
 from WFHelper import WFHelper
 import threading
 from Pipe import PipeImpl
@@ -48,17 +48,16 @@ if __name__ == "__main__":
         config = configManager.selectConfig()
 
     c1, c2 = PipeImpl()
+    c3, c4 = PipeImpl()
 
-    wfhelper = WFHelper(config, serial, c1, isDebug)
-    # wfhelper.start()
+    wfhelper = WFHelper(config, serial, c1, c3, isDebug)
+    wfhelper.start()
 
-    # wsThread = threading.Thread(target=WS.run)
-    # wsThread.daemon = True
-    # wsThread.start()
+    ws = WS(c2)
+    ws.start()
 
-    server = Server(wfhelper)
-    server.startServer()
-
-
-    # # 不用子线程启动的原因是，子线程莫名的速度慢很多
-    # wfhelper.run(isDebug)
+    Server(c4).startServer()
+    # server = Server(c4)
+    # serverThread = threading.Thread(target=server.startServer)
+    # serverThread.daemon = True
+    # serverThread.start()

@@ -19,12 +19,11 @@ class WFHelper(Process):
     serial = None
     isDebug = False
     conn = None
+    conn2 = None
 
     def updateCallback(self, state):
-        data = {
-            "onUpdate": state
-        }
-        self.conn.send(data)
+        self.conn.send(state)
+        self.conn2.send(self.state.content)
 
     def check(self, target, screen):
         result = False
@@ -84,12 +83,15 @@ class WFHelper(Process):
         self.state.setState("isDebug", isDebug)
         self.Start()
 
-        while True:
-            if not self.isIdle():
-                targets = self.config.targetList[self.state.getState("currentTargets")]
-                self.screen = readImageFromBytes(adbUtil.getScreen())
-                self.mainLoop(targets)
-                self.loopDelay()
+        try:
+            while True:
+                if not self.isIdle():
+                    targets = self.config.targetList[self.state.getState("currentTargets")]
+                    self.screen = readImageFromBytes(adbUtil.getScreen())
+                    self.mainLoop(targets)
+                    self.loopDelay()
+        except KeyboardInterrupt:
+            self.conn2.send("exit")
 
     def Start(self):
         self.state.merge(self.config.state)
@@ -108,11 +110,12 @@ class WFHelper(Process):
         self.state.setCallback(self.updateCallback)
         Log.setCallback(self.updateCallback)
 
-    def __init__(self, config, serial, conn, isDebug):
+    def __init__(self, config, serial, conn, conn2, isDebug):
         super().__init__()
         self.daemon = True
         self.config = config
         self.serial = serial
         self.isDebug = isDebug
         self.conn = conn
+        self.conn2 = conn2
         self.actionManager = ActionManager(self)
