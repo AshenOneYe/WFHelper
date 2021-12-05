@@ -26,9 +26,6 @@ const switchTab = (event, name) => {
     loadLogArray();
   }
 
-  if (name === "ScreenCap") {
-    loadScreenCap();
-  }
 };
 
 const loadState = () => {
@@ -94,23 +91,6 @@ const loadLogArray = () => {
     });
 };
 
-const loadScreenCap = () => {
-  fetch(`/getScreenShot`)
-    .then((res) => res.blob())
-    .then((blob) => {
-      const img = new Image();
-
-      img.src = URL.createObjectURL(blob);
-      img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-
-        ctx.drawImage(img, 0, 0);
-
-        img.remove();
-      };
-    });
-};
 
 const start = () => {
   fetch(`/start`);
@@ -259,7 +239,6 @@ const touchScreen = (() => {
         .then(() => {
           canvas.style.cursor = "auto";
         })
-        .then(loadScreenCap);
     }
   };
 })();
@@ -284,7 +263,6 @@ const swipeScreen = (() => {
         .then(() => {
           canvas.style.cursor = "auto";
         })
-        .then(loadScreenCap);
     }
   };
 })();
@@ -371,8 +349,7 @@ socket.on(
   'onFrameUpdate',
   (data)=>{
     const img = new Image()
-
-    img.src = URL.createObjectURL(data)
+    img.src = "data:image/png;base64," + data
     img.onload = () => {
       canvas.width = img.width
       canvas.height = img.height

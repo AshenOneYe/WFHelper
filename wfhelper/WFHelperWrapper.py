@@ -3,6 +3,7 @@ from multiprocessing import Pipe, Process
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
 import threading
+import base64
 
 
 class WFHelperWrapper(Process):
@@ -11,12 +12,16 @@ class WFHelperWrapper(Process):
 
     childConn = None
     parentConn = None
+    childEventConn = None
+    parentEventConn = None
     receivingThread = None
+    eventHandlerThread = None
     frame = None
     config = None
     serial = None
     isDebug = False
     isChild = False
+
 
     def __init__(self, config, serial, isDebug):
         super().__init__()
@@ -25,6 +30,7 @@ class WFHelperWrapper(Process):
         self.serial = serial
         self.isDebug = isDebug
         self.childConn, self.parentConn = Pipe()
+        self.childEventConn, self.parentEventConn = Pipe()
 
     def init(self):
         self.isChild = True
@@ -39,9 +45,19 @@ class WFHelperWrapper(Process):
 
     def updateFrame(self, frame):
         self.frame = frame
+        self.emit({"type": "onFrameUpdate", "data": base64.b64encode(frame).decode("utf-8")})
 
-    def setEventHandler(self, callback):
-        self.parentConn.setCallback(callback)
+    def emit(self, event):
+        self.childEventConn.send(event)
+
+    def setEventHandler(self, handler):
+        def waitForEvent():
+            while True:
+                event = self.parentEventConn.recv()
+                handler(event)
+        self.eventHandlerThread = threading.Thread(target=waitForEvent)
+        self.eventHandlerThread.daemon = True
+        self.eventHandlerThread.start()
 
     def run(self):
         self.init()
