@@ -2,13 +2,10 @@ import getopt
 import sys
 
 from ConfigManager import configManager
+from WFHelperWrapper import WFHelperWrapper
 from server.Server import Server
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
-from server.WS import WS
-from WFHelper import WFHelper
-import threading
-from Pipe import PipeImpl
 
 
 if __name__ == "__main__":
@@ -47,17 +44,7 @@ if __name__ == "__main__":
         Log.info("未指定配置文件\n")
         config = configManager.selectConfig()
 
-    c1, c2 = PipeImpl()
-    c3, c4 = PipeImpl()
-
-    wfhelper = WFHelper(config, serial, c1, c3, isDebug)
+    wfhelper = WFHelperWrapper(config, serial, isDebug)
     wfhelper.start()
 
-    ws = WS(c2)
-    ws.start()
-
-    Server(c4).startServer()
-    # server = Server(c4)
-    # serverThread = threading.Thread(target=server.startServer)
-    # serverThread.daemon = True
-    # serverThread.start()
+    Server(wfhelper).startServer()

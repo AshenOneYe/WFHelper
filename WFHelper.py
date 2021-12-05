@@ -7,10 +7,9 @@ from State import State
 from utils.ADBUtil import adbUtil
 from utils.ImageUtil import readImageFromBytes, similarity
 from utils.LogUtil import Log
-from multiprocessing import Process
 
 
-class WFHelper(Process):
+class WFHelper:
 
     actionManager = None
     config = Config()
@@ -18,12 +17,6 @@ class WFHelper(Process):
     screen = None
     serial = None
     isDebug = False
-    conn = None
-    conn2 = None
-
-    def updateCallback(self, state):
-        self.conn.send(state)
-        self.conn2.send(self.state.content)
 
     def check(self, target, screen):
         result = False
@@ -75,25 +68,32 @@ class WFHelper(Process):
     def updateActionTime(self, time):
         self.state.setState("lastActionTime", time)
 
-    def run(self, isDebug=False):
-        self.init()
-        if isDebug:
+    def run(self):
+
+        self.actionManager = ActionManager(self)
+
+        if self.isDebug:
             Log.setDebugLevel()
 
-        self.state.setState("isDebug", isDebug)
-        self.Start()
+        self.state.setState("isDebug", self.isDebug)
+        self.start()
 
         try:
             while True:
                 if not self.isIdle():
+                    t = time.time()
                     targets = self.config.targetList[self.state.getState("currentTargets")]
                     self.screen = readImageFromBytes(adbUtil.getScreen())
+                    Log.debug("截图耗时: {}".format(time.time() - t))
+                    t = time.time()
                     self.mainLoop(targets)
+                    Log.debug("比对循环耗时: {}".format(time.time() - t))
                     self.loopDelay()
         except KeyboardInterrupt:
-            self.conn2.send("exit")
+            import sys
+            sys.exit()
 
-    def Start(self):
+    def start(self):
         self.state.merge(self.config.state)
         self.state.setState("isRunning", True)
         self.state.setState("startTime", int(time.time()))
@@ -104,18 +104,8 @@ class WFHelper(Process):
         self.state.setState("startTime", "")
         Log.info("停止自动脚本")
 
-    def init(self):
-        self.config.init()
-        adbUtil.setDevice(self.serial, True)
-        self.state.setCallback(self.updateCallback)
-        Log.setCallback(self.updateCallback)
-
-    def __init__(self, config, serial, conn, conn2, isDebug):
-        super().__init__()
-        self.daemon = True
+    def setConfig(self, config):
         self.config = config
-        self.serial = serial
+
+    def enableDebug(self, isDebug):
         self.isDebug = isDebug
-        self.conn = conn
-        self.conn2 = conn2
-        self.actionManager = ActionManager(self)
