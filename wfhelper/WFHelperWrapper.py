@@ -1,21 +1,22 @@
 from wfhelper.WFHelper import WFHelper
-from multiprocessing import Process
-import Connection
+from multiprocessing import Pipe, Process
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
+import threading
 
 
 class WFHelperWrapper(Process):
 
     wfhelper = WFHelper()
 
-    recvConn = None
-    sendConn = None
-
+    childConn = None
+    parentConn = None
+    receivingThread = None
+    frame = None
     config = None
     serial = None
     isDebug = False
-    frame = None
+    isChild = False
 
     def __init__(self, config, serial, isDebug):
         super().__init__()
@@ -23,91 +24,113 @@ class WFHelperWrapper(Process):
         self.config = config
         self.serial = serial
         self.isDebug = isDebug
-
-        self.recvConn, self.sendConn = Connection.getConnections()
+        self.childConn, self.parentConn = Pipe()
 
     def init(self):
-        self.recvConn.setCallback(self.onMessage)
-        self.recvConn.startReceive()
+        self.isChild = True
         self.config.init()
         self.wfhelper.setConfig(self.config)
         self.wfhelper.enableDebug(self.isDebug)
         self.wfhelper.screenUpdateCallback = self.updateFrame
         adbUtil.setDevice(self.serial, True)
+        self.receivingThread = threading.Thread(target=self.onChildReceive, args=(self.childConn,))
+        self.receivingThread.daemon = True
+        self.receivingThread.start()
 
     def updateFrame(self, frame):
         self.frame = frame
+
+    def setEventHandler(self, callback):
+        self.parentConn.setCallback(callback)
 
     def run(self):
         self.init()
         self.wfhelper.run()
 
-    def onMessage(self, msg):
-        if msg["type"] == "getState":
-            self.recvConn.send(self.wfhelper.state.content)
-        elif msg["type"] == "setState":
-            self.wfhelper.state.setState(msg["key"], msg["value"])
-        elif msg["type"] == "getLastLog":
-            self.recvConn.send(Log.lastLog)
-        elif msg["type"] == "getLogArray":
-            self.recvConn.send(Log.logArray)
-        elif msg["type"] == "setLogLimit":
-            Log.logArray = []
-            Log.logLimit = msg["value"]
-        elif msg["type"] == "getScreenShot":
-            self.recvConn.send(Log.lastLog)
-        elif msg["type"] == "touchScreen":
-            x, y = msg["pos"]
-            adbUtil.touchScreen([x, y, x+1, y+1])
-        elif msg["type"] == "swipeScreen":
-            x1, y1 = msg["start"]
-            x2, y2 = msg["end"]
-            adbUtil.swipeScreen(x1, y1, x2, y2)
-        elif msg["type"] == "stopWFHelper":
-            self.wfhelper.stop()
-        elif msg["type"] == "startWFHelper":
-            self.wfhelper.start()
+    def onChildReceive(self, conn):
+        while True:
+            msg = conn.recv()
+            if "args" in msg:
+                getattr(self, msg["method"])(args=msg["args"])
+            else:
+                getattr(self, msg["method"])()
 
     def getState(self):
-        return self.sendConn.getResponse({"type": "getState"})
+        if self.isChild:
+            self.childConn.send(self.wfhelper.state.content)
+        else:
+            self.parentConn.send({"method": "getState"})
+            return self.parentConn.recv()
 
-    def setState(self, key, value):
-        self.sendConn.send({
-            "type": "getLogArray",
-            "key": key,
-            "value": value
-        })
+    def setState(self, args):
+        if self.isChild:
+            key, value = args
+            self.wfhelper.state.setState(key, value)
+        else:
+            self.parentConn.send({
+                "method": "setState",
+                "args": args
+            })
 
     def getLastLog(self):
-        return self.sendConn.getResponse({"type": "getLastLog"})
+        if self.isChild:
+            self.childConn.send(Log.lastLog)
+        else:
+            self.parentConn.send({"method": "getLastLog"})
+            return self.parentConn.recv()
 
     def getLogArray(self):
-        return self.sendConn.getResponse({"type": "getLogArray"})
+        if self.isChild:
+            self.childConn.send(Log.logArray)
+        else:
+            self.parentConn.send({"method": "getLogArray"})
+            return self.parentConn.recv()
 
-    def setLogLimit(self, value):
-        self.sendConn.send({
-            "type": "setLogLimit",
-            "value": value
-        })
+    def setLogLimit(self, args):
+        if self.isChild:
+            Log.logArray = []
+            Log.logLimit = args
+        else:
+            self.parentConn.send({
+                "method": "setLogLimit",
+                "args": args
+            })
 
     def getScreenShot(self):
-        return adbUtil.getScreen()
+        if self.isChild:
+            self.childConn.send(self.frame)
+        else:
+            self.parentConn.send({"method": "getScreenShot"})
+            return self.parentConn.recv()
 
-    def touchScreen(self, x, y):
-        self.sendConn.send({
-            "type": "touchScreen",
-            "pos": (x, y)
-        })
+    def touchScreen(self, args):
+        if self.isChild:
+            x, y = args
+            adbUtil.touchScreen([x, y, x+1, y+1])
+        else:
+            self.parentConn.send({
+                "method": "touchScreen",
+                "args": args
+            })
 
-    def swipeScreen(self, x1, y1, x2, y2):
-        self.sendConn.send({
-            "type": "swipeScreen",
-            "start": [x1, y1],
-            "end": [x2, y2]
-        })
+    def swipeScreen(self, args):
+        if self.isChild:
+            x1, y1, x2, y2 = args
+            adbUtil.swipeScreen(x1, y1, x2, y2)
+        else:
+            self.parentConn.send({
+                "method": "swipeScreen",
+                "args": args
+            })
 
     def stopWFHelper(self):
-        self.sendConn.send({"type": "stopWFHelper"})
+        if self.isChild:
+            self.wfhelper.stop()
+        else:
+            self.parentConn.send({"method": "stopWFHelper"})
 
     def startWFHelper(self):
-        self.sendConn.send({"type": "startWFHelper"})
+        if self.isChild:
+            self.wfhelper.start()
+        else:
+            self.parentConn.send({"method": "startWFHelper"})

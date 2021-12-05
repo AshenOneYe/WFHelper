@@ -3,8 +3,6 @@ import logging
 import time
 from typing import List
 
-# from utils.WSUtil import WS
-
 
 class LogUtil:
     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"

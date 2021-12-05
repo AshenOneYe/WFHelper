@@ -367,6 +367,19 @@ socket.on('connect', function() {
   socket.emit('my event', {data: 'I\'m connected!'});
 });
 
-socket.on('test',function(data){
-  console.log(data)
-})
+socket.on(
+  'onFrameUpdate',
+  (data)=>{
+    const img = new Image()
+
+    img.src = URL.createObjectURL(data)
+    img.onload = () => {
+      canvas.width = img.width
+      canvas.height = img.height
+
+      ctx.drawImage(img, 0, 0);
+
+      img.remove()
+    }
+  }
+)

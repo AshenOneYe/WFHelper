@@ -9,10 +9,14 @@ class Server():
     wfhelper = None
     socketio = SocketIO(app)
 
+    def eventHandler(self, msg):
+        self.socketio.emit(msg["event"], msg["data"])
+
     def __init__(self, wfhelper):
 
         # TODO 提供参数指定host和port
         self.wfhelper = wfhelper
+        # self.wfhelper.setEventHandler(self.eventHandler)
         setRouter(self)
         setWebSocket(self)
 
@@ -26,7 +30,7 @@ class Server():
         self.wfhelper.setLogLimit(value)
 
     def setState(self, key, value):
-        self.wfhelper.setState(key, value)
+        self.wfhelper.setState([key, value])
 
     def getState(self):
         return self.wfhelper.getState()
@@ -35,10 +39,10 @@ class Server():
         return self.wfhelper.getScreenShot()
 
     def touchScreen(self, x, y):
-        self.wfhelper.touchScreen(x, y)
+        self.wfhelper.touchScreen([x, y])
 
     def swipeScreen(self, x1, y1, x2, y2):
-        self.wfhelper.swipeScreen(x1, y1, x2, y2)
+        self.wfhelper.swipeScreen([x1, y1, x2, y2])
 
     def stopWFHelper(self):
         self.wfhelper.stopWFHelper()

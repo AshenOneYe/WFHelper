@@ -11,4 +11,3 @@ def setWebSocket(server):
     @socketio.on('disconnect')
     def onDisonnect():
         Log.info("websocket Client disconnected!")
-        # stopThread

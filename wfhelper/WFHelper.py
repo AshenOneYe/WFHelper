@@ -95,9 +95,11 @@ class WFHelper:
 
     def updateScreen(self):
         frame = adbUtil.getScreen()
-        if self.screenUpdateCallback is not None:
-            self.screenUpdateCallback(frame)
-        self.screen = readImageFromBytes(frame)
+        screen = readImageFromBytes(frame)
+        if screen is not None:
+            self.screen = screen
+            if self.screenUpdateCallback is not None:
+                self.screenUpdateCallback(frame)
 
     def start(self):
         self.state.merge(self.config.state)

@@ -1,5 +1,5 @@
 from io import BytesIO
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 import imagehash
 import math
 import operator
@@ -25,7 +25,11 @@ def similarity(img, target):
 
 def readImageFromBytes(bytes):
     bytes_stream = BytesIO(bytes)
-    return Image.open(bytes_stream)
+    try:
+        img = Image.open(bytes_stream)
+    except UnidentifiedImageError:
+        return None
+    return img
 
 
 def getImageHash(image=None, path=None):
