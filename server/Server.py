@@ -19,14 +19,13 @@ class Server():
         setWebSocket(self)
 
     def getLastLog(self):
-        return Log.lastLog
+        return self.wfhelper.getLastLog()
 
     def getLogArray(self):
-        return Log.logArray
+        return self.wfhelper.getLogArray()
 
     def setLogLimit(self, value):
-        Log.logArray = []
-        Log.logLimit = value
+        self.wfhelper.setLogLimit(value)
 
     def setState(self, key, value):
         self.wfhelper.setState(key, value)
@@ -35,19 +34,19 @@ class Server():
         return self.wfhelper.getState()
 
     def getScreenShot(self):
-        return adbUtil.getScreen()
+        return self.wfhelper.getScreenShot()
 
     def touchScreen(self, x, y):
-        adbUtil.touchScreen([x, y, x+1, y+1])
+        self.wfhelper.touchScreen(x, y)
 
     def swipeScreen(self, x1, y1, x2, y2):
-        adbUtil.swipeScreen(x1, y1, x2, y2)
+        self.wfhelper.swipeScreen(x1, y1, x2, y2)
 
     def stopWFHelper(self):
-        self.wfhelper.stop()
+        self.wfhelper.stopWFHelper()
 
     def startWFHelper(self):
-        self.wfhelper.start()
+        self.wfhelper.startWFHelper()
 
     def startServer(self):
         self.socketio.run(self.app, "0.0.0.0", 8080)

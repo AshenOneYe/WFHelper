@@ -42,7 +42,6 @@ class LogUtil:
             self.logArray.pop(0)
 
     def debug(self, msg):
-        self.setLastLog(msg)
         logging.debug(msg)
 
     def info(self, msg):
@@ -50,15 +49,12 @@ class LogUtil:
         logging.info(msg)
 
     def warning(self, msg):
-        self.setLastLog(msg)
         logging.warning(msg)
 
     def error(self, msg):
-        self.setLastLog(msg)
         logging.error(msg)
 
     def critical(self, msg):
-        self.setLastLog(msg)
         logging.critical(msg)
 
     def setCallback(self, callback):

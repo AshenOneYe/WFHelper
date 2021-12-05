@@ -91,8 +91,7 @@ class WFHelperWrapper(Process):
     def touchScreen(self, x, y):
         self.sendConn.send({
             "type": "touchScreen",
-            "x": x,
-            "y": y
+            "pos": (x, y)
         })
 
     def swipeScreen(self, x1, y1, x2, y2):
@@ -103,7 +102,7 @@ class WFHelperWrapper(Process):
         })
 
     def stopWFHelper(self):
-        self.sendConn.send("stopWFHelper")
+        self.sendConn.send({"type": "stopWFHelper"})
 
     def startWFHelper(self):
-        self.sendConn.send("startWFHelper")
+        self.sendConn.send({"type": "startWFHelper"})
