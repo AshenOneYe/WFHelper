@@ -1,4 +1,4 @@
-from WFHelper import WFHelper
+from wfhelper.WFHelper import WFHelper
 from multiprocessing import Process
 import Connection
 from utils.ADBUtil import adbUtil

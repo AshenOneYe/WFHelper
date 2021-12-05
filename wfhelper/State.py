@@ -3,7 +3,6 @@ import json
 import time
 
 from utils.LogUtil import Log
-# from utils.WSUtil import WS
 
 
 class State:

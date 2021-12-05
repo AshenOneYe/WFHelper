@@ -1,9 +1,9 @@
 import random
 import time
 
-from Action import ActionManager
-from Config import Config
-from State import State
+from wfhelper.Action import ActionManager
+from wfhelper.Config import Config
+from wfhelper.State import State
 from utils.ADBUtil import adbUtil
 from utils.ImageUtil import readImageFromBytes, similarity
 from utils.LogUtil import Log

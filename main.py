@@ -1,8 +1,8 @@
 import getopt
 import sys
 
-from ConfigManager import configManager
-from WFHelperWrapper import WFHelperWrapper
+from utils.ConfigUtil import configUtil
+from wfhelper.WFHelperWrapper import WFHelperWrapper
 from server.Server import Server
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
@@ -31,7 +31,7 @@ if __name__ == "__main__":
             sys.exit()
 
         if "-c" in opts:
-            config = configManager.getConfig(opts["-c"])
+            config = configUtil.getConfig(opts["-c"])
 
         if "-t" in opts:
             isDebug = True
@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     if config is None:
         Log.info("未指定配置文件\n")
-        config = configManager.selectConfig()
+        config = configUtil.selectConfig()
 
     wfhelper = WFHelperWrapper(config, serial, isDebug)
     wfhelper.start()

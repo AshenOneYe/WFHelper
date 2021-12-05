@@ -2,10 +2,10 @@ import json
 import os
 import sys
 
-from Config import Config
+from wfhelper.Config import Config
 
 
-class ConfigManager:
+class ConfigUtil:
     rootPath = "configs"
 
     def getConfigFileList(self):
@@ -62,4 +62,4 @@ class ConfigManager:
             sys.exit()
 
 
-configManager = ConfigManager()
+configUtil = ConfigUtil()
