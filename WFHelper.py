@@ -81,17 +81,23 @@ class WFHelper:
         try:
             while True:
                 if not self.isIdle():
-                    t = time.time()
                     targets = self.config.targetList[self.state.getState("currentTargets")]
-                    self.screen = readImageFromBytes(adbUtil.getScreen())
-                    Log.debug("截图耗时: {}".format(time.time() - t))
+                    t = time.time()
+                    self.updateScreen()
+                    Log.debug("截图耗时: {}秒".format(time.time() - t))
                     t = time.time()
                     self.mainLoop(targets)
-                    Log.debug("比对循环耗时: {}".format(time.time() - t))
+                    Log.debug("比对循环耗时: {}秒".format(time.time() - t))
                     self.loopDelay()
         except KeyboardInterrupt:
             import sys
             sys.exit()
+
+    def updateScreen(self):
+        frame = adbUtil.getScreen()
+        if self.screenUpdateCallback is not None:
+            self.screenUpdateCallback(frame)
+        self.screen = readImageFromBytes(frame)
 
     def start(self):
         self.state.merge(self.config.state)

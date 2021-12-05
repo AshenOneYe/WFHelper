@@ -1,7 +1,5 @@
 from flask import Flask
 from server.Router import setRouter
-from utils.ADBUtil import adbUtil
-from utils.LogUtil import Log
 from server.WebSocket import setWebSocket
 from flask_socketio import SocketIO
 

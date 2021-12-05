@@ -60,4 +60,5 @@ class LogUtil:
     def setCallback(self, callback):
         self.callback = callback
 
+
 Log = LogUtil()

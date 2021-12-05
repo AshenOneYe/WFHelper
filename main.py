@@ -44,7 +44,7 @@ if __name__ == "__main__":
         Log.info("未指定配置文件\n")
         config = configManager.selectConfig()
 
-    wfhelper = WFHelperWrapper(config, serial, True)
+    wfhelper = WFHelperWrapper(config, serial, isDebug)
     wfhelper.start()
 
     Server(wfhelper).startServer()

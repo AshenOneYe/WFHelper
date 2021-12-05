@@ -15,6 +15,7 @@ class WFHelperWrapper(Process):
     config = None
     serial = None
     isDebug = False
+    frame = None
 
     def __init__(self, config, serial, isDebug):
         super().__init__()
@@ -31,7 +32,11 @@ class WFHelperWrapper(Process):
         self.config.init()
         self.wfhelper.setConfig(self.config)
         self.wfhelper.enableDebug(self.isDebug)
+        self.wfhelper.screenUpdateCallback = self.updateFrame
         adbUtil.setDevice(self.serial, True)
+
+    def updateFrame(self, frame):
+        self.frame = frame
 
     def run(self):
         self.init()
