@@ -7,7 +7,7 @@ from flask_socketio import SocketIO
 class Server():
     app = Flask(__name__)
     wfhelper = None
-    socketio = SocketIO(app)
+    socketio = SocketIO(app, cors_allowed_origins='*')
 
     def eventHandler(self, event):
         self.socketio.emit(event["type"], event["data"])
