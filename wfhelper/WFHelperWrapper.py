@@ -16,12 +16,10 @@ class WFHelperWrapper(Process):
     parentEventConn = None
     receivingThread = None
     eventHandlerThread = None
-    frame = None
     config = None
     serial = None
     isDebug = False
     isChild = False
-
 
     def __init__(self, config, serial, isDebug):
         super().__init__()
@@ -38,14 +36,21 @@ class WFHelperWrapper(Process):
         self.wfhelper.setConfig(self.config)
         self.wfhelper.enableDebug(self.isDebug)
         self.wfhelper.screenUpdateCallback = self.updateFrame
+        self.wfhelper.state.setCallback(self.updateState)
+        Log.setCallback(self.updateLog)
         adbUtil.setDevice(self.serial, True)
         self.receivingThread = threading.Thread(target=self.onChildReceive, args=(self.childConn,))
         self.receivingThread.daemon = True
         self.receivingThread.start()
 
     def updateFrame(self, frame):
-        self.frame = frame
         self.emit({"type": "onFrameUpdate", "data": base64.b64encode(frame).decode("utf-8")})
+
+    def updateState(self, state):
+        self.emit({"type": "onStateUpdate", "data": state})
+
+    def updateLog(self, log):
+        self.emit({"type": "onLogUpdate", "data": log})
 
     def emit(self, event):
         self.childEventConn.send(event)

@@ -2,7 +2,6 @@ from flask import Flask
 from server.Router import setRouter
 from server.WebSocket import setWebSocket
 from flask_socketio import SocketIO
-import base64
 
 
 class Server():
@@ -12,7 +11,6 @@ class Server():
 
     def eventHandler(self, event):
         self.socketio.emit(event["type"], event["data"])
-        # print(event)
 
     def __init__(self, wfhelper):
 

@@ -1,5 +1,3 @@
-
-import json
 import time
 
 from utils.LogUtil import Log
@@ -21,11 +19,7 @@ class State:
     def setState(self, key, value):
         self.content[key] = value
         if self.callback is not None:
-            self.callback(json.dumps({
-                "type": 'update-state',
-                "time": int(time.time()),
-                "data": self.content
-            }).encode('utf8'))
+            self.callback(self.content)
 
     def getState(self, key):
         if key in self.content:

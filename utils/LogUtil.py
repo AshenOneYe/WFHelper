@@ -1,4 +1,3 @@
-import json
 import logging
 import time
 from typing import List
@@ -23,11 +22,12 @@ class LogUtil:
 
     def setLastLog(self, log):
         if self.callback is not None:
-            self.callback(json.dumps({
-                "type": 'push-log-message',
-                "time": int(time.time()),
-                "data": log
-            }).encode('utf8'))
+            self.callback(
+                {
+                    "time": int(time.time()),
+                    "data": log
+                }
+            )
 
         log = str(
             time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
