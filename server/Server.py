@@ -2,13 +2,12 @@ from flask import Flask
 from server.Router import setRouter
 from server.WebSocket import setWebSocket
 from flask_socketio import SocketIO
-import base64
 
 
 class Server():
     app = Flask(__name__)
     wfhelper = None
-    socketio = SocketIO(app)
+    socketio = SocketIO(app, cors_allowed_origins='*')
 
     def eventHandler(self, event):
         self.socketio.emit(event["type"], event["data"])

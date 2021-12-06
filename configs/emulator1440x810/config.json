@@ -3,7 +3,7 @@
     "author":"大A",
     "description":"这个配置用于世界弹射物语国服混铃铛，可以在1440x810分辨率的模拟器上运行",
     "similarityThreshold":0.9,
-    "loopDelay" : [0,0],
+    "loopDelay" : [1,1],
     "randomClickDelay":300,
     "randomClickArea":[0,0,1,1],
     "screenSize":[1440,810],
@@ -96,7 +96,7 @@
                     "name":"info",
                     "args":["点击准备按钮"]
                 },
-                {
+				{
                     "name":"state",
                     "args":["set","正在挑战的boss","雷废龙"]
                 }
@@ -242,6 +242,30 @@
                 }
             ],
             "text" : "正在挑战猫头鹰"
+        },
+        {
+            "name" : "超火",
+            "path" : "chaohuo.png",
+            "area" : [36,1154,202,1258],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","超火"]
+                }
+            ],
+            "text" : "正在挑战超火"
+        },
+        {
+            "name" : "火上+",
+            "path" : "huoplus.png",
+            "area" : [36,1154,202,1258],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","火上+"]
+                }
+            ],
+            "text" : "正在挑战火上+"
         }
     ]
 }
