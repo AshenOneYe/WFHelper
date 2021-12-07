@@ -34,14 +34,18 @@ class WFHelper:
         finally:
             return result
 
-    def mainLoop(self, targets):
+    def mainLoop(self, targets, targetName=None):
 
         t = int(time.time())
 
         for target in targets:
+            if targetName is not None:
+                if target['name'] != targetName:
+                    continue
             if "hash" not in target or self.check(target, self.screen):
                 if "hash" not in target:
-                    Log.info("{} - 直接操作".format(target["text"]))
+                    if "text" in target:
+                        Log.info("{} - 直接操作".format(target["text"]))
                 self.actionManager.doActions(target)
                 self.updateActionTime(t)
                 return True

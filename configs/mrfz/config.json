@@ -74,11 +74,11 @@
                     "args":["lizhi"]
                 },
                 {
-                    "name":"if",
+                    "name":"match",
                     "args":[
                         "$有无理智药",
                         {
-                            "true":[
+                            "True":[
                                 {
                                     "name":"info",
                                     "args":["大朗恰药"]
@@ -88,7 +88,7 @@
                                     "args":[[1850,845,1897,888]]
                                 }
                             ],
-                            "false":[
+                            "False":[
                                 {
                                     "name":"info",
                                     "args":["没理智药了，退出"]

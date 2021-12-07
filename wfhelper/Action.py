@@ -57,14 +57,26 @@ class ActionManager:
             value = int(value) + int(self.state.getState(name))
             self.state.setState(name, value)
 
+    def changeTarget(self, args):
+        name, targetName = args
+        targets = self.wfhelper.config.targetList[name]
+
+        return self.wfhelper.mainLoop(targets, targetName)
+
     def changeTargets(self, args):
-        targets = self.wfhelper.config.targetList[args[0]]
-        if len(args) == 1:
-            return self.wfhelper.mainLoop(targets)
-        elif args[1] == "loop":
+        if len(args) == 2:
+            name, mode = args
+        else:
+            name, mode = args[0], "once"
+
+        targets = self.wfhelper.config.targetList[name]
+        
+        if mode == "loop":
             return self.state.setState("currentTargets", targets)
-        elif args[1] == "once":
-            return self.wfhelper.mainLoop(targets)
+
+        if mode == "once":
+            return self.changeTarget([name, None])
+
         return False
 
     def info(self, args):
@@ -83,20 +95,28 @@ class ActionManager:
     def getScreen(self, savePath):
         adbUtil.getScreen(savePath)
 
-    def IF(self, target, args):
+    def match(self, target, args):
         exp, callbacks = args
+        
+        func = exp
+
         match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+\[\]]+")
-        items = re.findall(match, exp)
+        items = re.findall(match, func)
+        
         for item in items:
-            func = exp.replace(item, str(self.formatArg(item)))
-        result = aeval(func)
-        Log.info("判断“{}”结果为: {}".format(exp, result))
+            func = func.replace(item, str(self.formatArg(item)))
+        
+        result = str(aeval(func))
+        
+        Log.debug("判断“{}”结果为: {}".format(exp, result))
+        
         actions = None
-        if result and "true" in callbacks:
-            actions = callbacks["true"]
-        elif not result and "false" in callbacks:
-            actions = callbacks["false"]
-        self.doActions(target, actions)
+
+        if result in callbacks:
+            actions = callbacks[result]
+        
+        if actions is not None:
+            self.doActions(target, actions)
 
     def doAction(self, target, action):
         if action["name"] == "click":
@@ -117,10 +137,10 @@ class ActionManager:
             self.accessState(action["args"])
         elif action["name"] == "changeTargets":
             self.changeTargets(action["args"])
+        elif action["name"] == "changeTarget":
+            self.changeTarget(action["args"])
         elif action["name"] == "info":
             self.info(action["args"])
-        elif action["name"] == "match":
-            self.match(action["args"])
         elif action["name"] == "exit":
             import sys
             sys.exit()
@@ -130,8 +150,8 @@ class ActionManager:
                 self.getScreen(savePath)
             else:
                 self.getScreen(action["args"])
-        elif action["name"] == "if":
-            self.IF(target, action["args"])
+        elif action["name"] == "match":
+            self.match(target, action["args"])
         else:
             Log.error(
                 "action:'{}'不存在！请检查'{}'的配置文件".format(
