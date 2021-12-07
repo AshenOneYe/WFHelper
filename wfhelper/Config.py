@@ -2,12 +2,8 @@ import json
 from typing import Dict
 from os import path
 
-from PIL import Image
-
 from utils.ImageUtil import getImageCrop, getImageHash
 from utils.LogUtil import Log
-
-DefaultConfigPath = r"configs\emulator1440x810\config.json"
 
 
 class Config:
@@ -51,18 +47,15 @@ class Config:
         if "screenSize" in self.configData:
             self.screenSize = self.configData["screenSize"]
         if "loopDelay" in self.configData:
-            if isinstance(self.configData["loopDelay"], float):
-                self.loopDelay = [self.configData["loopDelay"], self.configData["loopDelay"]]
-            else:
+            if isinstance(self.configData["loopDelay"], list):
                 self.loopDelay = self.configData["loopDelay"]
+            else:
+                loopDelay = self.configData["loopDelay"]
+                self.loopDelay = [loopDelay, loopDelay]
         if "state" in self.configData:
             self.state = self.configData["state"]
 
-        # 如果不在配置文件中指定屏幕尺寸，则根据配置文件下的截图计算
-        if self.screenSize is None:
-            self.screenSize = \
-                Image.open(path.join(self.configDir, self.targets[0]["path"])).size
-        Log.info("屏幕尺寸 : {}x{}".format(self.screenSize[0], self.screenSize[1]))
+        Log.info("适用屏幕尺寸 : {}x{}".format(self.screenSize[0], self.screenSize[1]))
 
         for targetsName in self.configData["targetList"]:
             targets = self.configData[targetsName]
@@ -73,6 +66,9 @@ class Config:
                     if "colorRatio" in target:
                         target["histogram"] = img.histogram()
             self.targetList[targetsName] = targets
+
+        
+
 
         Log.info("配置文件初始化完成")
         Log.info("配置文件名称 : {}".format(self.name))
