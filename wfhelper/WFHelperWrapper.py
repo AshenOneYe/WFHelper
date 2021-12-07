@@ -16,6 +16,7 @@ class WFHelperWrapper(Process):
     parentEventConn = None
     receivingThread = None
     eventHandlerThread = None
+    frame = None
     config = None
     serial = None
     isDebug = False
@@ -44,6 +45,7 @@ class WFHelperWrapper(Process):
         self.receivingThread.start()
 
     def updateFrame(self, frame):
+        self.frame = frame
         self.emit({"type": "onFrameUpdate", "data": base64.b64encode(frame).decode("utf-8")})
 
     def updateState(self, state):

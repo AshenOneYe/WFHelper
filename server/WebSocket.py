@@ -6,8 +6,8 @@ def setWebSocket(server):
 
     @socketio.on('connect')
     def onConnect(auth):
-        Log.info("websocket Client connected!")
+        Log.debug("websocket Client connected!")
 
     @socketio.on('disconnect')
     def onDisonnect():
-        Log.info("websocket Client disconnected!")
+        Log.debug("websocket Client disconnected!")
