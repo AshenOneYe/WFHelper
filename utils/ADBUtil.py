@@ -39,10 +39,7 @@ class ADBUtil:
         if self.device is not None:
             self.device.input_swipe(x1, y1, x2, y2, int(random.uniform(0.5, 1.0) * 1000))
 
-    def setDevice(self, serial, force=False):
-        if force:
-            self.device = self.adb.device(serial)
-            return serial
+    def setDevice(self, serial):
         # 用户没有指定设备
         if serial is None:
             devices = self.adb.devices()
@@ -70,8 +67,11 @@ class ADBUtil:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
         self.device = self.adb.device(serial)
-        Log.info("设备serial : {}".format(self.device.serial))
+        return serial
+
+    def logDeviceInfo(self):
         try:
+            Log.info("设备serial : {}".format(self.device.serial))
             props = self.device.get_properties()
             Log.info("设备名称 : {}".format(props["ro.product.device"]))
             Log.info("制造商 : {}".format(props["ro.product.manufacturer"]))
@@ -84,7 +84,6 @@ class ADBUtil:
         except ValueError:
             Log.error("获取设备信息失败")
             sys.exit()
-        return serial
 
     def __init__(self):
         if getattr(sys, "frozen", None):

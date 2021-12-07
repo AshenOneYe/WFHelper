@@ -39,7 +39,8 @@ class WFHelperWrapper(Process):
         self.wfhelper.screenUpdateCallback = self.updateFrame
         self.wfhelper.state.setCallback(self.updateState)
         Log.setCallback(self.updateLog)
-        adbUtil.setDevice(self.serial, True)
+        adbUtil.setDevice(self.serial)
+        adbUtil.logDeviceInfo()
         self.receivingThread = threading.Thread(target=self.onChildReceive, args=(self.childConn,))
         self.receivingThread.daemon = True
         self.receivingThread.start()
