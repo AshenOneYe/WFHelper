@@ -46,7 +46,7 @@ class WFHelperWrapper(Process):
 
     def updateFrame(self, frame):
         self.frame = frame
-        self.emit({"type": "onFrameUpdate", "data": base64.b64encode(frame).decode("utf-8")})
+        # self.emit({"type": "onFrameUpdate", "data": base64.b64encode(frame).decode("utf-8")})
 
     def updateState(self, state):
         self.emit({"type": "onStateUpdate", "data": state})
