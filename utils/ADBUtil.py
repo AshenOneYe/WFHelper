@@ -78,6 +78,8 @@ class ADBUtil:
             Log.info("model : {}".format(props["ro.product.model"]))
             Log.info("CPU : {}".format(props["ro.product.cpu.abi"]))
             Log.info("系统版本 : {}".format(props["ro.build.version.release"]))
+            size = self.device.wm_size()
+            Log.info("分辨率 : {}x{}".format(size[1], size[0]))
             # print(props)
         except ValueError:
             Log.error("获取设备信息失败")

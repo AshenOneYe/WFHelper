@@ -70,7 +70,7 @@ class ActionManager:
             name, mode = args[0], "once"
 
         targets = self.wfhelper.config.targetList[name]
-        
+
         if mode == "loop":
             return self.state.setState("currentTargets", targets)
 
@@ -97,24 +97,24 @@ class ActionManager:
 
     def match(self, target, args):
         exp, callbacks = args
-        
+
         func = exp
 
         match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+\[\]]+")
         items = re.findall(match, func)
-        
+
         for item in items:
             func = func.replace(item, str(self.formatArg(item)))
-        
+
         result = str(aeval(func))
-        
+
         Log.debug("判断“{}”结果为: {}".format(exp, result))
-        
+
         actions = None
 
         if result in callbacks:
             actions = callbacks[result]
-        
+
         if actions is not None:
             self.doActions(target, actions)
 
