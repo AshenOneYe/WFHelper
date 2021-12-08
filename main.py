@@ -6,9 +6,12 @@ from wfhelper.WFHelperWrapper import WFHelperWrapper
 from server.Server import Server
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
+import multiprocessing
 
 
 if __name__ == "__main__":
+    # 不写这个打包exe会出问题
+    multiprocessing.freeze_support()
 
     isDebug = False
     config = None

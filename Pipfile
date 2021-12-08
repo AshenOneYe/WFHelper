@@ -11,6 +11,8 @@ asteval = "*"
 asyncio = "*"
 flask_socketio = "*"
 pure-python-adb = "*"
+gevent = "*"
+eventlet = "*"
 
 [dev-packages]
 mypy = "*"
