@@ -143,10 +143,16 @@ class Server():
             self.streamClients.remove(websocket)
 
     def broadcastClients(self, message):
-        websockets.broadcast(self.clients, message)
+        try:
+            websockets.broadcast(self.clients, message)
+        except:
+            pass
 
     def broadcastStreamClients(self, message):
-        websockets.broadcast(self.streamClients, message)
+        try:
+            websockets.broadcast(self.streamClients, message)
+        except:
+            pass
 
     async def main(self):
         # TODO 加入端口配置启动项
