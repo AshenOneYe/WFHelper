@@ -11,7 +11,7 @@ class ADBUtil:
     device = None
     adb = None
 
-    def getScreen(self, savePath=None):
+    def getScreen(self, savePath = None):
         currentframe = None
 
         if self.device is not None:
@@ -50,12 +50,18 @@ class ADBUtil:
                 ip, port = serial.split(":")
                 self.adb.remote_connect(str(ip), int(port))
             else:
-                Log.info("检测到已连接的设备，请输入序号指定要连接的设备:")
+                print("检测到已连接的设备，请输入序号指定要连接的设备:")
                 for i in range(0, len(devices)):
                     print("[{}] - {}".format(i, devices[i].serial))
                 try:
                     print("[-1] - 手动输入设备ip和端口进行连接")
-                    index = int(input())
+
+                    index = input()
+                    if index is None or index == "":
+                        index = 0
+                    else:
+                        index = int(index)
+
                     if index == -1:
                         serial = "127.0.0.1:5555"
                         serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
@@ -66,7 +72,10 @@ class ADBUtil:
                 except ValueError:
                     Log.error("请输入正确的序号!!!")
                     sys.exit()
+
         self.device = self.adb.device(serial)
+        self.logDeviceInfo()
+
         return serial
 
     def logDeviceInfo(self):

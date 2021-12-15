@@ -9,10 +9,8 @@ Flask = "*"
 pyinstaller = "*"
 asteval = "*"
 asyncio = "*"
-flask_socketio = "*"
+websockets = "*"
 pure-python-adb = "*"
-gevent = "*"
-eventlet = "*"
 
 [dev-packages]
 mypy = "*"

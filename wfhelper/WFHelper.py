@@ -12,11 +12,12 @@ from utils.LogUtil import Log
 class WFHelper:
 
     actionManager = None
+
     config = Config()
     state = State()
+    
     screen = None
-    serial = None
-    isDebug = False
+    screenUpdateCallback = None
 
     def check(self, target, screen):
         result = False
@@ -76,10 +77,6 @@ class WFHelper:
 
         self.actionManager = ActionManager(self)
 
-        if self.isDebug:
-            Log.setDebugLevel()
-
-        self.state.setState("isDebug", self.isDebug)
         self.start()
 
         try:
@@ -118,6 +115,3 @@ class WFHelper:
 
     def setConfig(self, config):
         self.config = config
-
-    def enableDebug(self, isDebug):
-        self.isDebug = isDebug
