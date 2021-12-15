@@ -22,6 +22,8 @@ class WFHelperWrapper(Process):
     childEventConn = None
     parentEventConn = None
 
+    frameThread = None
+
     isChild = False
 
     def __init__(self, serial = None, config = None):
@@ -49,12 +51,15 @@ class WFHelperWrapper(Process):
 
         self.config.init()
         self.wfhelper.setConfig(self.config)
-        self.wfhelper.screenUpdateCallback = self.onFrameUpdate
         self.wfhelper.state.setCallback(self.onStateUpdate)
 
         self.receivingThread = threading.Thread(target = self.onChildReceive, args = (self.childConn,))
         self.receivingThread.daemon = True
         self.receivingThread.start()
+
+        self.frameThread = threading.Thread(target = self.frameLoop)
+        self.frameThread.daemon = True
+        self.frameThread.start()
 
         adbUtil.setDevice(self.serial)
         Log.onLogAppend(self.onLogAppend)
@@ -98,6 +103,14 @@ class WFHelperWrapper(Process):
 
     def onFrameUpdate(self, frame):
         self.emit("onFrameUpdate", frame)
+
+    def frameLoop(self):
+        while True:
+            frame = adbUtil.getScreen()
+
+            if frame is not None:
+                self.onFrameUpdate(frame)
+                self.wfhelper.lastFrame = frame
 
     def getState(self):
         if self.isChild:
