@@ -3,7 +3,7 @@ import random
 import sys
 
 from ppadb.client import Client as AdbClient
-from utils.LogUtil import Log
+from .LogUtil import Log
 
 
 class ADBUtil:

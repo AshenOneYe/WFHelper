@@ -2,11 +2,9 @@ import getopt
 import sys
 import multiprocessing
 
-from utils.ADBUtil import adbUtil
-from utils.ConfigUtil import configUtil
-from utils.LogUtil import Log
-from wfhelper.WFHelperWrapper import WFHelperWrapper
-from server.Server import Server
+from wfhelper import WFHelperWrapper
+from utils import adbUtil, configUtil, Log
+from server import Server
 from typing import Dict
 
 if __name__ == "__main__":

@@ -5,7 +5,7 @@ import logging
 import websockets
 from os.path import splitext
 from pathlib import Path
-from utils.LogUtil import Log
+from utils import Log
 from typing import Set, Any
 
 logging.getLogger("websockets").setLevel(logging.ERROR)

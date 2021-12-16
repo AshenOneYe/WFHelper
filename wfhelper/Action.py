@@ -5,9 +5,9 @@ from os import path
 
 from asteval import Interpreter
 
-from wfhelper.State import State
-from utils.ADBUtil import adbUtil
-from utils.LogUtil import Log
+from .State import State
+from utils import adbUtil
+from utils import Log
 
 aeval = Interpreter()
 
