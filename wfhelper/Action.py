@@ -2,6 +2,7 @@
 import re
 import time
 from os import path
+from typing import Any, List
 
 from asteval import Interpreter
 
@@ -32,7 +33,7 @@ class ActionManager:
                 arg = argLeft + self.state.getState(argRight)
         return arg
 
-    def click(self, area):
+    def click(self, area: List[Any]):
         adbUtil.touchScreen(area)
 
     def sleep(self, args):

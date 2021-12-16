@@ -1,25 +1,24 @@
 import random
 import time
+from typing import Any, List
+
+from PIL.Image import Image
+from utils import Log, adbUtil, readImageFromBytes, similarity
 
 from .Action import ActionManager
 from .Config import Config
 from .State import State
-from utils import adbUtil
-from utils import readImageFromBytes, similarity
-from utils import Log
 
 
 class WFHelper:
+    def __init__(self):
+        self.config = Config()
+        self.state = State()
+        self.actionManager = None
+        self.lastFrame = None
+        self.screen = None
 
-    actionManager = None
-
-    config = Config()
-    state = State()
-
-    lastFrame = None
-    screen = None
-
-    def check(self, target, screen):
+    def check(self, target, screen: Image):
         result = False
 
         try:
@@ -35,7 +34,7 @@ class WFHelper:
         finally:
             return result
 
-    def mainLoop(self, targets, targetName=None):
+    def mainLoop(self, targets: List[Any], targetName: str = None):
 
         t = int(time.time())
         screen = readImageFromBytes(self.lastFrame)
@@ -106,5 +105,5 @@ class WFHelper:
         self.state.setState("startTime", "")
         Log.info("停止自动脚本")
 
-    def setConfig(self, config):
+    def setConfig(self, config: Config):
         self.config = config

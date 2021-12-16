@@ -1,35 +1,23 @@
 import threading
 from multiprocessing import Pipe, Process
+from multiprocessing.connection import Connection
+from typing import Any, Callable, Dict
 
 from utils import Log, adbUtil
 
 from .WFHelper import WFHelper
+from .Config import Config
 
 
 class WFHelperWrapper(Process):
-
-    config = None
-
-    receivingThread = None
-    childConn = None
-    parentConn = None
-
-    eventHandlerThread = None
-    childEventConn = None
-    parentEventConn = None
-
-    frameThread = None
-
-    isChild = False
-
-    def __init__(self, serial: str, config):
+    def __init__(self, serial: str, config: Config):
         super().__init__()
         self.daemon = True
         self.serial = serial
         self.config = config
         self.childConn, self.parentConn = Pipe()
         self.childEventConn, self.parentEventConn = Pipe()
-
+        self.isChild = False
         self.wfhelper = WFHelper()
 
     def run(self):
@@ -64,10 +52,10 @@ class WFHelperWrapper(Process):
                 self.onFrameUpdate(frame)
                 self.wfhelper.lastFrame = frame
 
-    def emit(self, type, data):
+    def emit(self, type: str, data: Dict[str, Any]):
         self.childEventConn.send({"type": type, "data": data})
 
-    def setEventHandler(self, handler):
+    def setEventHandler(self, handler: Callable):
         def waitForEvent():
             while True:
                 try:
@@ -80,7 +68,7 @@ class WFHelperWrapper(Process):
         self.eventHandlerThread.daemon = True
         self.eventHandlerThread.start()
 
-    def onChildReceive(self, conn):
+    def onChildReceive(self, conn: Connection):
         while True:
             msg = conn.recv()
             if "args" in msg:
@@ -88,13 +76,13 @@ class WFHelperWrapper(Process):
             else:
                 getattr(self, msg["method"])()
 
-    def onLogAppend(self, log):
+    def onLogAppend(self, log: Dict[str, Any]):
         self.emit("onLogAppend", log)
 
-    def onStateUpdate(self, state):
+    def onStateUpdate(self, state: Dict[str, Any]):
         self.emit("onStateUpdate", state)
 
-    def onFrameUpdate(self, frame):
+    def onFrameUpdate(self, frame: Any):
         self.emit("onFrameUpdate", frame)
 
     def getState(self):
@@ -104,7 +92,7 @@ class WFHelperWrapper(Process):
             self.parentConn.send({"method": "getState"})
             return self.parentConn.recv()
 
-    def setState(self, args):
+    def setState(self, args: Dict[str, Any]):
         if self.isChild:
             self.wfhelper.state.setState(args["key"], args["value"])
         else:
@@ -117,7 +105,7 @@ class WFHelperWrapper(Process):
             self.parentConn.send({"method": "getLogArray"})
             return self.parentConn.recv()
 
-    def setLogLimit(self, args):
+    def setLogLimit(self, args: int):
         if self.isChild:
             Log.logArray = []
             Log.logLimit = args
@@ -136,13 +124,13 @@ class WFHelperWrapper(Process):
         else:
             self.parentConn.send({"method": "stopWFHelper"})
 
-    def touchScreen(self, args):
+    def touchScreen(self, args: Dict[str, Any]):
         if self.isChild:
             adbUtil.touchScreen([args["x"], args["y"], args["x"] + 1, args["y"] + 1])
         else:
             self.parentConn.send({"method": "touchScreen", "args": args})
 
-    def swipeScreen(self, args):
+    def swipeScreen(self, args: Dict[str, Any]):
         if self.isChild:
             adbUtil.swipeScreen(args["x1"], args["y1"], args["x2"], args["y2"])
         else:

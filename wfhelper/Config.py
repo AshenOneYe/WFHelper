@@ -8,22 +8,22 @@ from utils.LogUtil import Log
 
 class Config:
 
-    name = None  # 配置文件名
-    author = None  # 配置文件作者
-    description = None  # 配置文件描述
-    similarityThreshold = 1  # 全局相似度阈值，若有为target单独设置则无视全局阈值
-    randomClickDelay = 300  # 长时间未操作随机点击的触发时间，单位秒
-    randomClickArea = [0, 0, 1, 1]  # 长时间未操作随机点击的点击区域
-    screenSize = None  # 屏幕尺寸
-    loopDelay = [0, 0]  # 每轮循环的延迟时间
-    configData = None
-    targetList = {}  # type: Dict[str, list]
-    state = {}  # type: Dict[str, str]
-
     def __init__(self, configPath=None):
 
         if configPath is None:
             return
+
+        self.name = None  # 配置文件名
+        self.author = None  # 配置文件作者
+        self.description = None  # 配置文件描述
+        self.similarityThreshold = 1  # 全局相似度阈值，若有为target单独设置则无视全局阈值
+        self.randomClickDelay = 300  # 长时间未操作随机点击的触发时间，单位秒
+        self.randomClickArea = [0, 0, 1, 1]  # 长时间未操作随机点击的点击区域
+        self.screenSize = None  # 屏幕尺寸
+        self.loopDelay = [0, 0]  # 每轮循环的延迟时间
+        self.configData = None
+        self.targetList = {}  # type: Dict[str, list]
+        self.state = {}  # type: Dict[str, str]
 
         self.configPath = configPath
         self.configDir = path.dirname(configPath)
