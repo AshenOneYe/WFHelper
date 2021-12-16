@@ -1,6 +1,6 @@
 import random
 import time
-from typing import Any, List
+from typing import Any, Dict, List
 
 from PIL.Image import Image
 from utils import Log, adbUtil, readImageFromBytes, similarity
@@ -18,7 +18,7 @@ class WFHelper:
         self.lastFrame = None
         self.screen = None
 
-    def check(self, target, screen: Image):
+    def check(self, target: Dict[str, Any], screen: Image):
         result = False
 
         try:

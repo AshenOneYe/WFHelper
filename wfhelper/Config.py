@@ -1,5 +1,5 @@
 import json
-from typing import Dict
+from typing import Dict, Any
 from os import path
 
 from utils.ImageUtil import getImageCrop, getImageHash
@@ -7,8 +7,7 @@ from utils.LogUtil import Log
 
 
 class Config:
-
-    def __init__(self, configPath=None):
+    def __init__(self, configPath: str = None):
 
         if configPath is None:
             return
@@ -21,7 +20,7 @@ class Config:
         self.randomClickArea = [0, 0, 1, 1]  # 长时间未操作随机点击的点击区域
         self.screenSize = None  # 屏幕尺寸
         self.loopDelay = [0, 0]  # 每轮循环的延迟时间
-        self.configData = None
+        self.configData = {}  # type: Dict[str, Any]
         self.targetList = {}  # type: Dict[str, list]
         self.state = {}  # type: Dict[str, str]
 

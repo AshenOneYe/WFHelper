@@ -1,26 +1,25 @@
-
 import re
 import time
 from os import path
-from typing import Any, List
-
+from typing import Any, Dict, List
 from asteval import Interpreter
-
+from utils import Log, adbUtil
 from .State import State
-from utils import adbUtil
-from utils import Log
 
 aeval = Interpreter()
 
 
 class ActionManager:
-    wfhelper = None
-    state = State()
+
+    def __init__(self, wfhelper):
+        self.wfhelper = wfhelper
+        self.state = State()
+        self.state = wfhelper.state
 
     def formatArg(self, arg):
-        while isinstance(arg, str) and '$' in arg:
-            argLeft = arg[:arg.rfind("$")]
-            argRight = arg[arg.rfind("$")+1:]
+        while isinstance(arg, str) and "$" in arg:
+            argLeft = arg[: arg.rfind("$")]
+            argRight = arg[arg.rfind("$") + 1:]
             if argLeft == "":
                 tmp = self.state.getState(argRight)
                 if tmp is None:
@@ -36,10 +35,10 @@ class ActionManager:
     def click(self, area: List[Any]):
         adbUtil.touchScreen(area)
 
-    def sleep(self, args):
+    def sleep(self, args: List[Any]):
         time.sleep(args[0])
 
-    def accessState(self, args):
+    def accessState(self, args: List[Any]):
         action, name, value = args
 
         name = self.formatArg(name)
@@ -47,10 +46,10 @@ class ActionManager:
         if name is None:
             return
 
-        if action == 'set':
+        if action == "set":
             self.state.setState(name, value)
 
-        if action == 'increase':
+        if action == "increase":
             if name == "无" or name is None:
                 return
             if not self.state.has(name):
@@ -58,13 +57,13 @@ class ActionManager:
             value = int(value) + int(self.state.getState(name))
             self.state.setState(name, value)
 
-    def changeTarget(self, args):
+    def changeTarget(self, args: List[Any]):
         name, targetName = args
         targets = self.wfhelper.config.targetList[name]
 
         return self.wfhelper.mainLoop(targets, targetName)
 
-    def changeTargets(self, args):
+    def changeTargets(self, args: List[Any]):
         if len(args) == 2:
             name, mode = args
         else:
@@ -80,7 +79,7 @@ class ActionManager:
 
         return False
 
-    def info(self, args):
+    def info(self, args: List[Any]):
         if len(args) == 0:
             Log.error("`info` action的参数不能为空")
             return
@@ -93,10 +92,10 @@ class ActionManager:
         else:
             Log.info(tmp[0].format(*tmp[1:]))
 
-    def getScreen(self, savePath):
+    def getScreen(self, savePath: str):
         adbUtil.getScreen(savePath)
 
-    def match(self, target, args):
+    def match(self, target: Dict[str, Any], args: List[Any]):
         exp, callbacks = args
 
         func = exp
@@ -119,7 +118,7 @@ class ActionManager:
         if actions is not None:
             self.doActions(target, actions)
 
-    def doAction(self, target, action):
+    def doAction(self, target: Dict[str, Any], action: Dict[str, Any]):
         if action["name"] == "click":
             if (
                 "args" not in action
@@ -144,10 +143,14 @@ class ActionManager:
             self.info(action["args"])
         elif action["name"] == "exit":
             import sys
+
             sys.exit()
         elif action["name"] == "getScreen":
             if "args" not in action:
-                savePath = path.join(self.wfhelper.config.configDir, "temp/{}.png".format(int(time.time())))
+                savePath = path.join(
+                    self.wfhelper.config.configDir,
+                    "temp/{}.png".format(int(time.time())),
+                )
                 self.getScreen(savePath)
             else:
                 self.getScreen(action["args"])
@@ -155,16 +158,11 @@ class ActionManager:
             self.match(target, action["args"])
         else:
             Log.error(
-                "action:'{}'不存在！请检查'{}'的配置文件".format(
-                    action["name"], target["name"])
+                "action:'{}'不存在！请检查'{}'的配置文件".format(action["name"], target["name"])
             )
 
-    def doActions(self, target, actions=None):
+    def doActions(self, target: Dict[str, Any], actions: List[Any] = None):
         if actions is None:
             actions = target["actions"]
         for action in actions:
             self.doAction(target, action)
-
-    def __init__(self, wfhelper):
-        self.wfhelper = wfhelper
-        self.state = wfhelper.state

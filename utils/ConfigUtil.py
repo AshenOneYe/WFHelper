@@ -27,10 +27,14 @@ class ConfigUtil:
                 configs.append(config)
         return configs
 
-    def getConfig(self, configPath):
+    def getConfig(self, configPath: str):
         try:
             config = Config(configPath)
-            if "name" in config.configData and "author" in config.configData and "description" in config.configData:
+            if (
+                "name" in config.configData
+                and "author" in config.configData
+                and "description" in config.configData
+            ):
                 return config
         except json.decoder.JSONDecodeError:
             print("发现一个格式错误的配置文件 : {}".format(configPath))
