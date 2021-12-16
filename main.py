@@ -14,6 +14,8 @@ if __name__ == "__main__":
 
     isDebug = False
 
+    serial = None
+    config = None
     instance = None
 
     try:
