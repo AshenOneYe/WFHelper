@@ -67,9 +67,6 @@ class Config:
                         target["histogram"] = img.histogram()
             self.targetList[targetsName] = targets
 
-        
-
-
         Log.info("配置文件初始化完成")
         Log.info("配置文件名称 : {}".format(self.name))
         Log.info("配置文件作者 : {}".format(self.author))

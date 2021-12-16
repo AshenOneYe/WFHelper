@@ -1,58 +1,196 @@
-from flask import Flask
-from server.Router import setRouter
-from server.WebSocket import setWebSocket
-from flask_socketio import SocketIO
+import asyncio
+import http
+import json
+import logging
+import websockets
+from os.path import splitext
+from pathlib import Path
+from utils.LogUtil import Log
+from typing import Set, Any
+
+logging.getLogger("websockets").setLevel(logging.ERROR)
+
+CONTENT_TYPES = {
+    ".css": "text/css",
+    ".html": "text/html; charset=utf-8",
+    ".ico": "image/x-icon",
+    ".js": "text/javascript",
+}
 
 
+# TODO isDebug和instances应作为单独的信息传递给UI
 class Server():
-    app = Flask(__name__)
-    wfhelper = None
-    socketio = SocketIO(app, cors_allowed_origins='*')
+    isDebug = False
+
+    instances = set()  # type: Set[Any]
+
+    clients = set()  # type: Set[Any]
+    streamClients = set()  # type: Set[Any]
+
+    def __init__(self, instance=None, isDebug=False):
+        if isDebug:
+            Log.setDebugLevel()
+
+            self.isDebug = isDebug
+
+        if instance is not None:
+            self.createInstance(instance)
+
+    def createInstance(self, instance):
+        instance.start()
+        instance.setState({
+            "key": "isDebug",
+            "value": self.isDebug
+        })
+        instance.setEventHandler(self.eventHandler)
+
+        self.instances.add(instance)
 
     def eventHandler(self, event):
-        self.socketio.emit(event["type"], event["data"])
+        type = event["type"]
 
-    def __init__(self, wfhelper):
+        # TODO 也应发送给对应实例
+        if type == "onLogAppend" or type == "onStateUpdate":
+            self.broadcast(
+                self.clients,
+                json.dumps({
+                    "type": type,
+                    "data": event["data"]
+                }).encode('utf8')
+            )
+        elif type == "onFrameUpdate":
+            self.broadcast(
+                self.streamClients,
+                event["data"]
+            )
 
-        # TODO 提供参数指定host和port
-        self.wfhelper = wfhelper
-        self.wfhelper.setEventHandler(self.eventHandler)
-        setRouter(self)
-        setWebSocket(self)
+    async def handler(self, websocket, path):
+        if path == "/websocket":
+            await self.clientHandler(websocket)
+        if path == "/stream":
+            await self.streamHandler(websocket)
 
-    def getLastLog(self):
-        return self.wfhelper.getLastLog()
+    async def clientHandler(self, websocket):
+        async def send(queue, websocket):
+            while True:
+                try:
+                    message = await queue.get()
+                    await websocket.send(message)
+                except Exception:
+                    break
 
-    def getLogArray(self):
-        return self.wfhelper.getLogArray()
+        queue = asyncio.Queue()
 
-    def setLogLimit(self, value):
-        self.wfhelper.setLogLimit(value)
+        task = asyncio.create_task(
+            send(queue, websocket)
+        )
 
-    def setState(self, key, value):
-        self.wfhelper.setState([key, value])
+        self.clients.add(queue)
 
-    def getState(self):
-        return self.wfhelper.getState()
+        try:
+            async for message in websocket:
+                message = json.loads(message)
 
-    def getScreenShot(self):
-        return self.wfhelper.getScreenShot()
+                # TODO 现在强制使用单例模式，应读取websocket对应实例
+                for i in self.instances:
+                    instance = i
+                    break
 
-    def touchScreen(self, x, y):
-        self.wfhelper.touchScreen([x, y])
+                if "data" in message:
+                    result = getattr(instance, message["type"])(message["data"])
+                else:
+                    result = getattr(instance, message["type"])()
 
-    def swipeScreen(self, x1, y1, x2, y2):
-        self.wfhelper.swipeScreen([x1, y1, x2, y2])
+                if result is not None:
+                    await websocket.send(
+                        json.dumps({
+                            "type": message["type"] + "_ACK",
+                            "data": result
+                        }).encode('utf8')
+                    )
+        except Exception:
+            pass
+        finally:
+            self.clients.remove(queue)
 
-    def stopWFHelper(self):
-        self.wfhelper.stopWFHelper()
+            task.cancel()
 
-    def startWFHelper(self):
-        self.wfhelper.startWFHelper()
+    async def streamHandler(self, websocket):
+        async def send(queue, websocket):
+            while True:
+                try:
+                    message = await queue.get()
+                    await websocket.send(message)
+                except Exception:
+                    break
 
-    def startServer(self):
-        self.socketio.run(self.app, "0.0.0.0", 8080)
-        # from gevent import pywsgi
-        # from geventwebsocket.handler import WebSocketHandler
-        # server = pywsgi.WSGIServer(('', 8080), self.app, handler_class=WebSocketHandler)
-        # server.serve_forever()
+        queue = asyncio.Queue(1)
+
+        task = asyncio.create_task(
+            send(queue, websocket)
+        )
+
+        self.streamClients.add(queue)
+
+        try:
+            await websocket.wait_closed()
+        except Exception:
+            pass
+        finally:
+            self.streamClients.remove(queue)
+
+            task.cancel()
+
+    async def requestHandler(self, path, request_headers):
+        if path == "/websocket":
+            return
+        if path == "/stream":
+            return
+
+        name, ext = splitext(path)
+
+        if name[-1] == '/':
+            name = name[1:] + "index"
+        else:
+            name = name[1:]
+
+        if len(ext) == 0:
+            ext = ".html"
+
+        source = Path(__file__).parent.joinpath(name + ext)
+
+        if source.is_file() and source.suffix in CONTENT_TYPES:
+            headers = {
+                "Content-Type": CONTENT_TYPES[source.suffix]
+            }
+
+            body = source.read_bytes()
+
+            return http.HTTPStatus.OK, headers, body
+
+        return http.HTTPStatus.NOT_FOUND, {}
+
+    def broadcast(self, clients, message):
+        for queue in clients:
+            if queue.full():
+                continue
+            queue.put_nowait(message)
+
+    async def mainLoop(self):
+        # FIXME 暂时用这个办法解决队列死锁
+        while True:
+            await asyncio.sleep(0.01)
+
+    async def main(self):
+        # TODO 加入端口配置启动项
+        async with websockets.serve(
+            self.handler, "0.0.0.0", 8080,
+            process_request=self.requestHandler,
+            ping_interval=None
+        ):
+            Log.info("服务器启动完成 - http://localhost:8080")
+
+            await self.mainLoop()
+
+    def run(self):
+        asyncio.run(self.main())

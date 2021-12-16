@@ -31,43 +31,54 @@ class ADBUtil:
     def touchScreen(self, area):
         if self.device is not None:
             self.device.input_tap(
-                random.randrange(area[0], area[2]),
-                random.randrange(area[1], area[3])
+                random.randrange(round(float(area[0])), round(float(area[2]))),
+                random.randrange(round(float(area[1])), round(float(area[3])))
             )
 
     def swipeScreen(self, x1, y1, x2, y2):
         if self.device is not None:
             self.device.input_swipe(x1, y1, x2, y2, int(random.uniform(0.5, 1.0) * 1000))
 
+    def selectSerial(self):
+        devices = self.adb.devices()
+        if len(devices) == 0:
+            print("未检测到设备连接")
+            serial = "127.0.0.1:5555"
+            serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
+            ip, port = serial.split(":")
+            self.adb.remote_connect(str(ip), int(port))
+        else:
+            print("检测到已连接的设备，请输入序号指定要连接的设备:")
+            for i in range(0, len(devices)):
+                print("[{}] - {}".format(i, devices[i].serial))
+            try:
+                print("[-1] - 手动输入设备ip和端口进行连接")
+
+                index = input()
+                if index is None or index == "":
+                    index = 0
+                else:
+                    index = int(index)
+
+                if index == -1:
+                    serial = "127.0.0.1:5555"
+                    serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
+                    ip, port = serial.split(":")
+                    self.adb.remote_connect(str(ip), int(port))
+                else:
+                    serial = devices[index].serial
+            except ValueError:
+                Log.error("请输入正确的序号!!!")
+                sys.exit()
+        return serial
+
     def setDevice(self, serial):
         # 用户没有指定设备
         if serial is None:
-            devices = self.adb.devices()
-            if len(devices) == 0:
-                Log.error("未检测到设备连接")
-                serial = "127.0.0.1:5555"
-                serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
-                ip, port = serial.split(":")
-                self.adb.remote_connect(str(ip), int(port))
-            else:
-                Log.info("检测到已连接的设备，请输入序号指定要连接的设备:")
-                for i in range(0, len(devices)):
-                    print("[{}] - {}".format(i, devices[i].serial))
-                try:
-                    print("[-1] - 手动输入设备ip和端口进行连接")
-                    index = int(input())
-                    if index == -1:
-                        serial = "127.0.0.1:5555"
-                        serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
-                        ip, port = serial.split(":")
-                        self.adb.remote_connect(str(ip), int(port))
-                    else:
-                        serial = devices[index].serial
-                except ValueError:
-                    Log.error("请输入正确的序号!!!")
-                    sys.exit()
+            return
+
         self.device = self.adb.device(serial)
-        return serial
+        self.logDeviceInfo()
 
     def logDeviceInfo(self):
         try:

@@ -3,6 +3,7 @@ import time
 from typing import List
 
 
+# TODO 现在多个实例共用同一个LogUtil，应该分离
 class LogUtil:
     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
     DATE_FORMAT = "%Y/%m/%d %H:%M:%S"
@@ -11,40 +12,37 @@ class LogUtil:
         level=logging.INFO, format=LOG_FORMAT, datefmt=DATE_FORMAT
     )
 
-    lastLog = None
+    logAppendEvent = None
 
     logArray = []  # type: List[str]
     logLimit = 20
-    callback = None
 
     def setDebugLevel(self):
         logging.getLogger().setLevel(logging.DEBUG)
 
-    def setLastLog(self, log):
-        if self.callback is not None:
-            self.callback(
-                {
-                    "time": int(time.time()),
-                    "data": log
-                }
-            )
+    def onLogAppend(self, callback):
+        self.logAppendEvent = callback
 
-        log = str(
-            time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        ) + " {}".format(log)
+    def append(self, log):
+        log = {
+            "time": int(time.time()),
+            "message": log
+        }
 
-        self.lastLog = log
         self.logArray.append(log)
 
         if len(self.logArray) > self.logLimit:
             self.logArray.pop(0)
 
+        if self.logAppendEvent is not None:
+            self.logAppendEvent(log)
+
     def debug(self, msg):
         logging.debug(msg)
 
     def info(self, msg):
-        self.setLastLog(msg)
         logging.info(msg)
+        self.append(msg)
 
     def warning(self, msg):
         logging.warning(msg)
@@ -54,9 +52,6 @@ class LogUtil:
 
     def critical(self, msg):
         logging.critical(msg)
-
-    def setCallback(self, callback):
-        self.callback = callback
 
 
 Log = LogUtil()

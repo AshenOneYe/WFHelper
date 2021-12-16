@@ -100,7 +100,7 @@ class ActionManager:
 
         func = exp
 
-        match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+·\[\]]+")
+        match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+\[\]·]+")
         items = re.findall(match, func)
 
         for item in items:

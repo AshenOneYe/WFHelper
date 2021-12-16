@@ -12,11 +12,12 @@ from utils.LogUtil import Log
 class WFHelper:
 
     actionManager = None
+
     config = Config()
     state = State()
+    
+    lastFrame = None
     screen = None
-    serial = None
-    isDebug = False
 
     def check(self, target, screen):
         result = False
@@ -37,12 +38,13 @@ class WFHelper:
     def mainLoop(self, targets, targetName=None):
 
         t = int(time.time())
+        screen = readImageFromBytes(self.lastFrame)
 
         for target in targets:
             if targetName is not None:
                 if target['name'] != targetName:
                     continue
-            if "hash" not in target or self.check(target, self.screen):
+            if "hash" not in target or self.check(target, screen):
                 if "hash" not in target:
                     if "text" in target:
                         Log.info("{} - 直接操作".format(target["text"]))
@@ -76,10 +78,6 @@ class WFHelper:
 
         self.actionManager = ActionManager(self)
 
-        if self.isDebug:
-            Log.setDebugLevel()
-
-        self.state.setState("isDebug", self.isDebug)
         self.start()
 
         try:
@@ -87,23 +85,12 @@ class WFHelper:
                 if not self.isIdle():
                     targets = self.config.targetList[self.state.getState("currentTargets")]
                     t = time.time()
-                    self.updateScreen()
-                    Log.debug("截图耗时: {}秒".format(time.time() - t))
-                    t = time.time()
                     self.mainLoop(targets)
                     Log.debug("比对循环耗时: {}秒".format(time.time() - t))
                     self.loopDelay()
         except KeyboardInterrupt:
             import sys
             sys.exit()
-
-    def updateScreen(self):
-        frame = adbUtil.getScreen()
-        screen = readImageFromBytes(frame)
-        if screen is not None:
-            self.screen = screen
-            if self.screenUpdateCallback is not None:
-                self.screenUpdateCallback(frame)
 
     def start(self):
         self.state.merge(self.config.state)
@@ -118,6 +105,3 @@ class WFHelper:
 
     def setConfig(self, config):
         self.config = config
-
-    def enableDebug(self, isDebug):
-        self.isDebug = isDebug
