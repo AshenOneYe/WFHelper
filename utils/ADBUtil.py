@@ -11,7 +11,7 @@ class ADBUtil:
     device = None
     adb = None
 
-    def getScreen(self, savePath = None):
+    def getScreen(self, savePath=None):
         currentframe = None
 
         if self.device is not None:
@@ -31,8 +31,8 @@ class ADBUtil:
     def touchScreen(self, area):
         if self.device is not None:
             self.device.input_tap(
-                random.randrange(area[0], area[2]),
-                random.randrange(area[1], area[3])
+                random.randrange(round(float(area[0])), round(float(area[2]))),
+                random.randrange(round(float(area[1])), round(float(area[3])))
             )
 
     def swipeScreen(self, x1, y1, x2, y2):

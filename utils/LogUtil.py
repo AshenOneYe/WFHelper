@@ -2,6 +2,7 @@ import logging
 import time
 from typing import List
 
+
 # TODO 现在多个实例共用同一个LogUtil，应该分离
 class LogUtil:
     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
@@ -41,7 +42,6 @@ class LogUtil:
 
     def info(self, msg):
         logging.info(msg)
-        
         self.append(msg)
 
     def warning(self, msg):

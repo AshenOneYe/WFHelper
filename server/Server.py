@@ -6,6 +6,7 @@ import websockets
 from os.path import splitext
 from pathlib import Path
 from utils.LogUtil import Log
+from typing import Set, Any
 
 logging.getLogger("websockets").setLevel(logging.ERROR)
 
@@ -16,16 +17,17 @@ CONTENT_TYPES = {
     ".js": "text/javascript",
 }
 
+
 # TODO isDebug和instances应作为单独的信息传递给UI
 class Server():
     isDebug = False
 
-    instances = set()
+    instances = set()  # type: Set[Any]
 
-    clients = set()
-    streamClients = set()
+    clients = set()  # type: Set[Any]
+    streamClients = set()  # type: Set[Any]
 
-    def __init__(self, instance = None, isDebug = False):
+    def __init__(self, instance=None, isDebug=False):
         if isDebug:
             Log.setDebugLevel()
 
@@ -74,7 +76,7 @@ class Server():
                 try:
                     message = await queue.get()
                     await websocket.send(message)
-                except:
+                except Exception:
                     break
 
         queue = asyncio.Queue()
@@ -84,7 +86,7 @@ class Server():
         )
 
         self.clients.add(queue)
-        
+
         try:
             async for message in websocket:
                 message = json.loads(message)
@@ -98,7 +100,7 @@ class Server():
                     result = getattr(instance, message["type"])(message["data"])
                 else:
                     result = getattr(instance, message["type"])()
-            
+
                 if result is not None:
                     await websocket.send(
                         json.dumps({
@@ -106,11 +108,11 @@ class Server():
                             "data": result
                         }).encode('utf8')
                     )
-        except:
+        except Exception:
             pass
         finally:
             self.clients.remove(queue)
-            
+
             task.cancel()
 
     async def streamHandler(self, websocket):
@@ -119,7 +121,7 @@ class Server():
                 try:
                     message = await queue.get()
                     await websocket.send(message)
-                except:
+                except Exception:
                     break
 
         queue = asyncio.Queue(1)
@@ -129,10 +131,10 @@ class Server():
         )
 
         self.streamClients.add(queue)
-    
+
         try:
             await websocket.wait_closed()
-        except:
+        except Exception:
             pass
         finally:
             self.streamClients.remove(queue)
@@ -163,9 +165,9 @@ class Server():
             }
 
             body = source.read_bytes()
-            
+
             return http.HTTPStatus.OK, headers, body
-        
+
         return http.HTTPStatus.NOT_FOUND, {}
 
     def broadcast(self, clients, message):
@@ -182,9 +184,9 @@ class Server():
     async def main(self):
         # TODO 加入端口配置启动项
         async with websockets.serve(
-            self.handler, "0.0.0.0", 8080, 
-            process_request = self.requestHandler,
-            ping_interval = None
+            self.handler, "0.0.0.0", 8080,
+            process_request=self.requestHandler,
+            ping_interval=None
         ):
             Log.info("服务器启动完成 - http://localhost:8080")
 

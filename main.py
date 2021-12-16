@@ -7,6 +7,7 @@ from utils.ConfigUtil import configUtil
 from utils.LogUtil import Log
 from wfhelper.WFHelperWrapper import WFHelperWrapper
 from server.Server import Server
+from typing import Dict
 
 if __name__ == "__main__":
     # 不写这个打包exe会出问题
@@ -19,8 +20,8 @@ if __name__ == "__main__":
     instance = None
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "-t-s:-d:-c:-n")
-        opts = dict(opts)
+        _opts, args = getopt.getopt(sys.argv[1:], "-t-s:-d:-c:-n")
+        opts = dict(_opts)  # type: Dict[str,str]
 
         if "-t" in opts:
             isDebug = True
@@ -30,13 +31,13 @@ if __name__ == "__main__":
             adbUtil.getScreen(savePath)
             Log.info("截图保存至 : {}".format(savePath))
             sys.exit()
-            
+
         if "-d" in opts:
             serial = opts["-d"]
 
         if "-c" in opts:
             config = configUtil.getConfig(opts["-c"])
-    
+
         if "-n" in opts:
             if serial is None:
                 serial = adbUtil.selectSerial()
@@ -47,7 +48,6 @@ if __name__ == "__main__":
         # TODO -v 参数打印log信息
     except getopt.GetoptError:
         Log.error("参数错误")
-
 
     # FIXME 为避免其他使用者造成疑惑，当前版本默认创建实例并给出警告
     if instance is None:

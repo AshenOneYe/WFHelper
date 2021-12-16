@@ -35,7 +35,7 @@ class WFHelper:
         finally:
             return result
 
-    def mainLoop(self, targets, targetName = None):
+    def mainLoop(self, targets, targetName=None):
 
         t = int(time.time())
         screen = readImageFromBytes(self.lastFrame)

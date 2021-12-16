@@ -1,9 +1,11 @@
-import asyncio
-from wfhelper.WFHelper import WFHelper
+import threading
 from multiprocessing import Pipe, Process
+
 from utils.ADBUtil import adbUtil
 from utils.LogUtil import Log
-import threading
+
+from wfhelper.WFHelper import WFHelper
+
 
 class WFHelperWrapper(Process):
 
@@ -32,7 +34,6 @@ class WFHelperWrapper(Process):
         self.childConn, self.parentConn = Pipe()
         self.childEventConn, self.parentEventConn = Pipe()
 
-
     def run(self):
         self.init()
         self.wfhelper.run()
@@ -44,11 +45,11 @@ class WFHelperWrapper(Process):
         self.wfhelper.setConfig(self.config)
         self.wfhelper.state.setCallback(self.onStateUpdate)
 
-        self.receivingThread = threading.Thread(target = self.onChildReceive, args = (self.childConn,))
+        self.receivingThread = threading.Thread(target=self.onChildReceive, args=(self.childConn,))
         self.receivingThread.daemon = True
         self.receivingThread.start()
 
-        self.frameThread = threading.Thread(target = self.frameLoop)
+        self.frameThread = threading.Thread(target=self.frameLoop)
         self.frameThread.daemon = True
         self.frameThread.start()
 
@@ -76,10 +77,10 @@ class WFHelperWrapper(Process):
                 try:
                     event = self.parentEventConn.recv()
                     handler(event)
-                except:
+                except Exception:
                     continue
 
-        self.eventHandlerThread = threading.Thread(target = waitForEvent)
+        self.eventHandlerThread = threading.Thread(target=waitForEvent)
         self.eventHandlerThread.daemon = True
         self.eventHandlerThread.start()
 
@@ -87,7 +88,7 @@ class WFHelperWrapper(Process):
         while True:
             msg = conn.recv()
             if "args" in msg:
-                getattr(self, msg["method"])(args = msg["args"])
+                getattr(self, msg["method"])(args=msg["args"])
             else:
                 getattr(self, msg["method"])()
 
@@ -120,7 +121,7 @@ class WFHelperWrapper(Process):
         if self.isChild:
             self.childConn.send(Log.logArray)
         else:
-            self.parentConn.send({ 
+            self.parentConn.send({
                 "method": "getLogArray"
             })
             return self.parentConn.recv()
