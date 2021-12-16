@@ -2,7 +2,7 @@ import logging
 import time
 from typing import List
 
-# FIXME 现在多个实例共用同一个LogUtil，应该分离
+# TODO 现在多个实例共用同一个LogUtil，应该分离
 class LogUtil:
     LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
     DATE_FORMAT = "%Y/%m/%d %H:%M:%S"

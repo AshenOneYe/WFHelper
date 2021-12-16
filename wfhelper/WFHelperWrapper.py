@@ -1,9 +1,7 @@
 import asyncio
-import json
 from wfhelper.WFHelper import WFHelper
 from multiprocessing import Pipe, Process
 from utils.ADBUtil import adbUtil
-from utils.ConfigUtil import configUtil
 from utils.LogUtil import Log
 import threading
 
@@ -26,18 +24,11 @@ class WFHelperWrapper(Process):
 
     isChild = False
 
-    def __init__(self, serial = None, config = None):
+    def __init__(self, serial, config):
         super().__init__()
         self.daemon = True
-
-        # FIXME 现在多个实例共用同一个serial，应该分离
-        self.serial = adbUtil.setDevice(serial)
-
-        if config is None:
-            self.config = configUtil.selectConfig()
-        else:
-            self.config = config
-
+        self.serial = serial
+        self.config = config
         self.childConn, self.parentConn = Pipe()
         self.childEventConn, self.parentEventConn = Pipe()
 
@@ -61,8 +52,17 @@ class WFHelperWrapper(Process):
         self.frameThread.daemon = True
         self.frameThread.start()
 
+        # TODO 现在多个实例共用同一个serial，应该分离
         adbUtil.setDevice(self.serial)
         Log.onLogAppend(self.onLogAppend)
+
+    def frameLoop(self):
+        while True:
+            frame = adbUtil.getScreen()
+
+            if frame is not None:
+                self.onFrameUpdate(frame)
+                self.wfhelper.lastFrame = frame
 
     def emit(self, type, data):
         self.childEventConn.send({
@@ -71,19 +71,15 @@ class WFHelperWrapper(Process):
         })
 
     def setEventHandler(self, handler):
-        def eventLoop():
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-
-            loop.run_until_complete(waitForEvent())
-            loop.close()
-
-        async def waitForEvent():
+        def waitForEvent():
             while True:
-                event = self.parentEventConn.recv()
-                await handler(event)
+                try:
+                    event = self.parentEventConn.recv()
+                    handler(event)
+                except:
+                    continue
 
-        self.eventHandlerThread = threading.Thread(target = eventLoop)
+        self.eventHandlerThread = threading.Thread(target = waitForEvent)
         self.eventHandlerThread.daemon = True
         self.eventHandlerThread.start()
 
@@ -103,14 +99,6 @@ class WFHelperWrapper(Process):
 
     def onFrameUpdate(self, frame):
         self.emit("onFrameUpdate", frame)
-
-    def frameLoop(self):
-        while True:
-            frame = adbUtil.getScreen()
-
-            if frame is not None:
-                self.onFrameUpdate(frame)
-                self.wfhelper.lastFrame = frame
 
     def getState(self):
         if self.isChild:

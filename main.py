@@ -2,8 +2,8 @@ import getopt
 import sys
 import multiprocessing
 
-from utils.ConfigUtil import configUtil
 from utils.ADBUtil import adbUtil
+from utils.ConfigUtil import configUtil
 from utils.LogUtil import Log
 from wfhelper.WFHelperWrapper import WFHelperWrapper
 from server.Server import Server
@@ -13,9 +13,6 @@ if __name__ == "__main__":
     multiprocessing.freeze_support()
 
     isDebug = False
-
-    serial = None
-    config = None
 
     instance = None
 
@@ -31,7 +28,7 @@ if __name__ == "__main__":
             adbUtil.getScreen(savePath)
             Log.info("截图保存至 : {}".format(savePath))
             sys.exit()
-
+            
         if "-d" in opts:
             serial = opts["-d"]
 
@@ -39,14 +36,25 @@ if __name__ == "__main__":
             config = configUtil.getConfig(opts["-c"])
     
         if "-n" in opts:
+            if serial is None:
+                serial = adbUtil.selectSerial()
+            if config is None:
+                config = configUtil.selectConfig()
             instance = WFHelperWrapper(serial, config)
 
         # TODO -v 参数打印log信息
     except getopt.GetoptError:
         Log.error("参数错误")
 
-    # 指定了设备、配置时创建WFHelper实例
-    if serial is not None or config is not None:
+
+    # FIXME 为避免其他使用者造成疑惑，当前版本默认创建实例并给出警告
+    if instance is None:
+        Log.warning("脚本将在未来版本中取消默认启动任务并在UI中统一管理，如有需要请使用 -n 指令")
+
+        if serial is None:
+            serial = adbUtil.selectSerial()
+        if config is None:
+            config = configUtil.selectConfig()
         instance = WFHelperWrapper(serial, config)
 
     server = Server(instance, isDebug)
