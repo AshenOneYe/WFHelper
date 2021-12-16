@@ -4,7 +4,7 @@
     "description":"这个配置文件用于明日方舟循环刷某一张固定图",
     "similarityThreshold":0.9,
     "randomClickDelay":300,
-    "loopDelay":[1,1],
+    "loopDelay":1,
     "randomClickArea":[0,0,1,1],
     "screenSize":[2400,1080],
     "targetList":["mainTargets","lizhi"],
@@ -39,7 +39,7 @@
         {
             "name" : "行动结束",
             "path" : "xingdongjieshu.png",
-            "similarityThreshold":0.85,
+            "similarityThreshold":0.75,
             "area" : [495,767,564,805],
             "text" : "行动结束",
             "actions" : [

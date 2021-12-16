@@ -1,60 +1,63 @@
 import getopt
 import sys
+import multiprocessing
 
-from ConfigManager import configManager
-from server.Server import Server
 from utils.ADBUtil import adbUtil
+from utils.ConfigUtil import configUtil
 from utils.LogUtil import Log
-from utils.WSUtil import WS
-from WFHelper import WFHelper
-import threading
+from wfhelper.WFHelperWrapper import WFHelperWrapper
+from server.Server import Server
 
 if __name__ == "__main__":
+    # 不写这个打包exe会出问题
+    multiprocessing.freeze_support()
 
     isDebug = False
+
+    serial = None
     config = None
+    instance = None
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "d:s:c:t")
+        opts, args = getopt.getopt(sys.argv[1:], "-t-s:-d:-c:-n")
         opts = dict(opts)
-
-        if "-d" in opts:
-            serial = opts["-d"]
-            adbUtil.setDevice(serial)
-        else:
-            adbUtil.setDevice(None)
-
-        if "-s" in opts:
-            savePath = opts["-s"]
-            Log.info("截图保存至 : {}".format(savePath))
-            adbUtil.getScreen(savePath=savePath)
-            sys.exit()
-
-        if "-c" in opts:
-            config = configManager.getConfig(opts["-c"])
 
         if "-t" in opts:
             isDebug = True
 
-            # TODO -v 参数打印log信息
+        if "-s" in opts:
+            savePath = opts["-s"]
+            adbUtil.getScreen(savePath)
+            Log.info("截图保存至 : {}".format(savePath))
+            sys.exit()
+            
+        if "-d" in opts:
+            serial = opts["-d"]
+
+        if "-c" in opts:
+            config = configUtil.getConfig(opts["-c"])
+    
+        if "-n" in opts:
+            if serial is None:
+                serial = adbUtil.selectSerial()
+            if config is None:
+                config = configUtil.selectConfig()
+            instance = WFHelperWrapper(serial, config)
+
+        # TODO -v 参数打印log信息
     except getopt.GetoptError:
         Log.error("参数错误")
 
-    if config is None:
-        Log.info("未指定配置文件\n")
-        config = configManager.selectConfig()
 
-    config.init()
-    wfhelper = WFHelper(config)
+    # FIXME 为避免其他使用者造成疑惑，当前版本默认创建实例并给出警告
+    if instance is None:
+        Log.warning("脚本将在未来版本中取消默认启动任务并在UI中统一管理，如有需要请使用 -n 指令")
 
-    server = Server(wfhelper)
-    serverThread = threading.Thread(target=server.startServer)
-    serverThread.daemon = True
-    serverThread.start()
+        if serial is None:
+            serial = adbUtil.selectSerial()
+        if config is None:
+            config = configUtil.selectConfig()
+        instance = WFHelperWrapper(serial, config)
 
-    wsThread = threading.Thread(target=WS.run)
-    wsThread.daemon = True
-    wsThread.start()
-
-    # 不用子线程启动的原因是，子线程莫名的速度慢很多
-    wfhelper.run(isDebug)
+    server = Server(instance, isDebug)
+    server.run()
