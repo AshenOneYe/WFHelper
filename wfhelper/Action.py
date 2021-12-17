@@ -4,32 +4,29 @@ from os import path
 from typing import Any, Dict, List
 from asteval import Interpreter
 from utils import Log, adbUtil
-from .State import State
+from .Global import GlobalState
 
 aeval = Interpreter()
 
 
 class ActionManager:
-
     def __init__(self, wfhelper):
         self.wfhelper = wfhelper
-        self.state = State()
-        self.state = wfhelper.state
 
     def formatArg(self, arg):
         while isinstance(arg, str) and "$" in arg:
             argLeft = arg[: arg.rfind("$")]
             argRight = arg[arg.rfind("$") + 1:]
             if argLeft == "":
-                tmp = self.state.getState(argRight)
+                tmp = GlobalState.getState(argRight)
                 if tmp is None:
                     return None
                 arg = tmp
             else:
-                tmp = self.state.getState(argRight)
+                tmp = GlobalState.getState(argRight)
                 if tmp is None:
                     return None
-                arg = argLeft + self.state.getState(argRight)
+                arg = argLeft + GlobalState.getState(argRight)
         return arg
 
     def click(self, area: List[Any]):
@@ -47,15 +44,15 @@ class ActionManager:
             return
 
         if action == "set":
-            self.state.setState(name, value)
+            GlobalState.setState(name, value)
 
         if action == "increase":
             if name == "无" or name is None:
                 return
-            if not self.state.has(name):
-                self.state.setState(name, 0)
-            value = int(value) + int(self.state.getState(name))
-            self.state.setState(name, value)
+            if not GlobalState.has(name):
+                GlobalState.setState(name, 0)
+            value = int(value) + int(GlobalState.getState(name))
+            GlobalState.setState(name, value)
 
     def changeTarget(self, args: List[Any]):
         name, targetName = args
@@ -72,7 +69,7 @@ class ActionManager:
         targets = self.wfhelper.config.targetList[name]
 
         if mode == "loop":
-            return self.state.setState("currentTargets", targets)
+            return GlobalState.setState("currentTargets", targets)
 
         if mode == "once":
             return self.changeTarget([name, None])
@@ -158,7 +155,7 @@ class ActionManager:
             self.match(target, action["args"])
         else:
             Log.error(
-                "action:'{}'不存在！请检查'{}'的配置文件".format(action["name"], target["name"])
+                "action:'{}'不存在! 请检查'{}'的配置文件".format(action["name"], target["name"])
             )
 
     def doActions(self, target: Dict[str, Any], actions: List[Any] = None):

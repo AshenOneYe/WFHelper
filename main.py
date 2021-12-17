@@ -3,7 +3,7 @@ import sys
 import multiprocessing
 
 from wfhelper import WFHelperWrapper
-from utils import adbUtil, configUtil, Log
+from utils import adbUtil, Log, getConfig, selectConfig
 from server import Server
 from typing import Dict
 
@@ -34,13 +34,13 @@ if __name__ == "__main__":
             serial = opts["-d"]
 
         if "-c" in opts:
-            config = configUtil.getConfig(opts["-c"])
+            config = getConfig(opts["-c"])
 
         if "-n" in opts:
             if serial is None:
                 serial = adbUtil.selectSerial()
             if config is None:
-                config = configUtil.selectConfig()
+                config = selectConfig()
             instance = WFHelperWrapper(serial, config)
 
         # TODO -v 参数打印log信息
@@ -54,7 +54,8 @@ if __name__ == "__main__":
         if serial is None:
             serial = adbUtil.selectSerial()
         if config is None:
-            config = configUtil.selectConfig()
+            config = selectConfig()
+            
         instance = WFHelperWrapper(serial, config)
 
     server = Server(instance, isDebug)

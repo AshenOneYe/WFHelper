@@ -6,11 +6,11 @@ from typing import Any, Callable, Dict
 from utils import Log, adbUtil
 
 from .WFHelper import WFHelper
-from .Config import Config
+from .Global import GlobalState, GlobalConfig
 
 
 class WFHelperWrapper(Process):
-    def __init__(self, serial: str, config: Config):
+    def __init__(self, serial: str, config: dict):
         super().__init__()
         self.daemon = True
         self.serial = serial
@@ -26,9 +26,8 @@ class WFHelperWrapper(Process):
 
     def init(self):
         self.isChild = True
-        self.config.init()
-        self.wfhelper.setConfig(self.config)
-        self.wfhelper.state.setCallback(self.onStateUpdate)
+        GlobalConfig.setConfigData(self.config).init()
+        GlobalState.setCallback(self.onStateUpdate)
 
         self.receivingThread = threading.Thread(
             target=self.onChildReceive, args=(self.childConn,)
@@ -87,14 +86,14 @@ class WFHelperWrapper(Process):
 
     def getState(self):
         if self.isChild:
-            self.childConn.send(self.wfhelper.state.content)
+            self.childConn.send(GlobalState.content)
         else:
             self.parentConn.send({"method": "getState"})
             return self.parentConn.recv()
 
     def setState(self, args: Dict[str, Any]):
         if self.isChild:
-            self.wfhelper.state.setState(args["key"], args["value"])
+            GlobalState.setState(args["key"], args["value"])
         else:
             self.parentConn.send({"method": "setState", "args": args})
 

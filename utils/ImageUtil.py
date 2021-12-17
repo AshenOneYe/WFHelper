@@ -39,6 +39,6 @@ def getImageHash(image: Image = None, path: str = None):
     return imagehash.phash(image)
 
 
-def getImageCrop(path: str, box: List[Any]):
+def getImageCrop(path: str, box: List[int]):
     image = Image.open(path)
     return image.crop(box)

@@ -6,14 +6,11 @@ from PIL.Image import Image
 from utils import Log, adbUtil, readImageFromBytes, similarity
 
 from .Action import ActionManager
-from .Config import Config
-from .State import State
+from .Global import GlobalState, GlobalConfig
 
 
 class WFHelper:
     def __init__(self):
-        self.config = Config()
-        self.state = State()
         self.actionManager = None
         self.lastFrame = None
         self.screen = None
@@ -24,7 +21,7 @@ class WFHelper:
         try:
             tmp = screen.crop(target["area"])
             s = similarity(tmp, target)
-            similarityThreshold = self.config.similarityThreshold
+            similarityThreshold = GlobalConfig.similarityThreshold
             if "similarityThreshold" in target:
                 similarityThreshold = target["similarityThreshold"]
             if s >= similarityThreshold:
@@ -52,26 +49,26 @@ class WFHelper:
                 return True
 
         # 长时间未操作则随机点击一次
-        if t - self.state.getState("lastActionTime") > self.config.randomClickDelay:
+        if t - GlobalState.getState("lastActionTime") > GlobalConfig.randomClickDelay:
             Log.info("长时间未操作，随机点击一次")
-            adbUtil.touchScreen(self.config.randomClickArea)
+            adbUtil.touchScreen(GlobalConfig.randomClickArea)
             self.updateActionTime(t)
         return False
 
     def loopDelay(self):
-        a, b = self.config.loopDelay
+        a, b = GlobalConfig.loopDelay
         delay = random.uniform(a, b)
         time.sleep(delay)
 
     def isIdle(self):
-        if self.state.getState("isRunning"):
+        if GlobalState.getState("isRunning"):
             return False
-        if self.state.getState("lastActionTime") + 10 > int(time.time()):
+        if GlobalState.getState("lastActionTime") + 10 > int(time.time()):
             return False
         return True
 
     def updateActionTime(self, time):
-        self.state.setState("lastActionTime", time)
+        GlobalState.setState("lastActionTime", time)
 
     def run(self):
 
@@ -82,9 +79,7 @@ class WFHelper:
         try:
             while True:
                 if not self.isIdle():
-                    targets = self.config.targetList[
-                        self.state.getState("currentTargets")
-                    ]
+                    targets = GlobalConfig.targetList[GlobalState.getState("currentTargets")]
                     t = time.time()
                     self.mainLoop(targets)
                     Log.debug("比对循环耗时: {}秒".format(time.time() - t))
@@ -95,15 +90,12 @@ class WFHelper:
             sys.exit()
 
     def start(self):
-        self.state.merge(self.config.state)
-        self.state.setState("isRunning", True)
-        self.state.setState("startTime", int(time.time()))
+        GlobalState.merge(GlobalConfig.state)
+        GlobalState.setState("isRunning", True)
+        GlobalState.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
 
     def stop(self):
-        self.state.setState("isRunning", False)
-        self.state.setState("startTime", "")
+        GlobalState.setState("isRunning", False)
+        GlobalState.setState("startTime", "")
         Log.info("停止自动脚本")
-
-    def setConfig(self, config: Config):
-        self.config = config
