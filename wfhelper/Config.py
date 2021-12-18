@@ -3,6 +3,7 @@ from os import path
 
 from utils.ImageUtil import getImageCrop, getImageHash
 from utils.LogUtil import Log
+from .Target import Target
 
 
 class Config:
@@ -20,7 +21,7 @@ class Config:
         self.targetList: Dict[str, list] = {}
         self.state: Dict[str, str] = {}
         self._configPath: Optional[str] = None
-        self._configDir: Optional[str] = None
+        self.configDir: Optional[str] = None
 
     def setConfigData(self, configData: dict):
         self._configData = configData
@@ -28,7 +29,7 @@ class Config:
 
     def init(self):
         self._configPath = self._configData["configPath"]
-        self._configDir = path.dirname(self._configPath)
+        self.configDir = path.dirname(self._configPath)
 
         if "name" in self._configData:
             self._name = self._configData["name"]
@@ -57,16 +58,19 @@ class Config:
 
         # 初始化Targets
         for targetsName in self._configData["targetList"]:
+            targetGroup = list()
             targets = self._configData[targetsName]
             for target in targets:
                 if "path" in target:
                     img = getImageCrop(
-                        path.join(self._configDir, target["path"]), target["area"]
+                        path.join(self.configDir, target["path"]), target["area"]
                     )
                     target["hash"] = getImageHash(image=img)
                     if "colorRatio" in target:
                         target["histogram"] = img.histogram()
-            self.targetList[targetsName] = targets
+                t = Target(target)
+                targetGroup.append(t)
+            self.targetList[targetsName] = targetGroup
 
         Log.info("配置文件初始化完成")
         Log.info("配置文件名称 : {}".format(self._name))

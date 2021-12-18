@@ -1,5 +1,5 @@
 from io import BytesIO
-from typing import Any, Dict, List
+from typing import Any, List
 from PIL import Image, UnidentifiedImageError
 import imagehash
 import math
@@ -8,18 +8,18 @@ from functools import reduce
 
 
 # 这个函数可能要继续优化
-def similarity(img, target: Dict[str, Any]):
+def similarity(img, target: Any):
     hash1 = getImageHash(image=img)
-    hash2 = target["hash"]
+    hash2 = target.hash
     sim1 = 1 - (hash1 - hash2) / len(hash1.hash) ** 2
-    if "histogram" in target:
+    if target.histogram is not None:
         h1 = img.histogram()
-        h2 = target["histogram"]
+        h2 = target.histogram
         tmp = list(map(lambda a, b: (a - b) ** 2, h1, h2))
         result = reduce(operator.add, tmp)
         sim2 = math.sqrt(result) / (img.size[0] * img.size[1] * 4)
         sim2 = (0.5 - sim2) * 2
-        colorRatio = target["colorRatio"]
+        colorRatio = target.colorRatio
         return (1 - colorRatio) * sim1 + colorRatio * sim2
     return sim1
 

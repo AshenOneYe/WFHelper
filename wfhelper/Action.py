@@ -4,7 +4,8 @@ from os import path
 from typing import Any, Dict, List
 from asteval import Interpreter
 from utils import Log, adbUtil
-from .Global import GlobalState
+from .Global import GlobalConfig, GlobalState
+from .Target import Target
 
 aeval = Interpreter()
 
@@ -56,7 +57,7 @@ class ActionManager:
 
     def changeTarget(self, args: List[Any]):
         name, targetName = args
-        targets = self.wfhelper.config.targetList[name]
+        targets = GlobalConfig.targetList[name]
 
         return self.wfhelper.mainLoop(targets, targetName)
 
@@ -66,7 +67,7 @@ class ActionManager:
         else:
             name, mode = args[0], "once"
 
-        targets = self.wfhelper.config.targetList[name]
+        targets = GlobalConfig.targetList[name]
 
         if mode == "loop":
             return GlobalState.setState("currentTargets", targets)
@@ -92,7 +93,7 @@ class ActionManager:
     def getScreen(self, savePath: str):
         adbUtil.getScreen(savePath)
 
-    def match(self, target: Dict[str, Any], args: List[Any]):
+    def match(self, target: Target, args: List[Any]):
         exp, callbacks = args
 
         func = exp
@@ -115,17 +116,17 @@ class ActionManager:
         if actions is not None:
             self.doActions(target, actions)
 
-    def doAction(self, target: Dict[str, Any], action: Dict[str, Any]):
+    def doAction(self, target: Target, action: Dict[str, Any]):
         if action["name"] == "click":
             if (
                 "args" not in action
                 or len(action["args"]) == 0
                 or action["args"][0] is None
             ):
-                if "area" in target:
-                    self.click(target["area"])
+                if target.area is not None:
+                    self.click(target.area)
                 else:
-                    self.click(self.wfhelper.config.screenSize)
+                    self.click(GlobalConfig.screenSize)
             else:
                 self.click(action["args"][0])
         elif action["name"] == "sleep":
@@ -145,7 +146,7 @@ class ActionManager:
         elif action["name"] == "getScreen":
             if "args" not in action:
                 savePath = path.join(
-                    self.wfhelper.config.configDir,
+                    str(GlobalConfig.configDir),
                     "temp/{}.png".format(int(time.time())),
                 )
                 self.getScreen(savePath)
@@ -155,11 +156,11 @@ class ActionManager:
             self.match(target, action["args"])
         else:
             Log.error(
-                "action:'{}'不存在! 请检查'{}'的配置文件".format(action["name"], target["name"])
+                "action:'{}'不存在! 请检查'{}'的配置文件".format(action["name"], target.name)
             )
 
-    def doActions(self, target: Dict[str, Any], actions: List[Any] = None):
+    def doActions(self, target: Target, actions: List[Any] = None):
         if actions is None:
-            actions = target["actions"]
+            actions = target.actions
         for action in actions:
             self.doAction(target, action)

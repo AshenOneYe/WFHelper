@@ -1,12 +1,13 @@
 import random
 import time
-from typing import Any, Dict, List
+from typing import List
 
 from PIL.Image import Image
 from utils import Log, adbUtil, readImageFromBytes, similarity
 
 from .Action import ActionManager
 from .Global import GlobalState, GlobalConfig
+from .Target import Target
 
 
 class WFHelper:
@@ -15,35 +16,35 @@ class WFHelper:
         self.lastFrame = None
         self.screen = None
 
-    def check(self, target: Dict[str, Any], screen: Image):
+    def check(self, target: Target, screen: Image):
         result = False
 
         try:
-            tmp = screen.crop(target["area"])
+            tmp = screen.crop(target.area)
             s = similarity(tmp, target)
             similarityThreshold = GlobalConfig.similarityThreshold
-            if "similarityThreshold" in target:
-                similarityThreshold = target["similarityThreshold"]
+            if target.similarityThreshold is not None:
+                similarityThreshold = target.similarityThreshold
             if s >= similarityThreshold:
-                if "text" in target:
-                    Log.info("{} - 识别相似度：{}".format(target["text"], s))
+                if target.text is not None:
+                    Log.info("{} - 识别相似度：{}".format(target.text, s))
                 result = True
         finally:
             return result
 
-    def mainLoop(self, targets: List[Any], targetName: str = None):
+    def mainLoop(self, targets: List[Target], targetName: str = None):
 
         t = int(time.time())
         screen = readImageFromBytes(self.lastFrame)
 
         for target in targets:
             if targetName is not None:
-                if target["name"] != targetName:
+                if target.name != targetName:
                     continue
-            if "hash" not in target or self.check(target, screen):
-                if "hash" not in target:
-                    if "text" in target:
-                        Log.info("{} - 直接操作".format(target["text"]))
+            if target.hash is None or self.check(target, screen):
+                if target.hash is None:
+                    if target.text is not None:
+                        Log.info("{} - 直接操作".format(target.text))
                 self.actionManager.doActions(target)
                 self.updateActionTime(t)
                 return True
