@@ -11,6 +11,8 @@ if __name__ == "__main__":
     # 不写这个打包exe会出问题
     multiprocessing.freeze_support()
 
+    sys.stderr = open("main_err.log", "w", encoding="utf-8")
+
     isDebug = False
 
     serial = None
@@ -55,7 +57,7 @@ if __name__ == "__main__":
             serial = adbUtil.selectSerial()
         if config is None:
             config = selectConfig()
-            
+
         instance = WFHelperWrapper(serial, config)
 
     server = Server(instance, isDebug)

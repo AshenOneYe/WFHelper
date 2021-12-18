@@ -150,10 +150,8 @@ class ActionManager:
         else:
             try:
                 func(target, action.get("args"))
-            except BaseException as e:
-                Log.error(e)
+            except Exception:
                 Log.error("{}执行失败，参数为: {}".format(action["name"], action.get("args")))
-                sys.exit()
 
     def doActions(self, target: Target, actions: List[Any] = None):
         if actions is None:

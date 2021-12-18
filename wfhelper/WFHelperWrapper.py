@@ -1,3 +1,4 @@
+import sys
 import threading
 from multiprocessing import Pipe, Process
 from multiprocessing.connection import Connection
@@ -5,8 +6,8 @@ from typing import Any, Callable, Dict
 
 from utils import Log, adbUtil
 
+from .Global import GlobalConfig, GlobalState
 from .WFHelper import WFHelper
-from .Global import GlobalState, GlobalConfig
 
 
 class WFHelperWrapper(Process):
@@ -21,6 +22,7 @@ class WFHelperWrapper(Process):
         self.wfhelper = WFHelper()
 
     def run(self):
+        sys.stderr = open("wfhelper_err.log", "w", encoding="utf-8")
         self.init()
         self.wfhelper.run()
 

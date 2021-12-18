@@ -1,4 +1,5 @@
 import logging
+import sys
 import time
 from typing import Any, Callable, List
 
@@ -44,9 +45,13 @@ class LogUtil:
 
     def error(self, msg: str):
         logging.error(msg)
+        sys.stderr.write(msg+"\n")
+        sys.exit()
 
     def critical(self, msg: str):
         logging.critical(msg)
+        sys.stderr.write(msg+"\n")
+        sys.exit()
 
 
 Log = LogUtil()
