@@ -6,6 +6,7 @@ from asteval import Interpreter
 from utils import Log, adbUtil
 from .Global import GlobalConfig, GlobalState
 from .Target import Target
+import sys
 
 aeval = Interpreter()
 
@@ -37,14 +38,14 @@ class ActionManager:
             if target.area is not None:
                 area = target.area
         else:
-            area = args[1]
+            area = args[1][0]
         adbUtil.touchScreen(area)
 
     def sleep(self, *args):
         args = args[1]
         time.sleep(args[0])
 
-    def accessState(self, *args):
+    def state(self, *args):
         args = args[1]
         action, name, value = args
 
@@ -65,7 +66,7 @@ class ActionManager:
             GlobalState.setState(name, value)
 
     def changeTarget(self, *args):
-        name, targetName = args[1]
+        name, targetName = args
         targets = GlobalConfig.targetDict[name]
 
         return self.wfhelper.mainLoop(targets, targetName)
@@ -83,7 +84,7 @@ class ActionManager:
             return GlobalState.setState("currentTargets", targets)
 
         if mode == "once":
-            return self.changeTarget([name, None])
+            return self.changeTarget(name, None)
 
         return False
 
@@ -137,8 +138,6 @@ class ActionManager:
             self.doActions(target, actions)
 
     def exit(self, *args):
-        import sys
-
         sys.exit()
 
     def doAction(self, target: Target, action: Dict[str, Any]):
@@ -149,7 +148,12 @@ class ActionManager:
                 "action:'{}'不存在! 请检查'{}'的配置文件".format(action["name"], target.name)
             )
         else:
-            func(target, action.get("args"))
+            try:
+                func(target, action.get("args"))
+            except BaseException as e:
+                Log.error(e)
+                Log.error("{}执行失败，参数为: {}".format(action["name"], action.get("args")))
+                sys.exit()
 
     def doActions(self, target: Target, actions: List[Any] = None):
         if actions is None:

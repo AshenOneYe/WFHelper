@@ -2,7 +2,7 @@
     "name":"一加9R混铃铛",
     "author":"大A",
     "description":"这个配置文件用于一加9R混铃铛",
-    "similarityThreshold":1,
+    "similarityThreshold":0.9,
     "randomClickDelay":300,
     "randomClickArea":[0,0,1,1],
     "screenSize":[2400,1080],
@@ -42,7 +42,7 @@
             "area" : [311,1567,770,1710],
             "actions" : [
                 {
-                    "name":"subTargets",
+                    "name":"changeTargets",
                     "args":["bosses"]
                 },
                 {"name":"click"},
