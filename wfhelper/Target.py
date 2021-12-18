@@ -9,6 +9,10 @@ class Target:
         self.area = None
         self.histogram = None
         self.colorRatio = None
+        self.description = None
         self.similarityThreshold = None
         self.actions: List[Any] = list()
-        self.__dict__ = data
+
+        for key, value in data.items():
+            if key in self.__dict__:
+                self.__dict__[key] = value

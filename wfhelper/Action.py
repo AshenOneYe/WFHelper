@@ -30,13 +30,22 @@ class ActionManager:
                 arg = argLeft + GlobalState.getState(argRight)
         return arg
 
-    def click(self, area: List[Any]):
+    def click(self, *args):
+        target = args[0]  # type: Target
+        area = GlobalConfig.screenSize
+        if args[1] is None:
+            if target.area is not None:
+                area = target.area
+        else:
+            area = args[1]
         adbUtil.touchScreen(area)
 
-    def sleep(self, args: List[Any]):
+    def sleep(self, *args):
+        args = args[1]
         time.sleep(args[0])
 
-    def accessState(self, args: List[Any]):
+    def accessState(self, *args):
+        args = args[1]
         action, name, value = args
 
         name = self.formatArg(name)
@@ -55,19 +64,20 @@ class ActionManager:
             value = int(value) + int(GlobalState.getState(name))
             GlobalState.setState(name, value)
 
-    def changeTarget(self, args: List[Any]):
-        name, targetName = args
-        targets = GlobalConfig.targetList[name]
+    def changeTarget(self, *args):
+        name, targetName = args[1]
+        targets = GlobalConfig.targetDict[name]
 
         return self.wfhelper.mainLoop(targets, targetName)
 
-    def changeTargets(self, args: List[Any]):
+    def changeTargets(self, *args):
+        args = args[1]
         if len(args) == 2:
             name, mode = args
         else:
             name, mode = args[0], "once"
 
-        targets = GlobalConfig.targetList[name]
+        targets = GlobalConfig.targetDict[name]
 
         if mode == "loop":
             return GlobalState.setState("currentTargets", targets)
@@ -77,8 +87,9 @@ class ActionManager:
 
         return False
 
-    def info(self, args: List[Any]):
-        if len(args) == 0:
+    def info(self, *args):
+        args = args[1]
+        if args is None:
             Log.error("`info` action的参数不能为空")
             return
         tmp = []
@@ -88,13 +99,22 @@ class ActionManager:
         if len(tmp) == 1:
             Log.info(tmp[0])
         else:
-            Log.info(tmp[0].format(*tmp[1:]))
+            Log.info(str(tmp[0]).format(*tmp[1:]))
 
-    def getScreen(self, savePath: str):
-        adbUtil.getScreen(savePath)
+    def getScreen(self, *args):
+        args = args[1]
+        if args[1] is None:
+            savePath = path.join(
+                str("./"),
+                "temp/{}.png".format(int(time.time())),
+            )
+            adbUtil.getScreen(savePath)
+        else:
+            adbUtil.getScreen(args[0])
 
-    def match(self, target: Target, args: List[Any]):
-        exp, callbacks = args
+    def match(self, *args):
+        target = args[0]  # type: Target
+        exp, callbacks = args[1]
 
         func = exp
 
@@ -116,48 +136,20 @@ class ActionManager:
         if actions is not None:
             self.doActions(target, actions)
 
-    def doAction(self, target: Target, action: Dict[str, Any]):
-        if action["name"] == "click":
-            if (
-                "args" not in action
-                or len(action["args"]) == 0
-                or action["args"][0] is None
-            ):
-                if target.area is not None:
-                    self.click(target.area)
-                else:
-                    self.click(GlobalConfig.screenSize)
-            else:
-                self.click(action["args"][0])
-        elif action["name"] == "sleep":
-            self.sleep(action["args"])
-        elif action["name"] == "state":
-            self.accessState(action["args"])
-        elif action["name"] == "changeTargets":
-            self.changeTargets(action["args"])
-        elif action["name"] == "changeTarget":
-            self.changeTarget(action["args"])
-        elif action["name"] == "info":
-            self.info(action["args"])
-        elif action["name"] == "exit":
-            import sys
+    def exit(self, *args):
+        import sys
 
-            sys.exit()
-        elif action["name"] == "getScreen":
-            if "args" not in action:
-                savePath = path.join(
-                    str(GlobalConfig.configDir),
-                    "temp/{}.png".format(int(time.time())),
-                )
-                self.getScreen(savePath)
-            else:
-                self.getScreen(action["args"])
-        elif action["name"] == "match":
-            self.match(target, action["args"])
-        else:
+        sys.exit()
+
+    def doAction(self, target: Target, action: Dict[str, Any]):
+
+        func = getattr(self, action["name"], None)
+        if func is None:
             Log.error(
                 "action:'{}'不存在! 请检查'{}'的配置文件".format(action["name"], target.name)
             )
+        else:
+            func(target, action.get("args"))
 
     def doActions(self, target: Target, actions: List[Any] = None):
         if actions is None:

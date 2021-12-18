@@ -80,7 +80,7 @@ class WFHelper:
         try:
             while True:
                 if not self.isIdle():
-                    targets = GlobalConfig.targetList[GlobalState.getState("currentTargets")]
+                    targets = GlobalConfig.targetDict[GlobalState.getState("currentTargets")]
                     t = time.time()
                     self.mainLoop(targets)
                     Log.debug("比对循环耗时: {}秒".format(time.time() - t))
