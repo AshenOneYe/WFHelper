@@ -3,7 +3,8 @@ import sys
 import multiprocessing
 
 from wfhelper import WFHelperWrapper
-from utils import adbUtil, Log, getConfig, selectConfig
+from utils import Log, getConfig, selectConfig
+from utils.ADBUtil import getDevice, selectSerial, getScreen
 from server import Server
 from typing import Dict
 
@@ -18,6 +19,7 @@ if __name__ == "__main__":
     serial = None
     config = None
     instance = None
+    device = None
 
     try:
         _opts, args = getopt.getopt(sys.argv[1:], "-t-s:-d:-c:-n")
@@ -28,8 +30,8 @@ if __name__ == "__main__":
 
         if "-s" in opts:
             savePath = opts["-s"]
-            adbUtil.setDevice(adbUtil.selectSerial())
-            adbUtil.getScreen(savePath)
+            device = getDevice(selectSerial())
+            getScreen(device, savePath)
             Log.info("截图保存至 : {}".format(savePath))
             sys.exit()
 
@@ -41,7 +43,7 @@ if __name__ == "__main__":
 
         if "-n" in opts:
             if serial is None:
-                serial = adbUtil.selectSerial()
+                serial = selectSerial()
             if config is None:
                 config = selectConfig()
             instance = WFHelperWrapper(serial, config)
@@ -49,14 +51,13 @@ if __name__ == "__main__":
         # TODO -v 参数打印log信息
     except getopt.GetoptError:
         Log.error("参数错误")
-        sys.exit()
 
     # FIXME 为避免其他使用者造成疑惑，当前版本默认创建实例并给出警告
     if instance is None:
         Log.warning("脚本将在未来版本中取消默认启动任务并在UI中统一管理，如有需要请使用 -n 指令")
 
         if serial is None:
-            serial = adbUtil.selectSerial()
+            serial = selectSerial()
         if config is None:
             config = selectConfig()
 

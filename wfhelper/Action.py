@@ -4,8 +4,9 @@ import time
 from os import path
 from typing import Any, Dict, List
 from asteval import Interpreter
-from utils import Log, adbUtil
-from .Global import GlobalConfig, GlobalState
+from utils import Log
+from utils.ADBUtil import getScreen, touchScreen
+from .Global import GlobalConfig, GlobalState, device
 from .Target import Target
 import sys
 
@@ -40,7 +41,7 @@ class ActionManager:
                 area = target.area
         else:
             area = args[1][0]
-        adbUtil.touchScreen(area)
+        touchScreen(device, area)
 
     def delay(self, *args):
         self.sleep(args)
@@ -115,9 +116,9 @@ class ActionManager:
                 str("./"),
                 "temp/{}.png".format(int(time.time())),
             )
-            adbUtil.getScreen(savePath)
+            getScreen(device, savePath)
         else:
-            adbUtil.getScreen(args[0])
+            getScreen(device, args[0])
 
     def match(self, *args):
         target = args[0]  # type: Target

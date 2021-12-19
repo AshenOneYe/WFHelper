@@ -3,10 +3,11 @@ import time
 from typing import List
 
 from PIL.Image import Image
-from utils import Log, adbUtil, readImageFromBytes, similarity
+from utils import Log, readImageFromBytes, similarity
+from utils.ADBUtil import touchScreen
 
 from .Action import ActionManager
-from .Global import GlobalConfig, GlobalState
+from .Global import GlobalConfig, GlobalState, device
 from .Target import Target
 
 
@@ -52,7 +53,7 @@ class WFHelper:
         # 长时间未操作则随机点击一次
         if t - GlobalState.getState("lastActionTime") > GlobalConfig.randomClickDelay:
             Log.info("长时间未操作，随机点击一次")
-            adbUtil.touchScreen(GlobalConfig.randomClickArea)
+            touchScreen(device, GlobalConfig.randomClickArea)
             self.updateActionTime(t)
         return False
 

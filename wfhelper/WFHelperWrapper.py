@@ -4,9 +4,10 @@ from multiprocessing import Lock, Pipe, Process
 from multiprocessing.connection import Connection
 from typing import Any, Callable, Dict
 
-from utils import Log, adbUtil
+from utils import Log
+from utils.ADBUtil import getDevice, logDeviceInfo, getScreen, touchScreen, swipeScreen
 
-from .Global import GlobalConfig, GlobalState
+from .Global import GlobalConfig, GlobalState, device
 from .WFHelper import WFHelper
 
 
@@ -33,7 +34,9 @@ class WFHelperWrapper(Process):
         self.isChild = True
         GlobalConfig.setConfigData(self.config).init()
         GlobalState.setCallback(self.onStateUpdate)
-
+        global device
+        device = getDevice(self.serial)
+        logDeviceInfo(device)
         self.receivingThread = threading.Thread(
             target=self.onChildReceive, args=(self.childConn,)
         )
@@ -43,14 +46,11 @@ class WFHelperWrapper(Process):
         self.frameThread = threading.Thread(target=self.frameLoop)
         self.frameThread.daemon = True
         self.frameThread.start()
-
-        # TODO 现在多个实例共用同一个serial，应该分离
-        adbUtil.setDevice(self.serial)
         Log.onLogAppend(self.onLogAppend)
 
     def frameLoop(self):
         while True:
-            frame = adbUtil.getScreen()
+            frame = getScreen(device)
 
             if frame is not None:
                 self.onFrameUpdate(frame)
@@ -133,12 +133,12 @@ class WFHelperWrapper(Process):
 
     def touchScreen(self, args: Dict[str, Any]):
         if self.isChild:
-            adbUtil.touchScreen([args["x"], args["y"], args["x"] + 1, args["y"] + 1])
+            touchScreen(device, [args["x"], args["y"], args["x"] + 1, args["y"] + 1])
         else:
             self.parentConn.send({"method": "touchScreen", "args": args})
 
     def swipeScreen(self, args: Dict[str, Any]):
         if self.isChild:
-            adbUtil.swipeScreen(args["x1"], args["y1"], args["x2"], args["y2"])
+            swipeScreen(device, args["x1"], args["y1"], args["x2"], args["y2"])
         else:
             self.parentConn.send({"method": "swipeScreen", "args": args})
