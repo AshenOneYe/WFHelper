@@ -20,6 +20,8 @@
   },
   "targetList": [
     "mainTargets",
+    "搬空商店",
+    "主要",
     "参加",
     "跳过",
     "铃铛",
@@ -35,10 +37,137 @@
   ],
   "mainTargets": [
     {
+      "name": "主要",
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ]
+    }
+  ],
+  "搬空商店": [
+    {
+      "name": "进入商店",
+      "path": "shop/shop-1.png",
+      "area": [400, 1200, 450, 1250],
+      "actions": [
+        {
+          "name": "click"
+        }
+      ],
+      "text": "进入商店"
+    },
+    {
+      "name": "进入玛纳商店",
+      "path": "shop/shop-2.png",
+      "area": [50, 550, 100, 600],
+      "actions": [
+        {
+          "name": "click"
+        }
+      ],
+      "text": "进入玛纳商店"
+    },
+    {
+      "name": "点击商品",
+      "path": "shop/shop-3.png",
+      "area": [380, 270, 650, 300],
+      "actions": [
+        {
+          "name": "click",
+          "args": [[35, 400, 685, 500]]
+        }
+      ],
+      "text": "点击商品"
+    },
+    {
+      "name": "开始搬运",
+      "path": "shop/shop-4-1.png",
+      "area": [560, 675, 610, 725],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "click"
+        }
+      ],
+      "text": "开始搬运"
+    },
+    {
+      "name": "开始搬运",
+      "path": "shop/shop-4-2.png",
+      "area": [560, 675, 610, 725],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "click"
+        }
+      ],
+      "text": "开始搬运"
+    },
+    {
+      "name": "确认搬运",
+      "path": "shop/shop-5-1.png",
+      "area": [560, 675, 610, 725],
+      "actions": [
+        {
+          "name": "click",
+          "args": [[400, 900, 600, 940]]
+        }
+      ],
+      "text": "确认搬运"
+    },
+    {
+      "name": "确认搬运",
+      "path": "shop/shop-5-2.png",
+      "area": [560, 675, 610, 725],
+      "actions": [
+        {
+          "name": "click",
+          "args": [[400, 980, 600, 1020]]
+        }
+      ],
+      "text": "确认搬运"
+    },
+    {
+      "name": "搬空完毕",
+      "path": "shop/shop-6-1.png",
+      "area": [400, 900, 600, 940],
+      "actions": [
+        {
+          "name": "click",
+          "args": [[100, 900, 300, 940]]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "任务完成，返回主要任务"
+    },
+    {
+      "name": "搬空完毕",
+      "path": "shop/shop-6-2.png",
+      "area": [400, 900, 600, 940],
+      "actions": [
+        {
+          "name": "click",
+          "args": [[100, 900, 300, 940]]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "任务完成，返回主要任务"
+    }
+  ],
+  "主要": [
+    {
       "name": "铃铛",
       "path": "lingdang.png",
       "area": [30, 18, 62, 50],
-      "actions": [{ "name": "click" }],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
       "text": "准备上车"
     },
     {
@@ -116,21 +245,21 @@
       "name": "OK",
       "path": "ok.png",
       "area": [300, 1180, 460, 1220],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
       "text": "点击OK"
     },
     {
       "name": "准备",
       "path": "zhunbei.png",
       "area": [240, 900, 480, 920],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
       "text": "点击准备"
     },
     {
       "name": "准备",
       "path": "zhunbei2.png",
       "area": [240, 900, 480, 920],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
       "text": "点击准备"
     },
     {
@@ -172,23 +301,7 @@
       "name": "新人物",
       "path": "new-character.png",
       "area": [150, 1090, 300, 1170],
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$isDebug",
-            {
-              "True": [
-                {
-                  "name": "getScreen"
-                }
-              ]
-            }
-          ]
-        },
-        { "name": "click" },
-        { "name": "delay", "args": [1] }
-      ],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
       "text": "获得新人物"
     },
     {
@@ -204,7 +317,7 @@
       "name": "参加",
       "path": "canjia.png",
       "area": [440, 1040, 640, 1100],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2, 10] }],
       "text": "点击参加"
     }
   ],

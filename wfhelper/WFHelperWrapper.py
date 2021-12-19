@@ -152,3 +152,16 @@ class WFHelperWrapper(Process):
             adbUtil.swipeScreen(args["x1"], args["y1"], args["x2"], args["y2"])
         else:
             self.parentConn.send({"method": "swipeScreen", "args": args})
+
+    def getTargetList(self):
+        if self.isChild:
+            self.childConn.send(list(self.wfhelper.config.targetList.keys()))
+        else:
+            self.parentConn.send({"method": "getTargetList"})
+            return self.parentConn.recv()
+
+    def changeTargets(self, args):
+        if self.isChild:
+            self.wfhelper.actionManager.changeTargets([args, "loop"])
+        else:
+            self.parentConn.send({"method": "changeTargets", "args": args})

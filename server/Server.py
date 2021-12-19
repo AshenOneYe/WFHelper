@@ -47,7 +47,7 @@ class Server:
         type = event["type"]
 
         # TODO 也应发送给对应实例
-        if type == "onLogAppend" or type == "onStateUpdate":
+        if type in ["onLogAppend", "onStateUpdate"]:
             self.broadcast(
                 self.clients,
                 json.dumps({"type": type, "data": event["data"]}).encode("utf8"),
