@@ -61,7 +61,6 @@ class WFHelper:
         delay = random.uniform(a, b)
         time.sleep(delay)
 
-
     def isIdle(self):
         if GlobalState.getState("isRunning"):
             return False
