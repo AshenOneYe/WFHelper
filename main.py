@@ -28,6 +28,7 @@ if __name__ == "__main__":
 
         if "-s" in opts:
             savePath = opts["-s"]
+            adbUtil.setDevice(adbUtil.selectSerial())
             adbUtil.getScreen(savePath)
             Log.info("截图保存至 : {}".format(savePath))
             sys.exit()
@@ -48,6 +49,7 @@ if __name__ == "__main__":
         # TODO -v 参数打印log信息
     except getopt.GetoptError:
         Log.error("参数错误")
+        sys.exit()
 
     # FIXME 为避免其他使用者造成疑惑，当前版本默认创建实例并给出警告
     if instance is None:

@@ -6,7 +6,7 @@ from PIL.Image import Image
 from utils import Log, adbUtil, readImageFromBytes, similarity
 
 from .Action import ActionManager
-from .Global import GlobalState, GlobalConfig
+from .Global import GlobalConfig, GlobalState
 from .Target import Target
 
 
@@ -60,6 +60,7 @@ class WFHelper:
         a, b = GlobalConfig.loopDelay
         delay = random.uniform(a, b)
         time.sleep(delay)
+
 
     def isIdle(self):
         if GlobalState.getState("isRunning"):

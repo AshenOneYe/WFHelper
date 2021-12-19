@@ -20,7 +20,7 @@ class ADBUtil:
         if savePath is not None and len(currentframe) != 0 and currentframe is not None:
             dirs = os.path.dirname(savePath)
 
-            if not os.path.exists(dirs):
+            if not dirs == "" and not os.path.exists(dirs):
                 os.makedirs(dirs)
 
             with open(savePath, "wb") as f:

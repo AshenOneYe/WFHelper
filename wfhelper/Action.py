@@ -1,3 +1,4 @@
+import random
 import re
 import time
 from os import path
@@ -41,9 +42,16 @@ class ActionManager:
             area = args[1][0]
         adbUtil.touchScreen(area)
 
+    def delay(self, *args):
+        self.sleep(args)
+
     def sleep(self, *args):
         args = args[1]
-        time.sleep(args[0])
+        if len(args) > 1:
+            delay = random.uniform(args[0], args[1])
+        else:
+            delay = args[0]
+        time.sleep(delay)
 
     def state(self, *args):
         args = args[1]
@@ -78,10 +86,8 @@ class ActionManager:
         else:
             name, mode = args[0], "once"
 
-        targets = GlobalConfig.targetDict[name]
-
         if mode == "loop":
-            return GlobalState.setState("currentTargets", targets)
+            return GlobalState.setState("currentTargets", name)
 
         if mode == "once":
             return self.changeTarget(name, None)

@@ -19,7 +19,7 @@ CONTENT_TYPES = {
 
 
 # TODO isDebug和instances应作为单独的信息传递给UI
-class Server():
+class Server:
     isDebug = False
 
     instances = set()  # type: Set[Any]
@@ -38,10 +38,7 @@ class Server():
 
     def createInstance(self, instance):
         instance.start()
-        instance.setState({
-            "key": "isDebug",
-            "value": self.isDebug
-        })
+        instance.setState({"key": "isDebug", "value": self.isDebug})
         instance.setEventHandler(self.eventHandler)
 
         self.instances.add(instance)
@@ -53,22 +50,19 @@ class Server():
         if type == "onLogAppend" or type == "onStateUpdate":
             self.broadcast(
                 self.clients,
-                json.dumps({
-                    "type": type,
-                    "data": event["data"]
-                }).encode('utf8')
+                json.dumps({"type": type, "data": event["data"]}).encode("utf8"),
             )
         elif type == "onFrameUpdate":
-            self.broadcast(
-                self.streamClients,
-                event["data"]
-            )
+            self.broadcast(self.streamClients, event["data"])
 
     async def handler(self, websocket, path):
-        if path == "/websocket":
-            await self.clientHandler(websocket)
-        if path == "/stream":
-            await self.streamHandler(websocket)
+        try:
+            if path == "/websocket":
+                await self.clientHandler(websocket)
+            if path == "/stream":
+                await self.streamHandler(websocket)
+        except Exception as e:
+            print(e)
 
     async def clientHandler(self, websocket):
         async def send(queue, websocket):
@@ -81,9 +75,7 @@ class Server():
 
         queue = asyncio.Queue()
 
-        task = asyncio.create_task(
-            send(queue, websocket)
-        )
+        task = asyncio.create_task(send(queue, websocket))
 
         self.clients.add(queue)
 
@@ -103,10 +95,9 @@ class Server():
 
                 if result is not None:
                     await websocket.send(
-                        json.dumps({
-                            "type": message["type"] + "_ACK",
-                            "data": result
-                        }).encode('utf8')
+                        json.dumps(
+                            {"type": message["type"] + "_ACK", "data": result}
+                        ).encode("utf8")
                     )
         except Exception:
             pass
@@ -126,9 +117,7 @@ class Server():
 
         queue = asyncio.Queue(1)
 
-        task = asyncio.create_task(
-            send(queue, websocket)
-        )
+        task = asyncio.create_task(send(queue, websocket))
 
         self.streamClients.add(queue)
 
@@ -149,7 +138,7 @@ class Server():
 
         name, ext = splitext(path)
 
-        if name[-1] == '/':
+        if name[-1] == "/":
             name = name[1:] + "index"
         else:
             name = name[1:]
@@ -160,9 +149,7 @@ class Server():
         source = Path(__file__).parent.joinpath(name + ext)
 
         if source.is_file() and source.suffix in CONTENT_TYPES:
-            headers = {
-                "Content-Type": CONTENT_TYPES[source.suffix]
-            }
+            headers = {"Content-Type": CONTENT_TYPES[source.suffix]}
 
             body = source.read_bytes()
 
@@ -184,9 +171,11 @@ class Server():
     async def main(self):
         # TODO 加入端口配置启动项
         async with websockets.serve(
-            self.handler, "0.0.0.0", 8080,
+            self.handler,
+            "0.0.0.0",
+            8080,
             process_request=self.requestHandler,
-            ping_interval=None
+            ping_interval=None,
         ):
             Log.info("服务器启动完成 - http://localhost:8080")
 
