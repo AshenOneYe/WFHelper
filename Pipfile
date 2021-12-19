@@ -10,6 +10,7 @@ asteval = "*"
 asyncio = "*"
 websockets = "*"
 pure-python-adb = "*"
+av = "*"
 
 [dev-packages]
 mypy = "*"

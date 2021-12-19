@@ -41,7 +41,8 @@ class ActionManager:
                 area = target.area
         else:
             area = args[1][0]
-        touchScreen(device, area)
+        print(area)
+        touchScreen(device.getDevice(), area)
 
     def delay(self, *args):
         self.sleep(args)
@@ -116,9 +117,9 @@ class ActionManager:
                 str("./"),
                 "temp/{}.png".format(int(time.time())),
             )
-            getScreen(device, savePath)
+            getScreen(device.getDevice(), savePath)
         else:
-            getScreen(device, args[0])
+            getScreen(device.getDevice(), args[0])
 
     def match(self, *args):
         target = args[0]  # type: Target

@@ -34,9 +34,8 @@ class WFHelperWrapper(Process):
         self.isChild = True
         GlobalConfig.setConfigData(self.config).init()
         GlobalState.setCallback(self.onStateUpdate)
-        global device
-        device = getDevice(self.serial)
-        logDeviceInfo(device)
+        device.setDevice(getDevice(self.serial))
+        logDeviceInfo(device.getDevice())
         self.receivingThread = threading.Thread(
             target=self.onChildReceive, args=(self.childConn,)
         )
@@ -46,11 +45,12 @@ class WFHelperWrapper(Process):
         self.frameThread = threading.Thread(target=self.frameLoop)
         self.frameThread.daemon = True
         self.frameThread.start()
+
         Log.onLogAppend(self.onLogAppend)
 
     def frameLoop(self):
         while True:
-            frame = getScreen(device)
+            frame = getScreen(device.getDevice())
 
             if frame is not None:
                 self.onFrameUpdate(frame)
@@ -133,12 +133,12 @@ class WFHelperWrapper(Process):
 
     def touchScreen(self, args: Dict[str, Any]):
         if self.isChild:
-            touchScreen(device, [args["x"], args["y"], args["x"] + 1, args["y"] + 1])
+            touchScreen(device.getDevice(), [args["x"], args["y"], args["x"] + 1, args["y"] + 1])
         else:
             self.parentConn.send({"method": "touchScreen", "args": args})
 
     def swipeScreen(self, args: Dict[str, Any]):
         if self.isChild:
-            swipeScreen(device, args["x1"], args["y1"], args["x2"], args["y2"])
+            swipeScreen(device.getDevice(), args["x1"], args["y1"], args["x2"], args["y2"])
         else:
             self.parentConn.send({"method": "swipeScreen", "args": args})

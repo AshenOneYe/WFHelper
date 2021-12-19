@@ -53,7 +53,7 @@ class WFHelper:
         # 长时间未操作则随机点击一次
         if t - GlobalState.getState("lastActionTime") > GlobalConfig.randomClickDelay:
             Log.info("长时间未操作，随机点击一次")
-            touchScreen(device, GlobalConfig.randomClickArea)
+            touchScreen(device.getDevice(), GlobalConfig.randomClickArea)
             self.updateActionTime(t)
         return False
 
