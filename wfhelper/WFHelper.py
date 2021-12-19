@@ -21,13 +21,13 @@ class WFHelper:
 
         try:
             tmp = screen.crop(target.area)
-            s = similarity(tmp, target)
+            s = similarity(tmp, target.hash, target.histogram, target.colorRatio)
             similarityThreshold = GlobalConfig.similarityThreshold
             if target.similarityThreshold is not None:
                 similarityThreshold = target.similarityThreshold
             if s >= similarityThreshold:
                 if target.text is not None:
-                    Log.info("{} - 识别相似度：{}".format(target.text, s))
+                    Log.info("{} - 识别相似度: {}".format(target.text, s))
                 result = True
         finally:
             return result

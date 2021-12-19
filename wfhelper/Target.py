@@ -8,7 +8,7 @@ class Target:
         self.text = None
         self.area = None
         self.histogram = None
-        self.colorRatio = None
+        self.colorRatio = 0
         self.description = None
         self.similarityThreshold = None
         self.actions: List[Any] = list()
