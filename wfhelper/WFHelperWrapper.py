@@ -1,5 +1,5 @@
 import threading
-from multiprocessing import Pipe, Process
+from multiprocessing import Lock, Pipe, Process
 
 from utils import Log, adbUtil
 
@@ -22,13 +22,15 @@ class WFHelperWrapper(Process):
 
     isChild = False
 
+    lock = Lock()
+
     def __init__(self, serial: str, config):
         super().__init__()
         self.daemon = True
         self.serial = serial
         self.config = config
-        self.childConn, self.parentConn = Pipe()
-        self.childEventConn, self.parentEventConn = Pipe()
+        self.parentConn, self.childConn = Pipe()
+        self.parentEventConn, self.childEventConn = Pipe(False)
 
         self.wfhelper = WFHelper()
 
@@ -65,16 +67,19 @@ class WFHelperWrapper(Process):
                 self.wfhelper.lastFrame = frame
 
     def emit(self, type, data):
-        self.childEventConn.send({"type": type, "data": data})
+        try:
+            self.lock.acquire()
+            self.childEventConn.send({"type": type, "data": data})
+        finally:
+            self.lock.release()
 
     def setEventHandler(self, handler):
         def waitForEvent():
             while True:
-                try:
-                    event = self.parentEventConn.recv()
-                    handler(event)
-                except Exception:
-                    continue
+                # FIXME recv 偶尔会报 _pickle.UnpicklingError，continue 并不能解决阻塞
+                # 在 send 端加上 lock 目前经测试 24 小时内未出现问题，但仍需要放弃使用 Pipe
+                event = self.parentEventConn.recv()
+                handler(event)
 
         self.eventHandlerThread = threading.Thread(target=waitForEvent)
         self.eventHandlerThread.daemon = True

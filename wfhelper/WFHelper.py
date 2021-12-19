@@ -1,4 +1,3 @@
-import random
 import time
 
 from .Action import ActionManager
@@ -60,9 +59,7 @@ class WFHelper:
         return False
 
     def loopDelay(self):
-        a, b = self.config.loopDelay
-        delay = random.uniform(a, b)
-        time.sleep(delay)
+        self.actionManager.delay(self.config.loopDelay)
 
     def isIdle(self):
         if self.state.getState("isRunning"):

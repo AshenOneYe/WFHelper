@@ -1,4 +1,4 @@
-
+import random
 import re
 import time
 from os import path
@@ -17,9 +17,9 @@ class ActionManager:
     state = State()
 
     def formatArg(self, arg):
-        while isinstance(arg, str) and '$' in arg:
-            argLeft = arg[:arg.rfind("$")]
-            argRight = arg[arg.rfind("$")+1:]
+        while isinstance(arg, str) and "$" in arg:
+            argLeft = arg[: arg.rfind("$")]
+            argRight = arg[arg.rfind("$") + 1:]
             if argLeft == "":
                 tmp = self.state.getState(argRight)
                 if tmp is None:
@@ -35,8 +35,12 @@ class ActionManager:
     def click(self, area):
         adbUtil.touchScreen(area)
 
-    def sleep(self, args):
-        time.sleep(args[0])
+    def delay(self, args):
+        if len(args) > 1:
+            delay = random.uniform(args[0], args[1])
+        else:
+            delay = args[0]
+        time.sleep(delay)
 
     def accessState(self, args):
         action, name, value = args
@@ -46,10 +50,10 @@ class ActionManager:
         if name is None:
             return
 
-        if action == 'set':
+        if action == "set":
             self.state.setState(name, value)
 
-        if action == 'increase':
+        if action == "increase":
             if name == "无" or name is None:
                 return
             if not self.state.has(name):
@@ -69,10 +73,8 @@ class ActionManager:
         else:
             name, mode = args[0], "once"
 
-        targets = self.wfhelper.config.targetList[name]
-
         if mode == "loop":
-            return self.state.setState("currentTargets", targets)
+            return self.state.setState("currentTargets", name)
 
         if mode == "once":
             return self.changeTarget([name, None])
@@ -131,8 +133,8 @@ class ActionManager:
                     self.click(self.wfhelper.config.screenSize)
             else:
                 self.click(action["args"][0])
-        elif action["name"] == "sleep":
-            self.sleep(action["args"])
+        elif action["name"] == "delay" or action["name"] == "sleep":
+            self.delay(action["args"])
         elif action["name"] == "state":
             self.accessState(action["args"])
         elif action["name"] == "changeTargets":
@@ -143,10 +145,14 @@ class ActionManager:
             self.info(action["args"])
         elif action["name"] == "exit":
             import sys
+
             sys.exit()
         elif action["name"] == "getScreen":
             if "args" not in action:
-                savePath = path.join(self.wfhelper.config.configDir, "temp/{}.png".format(int(time.time())))
+                savePath = path.join(
+                    self.wfhelper.config.configDir,
+                    "temp/{}.png".format(int(time.time())),
+                )
                 self.getScreen(savePath)
             else:
                 self.getScreen(action["args"])
@@ -154,8 +160,7 @@ class ActionManager:
             self.match(target, action["args"])
         else:
             Log.error(
-                "action:'{}'不存在！请检查'{}'的配置文件".format(
-                    action["name"], target["name"])
+                "action:'{}'不存在！请检查'{}'的配置文件".format(action["name"], target["name"])
             )
 
     def doActions(self, target, actions=None):
