@@ -1,17 +1,13 @@
 import threading
-from multiprocessing import Pipe, Process
+from multiprocessing import Lock, Pipe, Process
 
-from utils.ADBUtil import adbUtil
-from utils.LogUtil import Log
+from utils import Log, adbUtil
 
-from wfhelper.WFHelper import WFHelper
+from .WFHelper import WFHelper
 
 
 class WFHelperWrapper(Process):
 
-    wfhelper = WFHelper()
-
-    serial = None
     config = None
 
     receivingThread = None
@@ -26,13 +22,17 @@ class WFHelperWrapper(Process):
 
     isChild = False
 
-    def __init__(self, serial, config):
+    lock = Lock()
+
+    def __init__(self, serial: str, config):
         super().__init__()
         self.daemon = True
         self.serial = serial
         self.config = config
-        self.childConn, self.parentConn = Pipe()
-        self.childEventConn, self.parentEventConn = Pipe()
+        self.parentConn, self.childConn = Pipe()
+        self.parentEventConn, self.childEventConn = Pipe(False)
+
+        self.wfhelper = WFHelper()
 
     def run(self):
         self.init()
@@ -40,12 +40,13 @@ class WFHelperWrapper(Process):
 
     def init(self):
         self.isChild = True
-
         self.config.init()
         self.wfhelper.setConfig(self.config)
         self.wfhelper.state.setCallback(self.onStateUpdate)
 
-        self.receivingThread = threading.Thread(target=self.onChildReceive, args=(self.childConn,))
+        self.receivingThread = threading.Thread(
+            target=self.onChildReceive, args=(self.childConn,)
+        )
         self.receivingThread.daemon = True
         self.receivingThread.start()
 
@@ -66,19 +67,19 @@ class WFHelperWrapper(Process):
                 self.wfhelper.lastFrame = frame
 
     def emit(self, type, data):
-        self.childEventConn.send({
-            "type": type,
-            "data": data
-        })
+        try:
+            self.lock.acquire()
+            self.childEventConn.send({"type": type, "data": data})
+        finally:
+            self.lock.release()
 
     def setEventHandler(self, handler):
         def waitForEvent():
             while True:
-                try:
-                    event = self.parentEventConn.recv()
-                    handler(event)
-                except Exception:
-                    continue
+                # FIXME recv 偶尔会报 _pickle.UnpicklingError，continue 并不能解决阻塞
+                # 在 send 端加上 lock 目前经测试 24 小时内未出现问题，但仍需要放弃使用 Pipe
+                event = self.parentEventConn.recv()
+                handler(event)
 
         self.eventHandlerThread = threading.Thread(target=waitForEvent)
         self.eventHandlerThread.daemon = True
@@ -112,18 +113,13 @@ class WFHelperWrapper(Process):
         if self.isChild:
             self.wfhelper.state.setState(args["key"], args["value"])
         else:
-            self.parentConn.send({
-                "method": "setState",
-                "args": args
-            })
+            self.parentConn.send({"method": "setState", "args": args})
 
     def getLogArray(self):
         if self.isChild:
             self.childConn.send(Log.logArray)
         else:
-            self.parentConn.send({
-                "method": "getLogArray"
-            })
+            self.parentConn.send({"method": "getLogArray"})
             return self.parentConn.recv()
 
     def setLogLimit(self, args):
@@ -131,10 +127,7 @@ class WFHelperWrapper(Process):
             Log.logArray = []
             Log.logLimit = args
         else:
-            self.parentConn.send({
-                "method": "setLogLimit",
-                "args": args
-            })
+            self.parentConn.send({"method": "setLogLimit", "args": args})
 
     def startWFHelper(self):
         if self.isChild:
@@ -150,23 +143,12 @@ class WFHelperWrapper(Process):
 
     def touchScreen(self, args):
         if self.isChild:
-            adbUtil.touchScreen([
-                args["x"], args["y"],
-                args["x"] + 1, args["y"] + 1])
+            adbUtil.touchScreen([args["x"], args["y"], args["x"] + 1, args["y"] + 1])
         else:
-            self.parentConn.send({
-                "method": "touchScreen",
-                "args": args
-            })
+            self.parentConn.send({"method": "touchScreen", "args": args})
 
     def swipeScreen(self, args):
         if self.isChild:
-            adbUtil.swipeScreen(
-                args["x1"], args["y1"],
-                args["x2"], args["y2"]
-            )
+            adbUtil.swipeScreen(args["x1"], args["y1"], args["x2"], args["y2"])
         else:
-            self.parentConn.send({
-                "method": "swipeScreen",
-                "args": args
-            })
+            self.parentConn.send({"method": "swipeScreen", "args": args})

@@ -61,7 +61,9 @@ class Config:
             targets = self.configData[targetsName]
             for target in targets:
                 if "path" in target:
-                    img = getImageCrop(path.join(self.configDir, target["path"]), target["area"])
+                    img = getImageCrop(
+                        path.join(self.configDir, target["path"]), target["area"]
+                    )
                     target["hash"] = getImageHash(image=img)
                     if "colorRatio" in target:
                         target["histogram"] = img.histogram()

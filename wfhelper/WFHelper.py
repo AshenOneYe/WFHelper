@@ -1,12 +1,11 @@
-import random
 import time
 
-from wfhelper.Action import ActionManager
-from wfhelper.Config import Config
-from wfhelper.State import State
-from utils.ADBUtil import adbUtil
-from utils.ImageUtil import readImageFromBytes, similarity
-from utils.LogUtil import Log
+from .Action import ActionManager
+from .Config import Config
+from .State import State
+from utils import adbUtil
+from utils import readImageFromBytes, similarity
+from utils import Log
 
 
 class WFHelper:
@@ -15,7 +14,7 @@ class WFHelper:
 
     config = Config()
     state = State()
-    
+
     lastFrame = None
     screen = None
 
@@ -42,7 +41,7 @@ class WFHelper:
 
         for target in targets:
             if targetName is not None:
-                if target['name'] != targetName:
+                if target["name"] != targetName:
                     continue
             if "hash" not in target or self.check(target, screen):
                 if "hash" not in target:
@@ -60,9 +59,7 @@ class WFHelper:
         return False
 
     def loopDelay(self):
-        a, b = self.config.loopDelay
-        delay = random.uniform(a, b)
-        time.sleep(delay)
+        self.actionManager.delay(self.config.loopDelay)
 
     def isIdle(self):
         if self.state.getState("isRunning"):
@@ -83,13 +80,16 @@ class WFHelper:
         try:
             while True:
                 if not self.isIdle():
-                    targets = self.config.targetList[self.state.getState("currentTargets")]
+                    targets = self.config.targetList[
+                        self.state.getState("currentTargets")
+                    ]
                     t = time.time()
                     self.mainLoop(targets)
                     Log.debug("比对循环耗时: {}秒".format(time.time() - t))
                     self.loopDelay()
         except KeyboardInterrupt:
             import sys
+
             sys.exit()
 
     def start(self):

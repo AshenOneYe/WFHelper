@@ -1,0 +1,965 @@
+{
+  "name": "1280*720模拟器混铃铛",
+  "author": "snyssss",
+  "description": "适用于1280*720，DPI240",
+  "similarityThreshold": 0.95,
+  "loopDelay": [0.2, 1.0],
+  "randomClickDelay": 600,
+  "randomClickArea": [0, 1240, 40, 1280],
+  "screenSize": [1280, 720],
+  "state": {
+    "八岐大蛇": "0b1",
+    "管理者": "0b11",
+    "诅咒弧魔艾基尔": "0b11",
+    "不死王瑞西塔尔": "0b11",
+    "白虎": "0b11",
+    "寄居蟹船长": "0b11",
+    "废墟魔像": "0b1111",
+    "维·索拉斯": "0b1",
+    "伊尔考普斯": "0b11"
+  },
+  "targetList": [
+    "mainTargets",
+    "参加",
+    "跳过",
+    "铃铛",
+    "八岐大蛇",
+    "管理者",
+    "诅咒弧魔艾基尔",
+    "不死王瑞西塔尔",
+    "白虎",
+    "寄居蟹船长",
+    "废墟魔像",
+    "维·索拉斯",
+    "伊尔考普斯"
+  ],
+  "mainTargets": [
+    {
+      "name": "铃铛",
+      "path": "lingdang.png",
+      "area": [30, 18, 62, 50],
+      "actions": [{ "name": "click" }],
+      "text": "准备上车"
+    },
+    {
+      "name": "参加",
+      "path": "canjia.png",
+      "area": [440, 1040, 640, 1100],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["铃铛"]
+        }
+      ]
+    },
+    {
+      "name": "警告",
+      "path": "alert.png",
+      "area": [300, 800, 460, 840],
+      "actions": [
+        { "name": "click" },
+        { "name": "delay", "args": [1] },
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "无"]
+        }
+      ],
+      "text": "点击OK"
+    },
+    {
+      "name": "离开",
+      "path": "likai.png",
+      "area": [120, 1180, 320, 1220],
+      "actions": [
+        { "name": "click" },
+        { "name": "delay", "args": [1] },
+        {
+          "name": "state",
+          "args": ["increase", "$正在挑战的boss", 1]
+        },
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "无"]
+        }
+      ],
+      "text": "蹭车结束，离开房间"
+    },
+    {
+      "name": "放弃",
+      "path": "fangqi.png",
+      "area": [480, 800, 640, 840],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "关卡失败，点击放弃"
+    },
+    {
+      "name": "关卡完成",
+      "path": "wanchengguanqia.png",
+      "area": [120, 1180, 320, 1220],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "关卡完成"
+    },
+    {
+      "name": "失败",
+      "path": "shibai.png",
+      "area": [120, 1040, 320, 1080],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "关卡失败"
+    },
+    {
+      "name": "继续",
+      "path": "jixu.png",
+      "area": [300, 1180, 460, 1220],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击继续"
+    },
+    {
+      "name": "OK",
+      "path": "ok.png",
+      "area": [300, 1180, 460, 1220],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击OK"
+    },
+    {
+      "name": "准备",
+      "path": "zhunbei.png",
+      "area": [240, 900, 480, 920],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击准备"
+    },
+    {
+      "name": "准备",
+      "path": "zhunbei2.png",
+      "area": [240, 900, 480, 920],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击准备"
+    },
+    {
+      "name": "摇人",
+      "path": "yaoren.png",
+      "area": [310, 770, 410, 850],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "开始摇人"
+    },
+    {
+      "name": "摇人确认",
+      "path": "yaoren2.png",
+      "area": [480, 900, 640, 940],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "等待乘客"
+    },
+    {
+      "name": "发车",
+      "path": "fache.png",
+      "area": [280, 850, 460, 940],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "开始发车"
+    },
+    {
+      "name": "发车2",
+      "path": "fache2.png",
+      "area": [280, 850, 460, 940],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "开始发车"
+    },
+    {
+      "name": "解散",
+      "path": "jiesan.png",
+      "area": [120, 1180, 320, 1220],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "发车完成，离开房间"
+    },
+    {
+      "name": "新人物",
+      "path": "new-character.png",
+      "area": [150, 1090, 300, 1170],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$isDebug",
+            {
+              "True": [
+                {
+                  "name": "getScreen"
+                }
+              ]
+            }
+          ]
+        },
+        { "name": "click" },
+        { "name": "delay", "args": [1] }
+      ],
+      "text": "获得新人物"
+    },
+    {
+      "name": "升级",
+      "path": "shengji.png",
+      "area": [300, 560, 460, 600],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "已升级"
+    }
+  ],
+  "参加": [
+    {
+      "name": "参加",
+      "path": "canjia.png",
+      "area": [440, 1040, 640, 1100],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "点击参加"
+    }
+  ],
+  "跳过": [
+    {
+      "name": "参加",
+      "path": "canjia.png",
+      "area": [120, 1040, 320, 1100],
+      "actions": [{ "name": "click" }],
+      "text": "点击跳过"
+    }
+  ],
+  "铃铛": [
+    {
+      "name": "八岐大蛇 - 高级",
+      "path": "boss/she-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["八岐大蛇", "高级"]
+        }
+      ],
+      "text": "铃铛内容：八岐大蛇 - 高级"
+    },
+    {
+      "name": "管理者 - 高级",
+      "path": "boss/guang-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["管理者", "高级"]
+        }
+      ],
+      "text": "铃铛内容：管理者 - 高级"
+    },
+    {
+      "name": "管理者 - 中级",
+      "path": "boss/guang-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["管理者", "中级"]
+        }
+      ],
+      "text": "铃铛内容：管理者 - 中级"
+    },
+    {
+      "name": "诅咒弧魔艾基尔 - 高级",
+      "path": "boss/an-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["诅咒弧魔艾基尔", "高级"]
+        }
+      ],
+      "text": "铃铛内容：诅咒弧魔艾基尔 - 高级"
+    },
+    {
+      "name": "不死王瑞西塔尔 - 高级",
+      "path": "boss/feng-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["不死王瑞西塔尔", "高级"]
+        }
+      ],
+      "text": "铃铛内容：不死王瑞西塔尔 - 高级"
+    },
+    {
+      "name": "不死王瑞西塔尔 - 中级",
+      "path": "boss/feng-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["不死王瑞西塔尔", "中级"]
+        }
+      ],
+      "text": "铃铛内容：不死王瑞西塔尔 - 中级"
+    },
+    {
+      "name": "白虎 - 高级",
+      "path": "boss/lei-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["白虎", "高级"]
+        }
+      ],
+      "text": "铃铛内容：白虎 - 高级"
+    },
+    {
+      "name": "白虎 - 中级",
+      "path": "boss/lei-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["白虎", "中级"]
+        }
+      ],
+      "text": "铃铛内容：白虎 - 中级"
+    },
+    {
+      "name": "寄居蟹船长 - 高级",
+      "path": "boss/shui-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["寄居蟹船长", "高级"]
+        }
+      ],
+      "text": "铃铛内容：寄居蟹船长 - 高级"
+    },
+    {
+      "name": "寄居蟹船长 - 中级",
+      "path": "boss/shui-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["寄居蟹船长", "中级"]
+        }
+      ],
+      "text": "铃铛内容：寄居蟹船长 - 中级"
+    },
+    {
+      "name": "废墟魔像 - 超级",
+      "path": "boss/huo-4.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["废墟魔像", "超级"]
+        }
+      ],
+      "text": "铃铛内容：废墟魔像 - 超级"
+    },
+    {
+      "name": "废墟魔像 - 高级+",
+      "path": "boss/huo-3.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["废墟魔像", "高级+"]
+        }
+      ],
+      "text": "铃铛内容：废墟魔像 - 高级+"
+    },
+    {
+      "name": "废墟魔像 - 高级",
+      "path": "boss/huo-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["废墟魔像", "高级"]
+        }
+      ],
+      "text": "铃铛内容：废墟魔像 - 高级"
+    },
+    {
+      "name": "废墟魔像 - 中级",
+      "path": "boss/huo-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["废墟魔像", "中级"]
+        }
+      ],
+      "text": "铃铛内容：废墟魔像 - 中级"
+    },
+    {
+      "name": "维·索拉斯 - 初级",
+      "path": "boss/niao-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["维·索拉斯", "初级"]
+        }
+      ],
+      "text": "铃铛内容：维·索拉斯 - 初级"
+    },
+    {
+      "name": "伊尔考普斯 - 高级+",
+      "path": "boss/lei-feilong-3.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["伊尔考普斯", "高级+"]
+        }
+      ],
+      "text": "铃铛内容：伊尔考普斯 - 高级+"
+    },
+    {
+      "name": "伊尔考普斯 - 高级",
+      "path": "boss/lei-feilong-2.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["伊尔考普斯", "高级"]
+        }
+      ],
+      "text": "铃铛内容：伊尔考普斯 - 高级"
+    },
+    {
+      "name": "参加",
+      "path": "canjia.png",
+      "area": [440, 1040, 640, 1100],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$isDebug",
+            {
+              "True": [
+                {
+                  "name": "getScreen"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "state",
+          "args": ["set", "正在挑战的boss", "未知"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ]
+    }
+  ],
+  "八岐大蛇": [
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$八岐大蛇 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "八岐大蛇 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "管理者": [
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$管理者 & (1 << (2 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "管理者 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$管理者 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "管理者 - 中级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "诅咒弧魔艾基尔": [
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$诅咒弧魔艾基尔 & (1 << (2 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "诅咒弧魔艾基尔 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "不死王瑞西塔尔": [
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$不死王瑞西塔尔 & (1 << (2 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "不死王瑞西塔尔 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$不死王瑞西塔尔 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "不死王瑞西塔尔 - 中级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "白虎": [
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$白虎 & (1 << (2 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "白虎 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$白虎 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "白虎 - 中级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "寄居蟹船长": [
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$寄居蟹船长 & (1 << (2 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "寄居蟹船长 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$寄居蟹船长 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "寄居蟹船长 - 中级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "废墟魔像": [
+    {
+      "name": "超级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$废墟魔像 & (1 << (4 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "废墟魔像 - 超级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "高级+",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$废墟魔像 & (1 << (3 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "废墟魔像 - 高级+"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$废墟魔像 & (1 << (2 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "废墟魔像 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$废墟魔像 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "废墟魔像 - 中级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "维·索拉斯": [
+    {
+      "name": "初级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$维·索拉斯 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "维·索拉斯 - 初级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "伊尔考普斯": [
+    {
+      "name": "高级+",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$伊尔考普斯 & (1 << (2 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "伊尔考普斯 - 高级+"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$伊尔考普斯 & (1 << (1 - 1)) > 0",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["set", "正在挑战的boss", "伊尔考普斯 - 高级"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

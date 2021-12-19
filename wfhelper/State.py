@@ -1,6 +1,6 @@
 import time
 
-from utils.LogUtil import Log
+from utils import Log
 
 
 class State:
