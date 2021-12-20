@@ -26,7 +26,7 @@ class State:
         if key in self.content:
             return self.content[key]
         else:
-            Log.error("尝试获取不存在的状态值 : {}".format(key))
+            Log.info("尝试获取不存在的状态值 : {}".format(key))
             return None
 
     def merge(self, dict: Dict[str, Any]):

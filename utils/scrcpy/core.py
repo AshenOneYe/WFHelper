@@ -138,7 +138,6 @@ class Client:
         self.__server_stream.read(10)
 
     def start(self, threaded: bool = False) -> None:
-        print("start")
         """
         Start listening video stream
 

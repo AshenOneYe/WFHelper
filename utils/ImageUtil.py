@@ -52,6 +52,15 @@ def readImageFromBytes(bytes: bytes) -> ImageClass:
     return img
 
 
+output_buffer = BytesIO()
+
+
+def img2bytes(img: ImageClass) -> bytes:
+    output_buffer = BytesIO()
+    img.save(output_buffer, format="PNG")
+    return output_buffer.getvalue()
+
+
 def getImageHash(image: ImageClass = None, path: str = None) -> imagehash.ImageHash:
     if path is not None:
         image = Image.open(path)
