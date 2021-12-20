@@ -41,7 +41,6 @@ class ActionManager:
                 area = target.area
         else:
             area = args[1][0]
-        print(area)
         touchScreen(WFGlobal.device, area)
 
     def delay(self, *args):
