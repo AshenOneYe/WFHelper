@@ -7,7 +7,7 @@ from typing import Any, Callable, Dict
 from utils import Log
 from utils.ADBUtil import getDevice, logDeviceInfo, getScreen, touchScreen, swipeScreen
 
-from .Global import GlobalConfig, GlobalState, device
+from .Global import WFGlobal
 from .WFHelper import WFHelper
 
 
@@ -32,10 +32,10 @@ class WFHelperWrapper(Process):
 
     def init(self):
         self.isChild = True
-        GlobalConfig.setConfigData(self.config).init()
-        GlobalState.setCallback(self.onStateUpdate)
-        device.setDevice(getDevice(self.serial))
-        logDeviceInfo(device.getDevice())
+        WFGlobal.config.setConfigData(self.config).init()
+        WFGlobal.state.setCallback(self.onStateUpdate)
+        WFGlobal.device = getDevice(self.serial)
+        logDeviceInfo(WFGlobal.device)
         self.receivingThread = threading.Thread(
             target=self.onChildReceive, args=(self.childConn,)
         )
@@ -50,7 +50,7 @@ class WFHelperWrapper(Process):
 
     def frameLoop(self):
         while True:
-            frame = getScreen(device.getDevice())
+            frame = getScreen(WFGlobal.device)
 
             if frame is not None:
                 self.onFrameUpdate(frame)
@@ -94,14 +94,14 @@ class WFHelperWrapper(Process):
 
     def getState(self):
         if self.isChild:
-            self.childConn.send(GlobalState.content)
+            self.childConn.send(WFGlobal.state.content)
         else:
             self.parentConn.send({"method": "getState"})
             return self.parentConn.recv()
 
     def setState(self, args: Dict[str, Any]):
         if self.isChild:
-            GlobalState.setState(args["key"], args["value"])
+            WFGlobal.state.setState(args["key"], args["value"])
         else:
             self.parentConn.send({"method": "setState", "args": args})
 
@@ -133,12 +133,12 @@ class WFHelperWrapper(Process):
 
     def touchScreen(self, args: Dict[str, Any]):
         if self.isChild:
-            touchScreen(device.getDevice(), [args["x"], args["y"], args["x"] + 1, args["y"] + 1])
+            touchScreen(WFGlobal.device, [args["x"], args["y"], args["x"] + 1, args["y"] + 1])
         else:
             self.parentConn.send({"method": "touchScreen", "args": args})
 
     def swipeScreen(self, args: Dict[str, Any]):
         if self.isChild:
-            swipeScreen(device.getDevice(), args["x1"], args["y1"], args["x2"], args["y2"])
+            swipeScreen(WFGlobal.device, args["x1"], args["y1"], args["x2"], args["y2"])
         else:
             self.parentConn.send({"method": "swipeScreen", "args": args})

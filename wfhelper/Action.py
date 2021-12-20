@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 from asteval import Interpreter
 from utils import Log
 from utils.ADBUtil import getScreen, touchScreen
-from .Global import GlobalConfig, GlobalState, device
+from .Global import WFGlobal
 from .Target import Target
 import sys
 
@@ -22,27 +22,27 @@ class ActionManager:
             argLeft = arg[: arg.rfind("$")]
             argRight = arg[arg.rfind("$") + 1:]
             if argLeft == "":
-                tmp = GlobalState.getState(argRight)
+                tmp = WFGlobal.state.getState(argRight)
                 if tmp is None:
                     return None
                 arg = tmp
             else:
-                tmp = GlobalState.getState(argRight)
+                tmp = WFGlobal.state.getState(argRight)
                 if tmp is None:
                     return None
-                arg = argLeft + GlobalState.getState(argRight)
+                arg = argLeft + WFGlobal.state.getState(argRight)
         return arg
 
     def click(self, *args):
         target = args[0]  # type: Target
-        area = GlobalConfig.screenSize
+        area = WFGlobal.config.screenSize
         if args[1] is None:
             if target.area is not None:
                 area = target.area
         else:
             area = args[1][0]
         print(area)
-        touchScreen(device.getDevice(), area)
+        touchScreen(WFGlobal.device, area)
 
     def delay(self, *args):
         self.sleep(args)
@@ -65,19 +65,19 @@ class ActionManager:
             return
 
         if action == "set":
-            GlobalState.setState(name, value)
+            WFGlobal.state.setState(name, value)
 
         if action == "increase":
             if name == "无" or name is None:
                 return
-            if not GlobalState.has(name):
-                GlobalState.setState(name, 0)
-            value = int(value) + int(GlobalState.getState(name))
-            GlobalState.setState(name, value)
+            if not WFGlobal.state.has(name):
+                WFGlobal.state.setState(name, 0)
+            value = int(value) + int(WFGlobal.state.getState(name))
+            WFGlobal.state.setState(name, value)
 
     def changeTarget(self, *args):
         name, targetName = args
-        targets = GlobalConfig.targetDict[name]
+        targets = WFGlobal.config.targetDict[name]
 
         return self.wfhelper.mainLoop(targets, targetName)
 
@@ -89,7 +89,7 @@ class ActionManager:
             name, mode = args[0], "once"
 
         if mode == "loop":
-            return GlobalState.setState("currentTargets", name)
+            return WFGlobal.state.setState("currentTargets", name)
 
         if mode == "once":
             return self.changeTarget(name, None)
@@ -117,9 +117,9 @@ class ActionManager:
                 str("./"),
                 "temp/{}.png".format(int(time.time())),
             )
-            getScreen(device.getDevice(), savePath)
+            getScreen(WFGlobal.device, savePath)
         else:
-            getScreen(device.getDevice(), args[0])
+            getScreen(WFGlobal.device, args[0])
 
     def match(self, *args):
         target = args[0]  # type: Target
