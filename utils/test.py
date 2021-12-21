@@ -1,8 +1,11 @@
 import scrcpy
 from PIL import Image
 from ImageUtil import img2bytes
+from adbutils import AdbClient
 
-client = scrcpy.Client(device="192.168.137.164:5555")
+
+adb = AdbClient()
+client = scrcpy.Client(device=adb.device_list()[0])
 
 
 def on_frame(frame):
@@ -12,8 +15,7 @@ def on_frame(frame):
     if frame is not None:
         # frame is an bgr numpy ndarray (cv2' default format)
         img = Image.fromarray(frame)
-        open("test.png", "wb").write(img2bytes(img))
-        exit()
+        img2bytes(img)
 
 
 client.add_listener(scrcpy.EVENT_FRAME, on_frame)

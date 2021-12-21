@@ -75,7 +75,7 @@ class ActionManager:
             WFGlobal.state.setState(name, value)
 
     def changeTarget(self, *args):
-        name, targetName = args
+        name, targetName = args[1]
         targets = WFGlobal.config.targetDict[name]
 
         return self.wfhelper.mainLoop(targets, targetName)
@@ -91,7 +91,7 @@ class ActionManager:
             return WFGlobal.state.setState("currentTargets", name)
 
         if mode == "once":
-            return self.changeTarget(name, None)
+            return self.changeTarget(None, [name, None])
 
         return False
 

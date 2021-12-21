@@ -2,5 +2,5 @@
 
 from .ADBUtil import *
 from .LogUtil import Log
-from .ImageUtil import readImageFromBytes, similarity, getImageCrop, getImageHash
+from .ImageUtil import readImageFromBytes, similarity, getImageCrop, getImageHash, img2bytes
 from .ConfigUtil import getConfig, selectConfig

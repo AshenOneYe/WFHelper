@@ -7,7 +7,7 @@ from time import sleep
 from typing import Any, Callable, Optional, Tuple, Union
 
 import numpy as np
-from adbutils import AdbDevice, AdbError, Network, _AdbStreamConnection, adb
+from adbutils import AdbDevice, AdbError, Network, _AdbStreamConnection
 from av.codec import CodecContext
 
 from .const import EVENT_FRAME, EVENT_INIT, LOCK_SCREEN_ORIENTATION_UNLOCKED
@@ -34,16 +34,11 @@ class Client:
             max_width: frame width that will be broadcast from android server
             bitrate: bitrate
             max_fps: maximum fps, 0 means not limited (supported after android 10)
-            block_frame: only return nonempty frames
+            block_frame: only return nonempty frames, may block cv2 render thread
             stay_awake: keep Android device awake
             lock_screen_orientation: lock screen orientation, LOCK_SCREEN_ORIENTATION_*
             connection_timeout: timeout for connection, unit is ms
         """
-
-        if device is None:
-            device = adb.device_list()[0]
-        elif isinstance(device, str):
-            device = adb.device(serial=device)
 
         self.device = device
         self.listeners = dict(frame=[], init=[])
@@ -180,7 +175,7 @@ class Client:
                 for packet in packets:
                     frames = codec.decode(packet)
                     for frame in frames:
-                        frame = frame.to_ndarray(format="bgr24")
+                        frame = frame.to_ndarray(format="rgb24")
                         self.last_frame = frame
                         self.resolution = (frame.shape[1], frame.shape[0])
                         self.__send_to_listeners(EVENT_FRAME, frame)
