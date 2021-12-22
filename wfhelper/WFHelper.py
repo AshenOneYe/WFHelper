@@ -107,6 +107,6 @@ class WFHelper:
     def setConfig(self, config):
         self.config = config
 
-    def setConfigSettings(self, key, value):
-        self.state.setState(key, value)
-        self.config.write_settings({key: value})
+    def mergeConfigSettings(self, data):
+        self.state.merge(data)
+        self.config.merge_settings(data)

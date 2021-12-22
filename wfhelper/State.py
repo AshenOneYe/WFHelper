@@ -32,6 +32,8 @@ class State:
 
     def merge(self, dict):
         self.content = merge(self.content, dict, strategy=Strategy.ADDITIVE)
+        if self.callback is not None:
+            self.callback(self.content)
 
     def has(self, key):
         if key in self.content:

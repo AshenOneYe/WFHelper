@@ -115,11 +115,11 @@ class WFHelperWrapper(Process):
         else:
             self.parentConn.send({"method": "setState", "args": args})
 
-    def setConfigSettings(self, args):
+    def mergeConfigSettings(self, args):
         if self.isChild:
-            self.wfhelper.setConfigSettings(args["key"], args["value"])
+            self.wfhelper.mergeConfigSettings(args)
         else:
-            self.parentConn.send({"method": "setConfigSettings", "args": args})
+            self.parentConn.send({"method": "mergeConfigSettings", "args": args})
 
     def getLogArray(self):
         if self.isChild:

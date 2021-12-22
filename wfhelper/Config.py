@@ -91,7 +91,7 @@ class Config:
 
         return {}
 
-    def write_settings(self, data):
+    def merge_settings(self, data):
         path = Path(self.settingsPath)
 
         if path.is_file():
