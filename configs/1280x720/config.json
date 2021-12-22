@@ -120,12 +120,12 @@
       "伊尔考普斯": {
         "高级+": {
           "name": "伊尔考普斯 - 高级+",
-          "party": "J",
+          "party": "",
           "enabled": true
         },
         "高级": {
           "name": "伊尔考普斯 - 高级",
-          "party": "J",
+          "party": "",
           "enabled": true
         }
       }
