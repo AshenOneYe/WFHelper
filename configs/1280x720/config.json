@@ -8,19 +8,131 @@
   "randomClickArea": [0, 1240, 40, 1280],
   "screenSize": [1280, 720],
   "state": {
-    "八岐大蛇": "0b1",
-    "管理者": "0b11",
-    "诅咒弧魔艾基尔": "0b11",
-    "不死王瑞西塔尔": "0b11",
-    "白虎": "0b11",
-    "寄居蟹船长": "0b11",
-    "废墟魔像": "0b1111",
-    "维·索拉斯": "0b1",
-    "伊尔考普斯": "0b11"
+    "当前铃铛": {},
+    "铃铛计数": {},
+    "铃铛设置": {
+      "八岐大蛇": {
+        "高级": {
+          "name": "八岐大蛇 - 高级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "管理者": {
+        "高级": {
+          "name": "管理者 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "管理者 - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "诅咒弧魔艾基尔": {
+        "高级": {
+          "name": "诅咒弧魔艾基尔 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "诅咒弧魔艾基尔 - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "不死王瑞西塔尔": {
+        "超级": {
+          "name": "不死王瑞西塔尔 - 超级",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "不死王瑞西塔尔 - 高级+",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "不死王瑞西塔尔 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "不死王瑞西塔尔 - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "白虎": {
+        "高级": {
+          "name": "白虎 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "白虎 - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "寄居蟹船长": {
+        "高级": {
+          "name": "寄居蟹船长 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "寄居蟹船长 - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "废墟魔像": {
+        "超级": {
+          "name": "废墟魔像 - 超级",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "废墟魔像 - 高级+",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "废墟魔像 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "废墟魔像 - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "维·索拉斯": {
+        "初级": {
+          "name": "维·索拉斯 - 初级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "伊尔考普斯": {
+        "高级+": {
+          "name": "伊尔考普斯 - 高级+",
+          "party": "J",
+          "enabled": true
+        },
+        "高级": {
+          "name": "伊尔考普斯 - 高级",
+          "party": "J",
+          "enabled": true
+        }
+      }
+    }
   },
   "targetList": [
     "mainTargets",
-    "搬空商店",
     "主要",
     "参加",
     "跳过",
@@ -33,7 +145,9 @@
     "寄居蟹船长",
     "废墟魔像",
     "维·索拉斯",
-    "伊尔考普斯"
+    "伊尔考普斯",
+    "切换铃铛队伍",
+    "搬空商店"
   ],
   "mainTargets": [
     {
@@ -44,122 +158,6 @@
           "args": ["主要", "loop"]
         }
       ]
-    }
-  ],
-  "搬空商店": [
-    {
-      "name": "进入商店",
-      "path": "shop/shop-1.png",
-      "area": [400, 1200, 450, 1250],
-      "actions": [
-        {
-          "name": "click"
-        }
-      ],
-      "text": "进入商店"
-    },
-    {
-      "name": "进入玛纳商店",
-      "path": "shop/shop-2.png",
-      "area": [50, 550, 100, 600],
-      "actions": [
-        {
-          "name": "click"
-        }
-      ],
-      "text": "进入玛纳商店"
-    },
-    {
-      "name": "点击商品",
-      "path": "shop/shop-3.png",
-      "area": [380, 270, 650, 300],
-      "actions": [
-        {
-          "name": "click",
-          "args": [[35, 400, 685, 500]]
-        }
-      ],
-      "text": "点击商品"
-    },
-    {
-      "name": "开始搬运",
-      "path": "shop/shop-4-1.png",
-      "area": [560, 675, 610, 725],
-      "similarityThreshold": 1,
-      "actions": [
-        {
-          "name": "click"
-        }
-      ],
-      "text": "开始搬运"
-    },
-    {
-      "name": "开始搬运",
-      "path": "shop/shop-4-2.png",
-      "area": [560, 675, 610, 725],
-      "similarityThreshold": 1,
-      "actions": [
-        {
-          "name": "click"
-        }
-      ],
-      "text": "开始搬运"
-    },
-    {
-      "name": "确认搬运",
-      "path": "shop/shop-5-1.png",
-      "area": [560, 675, 610, 725],
-      "actions": [
-        {
-          "name": "click",
-          "args": [[400, 900, 600, 940]]
-        }
-      ],
-      "text": "确认搬运"
-    },
-    {
-      "name": "确认搬运",
-      "path": "shop/shop-5-2.png",
-      "area": [560, 675, 610, 725],
-      "actions": [
-        {
-          "name": "click",
-          "args": [[400, 980, 600, 1020]]
-        }
-      ],
-      "text": "确认搬运"
-    },
-    {
-      "name": "搬空完毕",
-      "path": "shop/shop-6-1.png",
-      "area": [400, 900, 600, 940],
-      "actions": [
-        {
-          "name": "click",
-          "args": [[100, 900, 300, 940]]
-        },
-        {
-          "name": "changeTargets",
-          "args": ["主要", "loop"]
-        }
-      ],
-      "text": "任务完成，返回主要任务"
-    },
-    {
-      "name": "搬空完毕",
-      "path": "shop/shop-6-2.png",
-      "area": [400, 900, 600, 940],
-      "actions": [
-        {
-          "name": "click",
-          "args": [[100, 900, 300, 940]]
-        },
-        {
-          "name": "changeTargets",
-          "args": ["主要", "loop"]
-        }
-      ],
-      "text": "任务完成，返回主要任务"
     }
   ],
   "主要": [
@@ -190,7 +188,7 @@
         { "name": "delay", "args": [1] },
         {
           "name": "state",
-          "args": ["set", "正在挑战的boss", "无"]
+          "args": ["set", "当前铃铛", {}]
         }
       ],
       "text": "点击OK"
@@ -204,11 +202,15 @@
         { "name": "delay", "args": [1] },
         {
           "name": "state",
-          "args": ["increase", "$正在挑战的boss", 1]
+          "args": [
+            "merge",
+            "铃铛计数",
+            "'name' in $当前铃铛 and { $当前铃铛['name']: $当前铃铛['name'] in $铃铛计数 and $铃铛计数[$当前铃铛['name']] + 1 or 1 } or {}"
+          ]
         },
         {
           "name": "state",
-          "args": ["set", "正在挑战的boss", "无"]
+          "args": ["set", "当前铃铛", {}]
         }
       ],
       "text": "蹭车结束，离开房间"
@@ -266,7 +268,7 @@
       "name": "摇人",
       "path": "yaoren.png",
       "area": [310, 770, 410, 850],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
       "text": "开始摇人"
     },
     {
@@ -317,7 +319,7 @@
       "name": "参加",
       "path": "canjia.png",
       "area": [440, 1040, 640, 1100],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2, 10] }],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
       "text": "点击参加"
     }
   ],
@@ -378,6 +380,18 @@
         }
       ],
       "text": "铃铛内容：诅咒弧魔艾基尔 - 高级"
+    },
+    {
+      "name": "诅咒弧魔艾基尔 - 中级",
+      "path": "boss/an-1.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "changeTarget",
+          "args": ["诅咒弧魔艾基尔", "中级"]
+        }
+      ],
+      "text": "铃铛内容：诅咒弧魔艾基尔 - 中级"
     },
     {
       "name": "不死王瑞西塔尔 - 高级",
@@ -554,10 +568,6 @@
           ]
         },
         {
-          "name": "state",
-          "args": ["set", "正在挑战的boss", "未知"]
-        },
-        {
           "name": "changeTargets",
           "args": ["参加"]
         }
@@ -571,16 +581,20 @@
         {
           "name": "match",
           "args": [
-            "$八岐大蛇 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['八岐大蛇']['高级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "八岐大蛇 - 高级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['八岐大蛇']['高级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -602,16 +616,20 @@
         {
           "name": "match",
           "args": [
-            "$管理者 & (1 << (2 - 1)) > 0",
+            "$铃铛设置['管理者']['高级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "管理者 - 高级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['管理者']['高级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -631,16 +649,20 @@
         {
           "name": "match",
           "args": [
-            "$管理者 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['管理者']['中级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "管理者 - 中级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['管理者']['中级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -662,47 +684,24 @@
         {
           "name": "match",
           "args": [
-            "$诅咒弧魔艾基尔 & (1 << (2 - 1)) > 0",
+            "$铃铛设置['诅咒弧魔艾基尔']['高级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "诅咒弧魔艾基尔 - 高级"]
+                  "args": [
+                    "set",
+                    "当前铃铛",
+                    "$铃铛设置['诅咒弧魔艾基尔']['高级']"
+                  ]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "不死王瑞西塔尔": [
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$不死王瑞西塔尔 & (1 << (2 - 1)) > 0",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "正在挑战的boss", "不死王瑞西塔尔 - 高级"]
                 },
                 {
                   "name": "changeTargets",
-                  "args": ["参加"]
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -722,16 +721,174 @@
         {
           "name": "match",
           "args": [
-            "$不死王瑞西塔尔 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['诅咒弧魔艾基尔']['中级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "不死王瑞西塔尔 - 中级"]
+                  "args": [
+                    "set",
+                    "当前铃铛",
+                    "$铃铛设置['诅咒弧魔艾基尔']['中级']"
+                  ]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "不死王瑞西塔尔": [
+    {
+      "name": "超级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$铃铛设置['不死王瑞西塔尔']['超级']['enabled']",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": [
+                    "set",
+                    "当前铃铛",
+                    "$铃铛设置['不死王瑞西塔尔']['超级']"
+                  ]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "高级+",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$铃铛设置['不死王瑞西塔尔']['高级+']['enabled']",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": [
+                    "set",
+                    "当前铃铛",
+                    "$铃铛设置['不死王瑞西塔尔']['高级+']"
+                  ]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "高级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$铃铛设置['不死王瑞西塔尔']['高级']['enabled']",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": [
+                    "set",
+                    "当前铃铛",
+                    "$铃铛设置['不死王瑞西塔尔']['高级']"
+                  ]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "changeTargets",
+                  "args": ["跳过"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "中级",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$铃铛设置['不死王瑞西塔尔']['中级']['enabled']",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": [
+                    "set",
+                    "当前铃铛",
+                    "$铃铛设置['不死王瑞西塔尔']['中级']"
+                  ]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -753,16 +910,20 @@
         {
           "name": "match",
           "args": [
-            "$白虎 & (1 << (2 - 1)) > 0",
+            "$铃铛设置['白虎']['高级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "白虎 - 高级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['白虎']['高级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -782,16 +943,20 @@
         {
           "name": "match",
           "args": [
-            "$白虎 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['白虎']['中级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "白虎 - 中级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['白虎']['中级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -813,16 +978,20 @@
         {
           "name": "match",
           "args": [
-            "$寄居蟹船长 & (1 << (2 - 1)) > 0",
+            "$铃铛设置['寄居蟹船长']['高级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "寄居蟹船长 - 高级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['高级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -842,16 +1011,20 @@
         {
           "name": "match",
           "args": [
-            "$寄居蟹船长 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['寄居蟹船长']['中级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "寄居蟹船长 - 中级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['中级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -873,16 +1046,20 @@
         {
           "name": "match",
           "args": [
-            "$废墟魔像 & (1 << (4 - 1)) > 0",
+            "$铃铛设置['废墟魔像']['超级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "废墟魔像 - 超级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['超级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -902,16 +1079,20 @@
         {
           "name": "match",
           "args": [
-            "$废墟魔像 & (1 << (3 - 1)) > 0",
+            "$铃铛设置['废墟魔像']['高级+']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "废墟魔像 - 高级+"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['高级+']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -931,16 +1112,20 @@
         {
           "name": "match",
           "args": [
-            "$废墟魔像 & (1 << (2 - 1)) > 0",
+            "$铃铛设置['废墟魔像']['高级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "废墟魔像 - 高级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['高级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -960,16 +1145,20 @@
         {
           "name": "match",
           "args": [
-            "$废墟魔像 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['废墟魔像']['中级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "废墟魔像 - 中级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['中级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -991,16 +1180,20 @@
         {
           "name": "match",
           "args": [
-            "$维·索拉斯 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['维·索拉斯']['初级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "维·索拉斯 - 初级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['维·索拉斯']['初级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -1022,16 +1215,24 @@
         {
           "name": "match",
           "args": [
-            "$伊尔考普斯 & (1 << (2 - 1)) > 0",
+            "$铃铛设置['伊尔考普斯']['高级+']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "伊尔考普斯 - 高级+"]
+                  "args": [
+                    "set",
+                    "当前铃铛",
+                    "$铃铛设置['伊尔考普斯']['高级+']"
+                  ]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -1051,16 +1252,20 @@
         {
           "name": "match",
           "args": [
-            "$伊尔考普斯 & (1 << (1 - 1)) > 0",
+            "$铃铛设置['伊尔考普斯']['高级']['enabled']",
             {
               "True": [
                 {
                   "name": "state",
-                  "args": ["set", "正在挑战的boss", "伊尔考普斯 - 高级"]
+                  "args": ["set", "当前铃铛", "$铃铛设置['伊尔考普斯']['高级']"]
                 },
                 {
                   "name": "changeTargets",
                   "args": ["参加"]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
                 }
               ],
               "False": [
@@ -1073,6 +1278,479 @@
           ]
         }
       ]
+    }
+  ],
+  "切换铃铛队伍": [
+    {
+      "name": "警告",
+      "path": "alert.png",
+      "area": [300, 800, 460, 840],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ]
+    },
+    {
+      "name": "编成",
+      "path": "party/party-1.png",
+      "area": [620, 100, 680, 160],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == ''",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "队伍 A",
+      "path": "party/party-2-1.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'A'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 A"
+    },
+    {
+      "name": "队伍 B",
+      "path": "party/party-2-2.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'B'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 B"
+    },
+    {
+      "name": "队伍 C",
+      "path": "party/party-2-3.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'C'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 C"
+    },
+    {
+      "name": "队伍 D",
+      "path": "party/party-2-4.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'D'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 D"
+    },
+    {
+      "name": "队伍 E",
+      "path": "party/party-2-5.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'E'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 E"
+    },
+    {
+      "name": "队伍 F",
+      "path": "party/party-2-6.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'F'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 F"
+    },
+    {
+      "name": "队伍 G",
+      "path": "party/party-2-7.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'G'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 G"
+    },
+    {
+      "name": "队伍 H",
+      "path": "party/party-2-8.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'H'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 H"
+    },
+    {
+      "name": "队伍 I",
+      "path": "party/party-2-9.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'I'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 I"
+    },
+    {
+      "name": "队伍 J",
+      "path": "party/party-2-10.png",
+      "area": [190, 45, 530, 85],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['party'] == 'J'",
+            {
+              "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "swipe",
+                  "args": [120, 45, 600, 85]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "text": "切换到队伍 J"
+    }
+  ],
+  "搬空商店": [
+    {
+      "name": "进入商店",
+      "path": "shop/shop-1.png",
+      "area": [400, 1200, 450, 1250],
+      "actions": [
+        {
+          "name": "click"
+        }
+      ],
+      "text": "进入商店"
+    },
+    {
+      "name": "进入玛纳商店",
+      "path": "shop/shop-2.png",
+      "area": [50, 550, 100, 600],
+      "actions": [
+        {
+          "name": "click"
+        }
+      ],
+      "text": "进入玛纳商店"
+    },
+    {
+      "name": "点击商品",
+      "path": "shop/shop-3.png",
+      "area": [380, 270, 650, 300],
+      "actions": [
+        {
+          "name": "click",
+          "args": [35, 400, 685, 500]
+        }
+      ],
+      "text": "点击商品"
+    },
+    {
+      "name": "开始搬运",
+      "path": "shop/shop-4-1.png",
+      "area": [560, 675, 610, 725],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "click"
+        }
+      ]
+    },
+    {
+      "name": "开始搬运",
+      "path": "shop/shop-4-2.png",
+      "area": [560, 675, 610, 725],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "click"
+        }
+      ]
+    },
+    {
+      "name": "确认搬运",
+      "path": "shop/shop-5-1.png",
+      "area": [560, 675, 610, 725],
+      "actions": [
+        {
+          "name": "click",
+          "args": [400, 900, 600, 940]
+        }
+      ],
+      "text": "确认搬运"
+    },
+    {
+      "name": "确认搬运",
+      "path": "shop/shop-5-2.png",
+      "area": [560, 675, 610, 725],
+      "actions": [
+        {
+          "name": "click",
+          "args": [400, 980, 600, 1020]
+        }
+      ],
+      "text": "确认搬运"
+    },
+    {
+      "name": "搬空完毕",
+      "path": "shop/shop-6-1.png",
+      "area": [400, 900, 600, 940],
+      "actions": [
+        {
+          "name": "click",
+          "args": [100, 900, 300, 940]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "任务完成，返回主要任务"
+    },
+    {
+      "name": "搬空完毕",
+      "path": "shop/shop-6-2.png",
+      "area": [400, 900, 600, 940],
+      "actions": [
+        {
+          "name": "click",
+          "args": [100, 900, 300, 940]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "任务完成，返回主要任务"
     }
   ]
 }

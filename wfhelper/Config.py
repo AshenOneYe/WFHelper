@@ -1,6 +1,7 @@
 import json
-from typing import Dict
+from typing import Any, Dict
 from os import path
+from pathlib import Path
 
 from utils.ImageUtil import getImageCrop, getImageHash
 from utils.LogUtil import Log
@@ -18,7 +19,7 @@ class Config:
     loopDelay = [0, 0]  # 每轮循环的延迟时间
     configData = None
     targetList = {}  # type: Dict[str, list]
-    state = {}  # type: Dict[str, str]
+    state = {}  # type: Dict[str, Any]
 
     def __init__(self, configPath=None):
 
@@ -27,6 +28,8 @@ class Config:
 
         self.configPath = configPath
         self.configDir = path.dirname(configPath)
+
+        self.settingsPath = path.join(self.configDir, "settings.json")
 
         data = open(self.configPath, "r", encoding="utf-8").read()
         self.configData = json.loads(data)
@@ -73,3 +76,29 @@ class Config:
         Log.info("配置文件名称 : {}".format(self.name))
         Log.info("配置文件作者 : {}".format(self.author))
         Log.info("配置文件描述 : {}".format(self.description))
+
+    def read_settings(self):
+        path = Path(self.settingsPath)
+
+        if path.is_file():
+            data = path.read_text(encoding="utf-8")
+
+            Log.info("载入配置文件设置")
+
+            return json.loads(data)
+
+        return {}
+
+    def write_settings(self, data):
+        path = Path(self.settingsPath)
+
+        if path.is_file():
+            source = path.read_bytes()
+
+            target = json.loads(source)
+        else:
+            target = {}
+
+        target.update(data)
+
+        path.write_bytes(json.dumps(target).encode("utf8"))

@@ -16,6 +16,26 @@ class ActionManager:
     wfhelper = None
     state = State()
 
+    def eval(self, arg):
+        if isinstance(arg, str) and "$" in arg:
+            func = arg
+
+            while isinstance(func, str) and "$" in func:
+                match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+·]+")
+                items = re.findall(match, func)
+
+                for item in items:
+                    func = func.replace(item, str(self.state.getState(item[1:])))
+
+            result = aeval(func)
+
+            Log.debug('计算"{}"结果为: {}'.format(arg, result))
+
+        else:
+            result = arg
+
+        return result
+
     def formatArg(self, arg):
         while isinstance(arg, str) and "$" in arg:
             argLeft = arg[: arg.rfind("$")]
@@ -35,6 +55,10 @@ class ActionManager:
     def click(self, area):
         adbUtil.touchScreen(area)
 
+    def swipe(self, args):
+        x1, y1, x2, y2 = args
+        adbUtil.swipeScreen(x1, y1, x2, y2)
+
     def delay(self, args):
         if len(args) > 1:
             delay = random.uniform(args[0], args[1])
@@ -46,19 +70,29 @@ class ActionManager:
         action, name, value = args
 
         name = self.formatArg(name)
-        value = self.formatArg(value)
+        value = self.eval(value)
+
         if name is None:
             return
 
         if action == "set":
             self.state.setState(name, value)
 
-        if action == "increase":
-            if name == "无" or name is None:
+        if action == "merge":
+            state = self.state.getState(name)
+
+            if not isinstance(state, dict):
                 return
-            if not self.state.has(name):
-                self.state.setState(name, 0)
-            value = int(value) + int(self.state.getState(name))
+
+            state.update(value)
+
+        if action == "increase":
+            if name == "无":
+                return
+
+            if self.state.has(name):
+                value = int(value) + int(self.state.getState(name))
+
             self.state.setState(name, value)
 
     def changeTarget(self, args):
@@ -100,17 +134,7 @@ class ActionManager:
     def match(self, target, args):
         exp, callbacks = args
 
-        func = exp
-
-        match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+\[\]·]+")
-        items = re.findall(match, func)
-
-        for item in items:
-            func = func.replace(item, str(self.formatArg(item)))
-
-        result = str(aeval(func))
-
-        Log.debug("判断“{}”结果为: {}".format(exp, result))
+        result = str(self.eval(exp))
 
         actions = None
 
@@ -122,17 +146,15 @@ class ActionManager:
 
     def doAction(self, target, action):
         if action["name"] == "click":
-            if (
-                "args" not in action
-                or len(action["args"]) == 0
-                or action["args"][0] is None
-            ):
+            if "args" not in action:
                 if "area" in target:
                     self.click(target["area"])
                 else:
                     self.click(self.wfhelper.config.screenSize)
             else:
-                self.click(action["args"][0])
+                self.click(action["args"])
+        elif action["name"] == "swipe":
+            self.swipe(action["args"])
         elif action["name"] == "delay" or action["name"] == "sleep":
             self.delay(action["args"])
         elif action["name"] == "state":
