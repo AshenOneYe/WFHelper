@@ -1,6 +1,8 @@
 import json
 from typing import Any, Dict
 from os import path
+
+from mergedeep import merge, Strategy
 from pathlib import Path
 
 from utils.ImageUtil import getImageCrop, getImageHash
@@ -95,10 +97,10 @@ class Config:
         if path.is_file():
             source = path.read_bytes()
 
-            target = json.loads(source)
+            source = json.loads(source)
         else:
-            target = {}
+            source = {}
 
-        target.update(data)
+        target = merge({}, source, data, strategy=Strategy.ADDITIVE)
 
         path.write_bytes(json.dumps(target).encode("utf8"))

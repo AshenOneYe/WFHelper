@@ -4,6 +4,7 @@ import time
 from os import path
 
 from asteval import Interpreter
+from mergedeep import merge, Strategy
 
 from .State import State
 from utils import adbUtil
@@ -84,7 +85,7 @@ class ActionManager:
             if not isinstance(state, dict):
                 return
 
-            state.update(value)
+            self.state.setState(name, merge(state, value, strategy=Strategy.ADDITIVE))
 
         if action == "increase":
             if name == "无":
