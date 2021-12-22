@@ -1295,7 +1295,7 @@
     {
       "name": "编成",
       "path": "party/party-1.png",
-      "area": [620, 100, 680, 160],
+      "area": [630, 120, 670, 160],
       "actions": [
         {
           "name": "match",
