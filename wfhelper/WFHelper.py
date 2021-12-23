@@ -94,6 +94,7 @@ class WFHelper:
 
     def start(self):
         self.state.merge(self.config.state)
+        self.state.merge(self.config.read_settings())
         self.state.setState("isRunning", True)
         self.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
@@ -105,3 +106,7 @@ class WFHelper:
 
     def setConfig(self, config):
         self.config = config
+
+    def mergeConfigSettings(self, data):
+        self.state.merge(data)
+        self.config.merge_settings(data)

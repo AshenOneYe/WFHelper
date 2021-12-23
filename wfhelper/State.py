@@ -1,5 +1,7 @@
 import time
 
+from mergedeep import merge, Strategy
+
 from utils import Log
 
 
@@ -29,7 +31,9 @@ class State:
             return None
 
     def merge(self, dict):
-        self.content.update(dict)
+        self.content = merge(self.content, dict, strategy=Strategy.ADDITIVE)
+        if self.callback is not None:
+            self.callback(self.content)
 
     def has(self, key):
         if key in self.content:
