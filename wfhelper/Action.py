@@ -44,7 +44,7 @@ class ActionManager:
         touchScreen(WFGlobal.device, area)
 
     def delay(self, *args):
-        self.sleep(args)
+        self.sleep(args[0], args[1])
 
     def sleep(self, *args):
         args = args[1]
