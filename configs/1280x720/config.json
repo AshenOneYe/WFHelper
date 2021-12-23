@@ -659,7 +659,7 @@
         {
           "name": "match",
           "args": [
-            "'party' not in $当前铃铛 or $当前铃铛['enabled']",
+            "'enabled' not in $当前铃铛 or $当前铃铛['enabled']",
             {
               "True": [
                 { "name": "click" },
