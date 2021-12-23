@@ -33,29 +33,26 @@ class ActionManager:
                 arg = argLeft + WFGlobal.state.getState(argRight)
         return arg
 
-    def click(self, *args):
-        target = args[0]  # type: Target
+    def click(self, target: Target, args):
         area = WFGlobal.config.screenSize
-        if args[1] is None:
+        if args is None:
             if target.area is not None:
                 area = target.area
         else:
-            area = args[1][0]
+            area = args[0]
         touchScreen(WFGlobal.device, area)
 
-    def delay(self, *args):
-        self.sleep(args[0], args[1])
+    def delay(self, target: Target, args):
+        self.sleep(target, args)
 
-    def sleep(self, *args):
-        args = args[1]
+    def sleep(self, target: Target, args):
         if len(args) > 1:
-            delay = random.uniform(args[0], args[1])
+            delay = random.uniform(*args)
         else:
             delay = args[0]
         time.sleep(delay)
 
-    def state(self, *args):
-        args = args[1]
+    def state(self, target: Target, args):
         action, name, value = args
 
         name = self.formatArg(name)
@@ -74,14 +71,13 @@ class ActionManager:
             value = int(value) + int(WFGlobal.state.getState(name))
             WFGlobal.state.setState(name, value)
 
-    def changeTarget(self, *args):
-        name, targetName = args[1]
+    def changeTarget(self, target: Target, args):
+        name, targetName = args
         targets = WFGlobal.config.targetDict[name]
 
         return self.wfhelper.mainLoop(targets, targetName)
 
-    def changeTargets(self, *args):
-        args = args[1]
+    def changeTargets(self, target: Target, args):
         if len(args) == 2:
             name, mode = args
         else:
@@ -91,12 +87,11 @@ class ActionManager:
             return WFGlobal.state.setState("currentTargets", name)
 
         if mode == "once":
-            return self.changeTarget(None, [name, None])
+            return self.changeTarget(target, [name, None])
 
         return False
 
-    def info(self, *args):
-        args = args[1]
+    def info(self, target: Target, args):
         if args is None:
             Log.error("`info` action的参数不能为空")
             return
@@ -109,9 +104,8 @@ class ActionManager:
         else:
             Log.info(str(tmp[0]).format(*tmp[1:]))
 
-    def getScreen(self, *args):
-        args = args[1]
-        if args[1] is None:
+    def getScreen(self, target: Target, args):
+        if args is None:
             savePath = path.join(
                 str("./"),
                 "temp/{}.png".format(int(time.time())),
@@ -120,9 +114,8 @@ class ActionManager:
         else:
             getScreen(WFGlobal.device, args[0])
 
-    def match(self, *args):
-        target = args[0]  # type: Target
-        exp, callbacks = args[1]
+    def match(self, target: Target, args):
+        exp, callbacks = args
 
         func = exp
 
@@ -144,7 +137,7 @@ class ActionManager:
         if actions is not None:
             self.doActions(target, actions)
 
-    def exit(self, *args):
+    def exit(self, target: Target, args):
         sys.exit()
 
     def doAction(self, target: Target, action: Dict[str, Any]):

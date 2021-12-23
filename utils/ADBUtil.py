@@ -15,7 +15,7 @@ def getADB():
     adbPath = os.path.join(basedir, "") + r"adb;"
     os.environ['PATH'] = adbPath + os.environ['PATH']
     os.system("adb start-server")
-    adb = AdbClient(host="127.0.0.1", port=5037)
+    adb = AdbClient()
     return adb
 
 

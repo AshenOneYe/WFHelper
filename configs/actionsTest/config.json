@@ -1,0 +1,206 @@
+{
+    "name":"test",
+    "author":"大A",
+    "description":"This is just for action test",
+    "similarityThreshold":0,
+    "randomClickDelay":300,
+    "loopDelay":1,
+    "randomClickArea":[0,0,1,1],
+    "screenSize":[2400,1080],
+    "targetList":["mainTargets","subTargets","loopTargets"],
+    "mainTargets":[
+        {
+            "name" : "maintest",
+            "path" : "test.png",
+            "area" : [0,0,1,1],
+            "colorRatio":0.2,
+            "text" : "discover main test",
+            "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
+            "actions" : [
+                {
+                    "name":"click"
+                },
+                {
+                    "name":"info",
+                    "args":["Click(no args) pass"]
+                },
+                {
+                    "name":"sleep",
+                    "args":[1]
+                },
+                {
+                    "name":"info",
+                    "args":["sleep(args:[1]) pass"]
+                },
+                {
+                    "name":"click",
+                    "args":[[0,0,1,1]]
+                },
+                {
+                    "name":"info",
+                    "args":["Click(args:[0,0,1,1]) pass"]
+                },
+                {
+                    "name":"sleep",
+                    "args":[0,1]
+                },
+                {
+                    "name":"info",
+                    "args":["sleep(args:[0,1]) pass"]
+                },
+                {
+                    "name":"state",
+                    "args":["set","testState","True"]
+                },
+                {
+                    "name":"info",
+                    "args":["state(args:['set','testState','True']) pass"]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                },
+                {
+                    "name":"info",
+                    "args":["delay(args:[0,1]) pass"]
+                },
+                {
+                    "name":"getScreen"
+                },
+                {
+                    "name":"info",
+                    "args":["getScreen(no args)"]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                },
+                {
+                    "name":"getScreen",
+                    "args":["test.png"]
+                },
+                {
+                    "name":"info",
+                    "args":["getScreen(args:['test.png'])"]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                },
+                {
+                    "name":"changeTargets",
+                    "args":["subTargets","once"]
+                },
+                {
+                    "name":"info",
+                    "args":["changeTargets(args:['subTargets','once'])"]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                },
+                {
+                    "name":"changeTarget",
+                    "args":["subTargets",null]
+                },
+                {
+                    "name":"info",
+                    "args":["changeTarget(args:['subTargets'])"]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                },
+                {
+                    "name":"changeTarget",
+                    "args":["subTargets","subtest"]
+                },
+                {
+                    "name":"info",
+                    "args":["changeTarget(args:['subTargets','subtest'])"]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                },
+                {
+                    "name":"changeTargets",
+                    "args":["loopTargets","loop"]
+                }
+
+            ]
+        }
+    ],
+    "subTargets":[
+        {
+            "name" : "subtest",
+            "path" : "test.png",
+            "area" : [0,0,1,1],
+            "text" : "discover sub test",
+            "actions" : [
+                {
+                    "name":"info",
+                    "args":["This is subtarget"]
+                }
+            ]
+        }
+    ],
+    "loopTargets":[
+        {
+            "name" : "subtest",
+            "path" : "test.png",
+            "area" : [0,0,1,1],
+            "text" : "discover loop test",
+            "actions" : [
+                {
+                    "name":"info",
+                    "args":["changeTargets(args:['loopTargets','loop'])"]
+                },
+                {
+                    "name":"state",
+                    "args":["increase","loop",1]
+                },
+                {
+                    "name":"info",
+                    "args":["state(args:['increase','loop'])"]
+                },
+                {
+                    "name":"info",
+                    "args":["LOOP: {}","$loop"]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                },
+                {
+                    "name":"match",
+                    "args":["$loop==3",{
+                        "True":[
+                            {
+                                "name":"info",
+                                "args":["match result : True"]
+                            },
+                            {
+                                "name":"info",
+                                "args":["All test pass,exit..."]
+                            },
+                            {
+                                "name":"exit"
+                            }
+                        ],
+                        "False":[
+                            {
+                                "name":"info",
+                                "args":["match result : False"]
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "name":"delay",
+                    "args":[0,1]
+                }
+            ]
+        }
+    ]
+}
