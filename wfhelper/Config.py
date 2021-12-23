@@ -83,9 +83,7 @@ class Config:
         path = Path(self.settingsPath)
 
         if path.is_file():
-            data = path.read_text(encoding="utf-8")
-
-            Log.info("载入配置文件设置")
+            data = path.read_bytes()
 
             return json.loads(data)
 
@@ -94,12 +92,7 @@ class Config:
     def merge_settings(self, data):
         path = Path(self.settingsPath)
 
-        if path.is_file():
-            source = path.read_bytes()
-
-            source = json.loads(source)
-        else:
-            source = {}
+        source = self.read_settings()
 
         target = merge({}, source, data, strategy=Strategy.ADDITIVE)
 
