@@ -134,18 +134,8 @@
   "targetList": [
     "mainTargets",
     "主要",
-    "参加",
-    "跳过",
     "铃铛",
-    "八岐大蛇",
-    "管理者",
-    "诅咒弧魔艾基尔",
-    "不死王瑞西塔尔",
-    "白虎",
-    "寄居蟹船长",
-    "废墟魔像",
-    "维·索拉斯",
-    "伊尔考普斯",
+    "参加",
     "切换铃铛队伍",
     "搬空商店"
   ],
@@ -314,24 +304,6 @@
       "text": "已升级"
     }
   ],
-  "参加": [
-    {
-      "name": "参加",
-      "path": "canjia.png",
-      "area": [440, 1040, 640, 1100],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
-      "text": "点击参加"
-    }
-  ],
-  "跳过": [
-    {
-      "name": "参加",
-      "path": "canjia.png",
-      "area": [120, 1040, 320, 1100],
-      "actions": [{ "name": "click" }],
-      "text": "点击跳过"
-    }
-  ],
   "铃铛": [
     {
       "name": "八岐大蛇 - 高级",
@@ -339,8 +311,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["八岐大蛇", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['八岐大蛇']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：八岐大蛇 - 高级"
@@ -351,8 +327,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["管理者", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['管理者']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：管理者 - 高级"
@@ -363,8 +343,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["管理者", "中级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['管理者']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：管理者 - 中级"
@@ -375,8 +359,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["诅咒弧魔艾基尔", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['诅咒弧魔艾基尔']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：诅咒弧魔艾基尔 - 高级"
@@ -387,8 +375,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["诅咒弧魔艾基尔", "中级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['诅咒弧魔艾基尔']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：诅咒弧魔艾基尔 - 中级"
@@ -399,8 +391,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["不死王瑞西塔尔", "超级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['不死王瑞西塔尔']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：不死王瑞西塔尔 - 超级"
@@ -411,8 +407,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["不死王瑞西塔尔", "高级+"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['不死王瑞西塔尔']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：不死王瑞西塔尔 - 高级+"
@@ -423,8 +423,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["不死王瑞西塔尔", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['不死王瑞西塔尔']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：不死王瑞西塔尔 - 高级"
@@ -435,8 +439,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["不死王瑞西塔尔", "中级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['不死王瑞西塔尔']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：不死王瑞西塔尔 - 中级"
@@ -447,8 +455,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["白虎", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['白虎']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：白虎 - 高级"
@@ -459,8 +471,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["白虎", "中级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['白虎']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：白虎 - 中级"
@@ -471,8 +487,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["寄居蟹船长", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：寄居蟹船长 - 高级"
@@ -483,8 +503,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["寄居蟹船长", "中级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：寄居蟹船长 - 中级"
@@ -495,8 +519,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["废墟魔像", "超级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：废墟魔像 - 超级"
@@ -507,8 +535,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["废墟魔像", "高级+"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：废墟魔像 - 高级+"
@@ -519,8 +551,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["废墟魔像", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：废墟魔像 - 高级"
@@ -531,8 +567,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["废墟魔像", "中级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：废墟魔像 - 中级"
@@ -543,8 +583,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["维·索拉斯", "初级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['维·索拉斯']['初级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：维·索拉斯 - 初级"
@@ -555,8 +599,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["伊尔考普斯", "高级+"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['伊尔考普斯']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：伊尔考普斯 - 高级+"
@@ -567,8 +615,12 @@
       "area": [100, 330, 160, 380],
       "actions": [
         {
-          "name": "changeTarget",
-          "args": ["伊尔考普斯", "高级"]
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['伊尔考普斯']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
         }
       ],
       "text": "铃铛内容：伊尔考普斯 - 高级"
@@ -598,24 +650,24 @@
       ]
     }
   ],
-  "八岐大蛇": [
+  "参加": [
     {
-      "name": "高级",
+      "name": "参加",
+      "path": "canjia.png",
+      "area": [440, 1040, 640, 1100],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$铃铛设置['八岐大蛇']['高级']['enabled']",
+            "'party' not in $当前铃铛 or $当前铃铛['enabled']",
             {
               "True": [
+                { "name": "click" },
                 {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['八岐大蛇']['高级']"]
+                  "name": "info",
+                  "args": ["点击参加"]
                 },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
+                { "name": "delay", "args": [2] },
                 {
                   "name": "changeTargets",
                   "args": ["切换铃铛队伍", "loop"]
@@ -623,679 +675,16 @@
               ],
               "False": [
                 {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "管理者": [
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['管理者']['高级']['enabled']",
-            {
-              "True": [
+                  "name": "click",
+                  "args": [120, 1040, 320, 1100]
+                },
                 {
                   "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['管理者']['高级']"]
+                  "args": ["set", "当前铃铛", {}]
                 },
                 {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "中级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['管理者']['中级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['管理者']['中级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "诅咒弧魔艾基尔": [
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['诅咒弧魔艾基尔']['高级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": [
-                    "set",
-                    "当前铃铛",
-                    "$铃铛设置['诅咒弧魔艾基尔']['高级']"
-                  ]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "中级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['诅咒弧魔艾基尔']['中级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": [
-                    "set",
-                    "当前铃铛",
-                    "$铃铛设置['诅咒弧魔艾基尔']['中级']"
-                  ]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "不死王瑞西塔尔": [
-    {
-      "name": "超级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['不死王瑞西塔尔']['超级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": [
-                    "set",
-                    "当前铃铛",
-                    "$铃铛设置['不死王瑞西塔尔']['超级']"
-                  ]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "高级+",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['不死王瑞西塔尔']['高级+']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": [
-                    "set",
-                    "当前铃铛",
-                    "$铃铛设置['不死王瑞西塔尔']['高级+']"
-                  ]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['不死王瑞西塔尔']['高级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": [
-                    "set",
-                    "当前铃铛",
-                    "$铃铛设置['不死王瑞西塔尔']['高级']"
-                  ]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "中级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['不死王瑞西塔尔']['中级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": [
-                    "set",
-                    "当前铃铛",
-                    "$铃铛设置['不死王瑞西塔尔']['中级']"
-                  ]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "白虎": [
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['白虎']['高级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['白虎']['高级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "中级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['白虎']['中级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['白虎']['中级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "寄居蟹船长": [
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['寄居蟹船长']['高级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['高级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "中级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['寄居蟹船长']['中级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['中级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "废墟魔像": [
-    {
-      "name": "超级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['废墟魔像']['超级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['超级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "高级+",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['废墟魔像']['高级+']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['高级+']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['废墟魔像']['高级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['高级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "中级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['废墟魔像']['中级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['废墟魔像']['中级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "维·索拉斯": [
-    {
-      "name": "初级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['维·索拉斯']['初级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['维·索拉斯']['初级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "伊尔考普斯": [
-    {
-      "name": "高级+",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['伊尔考普斯']['高级+']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": [
-                    "set",
-                    "当前铃铛",
-                    "$铃铛设置['伊尔考普斯']['高级+']"
-                  ]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "高级",
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$铃铛设置['伊尔考普斯']['高级']['enabled']",
-            {
-              "True": [
-                {
-                  "name": "state",
-                  "args": ["set", "当前铃铛", "$铃铛设置['伊尔考普斯']['高级']"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["参加"]
-                },
-                {
-                  "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "changeTargets",
-                  "args": ["跳过"]
+                  "name": "info",
+                  "args": ["点击跳过"]
                 }
               ]
             }
@@ -1324,7 +713,7 @@
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == ''",
+            "'party' not in $当前铃铛 or $当前铃铛['party'] == ''",
             {
               "True": [
                 {
