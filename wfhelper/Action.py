@@ -94,7 +94,6 @@ class ActionManager:
     def info(self, target: Target, args):
         if args is None:
             Log.error("`info` action的参数不能为空")
-            return
         tmp = []
         for t in args:
             t = self.formatArg(t)

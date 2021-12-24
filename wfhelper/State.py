@@ -1,5 +1,5 @@
 import time
-from typing import Any, Callable, Dict
+from typing import Any, Callable, Dict, List
 
 from utils import Log
 
@@ -13,14 +13,15 @@ class State:
             "isRunning": False,
             "currentTargets": "mainTargets",
         }
+        self.callbacks: List[Callable] = []
 
-    def setCallback(self, callback: Callable[..., Any]):
-        self.callback = callback
+    def addCallback(self, callback: Callable[..., Any]):
+        self.callbacks.append(callback)
 
     def setState(self, key: str, value: Any):
         self.content[key] = value
-        if self.callback is not None:
-            self.callback(self.content)
+        for func in self.callbacks:
+            func(self.content)
 
     def getState(self, key: str):
         if key in self.content:

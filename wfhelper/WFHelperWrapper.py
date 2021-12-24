@@ -46,7 +46,7 @@ class WFHelperWrapper(Process):
         self.frameThread.daemon = True
         self.frameThread.start()
 
-        Log.onLogAppend(self.onLogAppend)
+        Log.addCallback(self.onLogAppend)
 
     def frameLoop(self):
         while True:

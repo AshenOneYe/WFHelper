@@ -11,7 +11,7 @@ class LogUtil:
 
     logging.basicConfig(level=logging.INFO, format=LOG_FORMAT, datefmt=DATE_FORMAT)
 
-    logAppendEvent = None
+    callbacks: List[Callable] = []
 
     logArray = []  # type: List[Any]
     logLimit = 20
@@ -19,8 +19,8 @@ class LogUtil:
     def setDebugLevel(self):
         logging.getLogger().setLevel(logging.DEBUG)
 
-    def onLogAppend(self, callback: Callable):
-        self.logAppendEvent = callback
+    def addCallback(self, callback: Callable):
+        self.callbacks.append(callback)
 
     def append(self, logdata: str):
         log = {"time": int(time.time()), "message": logdata}
@@ -30,8 +30,8 @@ class LogUtil:
         if len(self.logArray) > self.logLimit:
             self.logArray.pop(0)
 
-        if self.logAppendEvent is not None:
-            self.logAppendEvent(log)
+        for func in self.callbacks:
+            func(log)
 
     def debug(self, msg: str):
         logging.debug(msg)
