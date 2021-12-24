@@ -28,7 +28,7 @@ class ActionManager:
                 items = re.findall(match, func)
 
                 for item in items:
-                    func = func.replace(item, str(self.state.getState(item[1:])))
+                    func = func.replace(item, str(Global.state.getState(item[1:])))
 
             result = aeval(func)
 
@@ -92,12 +92,12 @@ class ActionManager:
             WFGlobal.state.setState(name, value)
 
         if action == "merge":
-            state = self.state.getState(name)
+            state = Global.state.getState(name)
 
             if not isinstance(state, dict):
                 return
 
-            self.state.setState(name, merge(state, value, strategy=Strategy.ADDITIVE))
+            Global.state.setState(name, merge(state, value, strategy=Strategy.ADDITIVE))
 
         if action == "increase":
             if name == "无":
