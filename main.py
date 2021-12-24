@@ -63,5 +63,8 @@ if __name__ == "__main__":
 
         instance = WFHelperWrapper(serial, config)
 
-    server = Server(instance, isDebug)
-    server.run()
+    try:
+        server = Server(instance, isDebug)
+        server.run()
+    except Exception:
+        Log.error("服务器启动失败")

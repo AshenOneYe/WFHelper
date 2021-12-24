@@ -33,7 +33,7 @@ class WFHelperWrapper(Process):
     def init(self):
         self.isChild = True
         WFGlobal.config.setConfigData(self.config).init()
-        WFGlobal.state.setCallback(self.onStateUpdate)
+        WFGlobal.state.addCallback(self.onStateUpdate)
         WFGlobal.device = getDevice(self.serial)
         logDeviceInfo(WFGlobal.device)
         self.receivingThread = threading.Thread(
