@@ -11,6 +11,8 @@ asyncio = "*"
 websockets = "*"
 pure-python-adb = "*"
 av = "*"
+mergedeep = "*"
+
 
 [dev-packages]
 mypy = "*"

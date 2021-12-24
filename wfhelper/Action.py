@@ -4,9 +4,11 @@ import time
 from os import path
 from typing import Any, Dict, List
 from asteval import Interpreter
+from mergedeep import merge, Strategy
+
 from utils import Log
-from utils.ADBUtil import getScreen, touchScreen
-from .Global import WFGlobal
+from utils.ADBUtil import getScreen, touchScreen, swipeScreen
+from .Global import Global, WFGlobal
 from .Target import Target
 import sys
 
@@ -16,6 +18,26 @@ aeval = Interpreter()
 class ActionManager:
     def __init__(self, wfhelper):
         self.wfhelper = wfhelper
+
+    def eval(self, arg):
+        if isinstance(arg, str) and "$" in arg:
+            func = arg
+
+            while isinstance(func, str) and "$" in func:
+                match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+·]+")
+                items = re.findall(match, func)
+
+                for item in items:
+                    func = func.replace(item, str(self.state.getState(item[1:])))
+
+            result = aeval(func)
+
+            Log.debug('计算"{}"结果为: {}'.format(arg, result))
+
+        else:
+            result = arg
+
+        return result
 
     def formatArg(self, arg):
         while isinstance(arg, str) and "$" in arg:
@@ -42,10 +64,15 @@ class ActionManager:
             area = args[0]
         touchScreen(WFGlobal.device, area)
 
+    def swipe(self, args):
+        x1, y1, x2, y2 = args
+        swipeScreen(Global.device, x1, y1, x2, y2)
+
     def delay(self, target: Target, args):
         self.sleep(target, args)
 
     def sleep(self, target: Target, args):
+
         if len(args) > 1:
             delay = random.uniform(*args)
         else:
@@ -56,15 +83,24 @@ class ActionManager:
         action, name, value = args
 
         name = self.formatArg(name)
-        value = self.formatArg(value)
+        value = self.eval(value)
+
         if name is None:
             return
 
         if action == "set":
             WFGlobal.state.setState(name, value)
 
+        if action == "merge":
+            state = self.state.getState(name)
+
+            if not isinstance(state, dict):
+                return
+
+            self.state.setState(name, merge(state, value, strategy=Strategy.ADDITIVE))
+
         if action == "increase":
-            if name == "无" or name is None:
+            if name == "无":
                 return
             if not WFGlobal.state.has(name):
                 WFGlobal.state.setState(name, 0)
@@ -116,17 +152,7 @@ class ActionManager:
     def match(self, target: Target, args):
         exp, callbacks = args
 
-        func = exp
-
-        match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+\[\]·]+")
-        items = re.findall(match, func)
-
-        for item in items:
-            func = func.replace(item, str(self.formatArg(item)))
-
-        result = str(aeval(func))
-
-        Log.debug("判断“{}”结果为: {}".format(exp, result))
+        result = str(self.eval(exp))
 
         actions = None
 

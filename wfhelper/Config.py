@@ -1,5 +1,10 @@
+import json
 from typing import Dict, Any, List
+
 from os import path
+
+from mergedeep import merge, Strategy
+from pathlib import Path
 
 from utils.ImageUtil import getImageCrop, getImageHash
 from utils.LogUtil import Log
@@ -27,8 +32,8 @@ class Config:
         return self
 
     def init(self):
-        configDir = path.dirname(self.configData["configPath"])
-
+        self.configDir = path.dirname(self.configData["configPath"])
+        self.settingsPath = path.join(self.configDir, "settings.json")
         for key, value in self.configData.items():
             if key in self.__dict__:
                 self.__dict__[key] = value
@@ -46,7 +51,7 @@ class Config:
             for target in targets:
                 if "path" in target:
                     img = getImageCrop(
-                        path.join(configDir, target["path"]), target["area"]
+                        path.join(self.configDir, target["path"]), target["area"]
                     )
                     target["hash"] = getImageHash(image=img)
                     if "colorRatio" in target:
@@ -59,3 +64,22 @@ class Config:
         Log.info("配置文件名称 : {}".format(self.name))
         Log.info("配置文件作者 : {}".format(self.author))
         Log.info("配置文件描述 : {}".format(self.description))
+
+    def read_settings(self):
+        path = Path(self.settingsPath)
+
+        if path.is_file():
+            data = path.read_bytes()
+
+            return json.loads(data)
+
+        return {}
+
+    def merge_settings(self, data):
+        path = Path(self.settingsPath)
+
+        source = self.read_settings()
+
+        target = merge({}, source, data, strategy=Strategy.ADDITIVE)
+
+        path.write_bytes(json.dumps(target).encode("utf8"))

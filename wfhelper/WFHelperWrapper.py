@@ -105,6 +105,12 @@ class WFHelperWrapper(Process):
         else:
             self.parentConn.send({"method": "setState", "args": args})
 
+    def mergeConfigSettings(self, args):
+        if self.isChild:
+            self.wfhelper.mergeConfigSettings(args)
+        else:
+            self.parentConn.send({"method": "mergeConfigSettings", "args": args})
+
     def getLogArray(self):
         if self.isChild:
             self.childConn.send(Log.logArray)
@@ -142,3 +148,16 @@ class WFHelperWrapper(Process):
             swipeScreen(WFGlobal.device, args["x1"], args["y1"], args["x2"], args["y2"])
         else:
             self.parentConn.send({"method": "swipeScreen", "args": args})
+
+    def getTargetList(self):
+        if self.isChild:
+            self.childConn.send(list(self.wfhelper.config.targetList.keys()))
+        else:
+            self.parentConn.send({"method": "getTargetList"})
+            return self.parentConn.recv()
+
+    def changeTargets(self, args):
+        if self.isChild:
+            self.wfhelper.actionManager.changeTargets([args, "loop"])
+        else:
+            self.parentConn.send({"method": "changeTargets", "args": args})

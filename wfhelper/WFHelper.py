@@ -7,7 +7,7 @@ from utils import Log, readImageFromBytes, similarity
 from utils.ADBUtil import touchScreen
 
 from .Action import ActionManager
-from .Global import WFGlobal
+from .Global import Global, WFGlobal
 from .Target import Target
 
 
@@ -93,6 +93,7 @@ class WFHelper:
 
     def start(self):
         WFGlobal.state.merge(WFGlobal.config.state)
+        WFGlobal.state.merge(WFGlobal.config.read_settings())
         WFGlobal.state.setState("isRunning", True)
         WFGlobal.state.setState("startTime", int(time.time()))
         Log.info("开始自动脚本")
@@ -101,3 +102,10 @@ class WFHelper:
         WFGlobal.state.setState("isRunning", False)
         WFGlobal.state.setState("startTime", "")
         Log.info("停止自动脚本")
+
+    def setConfig(self, config):
+        self.config = config
+
+    def mergeConfigSettings(self, data):
+        Global.state.merge(data)
+        Global.config.merge_settings(data)

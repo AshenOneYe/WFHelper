@@ -1,6 +1,8 @@
 import time
 from typing import Any, Callable, Dict, List
 
+from mergedeep import merge, Strategy
+
 from utils import Log
 
 
@@ -31,7 +33,9 @@ class State:
             return None
 
     def merge(self, dict: Dict[str, Any]):
-        self.content.update(dict)
+        self.content = merge(self.content, dict, strategy=Strategy.ADDITIVE)
+        for func in self.callbacks:
+            func(self.content)
 
     def has(self, key: str):
         if key in self.content:
