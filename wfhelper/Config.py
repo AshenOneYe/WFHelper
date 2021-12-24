@@ -1,6 +1,9 @@
 import json
-from typing import Dict
+from typing import Any, Dict
 from os import path
+
+from mergedeep import merge, Strategy
+from pathlib import Path
 
 from utils.ImageUtil import getImageCrop, getImageHash
 from utils.LogUtil import Log
@@ -18,7 +21,7 @@ class Config:
     loopDelay = [0, 0]  # 每轮循环的延迟时间
     configData = None
     targetList = {}  # type: Dict[str, list]
-    state = {}  # type: Dict[str, str]
+    state = {}  # type: Dict[str, Any]
 
     def __init__(self, configPath=None):
 
@@ -27,6 +30,8 @@ class Config:
 
         self.configPath = configPath
         self.configDir = path.dirname(configPath)
+
+        self.settingsPath = path.join(self.configDir, "settings.json")
 
         data = open(self.configPath, "r", encoding="utf-8").read()
         self.configData = json.loads(data)
@@ -73,3 +78,22 @@ class Config:
         Log.info("配置文件名称 : {}".format(self.name))
         Log.info("配置文件作者 : {}".format(self.author))
         Log.info("配置文件描述 : {}".format(self.description))
+
+    def read_settings(self):
+        path = Path(self.settingsPath)
+
+        if path.is_file():
+            data = path.read_bytes()
+
+            return json.loads(data)
+
+        return {}
+
+    def merge_settings(self, data):
+        path = Path(self.settingsPath)
+
+        source = self.read_settings()
+
+        target = merge({}, source, data, strategy=Strategy.ADDITIVE)
+
+        path.write_bytes(json.dumps(target).encode("utf8"))
