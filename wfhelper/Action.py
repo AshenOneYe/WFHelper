@@ -18,15 +18,25 @@ class ActionManager:
     state = State()
 
     def eval(self, arg):
-        if isinstance(arg, str) and "$" in arg:
-            func = arg
+        if isinstance(arg, str):
+            if "$" in arg:
+                func = arg
 
-            while isinstance(func, str) and "$" in func:
-                match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+·]+")
-                items = re.findall(match, func)
+                while isinstance(func, str) and "$" in func:
+                    match = re.compile(r"\$[\u4E00-\u9FA5A-Za-z0-9_+·]+")
+                    items = re.findall(match, func)
 
-                for item in items:
-                    func = func.replace(item, str(self.state.getState(item[1:])))
+                    for item in items:
+                        key = item[1:]
+
+                        if self.state.has(key):
+                            value = self.state.getState(key)
+                        else:
+                            value = None
+
+                        func = func.replace(item, str(value))
+            else:
+                func = arg
 
             result = aeval(func)
 
