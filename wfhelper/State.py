@@ -36,6 +36,4 @@ class State:
             self.callback(self.content)
 
     def has(self, key):
-        if key in self.content:
-            return True
-        return False
+        return key in self.content
