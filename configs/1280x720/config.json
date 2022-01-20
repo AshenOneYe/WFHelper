@@ -30,6 +30,18 @@
           "enabled": true
         }
       },
+      "Sec-5200Li": {
+        "高级": {
+          "name": "Sec-5200Li - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "Sec-5200Li - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
       "白虎": {
         "高级": {
           "name": "白虎 - 高级",
@@ -62,6 +74,18 @@
         },
         "中级": {
           "name": "寄居蟹船长 - 中级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "潮汐巨妖": {
+        "高级": {
+          "name": "潮汐巨妖 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "潮汐巨妖 - 中级",
           "party": "",
           "enabled": true
         }
@@ -110,30 +134,6 @@
           "enabled": true
         }
       },
-      "潮汐巨妖": {
-        "高级": {
-          "name": "潮汐巨妖 - 高级",
-          "party": "",
-          "enabled": true
-        },
-        "中级": {
-          "name": "潮汐巨妖 - 中级",
-          "party": "",
-          "enabled": true
-        }
-      },
-      "Sec-5200Li": {
-        "高级": {
-          "name": "Sec-5200Li - 高级",
-          "party": "",
-          "enabled": true
-        },
-        "中级": {
-          "name": "Sec-5200Li - 中级",
-          "party": "",
-          "enabled": true
-        }
-      },
       "维·索拉斯": {
         "初级": {
           "name": "维·索拉斯 - 初级",
@@ -166,6 +166,18 @@
         },
         "高级": {
           "name": "伊尔考普斯 - 高级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "指挥者": {
+        "高级+": {
+          "name": "指挥者 - 高级+",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "指挥者 - 高级",
           "party": "",
           "enabled": true
         }
@@ -777,6 +789,38 @@
         }
       ],
       "text": "铃铛内容: 伊尔考普斯 - 高级"
+    },
+    {
+      "name": "指挥者 - 高级+",
+      "path": "boss/Conductor/Advanced+.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['指挥者']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 指挥者 - 高级+"
+    },
+    {
+      "name": "指挥者 - 高级",
+      "path": "boss/Conductor/Advanced.png",
+      "area": [100, 330, 160, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['指挥者']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 指挥者 - 高级"
     },
     {
       "name": "参加",
