@@ -55,6 +55,16 @@
         }
       },
       "诅咒弧魔艾基尔": {
+        "超级": {
+          "name": "诅咒弧魔艾基尔 - 超级",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "诅咒弧魔艾基尔 - 高级+",
+          "party": "",
+          "enabled": true
+        },
         "高级": {
           "name": "诅咒弧魔艾基尔 - 高级",
           "party": "",
@@ -178,6 +188,18 @@
         },
         "高级": {
           "name": "指挥者 - 高级",
+          "party": "",
+          "enabled": true
+        }
+      },
+      "女王·拉芙": {
+        "超级": {
+          "name": "女王·拉芙 - 超级",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "女王·拉芙 - 高级",
           "party": "",
           "enabled": true
         }
@@ -361,7 +383,7 @@
     {
       "name": "八岐大蛇 - 高级",
       "path": "boss/Orochi/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -377,7 +399,7 @@
     {
       "name": "管理者 - 高级",
       "path": "boss/The_Administrator/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -393,7 +415,7 @@
     {
       "name": "管理者 - 中级",
       "path": "boss/The_Administrator/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -409,7 +431,7 @@
     {
       "name": "Sec-5200Li - 高级",
       "path": "boss/Sec-5200Li/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -425,7 +447,7 @@
     {
       "name": "Sec-5200Li - 中级",
       "path": "boss/Sec-5200Li/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -441,7 +463,7 @@
     {
       "name": "白虎 - 高级",
       "path": "boss/Whitetail/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -457,7 +479,7 @@
     {
       "name": "白虎 - 中级",
       "path": "boss/Whitetail/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -471,9 +493,41 @@
       "text": "铃铛内容: 白虎 - 中级"
     },
     {
+      "name": "诅咒弧魔艾基尔 - 超级",
+      "path": "boss/Arch_Accursed/Godly.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['诅咒弧魔艾基尔']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 诅咒弧魔艾基尔 - 超级"
+    },
+    {
+      "name": "诅咒弧魔艾基尔 - 高级+",
+      "path": "boss/Arch_Accursed/Advanced+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['诅咒弧魔艾基尔']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 诅咒弧魔艾基尔 - 高级+"
+    },
+    {
       "name": "诅咒弧魔艾基尔 - 高级",
       "path": "boss/Arch_Accursed/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -489,7 +543,7 @@
     {
       "name": "诅咒弧魔艾基尔 - 中级",
       "path": "boss/Arch_Accursed/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -505,7 +559,7 @@
     {
       "name": "寄居蟹船长 - 高级",
       "path": "boss/Hermit_King/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -521,7 +575,7 @@
     {
       "name": "寄居蟹船长 - 中级",
       "path": "boss/Hermit_King/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -537,7 +591,7 @@
     {
       "name": "潮汐巨妖 - 高级",
       "path": "boss/Tidal_Kraken/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -553,7 +607,7 @@
     {
       "name": "潮汐巨妖 - 中级",
       "path": "boss/Tidal_Kraken/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -569,7 +623,7 @@
     {
       "name": "废墟魔像 - 超级",
       "path": "boss/Ancient_Golem/Godly.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -585,7 +639,7 @@
     {
       "name": "废墟魔像 - 高级+",
       "path": "boss/Ancient_Golem/Advanced+.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -601,7 +655,7 @@
     {
       "name": "废墟魔像 - 高级",
       "path": "boss/Ancient_Golem/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -617,7 +671,7 @@
     {
       "name": "废墟魔像 - 中级",
       "path": "boss/Ancient_Golem/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -633,7 +687,7 @@
     {
       "name": "不死王瑞西塔尔 - 超级",
       "path": "boss/Regitare_Undead_Lord/Godly.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -649,7 +703,7 @@
     {
       "name": "不死王瑞西塔尔 - 高级+",
       "path": "boss/Regitare_Undead_Lord/Advanced+.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -665,7 +719,7 @@
     {
       "name": "不死王瑞西塔尔 - 高级",
       "path": "boss/Regitare_Undead_Lord/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -681,7 +735,7 @@
     {
       "name": "不死王瑞西塔尔 - 中级",
       "path": "boss/Regitare_Undead_Lord/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -697,7 +751,7 @@
     {
       "name": "维·索拉斯 - 初级",
       "path": "boss/Owlbert/Normal.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -713,7 +767,7 @@
     {
       "name": "伊萨巴迪卡 - 高级+",
       "path": "boss/Flamewing/Advanced+.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -729,7 +783,7 @@
     {
       "name": "伊萨巴迪卡 - 高级",
       "path": "boss/Flamewing/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -745,7 +799,7 @@
     {
       "name": "伊萨巴迪卡 - 中级",
       "path": "boss/Flamewing/Intermediate.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -761,7 +815,7 @@
     {
       "name": "伊尔考普斯 - 高级+",
       "path": "boss/Shadowflash/Advanced+.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -777,7 +831,7 @@
     {
       "name": "伊尔考普斯 - 高级",
       "path": "boss/Shadowflash/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -793,7 +847,7 @@
     {
       "name": "指挥者 - 高级+",
       "path": "boss/Conductor/Advanced+.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -809,7 +863,7 @@
     {
       "name": "指挥者 - 高级",
       "path": "boss/Conductor/Advanced.png",
-      "area": [100, 330, 160, 380],
+      "area": [60, 300, 180, 380],
       "actions": [
         {
           "name": "state",
@@ -821,6 +875,38 @@
         }
       ],
       "text": "铃铛内容: 指挥者 - 高级"
+    },
+    {
+      "name": "女王·拉芙 - 超级",
+      "path": "boss/Mother_Love/Godly.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['女王·拉芙']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 女王·拉芙 - 超级"
+    },
+    {
+      "name": "女王·拉芙 - 高级",
+      "path": "boss/Mother_Love/Advanced.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['女王·拉芙']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 女王·拉芙 - 高级"
     },
     {
       "name": "参加",
