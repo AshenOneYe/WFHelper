@@ -1073,7 +1073,7 @@
         {
           "name": "match",
           "args": [
-            "'party' not in $当前铃铛 or $当前铃铛['party'] == ''",
+            "'party' not in $当前铃铛 or $当前铃铛['party'] == '' or $当前铃铛['name'] in $铃铛计数",
             {
               "True": [
                 {
