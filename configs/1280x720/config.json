@@ -43,6 +43,16 @@
         }
       },
       "白虎": {
+        "超级": {
+          "name": "白虎 - 超级",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "白虎 - 高级+",
+          "party": "",
+          "enabled": true
+        },
         "高级": {
           "name": "白虎 - 高级",
           "party": "",
@@ -476,6 +486,38 @@
         }
       ],
       "text": "铃铛内容: Sec-5200Li - 中级"
+    },
+    {
+      "name": "白虎 - 超级",
+      "path": "boss/Whitetail/Godly.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['白虎']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 白虎 - 超级"
+    },
+    {
+      "name": "白虎 - 高级+",
+      "path": "boss/Whitetail/Advanced+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['白虎']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 白虎 - 高级+"
     },
     {
       "name": "白虎 - 高级",
@@ -1073,7 +1115,7 @@
         {
           "name": "match",
           "args": [
-            "'party' not in $当前铃铛 or $当前铃铛['party'] == ''",
+            "'party' not in $当前铃铛 or $当前铃铛['party'] == '' or $当前铃铛['name'] in $铃铛计数",
             {
               "True": [
                 {
