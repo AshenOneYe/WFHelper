@@ -87,6 +87,16 @@
         }
       },
       "寄居蟹船长": {
+        "超级": {
+          "name": "寄居蟹船长 - 超级",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "寄居蟹船长 - 高级+",
+          "party": "",
+          "enabled": true
+        },
         "高级": {
           "name": "寄居蟹船长 - 高级",
           "party": "",
@@ -239,7 +249,8 @@
     "铃铛",
     "参加",
     "切换铃铛队伍",
-    "搬空商店"
+    "搬空商店",
+    "清空体力"
   ],
   "mainTargets": [
     {
@@ -614,6 +625,38 @@
         }
       ],
       "text": "铃铛内容: 诅咒弧魔艾基尔 - 中级"
+    },
+    {
+      "name": "寄居蟹船长 - 超级",
+      "path": "boss/Hermit_King/Godly.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 寄居蟹船长 - 超级"
+    },
+    {
+      "name": "寄居蟹船长 - 高级+",
+      "path": "boss/Hermit_King/Advanced+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['寄居蟹船长']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 寄居蟹船长 - 高级+"
     },
     {
       "name": "寄居蟹船长 - 高级",
@@ -1560,6 +1603,42 @@
           "name": "click",
           "args": [100, 900, 300, 940]
         },
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "任务完成，返回主要任务"
+    }
+  ],
+  "清空体力": [
+    {
+      "name": "挑战",
+      "path": "tiaozhan.png",
+      "area": [240, 1050, 480, 1100],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击挑战"
+    },
+    {
+      "name": "继续",
+      "path": "jixu.png",
+      "area": [300, 1180, 460, 1220],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击继续"
+    },
+    {
+      "name": "再次挑战",
+      "path": "again.png",
+      "area": [420, 1180, 620, 1220],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击再次挑战"
+    },
+    {
+      "name": "清空完毕",
+      "path": "energy.png",
+      "area": [240, 1080, 480, 1140],
+      "actions": [
+        { "name": "click" },
         {
           "name": "changeTargets",
           "args": ["主要", "loop"]
