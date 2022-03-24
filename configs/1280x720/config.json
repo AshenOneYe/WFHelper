@@ -240,6 +240,23 @@
           "party": "",
           "enabled": true
         }
+      },
+      "方舟守护者": {
+        "高级+": {
+          "name": "方舟守护者 - 高级+",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "方舟守护者 - 高级",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "方舟守护者 - 中级",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -1057,6 +1074,54 @@
         }
       ],
       "text": "铃铛内容: 女王·拉芙 - 高级"
+    },
+    {
+      "name": "方舟守护者 - 高级+",
+      "path": "boss/Arch_Custodian/Advanced+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['方舟守护者']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 方舟守护者 - 高级+"
+    },
+    {
+      "name": "方舟守护者 - 高级",
+      "path": "boss/Arch_Custodian/Advanced.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['方舟守护者']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 方舟守护者 - 高级"
+    },
+    {
+      "name": "方舟守护者 - 中级",
+      "path": "boss/Arch_Custodian/Intermediate.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['方舟守护者']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 方舟守护者 - 中级"
     },
     {
       "name": "参加",
