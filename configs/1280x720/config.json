@@ -1685,6 +1685,13 @@
       "text": "点击挑战"
     },
     {
+      "name": "挑战深层域",
+      "path": "tiaozhan2.png",
+      "area": [240, 1050, 480, 1100],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击挑战深层域"
+    },
+    {
       "name": "继续",
       "path": "jixu.png",
       "area": [300, 1180, 460, 1220],
