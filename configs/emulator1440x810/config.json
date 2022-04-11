@@ -1,86 +1,271 @@
-[
-    {
-        "name" : "继续",
-        "path" : "jixu.png",
-        "area" : [279,1319,530,1388],
-        "action" : ["-w","离开"],
-        "text" : "点击继续"
-    },
-    {
-        "name" : "参加",
-        "path" : "canjia.png",
-        "area" : [431,1173,740,1240],
-        "action" : ["-c",null],
-        "text" : "点击参加按钮"
-    },
-    {
-        "name" : "参加2",
-        "path" : "canjia2.png",
-        "area" : [374,1309,643,1376],
-        "action" : ["-c",null],
-        "text" : "点击参加按钮"
-    },
-    {
-        "name" : "铃铛",
-        "path" : "lingdang.png",
-        "area" : [30,17,75,59],
-        "action" : ["-c",null],
-        "text" : "发现铃铛，点击"
-    },
-    {
-        "name" : "铃铛2",
-        "path" : "lingdang2.png",
-        "area" : [3,32,85,132],
-        "action" : ["-c",null],
-        "text" : "发现铃铛，点击"
-    },
-    {
-        "name" : "OK",
-        "path" : "OK.png",
-        "area" : [246,894,563,962],
-        "action" : ["-c",null],
-        "text" : "蹭车失败，点击OK"
-    },
-    {
-        "name" : "箭头",
-        "path" : "jiantou.png",
-        "area" : [700,45,746,104],
-        "action" : ["-c",null],
-        "text" : "点击箭头，返回游戏"
-    },
-    {
-        "name" : "准备",
-        "path" : "zhunbei.png",
-        "area" : [240,1000,565,1094],
-        "action" : ["-c",null],
-        "text" : "点击准备按钮"
-    },
-    {
-        "name" : "离开",
-        "path" : "likai.png",
-        "area" : [116,1322,366,1383],
-        "action" : ["-c",null],
-        "text" : "离开房间"
-    },
-    {
-        "name" : "继续关卡",
-        "path" : "jixuguanka.png",
-        "area" : [430,895,742,960],
-        "action" : ["-c",null],
-        "text" : "继续关卡"
-    },
-    {
-        "name" : "升级",
-        "path" : "shengji.png",
-        "area" : [234,632,576,677],
-        "action" : ["-c",null],
-        "text" : "升级了！！！"
-    },
-    {
-        "name" : "升级2",
-        "path" : "shengji2.png",
-        "area" : [223,632,577,677],
-        "action" : ["-c",null],
-        "text" : "升级了！！！"
-    }
-]
+{
+    "name":"WF1440x810模拟器混铃铛",
+    "author":"大A",
+    "description":"这个配置用于世界弹射物语国服混铃铛，可以在1440x810分辨率的模拟器上运行",
+    "similarityThreshold":0.9,
+    "loopDelay" : [1,1],
+    "randomClickDelay":300,
+    "randomClickArea":[0,0,1,1],
+    "screenSize":[1440,810],
+    "targetList":["mainTargets","bosses"],
+    "mainTargets":[
+        {
+            "name" : "继续",
+            "path" : "jixu.png",
+            "area" : [279,1319,530,1388],
+            "text" : "发现继续按钮",
+            "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
+            "actions":[{"name":"click"}]
+        },
+        {
+            "name" : "参加",
+            "path" : "canjia.png",
+            "area" : [431,1173,740,1240],
+            "text" : "点击参加按钮",
+            "actions" : [{"name":"click"}]
+        },
+        {
+            "name" : "参加2",
+            "path" : "canjia2.png",
+            "area" : [374,1309,643,1376],
+            "actions" : [{"name":"click"}],
+            "text" : "点击参加按钮"
+        },
+        {
+            "name" : "铃铛",
+            "path" : "lingdang.png",
+            "area" : [30,17,75,59],
+            "actions" : [{"name":"click"}],
+            "text" : "发现铃铛，点击"
+        },
+        {
+            "name" : "铃铛2",
+            "path" : "lingdang2.png",
+            "area" : [3,32,85,132],
+            "actions" : [{"name":"click"}],
+            "text" : "发现铃铛，点击"
+        },
+        {
+            "name" : "OK",
+            "path" : "OK.png",
+            "area" : [246,894,563,962],
+            "actions" : [
+                {"name":"click"},
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","无"]
+                }
+            ],
+            "text" : "蹭车失败，点击OK"
+        },
+        {
+            "name" : "箭头",
+            "path" : "jiantou.png",
+            "area" : [700,45,746,104],
+            "actions" : [{"name":"click"}],
+            "text" : "点击箭头，返回游戏"
+        },
+        {
+            "name" : "准备",
+            "path" : "zhunbei.png",
+            "area" : [240,1000,565,1094],
+            "actions" : [
+                {
+                    "name":"changeTargets",
+                    "args":["bosses","once"]
+                },
+                {"name":"click"},
+                {
+                    "name":"info",
+                    "args":["点击准备按钮"]
+                }
+            ],
+            "text" : "点击准备按钮"
+        },
+        {
+            "name" : "准备2",
+            "path" : "zhunbei2.png",
+            "area" : [240,1000,565,1094],
+            "actions" : [
+                {
+                    "name":"changeTargets",
+                    "args":["bosses"]
+                },
+                {"name":"click"},
+                {
+                    "name":"info",
+                    "args":["点击准备按钮"]
+                },
+				{
+                    "name":"state",
+                    "args":["set","正在挑战的boss","雷废龙"]
+                }
+            ],
+            "text" : "点击准备按钮"
+        },
+        {
+            "name" : "离开",
+            "path" : "likai.png",
+            "area" : [116,1322,366,1383],
+            "actions" : [
+                {"name":"click"},
+                {
+                    "name":"state",
+                    "args":["increase","$正在挑战的boss",1]
+                },
+                {
+                    "name":"info",
+                    "args":["完成挑战{} : {}次","$正在挑战的boss","$$正在挑战的boss"]
+                },
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","无"]
+                }
+            ],
+            "text" : "离开房间"
+        },
+        {
+            "name" : "继续关卡",
+            "path" : "jixuguanka.png",
+            "area" : [430,895,742,960],
+            "actions" : [{"name":"click"}],
+            "text" : "继续关卡"
+        },
+        {
+            "name" : "升级",
+            "path" : "shengji.png",
+            "area" : [234,632,576,677],
+            "actions" : [{"name":"click"}],
+            "text" : "升级了！！！"
+        },
+        {
+            "name" : "升级2",
+            "path" : "shengji2.png",
+            "area" : [223,632,577,677],
+            "actions" : [{"name":"click"}],
+            "text" : "升级了！！！"
+        }
+    ],
+    "bosses":[
+        {
+            "name" : "管理者",
+            "path" : "guanlizhe.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","管理者"]
+                }
+            ],
+            "text" : "正在挑战管理者"
+        },
+        {
+            "name" : "大蛇",
+            "path" : "dashe.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","大蛇"]
+                }
+            ],
+            "text" : "正在挑战大蛇"
+        },
+        {
+            "name" : "白虎",
+            "path" : "baihu.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","白虎"]
+                }
+            ],
+            "text" : "正在挑战白虎"
+        },
+        {
+            "name" : "恶魔",
+            "path" : "emo.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","恶魔"]
+                }
+            ],
+            "text" : "正在挑战恶魔"
+        },
+        {
+            "name" : "石头人",
+            "path" : "shitouren.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","石头人"]
+                }
+            ],
+            "text" : "正在挑战石头人"
+        },
+        {
+            "name" : "螃蟹",
+            "path" : "pangxie.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","螃蟹"]
+                }
+            ],
+            "text" : "正在挑战螃蟹"
+        },
+        {
+            "name" : "骷髅王",
+            "path" : "kulouwang.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","骷髅王"]
+                }
+            ],
+            "text" : "正在挑战骷髅王"
+        },
+        {
+            "name" : "猫头鹰",
+            "path" : "maotouying.png",
+            "area" : [33,1154,202,1252],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","猫头鹰"]
+                }
+            ],
+            "text" : "正在挑战猫头鹰"
+        },
+        {
+            "name" : "超火",
+            "path" : "chaohuo.png",
+            "area" : [36,1154,202,1258],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","超火"]
+                }
+            ],
+            "text" : "正在挑战超火"
+        },
+        {
+            "name" : "火上+",
+            "path" : "huoplus.png",
+            "area" : [36,1154,202,1258],
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","正在挑战的boss","火上+"]
+                }
+            ],
+            "text" : "正在挑战火上+"
+        }
+    ]
+}

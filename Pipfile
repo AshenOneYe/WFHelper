@@ -1,13 +1,16 @@
 [[source]]
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 verify_ssl = true
 name = "pypi"
 
 [packages]
 ImageHash = "*"
-Flask = "*"
-Distance = "*"
 pyinstaller = "*"
+asteval = "*"
+asyncio = "*"
+websockets = "*"
+pure-python-adb = "*"
+mergedeep = "*"
 
 [dev-packages]
 mypy = "*"

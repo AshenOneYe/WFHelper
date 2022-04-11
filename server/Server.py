@@ -1,40 +1,185 @@
-from flask import Flask
-from wsgiref.simple_server import make_server
-from server.Router import setRouter
-from utils.ADBUtil import adbUtil
-from utils.LogUtil import Log
+import asyncio
+import http
+import json
+import logging
+import websockets
+from os.path import splitext
+from pathlib import Path
+from utils import Log
+from typing import Set, Any
+
+logging.getLogger("websockets").setLevel(logging.ERROR)
+
+CONTENT_TYPES = {
+    ".css": "text/css",
+    ".html": "text/html; charset=utf-8",
+    ".ico": "image/x-icon",
+    ".js": "text/javascript",
+}
 
 
-class Server():
-    app = Flask(__name__)
-    wfhelper = None
+# TODO isDebug和instances应作为单独的信息传递给UI
+class Server:
+    isDebug = False
 
-    def __init__(self,wfhelper):
+    instances = set()  # type: Set[Any]
 
-        # TODO 提供参数指定host和port
-        self.wfhelper = wfhelper
-        setRouter(self)
+    clients = set()  # type: Set[Any]
+    streamClients = set()  # type: Set[Any]
 
+    def __init__(self, instance=None, isDebug=False):
+        if isDebug:
+            Log.setDebugLevel()
 
-    def getLastLog(self):
-        return Log.lastLog
+            self.isDebug = isDebug
 
-    def getScreenShot(self):
-        return adbUtil.getScreen()
+        if instance is not None:
+            self.createInstance(instance)
 
-    def touchScreen(self,x,y):
-        adbUtil.touchScreen([x,y,x+1,y+1])
+    def createInstance(self, instance):
+        instance.start()
+        instance.setState({"key": "isDebug", "value": self.isDebug})
+        instance.setEventHandler(self.eventHandler)
 
-    def stopWFHelper(self):
-        self.wfhelper.stop()
+        self.instances.add(instance)
 
-    def startWFHelper(self):
-        self.wfhelper.isRunning = True
+    def eventHandler(self, event):
+        type = event["type"]
 
+        # TODO 也应发送给对应实例
+        if type in ["onLogAppend", "onStateUpdate"]:
+            self.broadcast(
+                self.clients,
+                json.dumps({"type": type, "data": event["data"]}).encode("utf8"),
+            )
+        elif type == "onFrameUpdate":
+            self.broadcast(self.streamClients, event["data"])
 
-    def startServer(self):
-        server = make_server('', 8080,self.app)
-        server.serve_forever()
-        # self.app.run("0.0.0.0",8080,debug=False)
+    async def handler(self, websocket, path):
+        try:
+            if path == "/websocket":
+                await self.clientHandler(websocket)
+            if path == "/stream":
+                await self.streamHandler(websocket)
+        except Exception as e:
+            print(e)
 
-        
+    async def clientHandler(self, websocket):
+        async def send(queue, websocket):
+            while True:
+                try:
+                    message = await queue.get()
+                    await websocket.send(message)
+                except Exception:
+                    break
+
+        queue = asyncio.Queue()
+
+        task = asyncio.create_task(send(queue, websocket))
+
+        self.clients.add(queue)
+
+        try:
+            async for message in websocket:
+                message = json.loads(message)
+
+                # TODO 现在强制使用单例模式，应读取websocket对应实例
+                for i in self.instances:
+                    instance = i
+                    break
+
+                if "data" in message:
+                    result = getattr(instance, message["type"])(message["data"])
+                else:
+                    result = getattr(instance, message["type"])()
+
+                if result is not None:
+                    await websocket.send(
+                        json.dumps(
+                            {"type": message["type"] + "_ACK", "data": result}
+                        ).encode("utf8")
+                    )
+        except Exception:
+            pass
+        finally:
+            self.clients.remove(queue)
+
+            task.cancel()
+
+    async def streamHandler(self, websocket):
+        async def send(queue, websocket):
+            while True:
+                try:
+                    message = await queue.get()
+                    await websocket.send(message)
+                except Exception:
+                    break
+
+        queue = asyncio.Queue(1)
+
+        task = asyncio.create_task(send(queue, websocket))
+
+        self.streamClients.add(queue)
+
+        try:
+            await websocket.wait_closed()
+        except Exception:
+            pass
+        finally:
+            self.streamClients.remove(queue)
+
+            task.cancel()
+
+    async def requestHandler(self, path, request_headers):
+        if path == "/websocket":
+            return
+        if path == "/stream":
+            return
+
+        name, ext = splitext(path)
+
+        if name[-1] == "/":
+            name = name[1:] + "index"
+        else:
+            name = name[1:]
+
+        if len(ext) == 0:
+            ext = ".html"
+
+        source = Path(__file__).parent.joinpath(name + ext)
+
+        if source.is_file() and source.suffix in CONTENT_TYPES:
+            headers = {"Content-Type": CONTENT_TYPES[source.suffix]}
+
+            body = source.read_bytes()
+
+            return http.HTTPStatus.OK, headers, body
+
+        return http.HTTPStatus.NOT_FOUND, {}
+
+    def broadcast(self, clients, message):
+        for queue in clients:
+            if queue.full():
+                continue
+            queue.put_nowait(message)
+
+    async def mainLoop(self):
+        # FIXME 暂时用这个办法解决队列死锁
+        while True:
+            await asyncio.sleep(0.01)
+
+    async def main(self):
+        # TODO 加入端口配置启动项
+        async with websockets.serve(
+            self.handler,
+            "0.0.0.0",
+            8080,
+            process_request=self.requestHandler,
+            ping_interval=None,
+        ):
+            Log.info("服务器启动完成 - http://localhost:8080")
+
+            await self.mainLoop()
+
+    def run(self):
+        asyncio.run(self.main())

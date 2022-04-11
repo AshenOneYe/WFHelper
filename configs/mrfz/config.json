@@ -1,0 +1,120 @@
+{
+    "name":"一加9R明日方舟循环刷图",
+    "author":"大A",
+    "description":"这个配置文件用于明日方舟循环刷某一张固定图",
+    "similarityThreshold":0.9,
+    "randomClickDelay":300,
+    "loopDelay":1,
+    "randomClickArea":[0,0,1,1],
+    "screenSize":[2400,1080],
+    "targetList":["mainTargets","lizhi"],
+    "mainTargets":[
+        {
+            "name" : "开始1",
+            "path" : "kaishi.png",
+            "area" : [2157,959,2346,1013],
+            "colorRatio":0.2,
+            "text" : "发现关卡界面开始行动按钮",
+            "description":"介绍该target功能，可以随便写，也可以省略，暂时用不上",
+            "actions" : [
+                {
+                    "name":"click",
+                    "info":"点击开始行动"
+                }
+            ]
+        },
+        {
+            "name" : "开始2",
+            "path" : "kaishixingdong.png",
+            "colorRatio":0.2,
+            "area" : [1794,550,1995,967],
+            "text" : "发现编队界面开始行动按钮",
+            "actions" : [
+                {
+                    "name":"click",
+                    "info":"点击开始行动"
+                }
+            ]
+        },
+        {
+            "name" : "行动结束",
+            "path" : "xingdongjieshu.png",
+            "similarityThreshold":0.75,
+            "area" : [495,767,564,805],
+            "text" : "行动结束",
+            "actions" : [
+                {
+                    "name":"sleep",
+                    "args":[3]
+                },
+                {"name":"click"},
+                {
+                    "name":"sleep",
+                    "args":[3]
+                },
+                {
+                    "name":"state",
+                    "args":["increase","complete",1]
+                }
+            ]
+        },
+        {
+            "name" : "理智不足",
+            "path" : "lizhibuzu.png",
+            "colorRatio":0.9,
+            "area" : [1159,728,2151,919],
+            "text" : "理智不足",
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","有无理智药",true]
+                },
+                {
+                    "name":"changeTargets",
+                    "args":["lizhi"]
+                },
+                {
+                    "name":"match",
+                    "args":[
+                        "$有无理智药",
+                        {
+                            "True":[
+                                {
+                                    "name":"info",
+                                    "args":["大朗恰药"]
+                                },
+                                {
+                                    "name":"click",
+                                    "args":[[1850,845,1897,888]]
+                                }
+                            ],
+                            "False":[
+                                {
+                                    "name":"info",
+                                    "args":["没理智药了，退出"]
+                                },
+                                {"name":"exit"}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+    ],
+    "lizhi":[
+        {
+            "name" : "是否使用源石",
+            "path" : "yuanshi.png",
+            "similarity":0.9,
+            "area" : [1363,416,1528,572],
+            "text" : "没有理智药了",
+            "actions" : [
+                {
+                    "name":"state",
+                    "args":["set","有无理智药",false]
+                }
+            ]
+        }
+    ]
+}

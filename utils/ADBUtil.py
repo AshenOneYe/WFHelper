@@ -1,100 +1,110 @@
 import os
 import random
-import subprocess
 import sys
 
-from utils.ImageUtil import readImageFromBytes
-from utils.LogUtil import Log
+from ppadb.client import Client as AdbClient
+from .LogUtil import Log
 
 
 class ADBUtil:
 
     device = None
-    rplc = b"\r\n"
-    test = False
-    lastScreenBytes = None
+    adb = None
 
-    # 解决打包前打包后路径不一致问题https://cloud.tencent.com/developer/article/1739886
-    def base_path(self, path):
+    def getScreen(self, savePath=None):
+        currentframe = None
+
+        if self.device is not None:
+            currentframe = self.device.screencap()
+
+        if savePath is not None and len(currentframe) != 0 and currentframe is not None:
+            dirs = os.path.dirname(savePath)
+
+            if not os.path.exists(dirs):
+                os.makedirs(dirs)
+
+            with open(savePath, "wb") as f:
+                f.write(currentframe)
+
+        return currentframe
+
+    def touchScreen(self, area):
+        if self.device is not None:
+            self.device.input_tap(
+                random.randrange(round(float(area[0])), round(float(area[2]))),
+                random.randrange(round(float(area[1])), round(float(area[3])))
+            )
+
+    def swipeScreen(self, x1, y1, x2, y2):
+        if self.device is not None:
+            self.device.input_swipe(x1, y1, x2, y2, int(random.uniform(0.5, 1.0) * 1000))
+
+    def selectSerial(self):
+        devices = self.adb.devices()
+        if len(devices) == 0:
+            print("未检测到设备连接")
+            serial = "127.0.0.1:5555"
+            serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
+            ip, port = serial.split(":")
+            self.adb.remote_connect(str(ip), int(port))
+        else:
+            print("检测到已连接的设备，请输入序号指定要连接的设备:")
+            for i in range(0, len(devices)):
+                print("[{}] - {}".format(i, devices[i].serial))
+            try:
+                print("[-1] - 手动输入设备ip和端口进行连接")
+
+                index = input()
+                if index is None or index == "":
+                    index = 0
+                else:
+                    index = int(index)
+
+                if index == -1:
+                    serial = "127.0.0.1:5555"
+                    serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
+                    ip, port = serial.split(":")
+                    self.adb.remote_connect(str(ip), int(port))
+                else:
+                    serial = devices[index].serial
+            except ValueError:
+                Log.error("请输入正确的序号!!!")
+                sys.exit()
+        return serial
+
+    def setDevice(self, serial):
+        # 用户没有指定设备
+        if serial is None:
+            return
+
+        self.device = self.adb.device(serial)
+        self.logDeviceInfo()
+
+    def logDeviceInfo(self):
+        try:
+            Log.info("设备serial : {}".format(self.device.serial))
+            props = self.device.get_properties()
+            Log.info("设备名称 : {}".format(props["ro.product.device"]))
+            Log.info("制造商 : {}".format(props["ro.product.manufacturer"]))
+            Log.info("model : {}".format(props["ro.product.model"]))
+            Log.info("CPU : {}".format(props["ro.product.cpu.abi"]))
+            Log.info("系统版本 : {}".format(props["ro.build.version.release"]))
+            size = self.device.wm_size()
+            Log.info("分辨率 : {}x{}".format(size[1], size[0]))
+            # print(props)
+        except ValueError:
+            Log.error("获取设备信息失败")
+            sys.exit()
+
+    def __init__(self):
         if getattr(sys, "frozen", None):
             basedir = sys._MEIPASS
         else:
             basedir = os.path.dirname(__file__)
-        return os.path.join(basedir, path)
-
-    def getDeviceList(self):
-        cmd = self.base_path("") + r"adb\adb.exe devices"
-        process = os.popen(cmd)
-        devices = process.readlines()
-        try:
-            devices = devices[1 : len(devices) - 1]
-        except:
-            Log.error("获取设备列表失败")
-        return devices
-
-    def getScreen(self, savePath=None):
-
-        cmd = self.base_path("") + r"adb\adb.exe "
-
-        if self.device is not None:
-            cmd += "-s {} ".format(self.device)
-
-        cmd += "shell screencap -p"
-
-        process = subprocess.Popen(
-            cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE
-        )
-        binary_screenshot = process.stdout.read()
-
-        if not self.test:
-            try:
-                readImageFromBytes(binary_screenshot.replace(self.rplc, b"\n"))
-            except Exception:
-                self.rplc = b"\r\r\n"
-            finally:
-                self.test = True
-
-        binary_screenshot = binary_screenshot.replace(self.rplc, b"\n")
-        if savePath is not None and len(binary_screenshot) != 0:
-            with open(savePath, "wb") as f:
-                f.write(binary_screenshot)
-
-        self.lastScreenBytes = binary_screenshot
-        return binary_screenshot
-
-    def touchScreen(self, area):
-        cmd = self.base_path("") + r"adb\adb.exe "
-
-        if self.device is not None:
-            cmd += "-s {} ".format(self.device)
-
-        cmd += "shell input tap {} {}".format(
-            random.randrange(area[0], area[2]), random.randrange(area[1], area[3])
-        )
-
-        os.system(cmd)
-
-    def setDevice(self, device):
-        if device is None:
-            devices = self.getDeviceList()
-            if len(devices) == 0:
-                Log.error("未检测到设备连接")
-            if len(devices) == 1:
-                device = devices[0].split("\t")[0]
-                Log.info("只检测到一台设备，默认与其建立连接")
-            else:
-                Log.info("发现多台设备，请输入序号指定要连接的设备:")
-                for i in range(0, len(devices)):
-                    print("{} : {}".format(i, devices[i]))
-                try:
-                    device = devices[int(input())]
-                except:
-                    Log.error("请输入正确的序号!!!")
-                    sys.exit()
-        if device is None:
-            sys.exit()
-        self.device = device
-        Log.info("设备名 : {}".format(self.device))
+        adbPath = os.path.join(basedir, "") + r"adb;"
+        os.environ['PATH'] = adbPath + os.environ['PATH']
+        os.system("adb start-server")
+        self.adb = AdbClient(host="127.0.0.1", port=5037)
 
 
 adbUtil = ADBUtil()

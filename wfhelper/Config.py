@@ -1,0 +1,99 @@
+import json
+from typing import Any, Dict
+from os import path
+
+from mergedeep import merge, Strategy
+from pathlib import Path
+
+from utils.ImageUtil import getImageCrop, getImageHash
+from utils.LogUtil import Log
+
+
+class Config:
+
+    name = None  # 配置文件名
+    author = None  # 配置文件作者
+    description = None  # 配置文件描述
+    similarityThreshold = 1  # 全局相似度阈值，若有为target单独设置则无视全局阈值
+    randomClickDelay = 300  # 长时间未操作随机点击的触发时间，单位秒
+    randomClickArea = [0, 0, 1, 1]  # 长时间未操作随机点击的点击区域
+    screenSize = None  # 屏幕尺寸
+    loopDelay = [0, 0]  # 每轮循环的延迟时间
+    configData = None
+    targetList = {}  # type: Dict[str, list]
+    state = {}  # type: Dict[str, Any]
+
+    def __init__(self, configPath=None):
+
+        if configPath is None:
+            return
+
+        self.configPath = configPath
+        self.configDir = path.dirname(configPath)
+
+        self.settingsPath = path.join(self.configDir, "settings.json")
+
+        data = open(self.configPath, "r", encoding="utf-8").read()
+        self.configData = json.loads(data)
+
+    def init(self):
+        if "name" in self.configData:
+            self.name = self.configData["name"]
+        if "author" in self.configData:
+            self.author = self.configData["author"]
+        if "description" in self.configData:
+            self.description = self.configData["description"]
+        if "similarityThreshold" in self.configData:
+            self.similarityThreshold = self.configData["similarityThreshold"]
+        if "randomClickDelay" in self.configData:
+            self.randomClickDelay = self.configData["randomClickDelay"]
+        if "randomClickArea" in self.configData:
+            self.randomClickArea = self.configData["randomClickArea"]
+        if "screenSize" in self.configData:
+            self.screenSize = self.configData["screenSize"]
+        if "loopDelay" in self.configData:
+            if isinstance(self.configData["loopDelay"], list):
+                self.loopDelay = self.configData["loopDelay"]
+            else:
+                loopDelay = self.configData["loopDelay"]
+                self.loopDelay = [loopDelay, loopDelay]
+        if "state" in self.configData:
+            self.state = self.configData["state"]
+
+        Log.info("适用屏幕尺寸 : {}x{}".format(self.screenSize[0], self.screenSize[1]))
+
+        for targetsName in self.configData["targetList"]:
+            targets = self.configData[targetsName]
+            for target in targets:
+                if "path" in target:
+                    img = getImageCrop(
+                        path.join(self.configDir, target["path"]), target["area"]
+                    )
+                    target["hash"] = getImageHash(image=img)
+                    if "colorRatio" in target:
+                        target["histogram"] = img.histogram()
+            self.targetList[targetsName] = targets
+
+        Log.info("配置文件初始化完成")
+        Log.info("配置文件名称 : {}".format(self.name))
+        Log.info("配置文件作者 : {}".format(self.author))
+        Log.info("配置文件描述 : {}".format(self.description))
+
+    def read_settings(self):
+        path = Path(self.settingsPath)
+
+        if path.is_file():
+            data = path.read_bytes()
+
+            return json.loads(data)
+
+        return {}
+
+    def merge_settings(self, data):
+        path = Path(self.settingsPath)
+
+        source = self.read_settings()
+
+        target = merge({}, source, data, strategy=Strategy.ADDITIVE)
+
+        path.write_bytes(json.dumps(target).encode("utf8"))

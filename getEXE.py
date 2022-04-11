@@ -3,13 +3,17 @@ import PyInstaller.__main__
 PyInstaller.__main__.run(
     [
         "main.py",
-        "--onefile",
+        "--onedir",
         "--noconfirm",
+        "-i",
+        "server/static/favicon.ico",
         "--add-data",
-        "configs;configs",
+        "server/templates;server/templates",
         "--add-data",
         "utils/adb;adb",
+        "--add-data",
+        "server/static;server/static",
         "--name",
-        "WFHelper-emulator1440x810",
+        "WFHelper",
     ]
 )
