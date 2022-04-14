@@ -19,6 +19,16 @@
         }
       },
       "管理者": {
+        "超级": {
+          "name": "管理者 - 超级",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "管理者 - 高级+",
+          "party": "",
+          "enabled": true
+        },
         "高级": {
           "name": "管理者 - 高级",
           "party": "",
@@ -450,6 +460,38 @@
         }
       ],
       "text": "铃铛内容: 八岐大蛇 - 高级"
+    },
+    {
+      "name": "管理者 - 超级",
+      "path": "boss/The_Administrator/Godly.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['管理者']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 管理者 - 高级"
+    },
+    {
+      "name": "管理者 - 高级+",
+      "path": "boss/The_Administrator/Advanced+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['管理者']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 管理者 - 高级"
     },
     {
       "name": "管理者 - 高级",
