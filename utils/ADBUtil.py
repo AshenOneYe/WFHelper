@@ -96,6 +96,12 @@ class ADBUtil:
             Log.error("获取设备信息失败")
             sys.exit()
 
+    def checkHeartbeat(self):
+        wfPid = self.device.get_pid("com.leiting.wf")
+        if wfPid is None:
+            os.system('adb shell am start -n com.leiting.wf/air.com.leiting.wf.AppEntry')
+            Log.info("游戏已停止运行，启动游戏")
+
     def __init__(self):
         if getattr(sys, "frozen", None):
             basedir = sys._MEIPASS

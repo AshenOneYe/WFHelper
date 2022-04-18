@@ -56,6 +56,7 @@ class WFHelper:
             Log.info("长时间未操作，随机点击一次")
             adbUtil.touchScreen(self.config.randomClickArea)
             self.updateActionTime(t)
+            adbUtil.checkHeartbeat()
         return False
 
     def loopDelay(self):
