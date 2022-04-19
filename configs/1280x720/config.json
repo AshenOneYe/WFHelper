@@ -14,6 +14,7 @@
       "八岐大蛇": {
         "高级": {
           "name": "八岐大蛇 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -21,6 +22,7 @@
       "管理者": {
         "超级": {
           "name": "管理者 - 超级",
+          "set": "",
           "party": "",
           "enabled": true
         },
@@ -43,11 +45,13 @@
       "Sec-5200Li": {
         "高级": {
           "name": "Sec-5200Li - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "Sec-5200Li - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -55,21 +59,25 @@
       "白虎": {
         "超级": {
           "name": "白虎 - 超级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级+": {
           "name": "白虎 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "白虎 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "白虎 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -77,21 +85,25 @@
       "诅咒弧魔艾基尔": {
         "超级": {
           "name": "诅咒弧魔艾基尔 - 超级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级+": {
           "name": "诅咒弧魔艾基尔 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "诅咒弧魔艾基尔 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "诅咒弧魔艾基尔 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -99,21 +111,25 @@
       "寄居蟹船长": {
         "超级": {
           "name": "寄居蟹船长 - 超级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级+": {
           "name": "寄居蟹船长 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "寄居蟹船长 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "寄居蟹船长 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -121,11 +137,13 @@
       "潮汐巨妖": {
         "高级": {
           "name": "潮汐巨妖 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "潮汐巨妖 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -133,21 +151,25 @@
       "废墟魔像": {
         "超级": {
           "name": "废墟魔像 - 超级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级+": {
           "name": "废墟魔像 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "废墟魔像 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "废墟魔像 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -155,21 +177,25 @@
       "不死王瑞西塔尔": {
         "超级": {
           "name": "不死王瑞西塔尔 - 超级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级+": {
           "name": "不死王瑞西塔尔 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "不死王瑞西塔尔 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "不死王瑞西塔尔 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -177,6 +203,7 @@
       "维·索拉斯": {
         "初级": {
           "name": "维·索拉斯 - 初级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -184,16 +211,19 @@
       "伊萨巴迪卡": {
         "高级+": {
           "name": "伊萨巴迪卡 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "伊萨巴迪卡 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "伊萨巴迪卡 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -201,11 +231,13 @@
       "伊尔考普斯": {
         "高级+": {
           "name": "伊尔考普斯 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "伊尔考普斯 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -213,16 +245,19 @@
       "伊尔梅塔雷": {
         "高级+": {
           "name": "伊尔梅塔雷 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "伊尔梅塔雷 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "伊尔梅塔雷 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -230,11 +265,13 @@
       "指挥者": {
         "高级+": {
           "name": "指挥者 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "指挥者 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -242,23 +279,13 @@
       "女王·拉芙": {
         "超级": {
           "name": "女王·拉芙 - 超级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "女王·拉芙 - 高级",
-          "party": "",
-          "enabled": true
-        }
-      },
-      "武装人偶": {
-        "高级+": {
-          "name": "武装人偶 - 高级+",
-          "party": "",
-          "enabled": true
-        },
-        "高级": {
-          "name": "武装人偶 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -266,16 +293,19 @@
       "方舟守护者": {
         "高级+": {
           "name": "方舟守护者 - 高级+",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "高级": {
           "name": "方舟守护者 - 高级",
+          "set": "",
           "party": "",
           "enabled": true
         },
         "中级": {
           "name": "方舟守护者 - 中级",
+          "set": "",
           "party": "",
           "enabled": true
         }
@@ -287,6 +317,7 @@
     "主要",
     "铃铛",
     "参加",
+    "切换铃铛SET",
     "切换铃铛队伍",
     "搬空商店",
     "清空体力"
@@ -1130,38 +1161,6 @@
       "text": "铃铛内容: 女王·拉芙 - 高级"
     },
     {
-      "name": "武装人偶 - 高级+",
-      "path": "boss/活动/武装人偶/高级+.png",
-      "area": [60, 300, 180, 380],
-      "actions": [
-        {
-          "name": "state",
-          "args": ["set", "当前铃铛", "$铃铛设置['武装人偶']['高级+']"]
-        },
-        {
-          "name": "changeTargets",
-          "args": ["参加"]
-        }
-      ],
-      "text": "铃铛内容: 武装人偶 - 高级+"
-    },
-    {
-      "name": "武装人偶 - 高级",
-      "path": "boss/活动/武装人偶/高级.png",
-      "area": [60, 300, 180, 380],
-      "actions": [
-        {
-          "name": "state",
-          "args": ["set", "当前铃铛", "$铃铛设置['武装人偶']['高级']"]
-        },
-        {
-          "name": "changeTargets",
-          "args": ["参加"]
-        }
-      ],
-      "text": "铃铛内容: 武装人偶 - 高级"
-    },
-    {
       "name": "方舟守护者 - 高级+",
       "path": "boss/活动/方舟守护者/高级+.png",
       "area": [60, 300, 180, 380],
@@ -1254,7 +1253,7 @@
                 { "name": "delay", "args": [2] },
                 {
                   "name": "changeTargets",
-                  "args": ["切换铃铛队伍", "loop"]
+                  "args": ["切换铃铛SET", "loop"]
                 }
               ],
               "False": [
@@ -1270,6 +1269,242 @@
                 {
                   "name": "state",
                   "args": ["set", "当前铃铛", {}]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "切换铃铛SET": [
+    {
+      "name": "警告",
+      "path": "alert.png",
+      "area": [300, 800, 460, 840],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ]
+    },
+    {
+      "name": "继续",
+      "path": "jixu.png",
+      "area": [300, 1180, 460, 1220],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ]
+    },
+    {
+      "name": "编队",
+      "path": "party/party-1.png",
+      "area": [600, 90, 700, 110],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "'party' not in $当前铃铛 or $当前铃铛['party'] == '' or $当前铃铛['name'] in $铃铛计数",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 1",
+      "path": "party/party-2-1.png",
+      "area": [20, 15, 100, 35],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '1'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [135, 15, 215, 35]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到SET 2"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 2",
+      "path": "party/party-2-2.png",
+      "area": [135, 15, 215, 35],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '2'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [260, 15, 340, 35]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到SET 3"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 3",
+      "path": "party/party-2-3.png",
+      "area": [260, 15, 340, 35],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '3'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [380, 15, 460, 35]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到SET 4"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 4",
+      "path": "party/party-2-4.png",
+      "area": [380, 15, 460, 35],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '4'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [500, 15, 580, 35]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到SET 5"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 5",
+      "path": "party/party-2-5.png",
+      "area": [500, 15, 580, 35],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '5'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [620, 15, 700, 35]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到SET 6"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 6",
+      "path": "party/party-2-6.png",
+      "area": [620, 15, 700, 35],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '6'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [20, 15, 100, 35]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到SET 1"]
                 }
               ]
             }
@@ -1302,16 +1537,20 @@
       ]
     },
     {
-      "name": "编成",
-      "path": "party/party-1.png",
-      "area": [630, 120, 670, 160],
+      "name": "队伍 1",
+      "path": "party/party-3-1.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "'party' not in $当前铃铛 or $当前铃铛['party'] == '' or $当前铃铛['name'] in $铃铛计数",
+            "$当前铃铛['party'] == '1'",
             {
               "True": [
+                {
+                  "name": "click",
+                  "args": [0, 1200, 80, 1280]
+                },
                 {
                   "name": "changeTargets",
                   "args": ["主要", "loop"]
@@ -1319,7 +1558,12 @@
               ],
               "False": [
                 {
-                  "name": "click"
+                  "name": "swipe",
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 2"]
                 }
               ]
             }
@@ -1328,14 +1572,14 @@
       ]
     },
     {
-      "name": "队伍 A",
-      "path": "party/party-2-1.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 2",
+      "path": "party/party-3-2.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'A'",
+            "$当前铃铛['party'] == '2'",
             {
               "True": [
                 {
@@ -1350,24 +1594,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 3"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 A"
+      ]
     },
     {
-      "name": "队伍 B",
-      "path": "party/party-2-2.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 3",
+      "path": "party/party-3-3.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'B'",
+            "$当前铃铛['party'] == '3'",
             {
               "True": [
                 {
@@ -1382,24 +1629,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 4"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 B"
+      ]
     },
     {
-      "name": "队伍 C",
-      "path": "party/party-2-3.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 4",
+      "path": "party/party-3-4.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'C'",
+            "$当前铃铛['party'] == '4'",
             {
               "True": [
                 {
@@ -1414,24 +1664,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 5"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 C"
+      ]
     },
     {
-      "name": "队伍 D",
-      "path": "party/party-2-4.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 5",
+      "path": "party/party-3-5.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'D'",
+            "$当前铃铛['party'] == '5'",
             {
               "True": [
                 {
@@ -1446,24 +1699,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 6"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 D"
+      ]
     },
     {
-      "name": "队伍 E",
-      "path": "party/party-2-5.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 6",
+      "path": "party/party-3-6.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'E'",
+            "$当前铃铛['party'] == '6'",
             {
               "True": [
                 {
@@ -1478,24 +1734,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 7"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 E"
+      ]
     },
     {
-      "name": "队伍 F",
-      "path": "party/party-2-6.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 7",
+      "path": "party/party-3-7.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'F'",
+            "$当前铃铛['party'] == '7'",
             {
               "True": [
                 {
@@ -1510,24 +1769,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 8"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 F"
+      ]
     },
     {
-      "name": "队伍 G",
-      "path": "party/party-2-7.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 8",
+      "path": "party/party-3-8.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'G'",
+            "$当前铃铛['party'] == '8'",
             {
               "True": [
                 {
@@ -1542,24 +1804,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 9"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 G"
+      ]
     },
     {
-      "name": "队伍 H",
-      "path": "party/party-2-8.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 9",
+      "path": "party/party-3-9.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'H'",
+            "$当前铃铛['party'] == '9'",
             {
               "True": [
                 {
@@ -1574,24 +1839,27 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "args": [600, 45, 120, 85]
+                },
+                {
+                  "name": "info",
+                  "args": ["切换到队伍 10"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 H"
+      ]
     },
     {
-      "name": "队伍 I",
-      "path": "party/party-2-9.png",
-      "area": [190, 45, 530, 85],
+      "name": "队伍 10",
+      "path": "party/party-3-10.png",
+      "area": [245, 675, 465, 700],
       "actions": [
         {
           "name": "match",
           "args": [
-            "$当前铃铛['party'] == 'I'",
+            "$当前铃铛['party'] == '10'",
             {
               "True": [
                 {
@@ -1606,46 +1874,17 @@
               "False": [
                 {
                   "name": "swipe",
-                  "args": [120, 45, 600, 85]
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "text": "切换到队伍 I"
-    },
-    {
-      "name": "队伍 J",
-      "path": "party/party-2-10.png",
-      "area": [190, 45, 530, 85],
-      "actions": [
-        {
-          "name": "match",
-          "args": [
-            "$当前铃铛['party'] == 'J'",
-            {
-              "True": [
-                {
-                  "name": "click",
-                  "args": [0, 1200, 80, 1280]
+                  "args": [600, 45, 120, 85]
                 },
                 {
-                  "name": "changeTargets",
-                  "args": ["主要", "loop"]
-                }
-              ],
-              "False": [
-                {
-                  "name": "swipe",
-                  "args": [120, 45, 600, 85]
+                  "name": "info",
+                  "args": ["切换到队伍 1"]
                 }
               ]
             }
           ]
         }
-      ],
-      "text": "切换到队伍 J"
+      ]
     }
   ],
   "搬空商店": [
