@@ -290,6 +290,20 @@
           "enabled": true
         }
       },
+      "步兵人偶": {
+        "高级+": {
+          "name": "步兵人偶 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "步兵人偶 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
+      },
       "方舟守护者": {
         "高级+": {
           "name": "方舟守护者 - 高级+",
@@ -358,11 +372,11 @@
       "area": [300, 800, 460, 840],
       "actions": [
         { "name": "click" },
-        { "name": "delay", "args": [1] },
         {
           "name": "state",
           "args": ["set", "当前铃铛", {}]
-        }
+        },
+        { "name": "delay", "args": [1] }
       ],
       "text": "点击OK"
     },
@@ -372,7 +386,6 @@
       "area": [120, 1180, 320, 1220],
       "actions": [
         { "name": "click" },
-        { "name": "delay", "args": [1] },
         {
           "name": "state",
           "args": [
@@ -384,7 +397,8 @@
         {
           "name": "state",
           "args": ["set", "当前铃铛", {}]
-        }
+        },
+        { "name": "delay", "args": [1] }
       ],
       "text": "蹭车结束，离开房间"
     },
@@ -1161,6 +1175,38 @@
       "text": "铃铛内容: 女王·拉芙 - 高级"
     },
     {
+      "name": "步兵人偶 - 高级+",
+      "path": "boss/活动/步兵人偶/高级+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['步兵人偶']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 步兵人偶 - 高级+"
+    },
+    {
+      "name": "步兵人偶 - 高级",
+      "path": "boss/活动/步兵人偶/高级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['步兵人偶']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 步兵人偶 - 高级"
+    },
+    {
       "name": "方舟守护者 - 高级+",
       "path": "boss/活动/方舟守护者/高级+.png",
       "area": [60, 300, 180, 380],
@@ -1265,11 +1311,11 @@
                   "name": "info",
                   "args": ["点击跳过"]
                 },
-                { "name": "delay", "args": [2] },
                 {
                   "name": "state",
                   "args": ["set", "当前铃铛", {}]
-                }
+                },
+                { "name": "delay", "args": [2] }
               ]
             }
           ]
