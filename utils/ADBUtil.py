@@ -43,8 +43,9 @@ class ADBUtil:
         devices = self.adb.devices()
         if len(devices) == 0:
             print("未检测到设备连接")
-            serial = "127.0.0.1:5555"
             serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
+            if serial.strip() == "":
+                serial = "127.0.0.1:5555"
             ip, port = serial.split(":")
             self.adb.remote_connect(str(ip), int(port))
         else:
@@ -61,8 +62,9 @@ class ADBUtil:
                     index = int(index)
 
                 if index == -1:
-                    serial = "127.0.0.1:5555"
                     serial = input("请输入设备IP和端口进行连接，默认127.0.0.1:5555\n")
+                    if serial.strip() == "":
+                        serial = "127.0.0.1:5555"
                     ip, port = serial.split(":")
                     self.adb.remote_connect(str(ip), int(port))
                 else:
