@@ -443,6 +443,20 @@
           "party": "",
           "enabled": true
         }
+      },
+      "画龙": {
+        "高级+": {
+          "name": "画龙 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "画龙 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -1661,6 +1675,38 @@
         }
       ],
       "text": "铃铛内容: 狂暴的罗梅罗 - 中级"
+    },
+    {
+      "name": "画龙 - 高级+",
+      "path": "boss/活动/画龙/高级+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['画龙']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 画龙 - 高级+"
+    },
+    {
+      "name": "画龙 - 高级",
+      "path": "boss/活动/画龙/高级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['画龙']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 画龙 - 高级"
     },
     {
       "name": "参加",
