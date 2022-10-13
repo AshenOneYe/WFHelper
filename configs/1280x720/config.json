@@ -551,6 +551,20 @@
           "party": "",
           "enabled": true
         }
+      },
+      "黑龙": {
+        "高级+": {
+          "name": "黑龙 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "黑龙 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -2025,6 +2039,38 @@
         }
       ],
       "text": "铃铛内容: 杰克南瓜灯 - 中级"
+    },
+    {
+      "name": "黑龙 - 高级+",
+      "path": "boss/活动/黑龙/高级+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['黑龙']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 黑龙 - 高级+"
+    },
+    {
+      "name": "黑龙 - 高级",
+      "path": "boss/活动/黑龙/高级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['黑龙']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 黑龙 - 高级"
     },
     {
       "name": "参加",
