@@ -591,6 +591,32 @@
           "party": "",
           "enabled": true
         }
+      },
+      "圣夜的雪像G": {
+        "超级": {
+          "name": "圣夜的雪像G - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "圣夜的雪像G - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "圣夜的雪像G - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "圣夜的雪像G - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -2162,6 +2188,70 @@
         }
       ],
       "text": "铃铛内容: 普罗基欧变异体 - 高级"
+    },
+    {
+      "name": "圣夜的雪像G - 超级",
+      "path": "boss/活动/圣夜的雪像G/超级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['圣夜的雪像G']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 圣夜的雪像G - 超级"
+    },
+    {
+      "name": "圣夜的雪像G - 高级+",
+      "path": "boss/活动/圣夜的雪像G/高级+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['圣夜的雪像G']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 圣夜的雪像G - 高级+"
+    },
+    {
+      "name": "圣夜的雪像G - 高级",
+      "path": "boss/活动/圣夜的雪像G/高级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['圣夜的雪像G']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 圣夜的雪像G - 高级"
+    },
+    {
+      "name": "圣夜的雪像G - 中级",
+      "path": "boss/活动/圣夜的雪像G/中级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['圣夜的雪像G']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 圣夜的雪像G - 中级"
     },
     {
       "name": "参加",
