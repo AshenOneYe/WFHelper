@@ -631,6 +631,32 @@
           "party": "",
           "enabled": true
         }
+      },
+      "比翼使魔": {
+        "超级": {
+          "name": "比翼使魔 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "比翼使魔 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "比翼使魔 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "比翼使魔 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -2300,6 +2326,70 @@
       "text": "铃铛内容: 圣夜的雪像G - 中级"
     },
     {
+      "name": "比翼使魔 - 超级",
+      "path": "boss/活动/比翼使魔/超级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['比翼使魔']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 比翼使魔 - 超级"
+    },
+    {
+      "name": "比翼使魔 - 高级+",
+      "path": "boss/活动/比翼使魔/高级+.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['比翼使魔']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 比翼使魔 - 高级+"
+    },
+    {
+      "name": "比翼使魔 - 高级",
+      "path": "boss/活动/比翼使魔/高级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['比翼使魔']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 比翼使魔 - 高级"
+    },
+    {
+      "name": "比翼使魔 - 中级",
+      "path": "boss/活动/比翼使魔/中级.png",
+      "area": [60, 300, 180, 380],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['比翼使魔']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 比翼使魔 - 中级"
+    },
+    {
       "name": "参加",
       "path": "canjia.png",
       "area": [440, 1040, 640, 1100],
@@ -3168,9 +3258,35 @@
       "text": "点击再次挑战"
     },
     {
+      "name": "失败",
+      "path": "shibai.png",
+      "area": [120, 1040, 320, 1080],
+      "actions": [
+        { "name": "click" },
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "关卡失败，返回主要任务"
+    },
+    {
       "name": "清空完毕",
       "path": "energy.png",
       "area": [240, 1080, 480, 1140],
+      "actions": [
+        { "name": "click" },
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "任务完成，返回主要任务"
+    },
+    {
+      "name": "清空完毕",
+      "path": "ok.png",
+      "area": [300, 1180, 460, 1220],
       "actions": [
         { "name": "click" },
         {
