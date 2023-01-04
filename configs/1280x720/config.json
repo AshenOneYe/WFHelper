@@ -2395,6 +2395,36 @@
   ],
   "参加": [
     {
+      "name": "参加3",
+      "path": "canjia.png",
+      "area": [255, 260, 310, 310],
+      "actions": [
+        {
+          "name": "click"
+        },
+        { "name": "delay", "args": [1] },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ]
+    },
+    {
+      "name": "参加2",
+      "path": "canjia.png",
+      "area": [255, 175, 310, 225],
+      "actions": [
+        {
+          "name": "click"
+        },
+        { "name": "delay", "args": [1] },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ]
+    },
+    {
       "name": "参加",
       "path": "canjia.png",
       "area": [335, 90, 420, 140],
