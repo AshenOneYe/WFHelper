@@ -400,6 +400,32 @@
           "enabled": true
         }
       },
+      "伊尔格拉乌": {
+        "超级": {
+          "name": "伊尔格拉乌 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "伊尔格拉乌 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "伊尔格拉乌 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "伊尔格拉乌 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
+      },
       "指挥者": {
         "高级+": {
           "name": "指挥者 - 高级+",
@@ -699,23 +725,62 @@
       ]
     },
     {
+      "name": "参加新手铃铛",
+      "path": "canjia2.png",
+      "area": [335, 90, 420, 140],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["铃铛"]
+        }
+      ]
+    },
+    {
       "name": "铃铛",
       "path": "lingdang.png",
       "area": [30, 18, 62, 50],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ],
       "text": "准备上车"
+    },
+    {
+      "name": "新手铃铛",
+      "path": "lingdang2.png",
+      "area": [30, 18, 62, 50],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ],
+      "text": "准备上车: 新手铃铛"
     },
     {
       "name": "警告",
       "path": "alert.png",
       "area": [300, 800, 460, 840],
       "actions": [
-        { "name": "click" },
+        {
+          "name": "click"
+        },
         {
           "name": "state",
           "args": ["set", "当前铃铛", {}]
         },
-        { "name": "delay", "args": [1] }
+        {
+          "name": "delay",
+          "args": [1]
+        }
       ],
       "text": "点击OK"
     },
@@ -724,7 +789,9 @@
       "path": "likai.png",
       "area": [120, 1180, 320, 1220],
       "actions": [
-        { "name": "click" },
+        {
+          "name": "click"
+        },
         {
           "name": "state",
           "args": [
@@ -737,7 +804,10 @@
           "name": "state",
           "args": ["set", "当前铃铛", {}]
         },
-        { "name": "delay", "args": [1] }
+        {
+          "name": "delay",
+          "args": [1]
+        }
       ],
       "text": "蹭车结束，离开房间"
     },
@@ -745,70 +815,150 @@
       "name": "继续",
       "path": "jixu.png",
       "area": [300, 1180, 460, 1220],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ],
       "text": "点击继续"
     },
     {
       "name": "OK",
       "path": "ok.png",
       "area": [300, 1180, 460, 1220],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [2]
+        }
+      ],
       "text": "点击OK"
     },
     {
       "name": "准备",
       "path": "zhunbei.png",
       "area": [240, 900, 480, 920],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [2]
+        }
+      ],
       "text": "点击准备"
     },
     {
       "name": "准备",
       "path": "zhunbei2.png",
       "area": [240, 900, 480, 920],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [2]
+        }
+      ],
       "text": "点击准备"
     },
     {
       "name": "升级",
       "path": "shengji.png",
       "area": [300, 560, 460, 600],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ],
       "text": "已升级"
     },
     {
       "name": "继续关卡",
       "path": "jixuguanqia.png",
       "area": [480, 800, 640, 840],
-      "actions": [{ "name": "click" }, { "name": "sleep", "args": [2] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "sleep",
+          "args": [2]
+        }
+      ],
       "text": "继续关卡"
     },
     {
       "name": "失败",
       "path": "shibai.png",
       "area": [120, 1040, 320, 1080],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [2]
+        }
+      ],
       "text": "关卡失败"
     },
     {
       "name": "放弃",
       "path": "fangqi.png",
       "area": [480, 800, 640, 840],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [2]
+        }
+      ],
       "text": "关卡失败，点击放弃"
     },
     {
       "name": "关卡完成",
       "path": "wanchengguanqia.png",
       "area": [120, 1180, 320, 1220],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ],
       "text": "关卡完成"
     },
     {
       "name": "体力不足",
       "path": "energy.png",
       "area": [240, 1080, 480, 1140],
-      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ],
       "text": "体力不足，返回主要任务"
     }
   ],
@@ -1758,6 +1908,70 @@
       "text": "铃铛内容: 伊劳德雷斯 - 中级"
     },
     {
+      "name": "伊尔格拉乌 - 超级",
+      "path": "boss/荒龙/伊尔格拉乌/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['伊尔格拉乌']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 伊尔格拉乌 - 超级"
+    },
+    {
+      "name": "伊尔格拉乌 - 高级+",
+      "path": "boss/荒龙/伊尔格拉乌/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['伊尔格拉乌']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 伊尔格拉乌 - 高级+"
+    },
+    {
+      "name": "伊尔格拉乌 - 高级",
+      "path": "boss/荒龙/伊尔格拉乌/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['伊尔格拉乌']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 伊尔格拉乌 - 高级"
+    },
+    {
+      "name": "伊尔格拉乌 - 中级",
+      "path": "boss/荒龙/伊尔格拉乌/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['伊尔格拉乌']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 伊尔格拉乌 - 中级"
+    },
+    {
       "name": "指挥者 - 高级+",
       "path": "boss/活动/指挥者/高级+.png",
       "area": [0, 85, 70, 145],
@@ -2391,18 +2605,32 @@
           "args": ["参加"]
         }
       ]
+    },
+    {
+      "name": "参加新手铃铛",
+      "path": "canjia2.png",
+      "area": [335, 90, 420, 140],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ]
     }
   ],
   "参加": [
     {
-      "name": "参加3",
+      "name": "跳过三号铃铛",
       "path": "canjia.png",
       "area": [255, 260, 310, 310],
       "actions": [
         {
           "name": "click"
         },
-        { "name": "delay", "args": [1] },
+        {
+          "name": "delay",
+          "args": [1]
+        },
         {
           "name": "changeTargets",
           "args": ["参加"]
@@ -2410,14 +2638,17 @@
       ]
     },
     {
-      "name": "参加2",
+      "name": "跳过二号铃铛",
       "path": "canjia.png",
       "area": [255, 175, 310, 225],
       "actions": [
         {
           "name": "click"
         },
-        { "name": "delay", "args": [1] },
+        {
+          "name": "delay",
+          "args": [1]
+        },
         {
           "name": "changeTargets",
           "args": ["参加"]
@@ -2448,12 +2679,17 @@
             "'enabled' not in $当前铃铛 or $当前铃铛['enabled']",
             {
               "True": [
-                { "name": "click" },
+                {
+                  "name": "click"
+                },
                 {
                   "name": "info",
                   "args": ["点击参加"]
                 },
-                { "name": "delay", "args": [2] },
+                {
+                  "name": "delay",
+                  "args": [2]
+                },
                 {
                   "name": "changeTargets",
                   "args": ["切换铃铛SET", "loop"]
@@ -2472,7 +2708,73 @@
                   "name": "state",
                   "args": ["set", "当前铃铛", {}]
                 },
-                { "name": "delay", "args": [2] }
+                {
+                  "name": "delay",
+                  "args": [2]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "参加新手铃铛",
+      "path": "canjia2.png",
+      "area": [335, 90, 420, 140],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "'name' not in $当前铃铛 and $isDebug",
+            {
+              "True": [
+                {
+                  "name": "getScreen"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "match",
+          "args": [
+            "'enabled' not in $当前铃铛 or $当前铃铛['enabled']",
+            {
+              "True": [
+                {
+                  "name": "click"
+                },
+                {
+                  "name": "info",
+                  "args": ["点击参加"]
+                },
+                {
+                  "name": "delay",
+                  "args": [2]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛SET", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [255, 90, 310, 140]
+                },
+                {
+                  "name": "info",
+                  "args": ["点击跳过"]
+                },
+                {
+                  "name": "state",
+                  "args": ["set", "当前铃铛", {}]
+                },
+                {
+                  "name": "delay",
+                  "args": [2]
+                }
               ]
             }
           ]
