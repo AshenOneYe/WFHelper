@@ -4,6 +4,8 @@ import imagehash
 import math
 import operator
 from functools import reduce
+import cv2
+import numpy as np
 
 
 # 这个函数可能要继续优化
@@ -21,6 +23,17 @@ def similarity(img, target):
         colorRatio = target["colorRatio"]
         return (1 - colorRatio) * sim1 + colorRatio * sim2
     return sim1
+
+
+def locateImage(test_pic, sample_pic):
+    w, h = test_pic.size
+    res = None
+
+    sample_pic_gray = np.array(sample_pic.convert('L'))
+    res = cv2.matchTemplate(sample_pic_gray, np.array(test_pic.convert('L')), cv2.TM_CCOEFF_NORMED)
+    score = np.max(res)
+    loc = np.where(res == score)
+    return [loc[1], loc[0], loc[1] + w, loc[0] + h], score
 
 
 def readImageFromBytes(bytes):
