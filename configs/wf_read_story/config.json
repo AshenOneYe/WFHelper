@@ -1,0 +1,108 @@
+{
+    "name":"WF1440x3120",
+    "author":"Hey",
+    "description":"python3 ./main.py -c configs/wf_read_story/config.json",
+    "similarityThreshold":0.80,
+    "loopDelay" : [1,1],
+    "randomClickDelay":300,
+    "randomClickArea":[0,0,1,1],
+    "screenSize":[1440,3120],
+    "targetList":["mainTargets", "continue"],
+    "mainTargets":[
+        {
+            "name" : "chose first story",
+            "path" : "first_page.png",
+            "area" : [46,942,138,1177],
+            "text" : "chose first page",
+            "description":"chose first page",
+            "actions":[{"name":"click"}]
+        },
+        {
+            "name" : "chose first chapter",
+            "path" : "chose_chapter_1.png",
+            "area" : [49,1533,287,1757],
+            "text" : "chose chapter",
+            "description":"chose chapter",
+            "actions":[{"name":"click"}]
+        },
+        {
+            "name" : "chose first chapter2",
+            "path" : "chose_chapter_2.png",
+            "area" : [49,1253,287,1484],
+            "text" : "chose chapter2",
+            "description":"chose chapter2",
+            "actions":[{"name":"click"}]
+        },
+        {
+            "name" : "chose first chapter3",
+            "path" : "chose_chapter_3.png",
+            "area" : [49,960,287,1180],
+            "text" : "chose chapter3",
+            "description":"chose chapter3",
+            "actions":[{"name":"click"}]
+        },
+        {
+            "name" : "chose first chapter done",
+            "path" : "chose_chapter_done.png",
+            "area" : [49,960,287,1180],
+            "text" : "chose chapter done",
+            "description":"chose chapter done",
+            "actions":[
+                {
+                "name":"click",
+                "args":[100,2900,101,2901]
+                }
+            ]
+        },
+        {
+            "name" : "read story",
+            "path" : "in_story_page.png",
+            "area" : [1205,341,1399,418],
+            "text" : "read story",
+            "description":"read story",
+            "actions":[
+                {"name":"click"},
+                {
+                    "name": "delay",
+                    "args": [1]
+                },
+                {
+                    "name":"changeTargets",
+                    "args":["continue"]
+                } 
+            ]
+        },
+        {
+            "name" : "read story2",
+            "path" : "in_story_page2.png",
+            "area" : [766,1931,1325,2050],
+            "text" : "read story2",
+            "description":"read story2",
+            "isTemplateMatch": 1,
+            "actions":[
+                {"name":"click"}
+            ]
+        },
+        {
+            "name" : "read story3",
+            "path" : "in_story_page3.png",
+            "area" : [437,1869,1004,1998],
+            "text" : "read story3",
+            "description":"read story3",
+            "actions":[{"name":"click"}]
+        }
+    ],
+    "continue":[
+        {
+            "name" : "read story2",
+            "path" : "in_story_page2.png",
+            "area" : [766,1931,1325,2050],
+            "text" : "read story2",
+            "description":"read story2",
+            "isTemplateMatch": 1,
+            "actions":[
+                {"name":"click"}
+            ]
+        }
+    ]
+}

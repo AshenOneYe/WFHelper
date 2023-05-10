@@ -69,6 +69,7 @@ class Config:
                     img = getImageCrop(
                         path.join(self.configDir, target["path"]), target["area"]
                     )
+                    target["originPic"] = img
                     target["hash"] = getImageHash(image=img)
                     if "colorRatio" in target:
                         target["histogram"] = img.histogram()

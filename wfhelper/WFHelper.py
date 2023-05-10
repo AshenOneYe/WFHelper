@@ -4,7 +4,7 @@ from .Action import ActionManager
 from .Config import Config
 from .State import State
 from utils import adbUtil
-from utils import readImageFromBytes, similarity
+from utils import readImageFromBytes, similarity, locateImage
 from utils import Log
 
 
@@ -34,6 +34,22 @@ class WFHelper:
         finally:
             return result
 
+    def templateMatch(self, target, screen):
+        result = False
+        if "isTemplateMatch" not in target or target["isTemplateMatch"] == 0:
+            return result
+        try:
+            area, score = locateImage(target["originPic"], screen)
+            similarityThreshold = self.config.similarityThreshold
+            if "similarityThreshold" in target:
+                similarityThreshold = target["similarityThreshold"]
+            if score >= similarityThreshold:
+                self.actionManager.click(area)
+                Log.info("{} - 识别相似度：{}".format(target["text"], score))
+                result = True
+        finally:
+            return result
+
     def mainLoop(self, targets, targetName=None):
 
         t = int(time.time())
@@ -43,6 +59,11 @@ class WFHelper:
             if targetName is not None:
                 if target["name"] != targetName:
                     continue
+
+            if self.templateMatch(target, screen):
+                self.updateActionTime(t)
+                return True
+
             if "hash" not in target or self.check(target, screen):
                 if "hash" not in target:
                     if "text" in target:

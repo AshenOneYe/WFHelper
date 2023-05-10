@@ -5,7 +5,6 @@ import multiprocessing
 from wfhelper import WFHelperWrapper
 from utils import adbUtil, configUtil, Log
 from server import Server
-from typing import Dict
 
 if __name__ == "__main__":
     # 不写这个打包exe会出问题
@@ -17,8 +16,10 @@ if __name__ == "__main__":
     config = None
     instance = None
 
+    port = 8080
+
     try:
-        _opts, args = getopt.getopt(sys.argv[1:], "-t-s:-d:-c:-n")
+        _opts, args = getopt.getopt(sys.argv[1:], "-t-s:-d:-c:-p:-n")
         opts = dict(_opts)  # type: Dict[str,str]
 
         if "-t" in opts:
@@ -44,6 +45,10 @@ if __name__ == "__main__":
                 config = configUtil.selectConfig()
             instance = WFHelperWrapper(serial, config)
 
+        if "-p" in opts:
+            port = opts["-p"]
+            Log.info("use port : {}".format(opts["-p"]))
+
         # TODO -v 参数打印log信息
     except getopt.GetoptError:
         Log.error("参数错误")
@@ -59,5 +64,5 @@ if __name__ == "__main__":
             config = configUtil.selectConfig()
         instance = WFHelperWrapper(serial, config)
 
-    server = Server(instance, isDebug)
+    server = Server(instance, isDebug, port)
     server.run()

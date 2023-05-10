@@ -21,13 +21,16 @@ CONTENT_TYPES = {
 # TODO isDebug和instances应作为单独的信息传递给UI
 class Server:
     isDebug = False
+    port = 8080
 
     instances = set()  # type: Set[Any]
 
     clients = set()  # type: Set[Any]
     streamClients = set()  # type: Set[Any]
 
-    def __init__(self, instance=None, isDebug=False):
+    def __init__(self, instance=None, isDebug=False, port = 8080):
+        self.port = port
+
         if isDebug:
             Log.setDebugLevel()
 
@@ -39,6 +42,7 @@ class Server:
     def createInstance(self, instance):
         instance.start()
         instance.setState({"key": "isDebug", "value": self.isDebug})
+        # set callback
         instance.setEventHandler(self.eventHandler)
 
         self.instances.add(instance)
@@ -173,11 +177,11 @@ class Server:
         async with websockets.serve(
             self.handler,
             "0.0.0.0",
-            8080,
+            self.port,
             process_request=self.requestHandler,
             ping_interval=None,
         ):
-            Log.info("服务器启动完成 - http://localhost:8080")
+            Log.info("服务器启动完成 - http://localhost:" + str(self.port))
 
             await self.mainLoop()
 
