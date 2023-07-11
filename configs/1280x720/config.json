@@ -901,6 +901,32 @@
           "party": "",
           "enabled": true
         }
+      },
+      "古拉托顿": {
+        "超级": {
+          "name": "古拉托顿 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "古拉托顿 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "古拉托顿 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "古拉托顿 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -3334,6 +3360,70 @@
         }
       ],
       "text": "铃铛内容: 玛格诺斯 - 高级"
+    },
+    {
+      "name": "古拉托顿 - 超级",
+      "path": "boss/活动/古拉托顿/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['古拉托顿']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 古拉托顿 - 超级"
+    },
+    {
+      "name": "古拉托顿 - 高级+",
+      "path": "boss/活动/古拉托顿/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['古拉托顿']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 古拉托顿 - 高级+"
+    },
+    {
+      "name": "古拉托顿 - 高级",
+      "path": "boss/活动/古拉托顿/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['古拉托顿']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 古拉托顿 - 高级"
+    },
+    {
+      "name": "古拉托顿 - 中级",
+      "path": "boss/活动/古拉托顿/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['古拉托顿']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 古拉托顿 - 中级"
     },
     {
       "name": "参加",
