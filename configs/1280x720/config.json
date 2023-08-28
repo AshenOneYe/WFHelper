@@ -3976,7 +3976,7 @@
     {
       "name": "队伍 1",
       "path": "party/party-3-1.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4011,7 +4011,7 @@
     {
       "name": "队伍 2",
       "path": "party/party-3-2.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4046,7 +4046,7 @@
     {
       "name": "队伍 3",
       "path": "party/party-3-3.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4081,7 +4081,7 @@
     {
       "name": "队伍 4",
       "path": "party/party-3-4.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4116,7 +4116,7 @@
     {
       "name": "队伍 5",
       "path": "party/party-3-5.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4151,7 +4151,7 @@
     {
       "name": "队伍 6",
       "path": "party/party-3-6.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4186,7 +4186,7 @@
     {
       "name": "队伍 7",
       "path": "party/party-3-7.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4221,7 +4221,7 @@
     {
       "name": "队伍 8",
       "path": "party/party-3-8.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4256,7 +4256,7 @@
     {
       "name": "队伍 9",
       "path": "party/party-3-9.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
@@ -4291,7 +4291,7 @@
     {
       "name": "队伍 10",
       "path": "party/party-3-10.png",
-      "area": [245, 675, 465, 700],
+      "area": [40, 75, 90, 95],
       "actions": [
         {
           "name": "match",
