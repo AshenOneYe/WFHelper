@@ -953,6 +953,20 @@
           "party": "",
           "enabled": true
         }
+      },
+      "噬龙者": {
+        "超级": {
+          "name": "噬龙者 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "噬龙者 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -3514,6 +3528,38 @@
         }
       ],
       "text": "铃铛内容: 古拉托顿 - 中级"
+    },
+    {
+      "name": "噬龙者 - 超级",
+      "path": "boss/活动/噬龙者/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['噬龙者']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 噬龙者 - 超级"
+    },
+    {
+      "name": "噬龙者 - 高级",
+      "path": "boss/活动/噬龙者/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['噬龙者']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 噬龙者 - 高级"
     },
     {
       "name": "参加",
