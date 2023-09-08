@@ -921,7 +921,9 @@
     "参加",
     "切换铃铛SET",
     "切换铃铛队伍",
-    "搬空商店"
+    "搬空商店",
+    "补充体力",
+    "战阵挂机"
   ],
   "mainTargets": [
     {
@@ -1181,7 +1183,7 @@
           "args": [1]
         }
       ],
-      "text": "体力不足，返回主要任务"
+      "text": "体力不足"
     }
   ],
   "铃铛": [
@@ -4308,6 +4310,261 @@
         }
       ],
       "text": "任务完成，返回主要任务"
+    }
+  ],
+  "补充体力": [
+    {
+      "name": "体力不足",
+      "path": "energy/no-energy.png",
+      "area": [240, 1080, 480, 1140],
+      "actions": [
+        {
+          "name": "click",
+          "args": [120, 420, 600, 500]
+        },
+        {
+          "name": "info",
+          "args": ["体力不足，尝试补充"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（临时）",
+      "path": "energy/type-0-1.png",
+      "area": [95, 425, 190, 520],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 890, 670, 965]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（临时）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（临时）",
+      "path": "energy/type-0-2.png",
+      "area": [95, 500, 190, 595],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 820, 670, 895]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（临时）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（小）",
+      "path": "energy/type-1-1.png",
+      "area": [95, 425, 190, 520],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 890, 670, 965]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（小）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（中）",
+      "path": "energy/type-2-1.png",
+      "area": [95, 425, 190, 520],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 890, 670, 965]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（中）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（大）",
+      "path": "energy/type-3-1.png",
+      "area": [95, 425, 190, 520],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 890, 670, 965]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（大）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "返回",
+      "actions": [
+        {
+          "name": "click",
+          "args": [0, 1200, 80, 1280]
+        }
+      ]
+    }
+  ],
+  "战阵挂机": [
+    {
+      "name": "警告",
+      "path": "alert.png",
+      "area": [300, 800, 460, 840],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ]
+    },
+    {
+      "name": "挑战",
+      "path": "quest/zhanzhen-1.png",
+      "area": [235, 1045, 475, 1135],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ]
+    },
+    {
+      "name": "继续",
+      "path": "quest/zhanzhen-2.png",
+      "area": [240, 1180, 480, 1240],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        }
+      ]
+    },
+    {
+      "name": "续战",
+      "path": "quest/zhanzhen-3.png",
+      "area": [400, 1180, 560, 1220],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "state",
+          "args": ["increase", "战阵次数", 1]
+        },
+        {
+          "name": "state",
+          "args": ["set", "尝试次数", 0]
+        }
+      ]
+    },
+    {
+      "name": "体力不足",
+      "path": "energy.png",
+      "area": [240, 1080, 480, 1140],
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$尝试次数 is None or $尝试次数 < 10",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["increase", "尝试次数", 1]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["补充体力", "once"]
+                },
+                {
+                  "name": "delay",
+                  "args": [2]
+                }
+              ],
+              "False": [
+                {
+                  "name": "state",
+                  "args": ["set", "尝试次数", 0]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                },
+                {
+                  "name": "info",
+                  "args": ["补充体力失败，返回主要任务"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
