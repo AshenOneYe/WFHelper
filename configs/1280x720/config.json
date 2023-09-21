@@ -4314,9 +4314,10 @@
   ],
   "补充体力": [
     {
-      "name": "体力不足",
-      "path": "energy/no-energy.png",
-      "area": [240, 1080, 480, 1140],
+      "name": "体力回复药（临时）",
+      "path": "energy/type-0-0.png",
+      "area": [65, 390, 200, 535],
+      "similarityThreshold": 1,
       "actions": [
         {
           "name": "click",
@@ -4324,7 +4325,7 @@
         },
         {
           "name": "info",
-          "args": ["体力不足，尝试补充"]
+          "args": ["体力不足，尝试使用体力回复药（临时）"]
         },
         {
           "name": "delay",
@@ -4384,6 +4385,30 @@
     },
     {
       "name": "体力回复药（小）",
+      "path": "energy/type-1-0.png",
+      "area": [65, 390, 200, 535],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "click",
+          "args": [120, 420, 600, 500]
+        },
+        {
+          "name": "info",
+          "args": ["体力不足，尝试使用体力回复药（小）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（小）",
       "path": "energy/type-1-1.png",
       "area": [95, 425, 190, 520],
       "actions": [
@@ -4394,6 +4419,53 @@
         {
           "name": "info",
           "args": ["使用体力回复药（小）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（小）",
+      "path": "energy/type-1-2.png",
+      "area": [95, 500, 190, 595],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 820, 670, 895]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（小）"]
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（中）",
+      "path": "energy/type-2-0.png",
+      "area": [65, 390, 200, 675],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "click",
+          "args": [120, 560, 600, 640]
+        },
+        {
+          "name": "info",
+          "args": ["体力不足，尝试使用体力回复药（中）"]
         },
         {
           "name": "delay",
@@ -4454,6 +4526,10 @@
     {
       "name": "返回",
       "actions": [
+        {
+          "name": "delay",
+          "args": [1]
+        },
         {
           "name": "click",
           "args": [0, 1200, 80, 1280]
