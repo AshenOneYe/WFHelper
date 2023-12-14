@@ -983,6 +983,32 @@
           "party": "",
           "enabled": true
         }
+      },
+      "始龙之眼": {
+        "超级": {
+          "name": "始龙之眼 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "始龙之眼 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "始龙之眼 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "始龙之眼 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -3626,6 +3652,70 @@
         }
       ],
       "text": "铃铛内容: 异质魔晶羊 - 高级"
+    },
+    {
+      "name": "始龙之眼 - 超级",
+      "path": "boss/活动/始龙之眼/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 超级"
+    },
+    {
+      "name": "始龙之眼 - 高级+",
+      "path": "boss/活动/始龙之眼/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 高级+"
+    },
+    {
+      "name": "始龙之眼 - 高级",
+      "path": "boss/活动/始龙之眼/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 高级"
+    },
+    {
+      "name": "始龙之眼 - 中级",
+      "path": "boss/活动/始龙之眼/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 中级"
     },
     {
       "name": "参加",
