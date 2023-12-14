@@ -983,6 +983,32 @@
           "party": "",
           "enabled": true
         }
+      },
+      "始龙之眼": {
+        "超级": {
+          "name": "始龙之眼 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "始龙之眼 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "始龙之眼 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "始龙之眼 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -993,6 +1019,7 @@
     "参加",
     "切换铃铛SET",
     "切换铃铛队伍",
+    "活动扭蛋",
     "搬空商店",
     "补充体力",
     "战阵挂机"
@@ -3627,6 +3654,70 @@
       "text": "铃铛内容: 异质魔晶羊 - 高级"
     },
     {
+      "name": "始龙之眼 - 超级",
+      "path": "boss/活动/始龙之眼/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 超级"
+    },
+    {
+      "name": "始龙之眼 - 高级+",
+      "path": "boss/活动/始龙之眼/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 高级+"
+    },
+    {
+      "name": "始龙之眼 - 高级",
+      "path": "boss/活动/始龙之眼/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 高级"
+    },
+    {
+      "name": "始龙之眼 - 中级",
+      "path": "boss/活动/始龙之眼/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['始龙之眼']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 始龙之眼 - 中级"
+    },
+    {
       "name": "参加",
       "path": "canjia.png",
       "area": [335, 90, 420, 140],
@@ -4443,6 +4534,48 @@
           ]
         }
       ]
+    }
+  ],
+  "活动扭蛋": [
+    {
+      "name": "OK",
+      "path": "alert.png",
+      "area": [300, 800, 460, 840],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "点击OK"
+    },
+    {
+      "name": "确认",
+      "path": "fangqi.png",
+      "area": [480, 800, 640, 840],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [2] }],
+      "text": "点击确认"
+    },
+    {
+      "name": "抽奖",
+      "path": "lottery/choujiang.png",
+      "area": [530, 590, 595, 625],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [4] }],
+      "text": "点击抽奖"
+    },
+    {
+      "name": "重置",
+      "path": "lottery/reset.png",
+      "area": [595, 240, 635, 290],
+      "actions": [{ "name": "click" }, { "name": "delay", "args": [1] }],
+      "text": "点击重置"
+    },
+    {
+      "name": "清空完毕",
+      "path": "lottery/complete.png",
+      "area": [225, 640, 310, 670],
+      "actions": [
+        {
+          "name": "changeTargets",
+          "args": ["主要", "loop"]
+        }
+      ],
+      "text": "任务完成，返回主要任务"
     }
   ],
   "搬空商店": [
