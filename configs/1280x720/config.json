@@ -4799,7 +4799,7 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4822,7 +4822,7 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4845,7 +4845,7 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4869,7 +4869,7 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4892,7 +4892,7 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4915,7 +4915,7 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4939,7 +4939,7 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4962,7 +4962,54 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（中）",
+      "path": "energy/type-2-2.png",
+      "area": [95, 500, 190, 595],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 820, 670, 895]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（中）"]
+        },
+        {
+          "name": "delay",
+          "args": [2]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（大）",
+      "path": "energy/type-3-0.png",
+      "area": [65, 390, 200, 815],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "click",
+          "args": [120, 700, 600, 780]
+        },
+        {
+          "name": "info",
+          "args": ["体力不足，尝试使用体力回复药（大）"]
+        },
+        {
+          "name": "delay",
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4985,7 +5032,30 @@
         },
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["补充体力", "once"]
+        }
+      ]
+    },
+    {
+      "name": "体力回复药（大）",
+      "path": "energy/type-3-2.png",
+      "area": [95, 500, 190, 595],
+      "actions": [
+        {
+          "name": "click",
+          "args": [375, 820, 670, 895]
+        },
+        {
+          "name": "info",
+          "args": ["使用体力回复药（大）"]
+        },
+        {
+          "name": "delay",
+          "args": [2]
         },
         {
           "name": "changeTargets",
@@ -4998,7 +5068,7 @@
       "actions": [
         {
           "name": "delay",
-          "args": [1]
+          "args": [2]
         },
         {
           "name": "click",
