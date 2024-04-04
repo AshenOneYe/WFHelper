@@ -1043,6 +1043,20 @@
           "party": "",
           "enabled": true
         }
+      },
+      "STM-帕里德斯": {
+        "超级": {
+          "name": "STM-帕里德斯 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "STM-帕里德斯 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -3846,6 +3860,38 @@
         }
       ],
       "text": "铃铛内容: 黏黏波露王 - 中级"
+    },
+    {
+      "name": "STM-帕里德斯 - 超级",
+      "path": "boss/活动/STM-帕里德斯/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['STM-帕里德斯']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: STM-帕里德斯 - 超级"
+    },
+    {
+      "name": "STM-帕里德斯 - 高级",
+      "path": "boss/活动/STM-帕里德斯/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['STM-帕里德斯']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: STM-帕里德斯 - 高级"
     },
     {
       "name": "参加",
