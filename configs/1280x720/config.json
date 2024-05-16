@@ -442,6 +442,38 @@
           "enabled": true
         }
       },
+      "碧之女王": {
+        "地狱级": {
+          "name": "碧之女王 - 地狱级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "超级": {
+          "name": "碧之女王 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "碧之女王 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "碧之女王 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "碧之女王 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
+      },
       "伊尔昂斯拉": {
         "超级": {
           "name": "伊尔昂斯拉 - 超级",
@@ -2415,6 +2447,86 @@
         }
       ],
       "text": "铃铛内容: 赤之女王 - 中级"
+    },
+    {
+      "name": "碧之女王 - 地狱级",
+      "path": "boss/领主/碧之女王/地狱级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['碧之女王']['地狱级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 碧之女王 - 地狱级"
+    },
+    {
+      "name": "碧之女王 - 超级",
+      "path": "boss/领主/碧之女王/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['碧之女王']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 碧之女王 - 超级"
+    },
+    {
+      "name": "碧之女王 - 高级+",
+      "path": "boss/领主/碧之女王/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['碧之女王']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 碧之女王 - 高级+"
+    },
+    {
+      "name": "碧之女王 - 高级",
+      "path": "boss/领主/碧之女王/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['碧之女王']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 碧之女王 - 高级"
+    },
+    {
+      "name": "碧之女王 - 中级",
+      "path": "boss/领主/碧之女王/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['碧之女王']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 碧之女王 - 中级"
     },
     {
       "name": "伊尔昂斯拉 - 超级",
