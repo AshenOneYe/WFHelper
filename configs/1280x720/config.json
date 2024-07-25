@@ -779,6 +779,12 @@
         }
       },
       "暗凤希亚特利欧": {
+        "地狱级": {
+          "name": "暗凤希亚特利欧 - 地狱级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
         "超级": {
           "name": "暗凤希亚特利欧 - 超级",
           "set": "",
@@ -3309,6 +3315,22 @@
       "text": "铃铛内容: 风师亚特摩西亚 - 中级"
     },
     {
+      "name": "暗凤希亚特利欧 - 地狱级",
+      "path": "boss/精灵兽/暗凤希亚特利欧/地狱级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['暗凤希亚特利欧']['地狱级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 暗凤希亚特利欧 - 地狱级"
+    },
+    {
       "name": "暗凤希亚特利欧 - 超级",
       "path": "boss/精灵兽/暗凤希亚特利欧/超级.png",
       "area": [0, 85, 70, 145],
@@ -4287,6 +4309,10 @@
                   "args": [2]
                 },
                 {
+                  "name": "state",
+                  "args": ["set", "尝试次数", 0]
+                },
+                {
                   "name": "changeTargets",
                   "args": ["切换铃铛SET", "loop"]
                 }
@@ -4352,6 +4378,10 @@
                 {
                   "name": "delay",
                   "args": [2]
+                },
+                {
+                  "name": "state",
+                  "args": ["set", "尝试次数", 0]
                 },
                 {
                   "name": "changeTargets",
@@ -4614,6 +4644,43 @@
                 {
                   "name": "info",
                   "args": ["切换到SET 1"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "卡死",
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$尝试次数 is None or $尝试次数 < 30",
+            {
+              "True": [
+                {
+                  "name": "state",
+                  "args": ["increase", "尝试次数", 1]
+                },
+                {
+                  "name": "delay",
+                  "args": [2]
+                }
+              ],
+              "False": [
+                {
+                  "name": "state",
+                  "args": ["set", "尝试次数", 0]
+                },
+                {
+                  "name": "changeTargets",
+                  "args": ["主要", "loop"]
+                },
+                {
+                  "name": "info",
+                  "args": ["进入房间失败，返回主要任务"]
                 }
               ]
             }
