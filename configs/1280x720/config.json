@@ -1155,6 +1155,38 @@
           "party": "",
           "enabled": true
         }
+      },
+      "红机兵海因莱特": {
+        "决战级": {
+          "name": "红机兵海因莱特 - 决战级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "超级": {
+          "name": "红机兵海因莱特 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "红机兵海因莱特 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "红机兵海因莱特 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "红机兵海因莱特 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -4232,6 +4264,86 @@
       "text": "铃铛内容: 深渊寄生兽 - 高级"
     },
     {
+      "name": "红机兵海因莱特 - 决战级",
+      "path": "boss/活动/红机兵海因莱特/决战级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['红机兵海因莱特']['决战级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 红机兵海因莱特 - 决战级"
+    },
+    {
+      "name": "红机兵海因莱特 - 超级",
+      "path": "boss/活动/红机兵海因莱特/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['红机兵海因莱特']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 红机兵海因莱特 - 超级"
+    },
+    {
+      "name": "红机兵海因莱特 - 高级+",
+      "path": "boss/活动/红机兵海因莱特/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['红机兵海因莱特']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 红机兵海因莱特 - 高级+"
+    },
+    {
+      "name": "红机兵海因莱特 - 高级",
+      "path": "boss/活动/红机兵海因莱特/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['红机兵海因莱特']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 红机兵海因莱特 - 高级"
+    },
+    {
+      "name": "红机兵海因莱特 - 中级",
+      "path": "boss/活动/红机兵海因莱特/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['红机兵海因莱特']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 红机兵海因莱特 - 中级"
+    },
+    {
       "name": "参加",
       "path": "canjia.png",
       "area": [335, 90, 420, 140],
@@ -4454,6 +4566,24 @@
         {
           "name": "changeTargets",
           "args": ["主要", "loop"]
+        }
+      ]
+    },
+    {
+      "name": "编队确认",
+      "path": "party/party-check.png",
+      "area": [400, 1065, 645, 1100],
+      "actions": [
+        {
+          "name": "click"
+        },
+        {
+          "name": "delay",
+          "args": [1]
+        },
+        {
+          "name": "info",
+          "args": ["编队确认"]
         }
       ]
     },
