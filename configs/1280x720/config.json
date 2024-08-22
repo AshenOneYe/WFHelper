@@ -4620,7 +4620,8 @@
     {
       "name": "SET 1",
       "path": "party/party-2-1.png",
-      "area": [20, 15, 100, 35],
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
       "actions": [
         {
           "name": "match",
@@ -4635,12 +4636,20 @@
               ],
               "False": [
                 {
-                  "name": "click",
-                  "args": [135, 15, 215, 35]
+                  "name": "state",
+                  "args": ["set", "xPos1", "55 * int($当前铃铛['set']) + 5"]
                 },
                 {
-                  "name": "info",
-                  "args": ["切换到SET 2"]
+                  "name": "state",
+                  "args": ["set", "xPos2", "55 * int($当前铃铛['set']) + 45"]
+                },
+                {
+                  "name": "click",
+                  "args": ["$xPos1", 10, "$xPos2", 45]
+                },
+                {
+                  "name": "delay",
+                  "args": [1]
                 }
               ]
             }
@@ -4651,7 +4660,8 @@
     {
       "name": "SET 2",
       "path": "party/party-2-2.png",
-      "area": [135, 15, 215, 35],
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
       "actions": [
         {
           "name": "match",
@@ -4667,11 +4677,11 @@
               "False": [
                 {
                   "name": "click",
-                  "args": [260, 15, 340, 35]
+                  "args": [5, 10, 50, 45]
                 },
                 {
-                  "name": "info",
-                  "args": ["切换到SET 3"]
+                  "name": "delay",
+                  "args": [1]
                 }
               ]
             }
@@ -4682,7 +4692,8 @@
     {
       "name": "SET 3",
       "path": "party/party-2-3.png",
-      "area": [260, 15, 340, 35],
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
       "actions": [
         {
           "name": "match",
@@ -4698,11 +4709,11 @@
               "False": [
                 {
                   "name": "click",
-                  "args": [380, 15, 460, 35]
+                  "args": [5, 10, 50, 45]
                 },
                 {
-                  "name": "info",
-                  "args": ["切换到SET 4"]
+                  "name": "delay",
+                  "args": [1]
                 }
               ]
             }
@@ -4713,7 +4724,8 @@
     {
       "name": "SET 4",
       "path": "party/party-2-4.png",
-      "area": [380, 15, 460, 35],
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
       "actions": [
         {
           "name": "match",
@@ -4729,11 +4741,11 @@
               "False": [
                 {
                   "name": "click",
-                  "args": [500, 15, 580, 35]
+                  "args": [5, 10, 50, 45]
                 },
                 {
-                  "name": "info",
-                  "args": ["切换到SET 5"]
+                  "name": "delay",
+                  "args": [1]
                 }
               ]
             }
@@ -4744,7 +4756,8 @@
     {
       "name": "SET 5",
       "path": "party/party-2-5.png",
-      "area": [500, 15, 580, 35],
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
       "actions": [
         {
           "name": "match",
@@ -4760,11 +4773,11 @@
               "False": [
                 {
                   "name": "click",
-                  "args": [620, 15, 700, 35]
+                  "args": [5, 10, 50, 45]
                 },
                 {
-                  "name": "info",
-                  "args": ["切换到SET 6"]
+                  "name": "delay",
+                  "args": [1]
                 }
               ]
             }
@@ -4775,7 +4788,8 @@
     {
       "name": "SET 6",
       "path": "party/party-2-6.png",
-      "area": [620, 15, 700, 35],
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
       "actions": [
         {
           "name": "match",
@@ -4791,11 +4805,203 @@
               "False": [
                 {
                   "name": "click",
-                  "args": [20, 15, 100, 35]
+                  "args": [5, 10, 50, 45]
                 },
                 {
-                  "name": "info",
-                  "args": ["切换到SET 1"]
+                  "name": "delay",
+                  "args": [1]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 7",
+      "path": "party/party-2-7.png",
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '7'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [5, 10, 50, 45]
+                },
+                {
+                  "name": "delay",
+                  "args": [1]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 8",
+      "path": "party/party-2-8.png",
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '8'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [5, 10, 50, 45]
+                },
+                {
+                  "name": "delay",
+                  "args": [1]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 9",
+      "path": "party/party-2-9.png",
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '9'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [5, 10, 50, 45]
+                },
+                {
+                  "name": "delay",
+                  "args": [1]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 10",
+      "path": "party/party-2-10.png",
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '10'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [5, 10, 50, 45]
+                },
+                {
+                  "name": "delay",
+                  "args": [1]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 11",
+      "path": "party/party-2-11.png",
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '11'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [5, 10, 50, 45]
+                },
+                {
+                  "name": "delay",
+                  "args": [1]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SET 12",
+      "path": "party/party-2-12.png",
+      "area": [5, 10, 715, 45],
+      "similarityThreshold": 1,
+      "actions": [
+        {
+          "name": "match",
+          "args": [
+            "$当前铃铛['set'] == '12'",
+            {
+              "True": [
+                {
+                  "name": "changeTargets",
+                  "args": ["切换铃铛队伍", "loop"]
+                }
+              ],
+              "False": [
+                {
+                  "name": "click",
+                  "args": [5, 10, 50, 45]
+                },
+                {
+                  "name": "delay",
+                  "args": [1]
                 }
               ]
             }
