@@ -52,12 +52,20 @@ class ActionManager:
                     return None
                 arg = argLeft + self.state.getState(argRight)
         return arg
+    
+    def formatArgs(self, args):
+        res = []
+        for t in args:
+            t = self.formatArg(t)
+            res.append(t)
+        return res
 
-    def click(self, area):
-        adbUtil.touchScreen(area)
+    def click(self, args):
+        x1, y1, x2, y2 = self.formatArgs(args)
+        adbUtil.touchScreen([x1, y1, x2, y2])
 
     def swipe(self, args):
-        x1, y1, x2, y2 = args
+        x1, y1, x2, y2 = self.formatArgs(args)
         adbUtil.swipeScreen(x1, y1, x2, y2)
 
     def delay(self, args):
