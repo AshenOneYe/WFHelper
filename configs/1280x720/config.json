@@ -1337,6 +1337,38 @@
           "party": "",
           "enabled": true
         }
+      },
+      "黑龙": {
+        "地狱级": {
+          "name": "黑龙 - 地狱级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "超级": {
+          "name": "黑龙 - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "黑龙 - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "黑龙 - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "黑龙 - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -4804,7 +4836,11 @@
       "actions": [
         {
           "name": "state",
-          "args": ["set", "当前铃铛", "$铃铛设置['噬星兽泰奥弗拉索斯']['地狱级']"]
+          "args": [
+            "set",
+            "当前铃铛",
+            "$铃铛设置['噬星兽泰奥弗拉索斯']['地狱级']"
+          ]
         },
         {
           "name": "changeTargets",
@@ -4836,7 +4872,11 @@
       "actions": [
         {
           "name": "state",
-          "args": ["set", "当前铃铛", "$铃铛设置['噬星兽泰奥弗拉索斯']['高级+']"]
+          "args": [
+            "set",
+            "当前铃铛",
+            "$铃铛设置['噬星兽泰奥弗拉索斯']['高级+']"
+          ]
         },
         {
           "name": "changeTargets",
@@ -4876,6 +4916,86 @@
         }
       ],
       "text": "铃铛内容: 噬星兽泰奥弗拉索斯 - 中级"
+    },
+    {
+      "name": "黑龙 - 地狱级",
+      "path": "boss/活动/黑龙/地狱级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['黑龙']['地狱级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 黑龙 - 地狱级"
+    },
+    {
+      "name": "黑龙 - 超级",
+      "path": "boss/活动/黑龙/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['黑龙']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 黑龙 - 超级"
+    },
+    {
+      "name": "黑龙 - 高级+",
+      "path": "boss/活动/黑龙/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['黑龙']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 黑龙 - 高级+"
+    },
+    {
+      "name": "黑龙 - 高级",
+      "path": "boss/活动/黑龙/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['黑龙']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 黑龙 - 高级"
+    },
+    {
+      "name": "黑龙 - 中级",
+      "path": "boss/活动/黑龙/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['黑龙']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 黑龙 - 中级"
     },
     {
       "name": "参加",
