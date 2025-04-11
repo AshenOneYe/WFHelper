@@ -1485,6 +1485,38 @@
           "party": "",
           "enabled": true
         }
+      },
+      "统领AI": {
+        "地狱级": {
+          "name": "统领AI - 地狱级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "超级": {
+          "name": "统领AI - 超级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级+": {
+          "name": "统领AI - 高级+",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "高级": {
+          "name": "统领AI - 高级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        },
+        "中级": {
+          "name": "统领AI - 中级",
+          "set": "",
+          "party": "",
+          "enabled": true
+        }
       }
     }
   },
@@ -5400,6 +5432,86 @@
         }
       ],
       "text": "铃铛内容: U塔罗斯∞ - 高级"
+    },
+    {
+      "name": "统领AI - 地狱级",
+      "path": "boss/活动/统领AI/地狱级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['统领AI']['地狱级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 统领AI - 地狱级"
+    },
+    {
+      "name": "统领AI - 超级",
+      "path": "boss/活动/统领AI/超级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['统领AI']['超级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 统领AI - 超级"
+    },
+    {
+      "name": "统领AI - 高级+",
+      "path": "boss/活动/统领AI/高级+.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['统领AI']['高级+']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 统领AI - 高级+"
+    },
+    {
+      "name": "统领AI - 高级",
+      "path": "boss/活动/统领AI/高级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['统领AI']['高级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 统领AI - 高级"
+    },
+    {
+      "name": "统领AI - 中级",
+      "path": "boss/活动/统领AI/中级.png",
+      "area": [0, 85, 70, 145],
+      "actions": [
+        {
+          "name": "state",
+          "args": ["set", "当前铃铛", "$铃铛设置['统领AI']['中级']"]
+        },
+        {
+          "name": "changeTargets",
+          "args": ["参加"]
+        }
+      ],
+      "text": "铃铛内容: 统领AI - 中级"
     },
     {
       "name": "参加",
